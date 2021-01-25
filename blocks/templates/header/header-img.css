@@ -1,0 +1,12 @@
+/*HEADER IMAGE*/
+.header-image {
+    height:50vh;
+    padding-top: 150px;
+    background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

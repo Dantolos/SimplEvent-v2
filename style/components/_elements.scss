@@ -1,0 +1,49 @@
+
+//------------------------------
+//BUTTONS
+//------------------------------
+button {
+    border: none;
+    text-decoration: none;
+    padding:5px;
+    background:var(--primeColor);
+    background-color:var(--primeColor);
+    color:var(--secondColor);
+
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        background:var(--primeColor);
+        background-color:var(--primeColor);
+        color:var(--secondColor);
+    }
+
+    &:focus {
+        outline: 0px solid #fff;
+        outline-offset: 0;
+    }
+}
+
+//------------------------------
+//LIGHTBOX
+//------------------------------
+.se-lightbox-container {
+    z-index: 100000;
+    position: fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+
+    .se-lightbox-closerBackground {
+        background-color: var(--secondColor);
+        opacity: .8;
+        height:100%; width:100%;
+    }
+
+    .se-lightbox-closerCross {
+        position: absolute;
+        right:5vw; top:5vw;
+        height:25px; width:25px;
+    }
+}

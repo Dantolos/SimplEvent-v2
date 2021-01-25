@@ -1,0 +1,13 @@
+
+.testimonial-text{
+    color:$primaryText !important; 
+    background-color:$primary;
+    p {
+        margin-top: 1em;
+        color:$primaryText !important; 
+    };
+}
+
+.infobox-front {
+    @include dropShadow;
+}

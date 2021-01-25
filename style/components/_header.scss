@@ -1,0 +1,247 @@
+
+
+header { 
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:10000;
+    width:100vw;
+    height:80px;
+    color: white;
+    background-color: $primary;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    
+
+    @include for_breakpoint( 'mobile' ){
+          height:20vw;
+     }
+
+    //------------------------------
+    //LOGO
+    //------------------------------
+    .header-logo {
+          position:fixed;
+          left:10%;
+          top:15px;
+          height:40px;
+          @include for_breakpoint( 'mobile' ){
+               left:5%;
+               top:20px;
+               height:30px;
+          }
+
+          a img {
+               height:100%;
+          }
+    }
+
+    //------------------------------
+    //NAVIGATION MENU
+    //------------------------------
+     #mobile-menu-wrapper {
+          position: fixed;
+          height:100vh;
+          width:100vw;
+          bottom:0;
+          left:0;
+          color: var(--primeColor);
+          background-color: var(--secondColor);
+          z-index:800;
+     }
+
+    .se2-navigation {
+          height: 90%;
+          width:80%;
+
+          ul{
+               padding:0;
+               li{
+                    margin:0;
+               }
+          }
+     
+          @include for_breakpoint( 'mobile' ){
+               position: absolute;
+               margin: auto;
+               top:0; right:0; bottom:0; left:0;
+               overflow-y:scroll;
+               width: fit-content;
+               height: fit-content;
+               max-height:80%;
+               max-width: 90%;
+               font-size: 1.2em;
+          }
+
+        .se2-current.current-menu-parent,
+        .current-menu-parent,
+        .se2-current.current_page_item {
+            border-bottom: 4px solid $secondary;
+            @include for_breakpoint( 'mobile' ){
+               border-bottom: unset;
+               color: $secondary;
+               font-weight: 800;
+            }
+        }
+
+        .menu {
+            height: 100%;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            align-content: flex-end;
+            justify-content: flex-end;
+            @include for_breakpoint( 'mobile' ){
+               width:fit-content;
+               display: block;
+           
+   
+           }
+
+            .se2-lvl-1-item {
+                width:fit-content;
+                display: flex;
+                align-items:center;
+                height:35px;
+                padding: 0 20px;
+
+                @include for_breakpoint( 'mobile' ){
+                    width:100%;
+                    display: block;
+                    height:fit-content;
+                    padding: 15px 0px;
+                }
+                /* border-left:1px solid var(--midColor); */
+                &:hover {  border-bottom: 0px solid $primary; }
+
+                &:hover {
+                    .se2-sub-menu {
+                        display: block;
+                        visibility: visible; 
+                    
+                        
+                    }
+                    
+                }
+            }
+
+
+            //SUBMENU
+            .se2-sub-menu { 
+                display: none;
+                visibility: hidden; 
+                position: absolute;
+                top:75px;
+                z-index:5;
+                min-width:fit-content;
+                margin-left:-20px;
+                list-style-type: none;
+                background-color: var(--primeColor);
+                color: var(--secondColor);
+                border-bottom: 1px solid var(--midColor);
+
+                @include for_breakpoint( 'mobile' ){
+                    display: block;
+                    visibility: unset; 
+                    position: unset;
+                    color: var(--midColor);
+                    font-size: .8em !important;
+                    border-bottom: unset;
+                    margin-left:0;
+                    color: var(--primeColor);
+                    background-color: var(--secondColor);
+                }
+
+                li {
+                    padding: 5px 20px;
+                    
+                    text-decoration: none;
+                    
+                    &:hover {
+                        background-color: var(--secondColor);
+                        color: var(--primeColor);
+                    }
+                }
+
+                .se2-current {
+                    background-color:$secondary;
+                    @include for_breakpoint( 'mobile' ){
+                         color: $primaryText;
+                    }
+                }
+            }
+        }
+    }
+
+     //BURGERMENU
+     #burger-menu {
+          position: fixed;
+          top: 6.25vw;
+          right: 5vw;
+          height: 8vh;
+          width: 10vw;
+          z-index: 1000;
+
+          
+               .active-menu {
+                    stroke: var(--primeColor) !important;
+               }
+          
+     }
+
+    //------------------------------
+    //DARKMODE SWITCH
+    //------------------------------
+    #extramenu {
+          position: fixed;
+          top:0;
+          display: flex; 
+          flex-direction: row;
+          margin-right:20px;
+          padding:0 0 0 10px;
+          font-size: 0.8em;
+          background-color: var(--primeColor);
+          
+          @include for_breakpoint( 'mobile' ){
+               position: absolute;
+               bottom:10px;
+               top: unset;
+               width: 100%;
+               justify-content: center;
+               font-size: 1.2em;
+          }
+
+        #modebutton, #languagebutton a button {
+            min-width:20px;
+            text-transform: uppercase;
+        }
+        #languagebutton {
+            a button {
+                padding-right:5px 10px;
+            }
+            
+            a {
+                &:last-of-type {
+                    padding-right:10px;
+                    margin-right:10px;
+                    border-right: 1px solid var(--midColor);
+                }
+            }
+            
+        }
+        
+        #header_anmeldebutton {
+             background-color: $secondary;
+             color:white;
+             height:100%;
+             font-size: 0.9em;
+             font-weight: 800;
+             padding:6px 10px;
+             text-transform: uppercase;
+        }
+       
+    }
+}

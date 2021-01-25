@@ -1,0 +1,44 @@
+@import 'components/variables';
+@import 'components/reset';
+@import 'components/responsive';
+@import 'components/fonts';
+@import 'components/elements';
+
+* {
+    transform: all();
+    transition-duration: 200ms;
+}
+
+#master-container {
+     width: 100vw;
+     /* max-width:1848px; */
+     position: absolute;
+     top: 80px;
+     left: 0;
+     right: 0;
+     margin: auto;
+     background-color:var(--secondColor);
+     min-height: calc(100vh - 80px);
+     @include for_breakpoint( 'mobile' ){
+          overflow-x: hidden;
+     }
+}
+
+.se-loader {
+     min-height:40vh;
+     width:100%;
+}
+ 
+
+@import 'components/header';
+@import 'components/footer'; 
+
+@import 'components/posts';
+@import 'components/people';
+@import 'components/partner';
+
+//BLOCKS Theme-specific
+@import 'components/blocks/testimonial';
+@import 'components/blocks/add-block-style';
+
+

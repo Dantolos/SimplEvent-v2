@@ -1,0 +1,49 @@
+.se2-people-wall {
+
+    @include wallContainerFlex;
+
+    .se2-people-box {
+        width:29%;
+        margin: 4% 2%;
+        min-width:300px;
+        min-height: fit-content;
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        
+        .se2-people-portrait {
+            @include imageSettings;
+            height:15vw;
+            width:15vw;
+            min-width:180px;
+            max-width:300px;
+            min-height:180px;
+            max-height:300px;
+     
+        }
+
+        .se2-people-content {
+            background-color: $primary;
+            color: $primaryText;
+            padding:10%;
+            margin-top:-5%;
+            margin-left:6%;
+            width:88%;
+            h2 {
+                margin-bottom: .2em;
+            }
+
+            p { color:white; }
+
+            .se2-people-branche{
+                margin-top:2em;
+                color: $primaryText;
+                text-transform: uppercase;
+                span:hover {
+                    color:$secondary;
+                }
+            }
+        }
+    }
+}

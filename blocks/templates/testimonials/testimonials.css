@@ -1,0 +1,39 @@
+
+
+.testimonial {
+    width:100%;
+}
+
+.testimonial-container {
+    width:90%;
+    height:500px;
+    margin:1em 5%;
+    position: relative;
+    margin:50px 0;
+    display:none;
+}
+
+.testimonial-portrait {
+    background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height:180px;
+    min-width:100px;
+    width:20%;
+    
+    position: absolute;
+    left:0;
+    top:0;
+}
+.testimonial-text {
+    position: absolute;
+    width:90%;
+    padding: 5%;
+    right: 0;
+    top:160px;
+    line-height: 200%;
+}
