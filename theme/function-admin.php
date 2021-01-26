@@ -42,12 +42,14 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
   register_setting( 'simplevent-settings-group', 'light_color_picker' );
 
-  register_setting( 'simplevent-settings-group', 'bg_img' );
+  register_setting( 'simplevent-settings-group', 'font_name' );
+  register_setting( 'simplevent-settings-group', 'font_link' );
+ 
 
   //****SECTIONS
   add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
   add_settings_section( 'simplevent-color-options', 'Colors', 'simplevent_color_options', 'aagi_simplevent');
-  add_settings_section( 'simplevent-bg', 'Background', 'simplevent_bg', 'aagi_simplevent');
+  add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
 
 
   //****fields
@@ -65,7 +67,8 @@ function simplevent_custom_settings() {
   add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
   add_settings_field( 'light-color-picker', 'Light Color', 'simplevent_light_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
 
-  add_settings_field( 'background-image', 'Hintergrundbild', 'simplevent_bg_img', 'aagi_simplevent', 'simplevent-bg' );
+  add_settings_field( 'font-name', 'Font Name', 'simplevent_font_name', 'aagi_simplevent', 'simplevent-fonts' );
+  add_settings_field( 'font-link', 'Font Link', 'simplevent_font_link', 'aagi_simplevent', 'simplevent-fonts' );
 
 
   //----------------------------------Header ---------------------------------------//
@@ -153,8 +156,8 @@ function simplevent_general_options() {
 function simplevent_color_options() {
   echo 'Farben anpassen';
 }
-function simplevent_bg() {
-  echo 'Das Hindergrundbild wechseln';
+function simplevent_fonts() {
+  echo 'Google-Font einbinden';
 }
 
 function simplevent_header_options() {
@@ -229,10 +232,14 @@ function simplevent_light_color_picker() {
   echo '<input class="se-color-picker" type="text" name="light_color_picker" value="' .$lightcolor. '" data-default-color="#dedede" />';
 }
 
-//BG
-function simplevent_bg_img() {
-  $bg = esc_attr( get_option( 'bg_img' ) );
-  echo '<input type="button" style="width:25%;" value="Bg" class="button button-secondary upload-button" data-target="bg-img"/><input type="" style="width:73%;" id="bg-img" name="bg_img" value="' .$bg. '"/>';
+//Fonts
+function simplevent_font_name() {
+     $fontName = esc_attr( get_option( 'font_name' ) );
+     echo '<input type="text" name="font_name" value="' .$fontName. '" placeholder="font-family: \'Roboto\', sans-serif;" />';
+}
+function simplevent_font_link() {
+     $fontLink= esc_attr( get_option( 'font_link' ) );
+     echo '<input type="text" name="font_link" value="' .$fontLink. '" placeholder="Google-Font Link-Tag" />';
 }
 
 

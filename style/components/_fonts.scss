@@ -2,31 +2,12 @@
 /*---------------------------------------------------
 ---------------------FONTS---------------------------
 ---------------------------------------------------*/
-@font-face {
-    font-family: 'PTSansPro';
-    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.eot'); /* IE9 Compat Modes */
-    src: url('https:/sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.woff2') format('woff2'), /* Super Modern Browsers */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PT_Sans_Pro-Extra_Light.otf')  format('opentype')
-}
-@font-face {
-    font-family: 'PTSansPro';
-    font-weight: bold;
-    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.eot'); /* IE9 Compat Modes */
-    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.woff2') format('woff2'), /* Super Modern Browsers */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.woff') format('woff'), /* Pretty Modern Browsers */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PT_Sans_Pro-Extra_Bold.otf')  format('opentype')
-}
+
 
 
 body { 
     font-size: 16px; 
     color:var(--primeColor); 
-    font-family: 'PTSansPro', Fallback, sans-serif; 
 }
 h1, h2 { text-transform: uppercase;}
 

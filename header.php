@@ -8,11 +8,44 @@
   <meta name="keywords" content="<?php echo esc_attr( get_option( 'se_keywords' ) ); ?>">
   <meta name="description" content="<?php echo __('Jedes Jahr treffen sich 1350 Führungspersönlichkeiten aus Wirtschaft, Wissenschaft, Politik und Medien zum aktiven Meinungsaustausch und branchenübergreifenden Dialog.'); ?>">
   <meta name="copyright" content="<?php bloginfo('name'); ?> 2020-2021" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.ico" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+  <!-- LOAD GOOGLE FONT -->
+  <?php
+  if( get_option( 'font_name' ) && get_option( 'font_link' ) ) {
+       echo '<link rel="preconnect" href="https://fonts.gstatic.com">';
+       echo '<link href="'.get_option( 'font_link' ).'" rel="stylesheet">';
+  }
+  ?>
+
      <style>
+          /*FONT*/
+          <?php if( !get_option( 'font_name' ) || !get_option( 'font_link' ) ) { ?>
+               @font-face {
+                    font-family: 'PTSansPro';
+                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.eot'); /* IE9 Compat Modes */
+                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.woff2') format('woff2'), /* Super Modern Browsers */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PT_Sans_Pro-Extra_Light.otf')  format('opentype')
+               }
+               @font-face {
+                    font-family: 'PTSansPro';
+                    font-weight: bold;
+                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.eot'); /* IE9 Compat Modes */
+                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.woff2') format('woff2'), /* Super Modern Browsers */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.woff') format('woff'), /* Pretty Modern Browsers */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PT_Sans_Pro-Extra_Bold.otf')  format('opentype')
+               }
+               body { font-family: 'PTSansPro', Fallback, sans-serif; }
+          <?php } else {
+               echo 'body { ' . get_option( 'font_name' ) . ' }';
+          } ?>
+
           body {
                --primary: <?php echo esc_attr( get_option( 'primary_color_picker' ) ); ?>;
                --secondary: <?php echo esc_attr( get_option( 'secondary_color_picker' ) ); ?>;
