@@ -126,7 +126,7 @@ wp_head();
           }
                
                $menuArgs = array(
-                    'menu'              => "18", 
+                    'menu'              => "Hauptmenu", 
                     'menu_class'        => "menu",
                     'container'         => "nav", 
                     'container_class'   => "se2-navigation", 

@@ -117,11 +117,14 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-footer-group', 'se_contact_address' );
   register_setting( 'simplevent-footer-group', 'se_contact_phone' );
   register_setting( 'simplevent-footer-group', 'se_contact_email' );
+
+  register_setting( 'simplevent-footer-group', 'se_footer_categories' );
   
 
   //****Section
   add_settings_section( 'simplevent-footer-options', 'Footer', 'simplevent_footer_options', 'simplevent_footer');
   add_settings_section( 'simplevent-footer-contact', 'Contact', 'simplevent_footer_contact', 'simplevent_footer');
+  add_settings_section( 'simplevent-footer-partner', 'Partner', 'simplevent_footer_partner', 'simplevent_footer');
 
 
   //****Fields
@@ -131,6 +134,8 @@ function simplevent_custom_settings() {
   add_settings_field( 'contact-address', 'Adresse', 'simplevent_se_contact_address', 'simplevent_footer', 'simplevent-footer-contact' );
   add_settings_field( 'contact-phone', 'Telefon Nummer', 'simplevent_se_contact_phone', 'simplevent_footer', 'simplevent-footer-contact' );
   add_settings_field( 'contact-email', 'E-Mail', 'simplevent_se_contact_email', 'simplevent_footer', 'simplevent-footer-contact' );
+
+  add_settings_field( 'footer-categories', 'Kategorien', 'simplevent_se_footer_categories', 'simplevent_footer', 'simplevent-footer-partner' );
 
   //----------------------------------Live ---------------------------------------//
 
@@ -174,6 +179,11 @@ function simplevent_footer_options() {
 
 function simplevent_footer_contact() {
      echo 'Kontakt Informationen';
+}
+
+
+function simplevent_footer_partner() {
+     echo 'Mainpartner Kategorie auswählen, welche im Footer erscheinen sollen.';
 }
 
 function simplevent_live_options() {
@@ -329,6 +339,19 @@ function simplevent_se_contact_phone() {
 function simplevent_se_contact_email() {
      $se_contact_email = get_option( 'se_contact_email' );
      echo '<input type="text" name="se_contact_email" value="' .$se_contact_email. '" placeholder="aaa@bb.c"/>';
+}
+
+function simplevent_se_footer_categories($args) {
+     $categiories = get_option( 'se_footer_categories' );
+     $partnerCategories = get_terms( array('taxonomy' => 'partner_categories') );
+     foreach($partnerCategories as $key => $partnerCategory){
+          $check = ( isset($categiories[$key]) ) ? 'checked' : '';
+          echo '<input type="checkbox" id="'.$partnerCategory->term_id.'" name="se_footer_categories['.$key.']" value="'.$partnerCategory->term_id.'" '.$check.'>';
+          echo '<label for="'.$partnerCategory->term_id.'">'.$partnerCategory->name.'</label><br>';
+   
+     }
+     var_dump( get_option( 'se_footer_categories' ) );
+    
 }
 
 
