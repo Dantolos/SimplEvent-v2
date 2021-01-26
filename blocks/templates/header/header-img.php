@@ -1,6 +1,6 @@
 <?php
 /**
- * Testimonial Block Template.
+ * Header Image Block Template.
  *
  * @param   array $block The block settings and attributes.
  * @param   string $content The block inner HTML (empty).
@@ -25,13 +25,14 @@ if( !empty($block['align']) ) {
 
 $image = get_field('image');
 $titel = get_field('titel');
-
+$datum = get_field('datuim');
+$fontColor = get_field('font_color');
 
 ?>
 
 
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>" style="background-image:url(<?php echo esc_url($image); ?>);">
-     <div class="container">
-         <h1><?php echo esc_attr($titel) ?></h1>
-     </div>
+
+     <InnerBlocks />
+ 
 </div>

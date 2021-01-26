@@ -44,6 +44,7 @@ function register_acf_block_types() {
           'category'          => 'formatting',
           'icon'              => 'format-image',
           'keywords'          => array( 'header', 'image' ),
+          'supports'          => array( 'jsx' => true ),
      ));
      // header image
      acf_register_block_type(array(
