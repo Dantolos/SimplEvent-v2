@@ -349,9 +349,7 @@ function simplevent_se_footer_categories($args) {
           echo '<input type="checkbox" id="'.$partnerCategory->term_id.'" name="se_footer_categories['.$key.']" value="'.$partnerCategory->term_id.'" '.$check.'>';
           echo '<label for="'.$partnerCategory->term_id.'">'.$partnerCategory->name.'</label><br>';
    
-     }
-     var_dump( get_option( 'se_footer_categories' ) );
-    
+     }    
 }
 
 

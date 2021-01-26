@@ -28,16 +28,23 @@ footer {
           max-width:60%;
           display: flex;
           flex-wrap: wrap;
+          
           .footer-partner-categorie {
                margin-left:50px;
                .footer-partner-logo-container{
                     display: flex;
+                    align-items: center;
+                    a {
+                         height:fit-content;
+                    }
+                    img {
+                         margin-top:5px;
+                         margin-right:10px;
+                         max-width:110px;
+                         max-height:45px;
+                    }
                }
-               img {
-                    margin-top:10px;
-                    max-width:75px;
-                    max-height:50px;
-               }
+               
           }
 
      }

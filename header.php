@@ -60,7 +60,7 @@ function theme_add_files()
 {
 
     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.01' );
-    wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', '1.0.06' );
+    wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', '1.0.07' );
     
     //3rd lybraris
     wp_enqueue_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', true );

@@ -14,6 +14,13 @@ $dark_shade: #141414;
 $light: #FFFFFF;
 $light_shade:#f1f1f1;
 
+.primary-txt { color: $primary; }
+.secondary-txt { color: $secondary; }
+.dark-txt { color: $dark; }
+.dark-shade-txt { color: $dark_shade; }
+.light-txt { color: $light; }
+.light-shade-txt { color: $light_shade; }
+
 body {
     background-color: var(--shadeColor);
     
