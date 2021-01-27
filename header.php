@@ -185,3 +185,4 @@ wp_head();
     ------------------>
 
     <div id="master-container">
+          <div id="content-container">

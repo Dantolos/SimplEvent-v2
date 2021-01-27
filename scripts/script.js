@@ -25,6 +25,8 @@ ANCHOR.goTO();
 let DARKMODE = (COOKIE.getCookie("mode") == 'false') ? false : true;
 const MODEBUTTON = document.getElementById('modebutton');
 const BODY = document.querySelector('body');
+//neg image
+const ImagesToNegate = document.getElementsByClassName('neg')
 
 if(COOKIE.getCookie('mode') == ''){
     if(window.matchMedia('(prefers-color-scheme: dark)').matches ) {
@@ -37,6 +39,9 @@ if(COOKIE.getCookie('mode') == ''){
 const switchMode = () => {
     DARKMODE = !DARKMODE;
     setClassToBody();
+    if( ImagesToNegate.length > 0 ){
+          negateImages( ImagesToNegate );
+     }
 }
 
 const setClassToBody = () => {
@@ -55,6 +60,26 @@ const setClassToBody = () => {
 MODEBUTTON.addEventListener('click', switchMode);
 setClassToBody();
 
+
+
+if( ImagesToNegate.length > 0 && DARKMODE ){
+     negateImages( ImagesToNegate );
+}
+
+function negateImages( images ){
+     for(let Image of images ){
+          let imgElement = Image.querySelector('img');
+          let src = imgElement.getAttribute('src').split('/')
+         
+          let name = (DARKMODE) ? src.pop().replace(/\.|-neg\./g, '-neg.') : src.pop().replace('-neg', '')
+       
+          
+          src[src.push(src.pop())-1]
+          src.push(name)
+          let newsrc = src.join('/');
+          imgElement.src = newsrc
+     }
+}
 
 //---------------------------------
 //HEADER

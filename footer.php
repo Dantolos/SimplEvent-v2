@@ -2,7 +2,7 @@
 wp_footer(); 
 $Partner = new Partner;
 ?>
-
+     </div>
           <footer>
                <div class="footer-contact-container">
                     <a href="<?php $url = home_url(); echo esc_url( $url ); ?>">
@@ -19,23 +19,24 @@ $Partner = new Partner;
                     <p class="copyright"><?php echo esc_attr( get_option( 'se_c_text' ) ); ?></p>
                </div>
                
-               <div class="footer-partner-container">
-                    
+               <div class="footer-partner-container">   
                     <?php 
                     $PartnerCategories = get_option( 'se_footer_categories' );
-                    foreach($PartnerCategories as $PartnerCategorie){
-                         $catTitle = get_term($PartnerCategorie);    
-                         echo '<div class="footer-partner-categorie">';
-                              echo '<p class="footer-partner-categorie-title">'.$catTitle->name .'</p>';
-                              $PartnerData = $Partner->call_Partner_in_Categorie( $PartnerCategorie, false, false );
-                              echo '<div class="footer-partner-logo-container">';
-                              foreach( $PartnerData as $SinglePartner ){
-                                   echo '<a href="'.$SinglePartner['link'].'" title="'.$SinglePartner['name'].' Website" target="_blank">';
-                                   echo '<img src="'.$SinglePartner['logo-neg'].'" alt="'.$SinglePartner['name'].'"/>';
-                                   echo '</a>';
-                              }
+                         if( isset($PartnerCategories) ){
+                         foreach($PartnerCategories as $PartnerCategorie){
+                              $catTitle = get_term($PartnerCategorie);    
+                              echo '<div class="footer-partner-categorie">';
+                                   echo '<p class="footer-partner-categorie-title">'.$catTitle->name .'</p>';
+                                   $PartnerData = $Partner->call_Partner_in_Categorie( $PartnerCategorie, false, false );
+                                   echo '<div class="footer-partner-logo-container">';
+                                   foreach( $PartnerData as $SinglePartner ){
+                                        echo '<a href="'.$SinglePartner['link'].'" title="'.$SinglePartner['name'].' Website" target="_blank">';
+                                        echo '<img src="'.$SinglePartner['logo-neg'].'" alt="'.$SinglePartner['name'].'"/>';
+                                        echo '</a>';
+                                   }
+                                   echo '</div>';
                               echo '</div>';
-                         echo '</div>';
+                         }
                     }
                     ?>
                </div>

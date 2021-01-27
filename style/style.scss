@@ -22,6 +22,11 @@
      @include for_breakpoint( 'mobile' ){
           overflow-x: hidden;
      }
+
+     #content-container {
+
+          min-height: calc(100vh - 320px);
+     }
 }
 
 .se-loader {
