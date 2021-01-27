@@ -139,6 +139,15 @@ function wp_bibel_de_custom_jpeg_quality($quality)
 	$quality = 100;
 	return $quality;
 }
+add_filter('intermediate_image_sizes', 'turn_off_default_sizes');
+
+function turn_off_default_sizes( $default_image_sizes) {
+    unset( $default_image_sizes['thumbnail']);
+    unset( $default_image_sizes['medium']);
+    unset( $default_image_sizes['large']);
+    unset( $default_image_sizes['medium_large']);
+    return $default_image_sizes;
+}
 
 // Add support for full and wide align images.
 add_theme_support( 'align-wide' );
