@@ -62,12 +62,13 @@ setClassToBody();
 
 
 
-if( ImagesToNegate.length > 0 && DARKMODE ){
+if( ImagesToNegate.length > 0 ){
      negateImages( ImagesToNegate );
 }
 
 function negateImages( images ){
      for(let Image of images ){
+          Image.srcset = ''
           let imgElement = Image.querySelector('img');
           let src = imgElement.getAttribute('src').split('/')
          

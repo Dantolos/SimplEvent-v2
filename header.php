@@ -65,7 +65,7 @@ function theme_add_files()
     //3rd lybraris
     wp_enqueue_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', true );
 
-    wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), '1.0.07', true );
+    wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), '1.0.08', true );
     
  
     //include Mobile Scripts
