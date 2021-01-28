@@ -1,4 +1,6 @@
-
+gsap.config({
+     nullTargetWarn: false,
+});
 /* bdedect = new Detect(); */
 
 var AJAX = new se2_Ajax();
@@ -79,7 +81,7 @@ function negateImages( images ){
           src[src.push(src.pop())-1]
           src.push(name)
           let newsrc = src.join('/');
-          
+
           imgElement.src = newsrc
      }
 }
