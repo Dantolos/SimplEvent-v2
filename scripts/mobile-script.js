@@ -4,8 +4,8 @@ const BURGERMENU = document.getElementById('burger-menu')
 const MOBILEMENU = document.getElementById('mobile-menu-wrapper')
 gsap.set(MOBILEMENU, { y: '-100vh'})
 
-let BMcntA = 0;
-let BMcntB = 0;
+var BMcntA = 0;
+var BMcntB = 0;
 
 
 
@@ -25,18 +25,19 @@ function BurgerMenuAnimation(e, count){
      let BMcc = 2;
 
      let BMstrokeRev = BMstroke
-     let BMcloser = e.querySelector('.se_BMstroke[LID="3"]');
+     let BMcloser = e.querySelector('.se_BMstroke[lid="3"]');
+     console.log(BMcloser)
      gsap.set(BMcloser, ({ y: '-10'}))
 
      while (BMcc >= 0) {
-          BMstroke.push(e.querySelector('.se_BMstroke[LID="'+BMcc+'"]'));
+          BMstroke.push(e.querySelector('.se_BMstroke[lid="'+BMcc+'"]'));
           BMcc--;
      }
      if(count%2 == 0) {
-          gsap.to(BMstroke, 0.6, {y:'20', ease:Power1.easeInOut}, 0.1);
-          gsap.to(BMcloser, 0.8, ({ y: '0', ease:Power1.easeInOut}));
+          gsap.to(BMstroke, 0.6, {y:'20', ease:Power1.easeInOut});
+          gsap.to(BMcloser, 0.8, { y: '0', ease:Power1.easeInOut});
      } else {
-          gsap.to(BMcloser, 0.6, ({ y: '-10', ease:Power1.easeOut}));
-          gsap.to(BMstroke, 0.6, {y:'0', ease:Power1.easeInOut}, 0.1);
+          gsap.to(BMcloser, 0.6, { y: '-10', ease:Power1.easeOut});
+          gsap.to(BMstroke, 0.6, {y:'0', ease:Power1.easeInOut});
      }
 }
