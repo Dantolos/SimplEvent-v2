@@ -68,11 +68,14 @@ header {
                margin: auto;
                top:0; right:0; bottom:0; left:0;
                overflow-y:scroll;
-               width: fit-content;
-               height: fit-content;
+               
                max-height:80%;
-               max-width: 90%;
+               width: 100%;
                font-size: 1.2em;
+               li{
+                   
+            
+               }
           }
 
         .se2-current.current-menu-parent,
@@ -81,8 +84,12 @@ header {
             border-bottom: 4px solid $secondary;
             @include for_breakpoint( 'mobile' ){
                border-bottom: unset;
-               color: $secondary;
-               font-weight: 800;
+               color: $primaryText;
+               background-color: $primary !important;
+              
+               .se2-sub-menu {
+                background-color: $primary !important;
+               }
             }
         }
 
@@ -95,7 +102,7 @@ header {
             align-content: flex-end;
             justify-content: flex-end;
             @include for_breakpoint( 'mobile' ){
-               width:fit-content;
+               width:100%;
                display: block;
            
    
@@ -112,7 +119,9 @@ header {
                     width:100%;
                     display: block;
                     height:fit-content;
-                    padding: 15px 0px;
+                    padding: 15px 10%;
+                    background-color:  var(--shadeColor);
+                    border-bottom:2px solid var(--secondColor);
                 }
                 /* border-left:1px solid var(--midColor); */
                 &:hover {  border-bottom: 0px solid $primary; }
@@ -152,24 +161,32 @@ header {
                     border-bottom: unset;
                     margin-left:0;
                     color: var(--primeColor);
-                    background-color: var(--secondColor);
+                    background-color: var(--shadeColor);
                 }
 
                 li {
                     padding: 5px 20px;
-                    
                     text-decoration: none;
+                    @include for_breakpoint( 'mobile' ){
+                        background-color:  var(--secondColor);
+                        border-radius:5px;
+                        padding: 5px 10px;
+                        margin:4px 0 ;
+                    }
                     
                     &:hover {
                         background-color: var(--secondColor);
                         color: var(--primeColor);
                     }
+
+                    
                 }
 
                 .se2-current {
                     background-color:$secondary;
                     @include for_breakpoint( 'mobile' ){
                          color: $primaryText;
+                         background-color: $secondary !important;
                     }
                 }
             }

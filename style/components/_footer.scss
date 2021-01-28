@@ -13,6 +13,12 @@ footer {
 
      .footer-contact-container {
           width:fit-content;
+          p {
+               color: $light;
+               opacity: .6;
+               font-weight: 200;
+          }
+         
           a { 
                .footer-logo-negativ {
                     max-width:120px;
