@@ -1,0 +1,63 @@
+.se2-partner-wall {
+    @include wallContainerFlex;
+
+    .partner-logo-box { 
+        width: 22%;
+        min-width:200px;
+        margin: 1.5%;
+    }
+
+    .partner-cat-title {
+        width:100%;
+        margin: 3em 0 1.5em 0;
+        h3 {
+            text-align: center;
+        }
+    }
+}
+
+.partner-logo-box { 
+    position: relative;
+    background-color:#f1f1f1;
+    min-height:200px;
+    img {   
+        position: absolute;
+        top:0;left:0;bottom:0;right:0;
+        margin: auto;
+        max-width:70%;
+        max-height:70%;
+    }
+}
+
+//------------------------------
+//LIGHTBOX
+//------------------------------
+.partner-info {
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+    margin:auto;
+    @include dropShadow;
+
+    color: $dark;
+    background-color: $light; 
+    width: 75%;
+    height:fit-content;
+    max-height:60vh;
+     overflow-y: scroll;
+    padding:50px;
+    p {color: $dark;}
+    img {
+        max-height:150px;
+        max-width:40%;
+        margin-bottom:5%;
+    }
+
+    @include for_breakpoint( 'mobile' ){
+        max-height:90vh;
+        padding:25px;
+        img {
+            max-height:150px;
+            max-width:80%;
+        }
+    }
+}

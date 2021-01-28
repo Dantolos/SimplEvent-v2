@@ -56,14 +56,20 @@
  
     height:80vh;
     overflow: hidden;
-    background-color: #FFFFFF;
+    color: $dark;
+    h2, h3, p {color: $dark;}
+    background-color: $light; 
     @include dropShadow;
+    @include for_breakpoint( 'mobile' ){
+        width: 90vw;
+    }
 
     .se2-post-lb-content {
         position: relative;
         overflow-y: scroll; 
         height: 50vh;
         padding:3% 6%;
+        
         h2 {margin: 20px 0 10px 0; }
     }
 
