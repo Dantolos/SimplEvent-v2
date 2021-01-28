@@ -54,11 +54,10 @@
 
 <?php
 
-$scriptversion = '1.0.09'; 
 
 function theme_add_files() 
 {
-
+     $scriptversion = '1.0.09'; 
     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.01' );
     wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
     
@@ -66,7 +65,7 @@ function theme_add_files()
     wp_enqueue_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', true );
 
     wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), $scriptversion, true );
-    
+
  
     //include Mobile Scripts
     if ( wp_is_mobile() ) {
@@ -176,6 +175,10 @@ wp_head();
           <?php
           //mobile menu wrapper closer
           if(wp_is_mobile()){ echo '</div>'; }
+
+          
+
+
           ?>
           
 
@@ -186,3 +189,11 @@ wp_head();
 
     <div id="master-container">
           <div id="content-container">
+               <?php
+               if(wp_is_mobile() || is_iphone() ){
+                    echo '<h1>MOBILE</h1>';
+               } else {
+                    echo '<h1>DESKTOP</h1>';
+               }
+               ?>
+               

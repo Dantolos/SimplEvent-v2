@@ -68,9 +68,10 @@ if( ImagesToNegate.length > 0 ){
 
 function negateImages( images ){
      for(let Image of images ){
-         
+
           let imgElement = Image.querySelector('img');
           imgElement.srcset = ''
+
           let src = imgElement.getAttribute('src').split('/')
          
           let name = (DARKMODE) ? src.pop().replace(/\.|-neg\./g, '-neg.') : src.pop().replace('-neg', '')
@@ -78,6 +79,7 @@ function negateImages( images ){
           src[src.push(src.pop())-1]
           src.push(name)
           let newsrc = src.join('/');
+          
           imgElement.src = newsrc
      }
 }

@@ -3,3 +3,21 @@
     background-color:$primary;
     color:$primaryText;
 }
+
+//BUTTON
+.wp-bootstrap-blocks-button {
+    .btn {
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+    .btn-primary {
+        background-color: $primary;
+        border-color: var(--secondColor);
+    }
+    .btn-secondary {
+        background-color: var(--secondColor);
+        color:  $secondary;
+        border-color:  $secondary;
+        border-width: 2px;
+    }
+}

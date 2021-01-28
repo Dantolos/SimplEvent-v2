@@ -3,9 +3,6 @@ class se2_Ajax
     call_Ajax(dataToCall, containerClassName, clearing = false)
     {
 
-
-        console.log(dataToCall);
-        
         this.parentContainer = document.getElementsByClassName(containerClassName);
         if(clearing) {
           this.parentContainer[0].innerHTML = '';

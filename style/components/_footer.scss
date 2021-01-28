@@ -28,20 +28,46 @@ footer {
           max-width:60%;
           display: flex;
           flex-wrap: wrap;
+          @include for_breakpoint( 'mobile' ){
+               width:100%;
+               max-width:unset;
+          }
           
           .footer-partner-categorie {
                margin-left:50px;
+               @include for_breakpoint( 'mobile' ){
+                    margin-left:0px;
+                    margin-top:25px;
+                    margin-bottom:10px;
+                    width:100%;
+               }
+               .footer-partner-categorie-title {
+                    color:$light_shade;
+                    opacity: .6;
+                    font-weight: 200;
+                    @include for_breakpoint( 'mobile' ){
+                         text-align: center;
+                         width: 100%;
+                    }
+               }
                .footer-partner-logo-container{
                     display: flex;
                     align-items: center;
+                    @include for_breakpoint( 'mobile' ){
+                         justify-content: center;
+                    }
                     a {
                          height:fit-content;
                     }
                     img {
                          margin-top:5px;
-                         margin-right:10px;
+                         margin-right:20px;
                          max-width:110px;
                          max-height:45px;
+                         @include for_breakpoint( 'mobile' ){
+                              margin-right:15px;
+                              margin-left:15px;
+                         }
                     }
                }
                

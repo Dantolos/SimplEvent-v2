@@ -25,7 +25,7 @@ if( !empty($block['align']) ) {
 
 $image = get_field('image');
 $titel = get_field('titel');
-$datum = get_field('datuim');
+$datum = get_field('datum');
 $fontColor = get_field('font_color');
 
 ?>

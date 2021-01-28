@@ -29,7 +29,7 @@ body {
         --primeColor: #{$dark};
         --secondColor: #{$light};
        
-        --midColor: #4f4f4f;
+        --midColor: #{$dark_shade};
 
         --shadeColor: #{$light_shade};
     }
@@ -37,7 +37,7 @@ body {
         --primeColor: #{$light};
         --secondColor: #{$dark};
         
-        --midColor: #8c8c8c;
+        --midColor:  #{$light_shade};
 
         --shadeColor: #{$dark_shade};
     }
