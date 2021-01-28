@@ -41,18 +41,18 @@
 }
 
 .infobox-back h3 {
-    margin:0 0 2% !important;
+    margin:0 0 1% !important;
 
 }
 
 .infobox-back ul {
     list-style-type: square;
     list-style-position: outside;
-    margin-left:20px;
-    font-size: .8em;
+    margin-left:5px;
+    padding:5%;
 }
 
 .infobox-back ul li {
-    margin-top:2.5%;
+    margin-top:1%;
     
 }
