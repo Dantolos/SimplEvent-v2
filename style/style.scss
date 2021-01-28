@@ -21,6 +21,7 @@
      min-height: calc(100vh - 80px);
      @include for_breakpoint( 'mobile' ){
           overflow-x: hidden;
+          top: 75px;
      }
 
      #content-container {

@@ -1,6 +1,7 @@
 /*HEADER IMAGE*/
 .header-image {
-    height:50vh;
+    min-height:50vh;
+    height:fit-content;
     padding-top: 150px;
     background-size: cover;
     -ms-background-size: cover;
