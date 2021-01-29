@@ -11,10 +11,12 @@
 </style>
 
 <?php settings_errors(); ?>
-<form action="options.php" method="post" class="simplevent-general-form">
-  <?php settings_fields( 'simplevent-footer-group' ); ?>
-  <?php do_settings_sections('simplevent_footer'); ?>
-  <?php submit_button(); ?>
-</form>
+<div class="se-settings-container">
+     <form action="options.php" method="post" class="simplevent-general-form">
+     <?php settings_fields( 'simplevent-footer-group' ); ?>
+     <?php do_settings_sections('simplevent_footer'); ?>
+     <?php submit_button(); ?>
+     </form>
+</div>
 
 <!--VORSCHAU-->

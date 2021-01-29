@@ -31,6 +31,7 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-settings-group', 'event_logo' );
   register_setting( 'simplevent-settings-group', 'event_logo_neg' );
   register_setting( 'simplevent-settings-group', 'event_icon' );
+  register_setting( 'simplevent-settings-group', 'event_icon_neg' );
 
   register_setting( 'simplevent-settings-group', 'twitter_link' );
   register_setting( 'simplevent-settings-group', 'youtube_link' );
@@ -40,7 +41,8 @@ function simplevent_custom_settings() {
 
   register_setting( 'simplevent-settings-group', 'primary_color_picker' );
   register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
-  register_setting( 'simplevent-settings-group', 'light_color_picker' );
+  register_setting( 'simplevent-settings-group', 'light_mode_picker' );
+  register_setting( 'simplevent-settings-group', 'dark_mode_picker' );
 
   register_setting( 'simplevent-settings-group', 'font_name' );
   register_setting( 'simplevent-settings-group', 'font_link' );
@@ -56,6 +58,8 @@ function simplevent_custom_settings() {
   add_settings_field( 'event_logo', 'Logo', 'simplevent_event_logo', 'aagi_simplevent', 'simplevent-general-options' );
   add_settings_field( 'event_logo_neg', 'Logo Negativ', 'simplevent_event_logo_neg', 'aagi_simplevent', 'simplevent-general-options' );
   add_settings_field( 'event_icon', 'Icon', 'simplevent_event_icon', 'aagi_simplevent', 'simplevent-general-options' );
+  add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
+
 
   add_settings_field( 'twitter-link', 'Twitter', 'simplevent_twitter_link', 'aagi_simplevent', 'simplevent-general-options' );
   add_settings_field( 'youtube-link', 'Youtube', 'simplevent_youtube_link', 'aagi_simplevent', 'simplevent-general-options' );
@@ -65,7 +69,8 @@ function simplevent_custom_settings() {
 
   add_settings_field( 'primary-color-picker', 'Primary Color', 'simplevent_primary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
   add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
-  add_settings_field( 'light-color-picker', 'Light Color', 'simplevent_light_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
+  add_settings_field( 'light-mode-picker', 'Light Mode', 'simplevent_light_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
+  add_settings_field( 'dark-mode-picker', 'Dark Mode', 'simplevent_dark_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
 
   add_settings_field( 'font-name', 'Font Name', 'simplevent_font_name', 'aagi_simplevent', 'simplevent-fonts' );
   add_settings_field( 'font-link', 'Font Link', 'simplevent_font_link', 'aagi_simplevent', 'simplevent-fonts' );
@@ -197,16 +202,29 @@ function simplevent_live_options() {
 //social media
 function simplevent_event_logo() {
   $logo = esc_attr( get_option( 'event_logo' ) );
+  echo '<div class="image-preview"><img src="'.get_option( 'event_logo' ).'" /></div>';
+
   echo '<input type="button" style="width:25%;" value="Logo" class="button button-secondary upload-button" data-target="event-logo"/><input type="" style="width:73%;" id="event-logo" name="event_logo" value="' .$logo. '"/>';
 }
 function simplevent_event_logo_neg() {
      $logoNeg = esc_attr( get_option( 'event_logo_neg' ) );
+     echo '<div class="image-preview image-neg"><img src="'.get_option( 'event_logo_neg' ).'" /></div>';
+
      echo '<input type="button" style="width:25%;" value="Logo Negativ" class="button button-secondary upload-button" data-target="event-logo-neg"/><input type="" style="width:73%;" id="event-logo-neg" name="event_logo_neg" value="' .$logoNeg. '"/>';
    }
 function simplevent_event_icon() {
   $icon = esc_attr( get_option( 'event_icon' ) );
+  echo '<div class="image-preview"><img src="'.get_option( 'event_icon' ).'" /></div>';
+
   echo '<input type="button" style="width:25%;" value="Icon" class="button button-secondary upload-button" data-target="event-icon"/><input type="" style="width:73%;" id="event-icon" name="event_icon" value="' .$icon. '"/>';
 }
+function simplevent_event_icon_neg() {
+  $iconNeg = esc_attr( get_option( 'event_icon_neg' ) );
+  echo '<div class="image-preview image-neg"><img src="'.get_option( 'event_icon_neg' ).'" /></div>';
+
+  echo '<input type="button" style="width:25%;" value="Icon Negativ" class="button button-secondary upload-button" data-target="event-icon-neg"/><input type="" style="width:73%;" id="event-icon-neg" name="event_icon_neg" value="' .$iconNeg. '"/>';
+}
+
 function simplevent_twitter_link() {
   $twitter = esc_attr( get_option( 'twitter_link' ) );
   echo '<input type="text" name="twitter_link" value="' .$twitter. '" placeholder="URL" />';
@@ -228,6 +246,7 @@ function simplevent_insta_link() {
   echo '<input type="text" name="insta_link" value="' .$insta. '" placeholder="URL" />';
 }
 
+
 //Colors output
 function simplevent_primary_color_picker() {
   $primarycolor = get_option( 'primary_color_picker' );
@@ -237,9 +256,29 @@ function simplevent_secondary_color_picker() {
   $secondarycolor = get_option( 'secondary_color_picker' );
   echo '<input class="se-color-picker" type="text" name="secondary_color_picker" value="' .$secondarycolor. '" data-default-color="#282828" />';
 }
-function simplevent_light_color_picker() {
-  $lightcolor = get_option( 'light_color_picker' );
-  echo '<input class="se-color-picker" type="text" name="light_color_picker" value="' .$lightcolor. '" data-default-color="#dedede" />';
+function simplevent_light_mode_picker() {
+  $lightmode = get_option( 'light_mode_picker' );
+  $stdLight = array( '#FFFFFF', '#f1f1f1');
+  $lightColors = (!is_array($lightmode)) ? $stdLight : $lightmode;
+  $fieldName = array('Color', 'Shading');
+  $cKey = 0;
+  foreach($lightColors as $key => $color ){
+    echo '<p>'.$fieldName[$cKey].'</p>';
+    echo '<input class="se-color-picker" type="text" name="light_mode_picker['.$cKey.']" value="' .$color. '" data-default-color="'.$stdLight[$cKey].'" />';
+    $cKey++;
+  }
+}
+function simplevent_dark_mode_picker() {
+  $darkmode = get_option( 'dark_mode_picker' );
+  $stdDark = array( '#1c1c1c', '#141414');
+  $darkColors = (!is_array($darkmode)) ? $stdDark : $darkmode;
+  $fieldName = array('Color', 'Shading');
+  $cKey = 0;
+  foreach($darkColors as $key => $color ){
+    echo '<p>'.$fieldName[$cKey].'</p>';
+    echo '<input class="se-color-picker" type="text" name="dark_mode_picker['.$cKey.']" value="' .$color. '" data-default-color="'.$stdDark[$cKey].'" />';
+    $cKey++;
+  }
 }
 
 //Fonts

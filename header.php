@@ -57,7 +57,7 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.30'; 
+     $scriptversion = '1.0.31'; 
     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.01' );
     wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
     
@@ -147,6 +147,7 @@ wp_head();
                               }
                               echo join( $langs );
                          }
+
                     ?>
                     </div>
 
@@ -175,9 +176,6 @@ wp_head();
           <?php
           //mobile menu wrapper closer
           if(wp_is_mobile()){ echo '</div>'; }
-
-          
-
 
           ?>
           
