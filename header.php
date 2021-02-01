@@ -1,23 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="<?php bloginfo('charset'); ?>">
-  <meta name="viewport" content="width=device-width">
-  <title><?php bloginfo('name'); ?></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="<?php echo esc_attr( get_option( 'se_keywords' ) ); ?>">
-  <meta name="description" content="<?php echo __('Jedes Jahr treffen sich 1350 Führungspersönlichkeiten aus Wirtschaft, Wissenschaft, Politik und Medien zum aktiven Meinungsaustausch und branchenübergreifenden Dialog.'); ?>">
-  <meta name="copyright" content="<?php bloginfo('name'); ?> 2020-2021" />
-  <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.ico" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     <meta charset="<?php bloginfo('charset'); ?>">
+     <meta name="viewport" content="width=device-width">
+     <title><?php bloginfo('name'); ?></title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="keywords" content="<?php echo esc_attr( get_option( 'se_keywords' ) ); ?>">
+     <meta name="description" content="<?php echo __('Jedes Jahr treffen sich 1350 Führungspersönlichkeiten aus Wirtschaft, Wissenschaft, Politik und Medien zum aktiven Meinungsaustausch und branchenübergreifenden Dialog.'); ?>">
+     <meta name="copyright" content="<?php bloginfo('name'); ?> 2020-2021" />
 
-  <!-- LOAD GOOGLE FONT -->
-  <?php
-  if( get_option( 'font_name' ) && get_option( 'font_link' ) ) {
-       echo '<link rel="preconnect" href="https://fonts.gstatic.com">';
-       echo '<link href="'.get_option( 'font_link' ).'" rel="stylesheet">';
-  }
-  ?>
+     <?php
+     //Google Analytics
+     if(get_option( 'google_analytics_ua' )){
+          $anonym = ( get_option( 'anonymize_ip' ) == 'on' ) ? '{ \'anonymize_ip\': true }' : '';
+          ?>
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr(get_option( 'google_analytics_ua' )); ?>"></script>
+          <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '<?php echo esc_attr(get_option( 'google_analytics_ua' )); ?>', <?php echo $anonym; ?> );
+          </script>
+               
+     <?php } ?>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     
+     <?php 
+          //FAVICON
+          if( get_option( 'event_icon' ) || get_option( 'event_icon_neg' ) ){
+               $favicon = ($_COOKIE["mode"]) ? get_option( 'event_icon_neg' ) : get_option( 'event_icon' );
+               echo '<link rel="icon" type="image/svg+xml" href="'.$favicon.'">';
+               echo '<link rel="alternate icon" href="'.$favicon.'">';
+               echo '<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01">';
+          }
+     ?>
+     
+     <!-- LOAD GOOGLE FONT -->
+     <?php
+     if( get_option( 'font_name' ) && get_option( 'font_link' ) ) {
+          echo '<link rel="preconnect" href="https://fonts.gstatic.com">';
+          echo '<link href="'.get_option( 'font_link' ).'" rel="stylesheet">';
+     }
+     ?>
 
      <style>
           /*FONT*/
@@ -57,7 +83,7 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.31'; 
+     $scriptversion = '1.0.32'; 
     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.01' );
     wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
     

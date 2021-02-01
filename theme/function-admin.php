@@ -47,11 +47,14 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-settings-group', 'font_name' );
   register_setting( 'simplevent-settings-group', 'font_link' );
  
+  register_setting( 'simplevent-settings-group', 'google_analytics_ua' );
+  register_setting( 'simplevent-settings-group', 'anonymize_ip' );
 
   //****SECTIONS
   add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
   add_settings_section( 'simplevent-color-options', 'Colors', 'simplevent_color_options', 'aagi_simplevent');
   add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
+  add_settings_section( 'simplevent-analytics', 'Analytics', 'simplevent_analytics', 'aagi_simplevent');
 
 
   //****fields
@@ -74,6 +77,9 @@ function simplevent_custom_settings() {
 
   add_settings_field( 'font-name', 'Font Name', 'simplevent_font_name', 'aagi_simplevent', 'simplevent-fonts' );
   add_settings_field( 'font-link', 'Font Link', 'simplevent_font_link', 'aagi_simplevent', 'simplevent-fonts' );
+
+  add_settings_field( 'google-analytics-ua', 'Google Analytics', 'simplevent_google_analytics_ua', 'aagi_simplevent', 'simplevent-analytics' );
+  add_settings_field( 'anonymize-ip', 'Anonymize IP', 'simplevent_anonymize_ip', 'aagi_simplevent', 'simplevent-analytics' );
 
 
   //----------------------------------Header ---------------------------------------//
@@ -168,6 +174,10 @@ function simplevent_color_options() {
 }
 function simplevent_fonts() {
   echo 'Google-Font einbinden';
+}
+
+function simplevent_analytics() {
+  echo 'Google-Analytics einbinnden';
 }
 
 function simplevent_header_options() {
@@ -291,6 +301,19 @@ function simplevent_font_link() {
      echo '<input type="text" name="font_link" value="' .$fontLink. '" placeholder="Google-Font Link-Tag" />';
 }
 
+//Analytics
+function simplevent_google_analytics_ua() {
+  $google_analytics_ua = get_option( 'google_analytics_ua' );
+  echo '<input type="text" name="google_analytics_ua" value="' .$google_analytics_ua. '" placeholder="UA-xxxxxxxx-x"/>';
+}
+function simplevent_anonymize_ip() {
+  $anonymize_ip = esc_attr( get_option( 'anonymize_ip' ) );
+  if($anonymize_ip == 'on'){
+    $anonymize_ip = 'checked';
+  }
+  echo '<input type="checkbox" name="anonymize_ip" ' .$anonymize_ip. '/>';
+  echo 'anwählen um Besucher IP anonym zu halten (empfohlen)';
+}
 
 //----------------------------------HEADER ---------------------------------------//
 
@@ -369,7 +392,7 @@ function simplevent_se_contact_name() {
 }
 function simplevent_se_contact_address() {
      $contact_address = get_option( 'se_contact_address' );
-     echo '<textarea type="textarea" rows="2" name="se_contact_address"  style="width: 100%;">' . $contact_address . '</textarea>';
+     echo '<textarea type="textarea" rows="3" name="se_contact_address"  style="width: 100%;">' . $contact_address . '</textarea>';
 }
 function simplevent_se_contact_phone() {
      $se_contact_phone = get_option( 'se_contact_phone' );
