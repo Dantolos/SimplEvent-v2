@@ -36,7 +36,11 @@ class People{
 
             //Social Media
             $socialmedia = new SocialMedia;
-          $this->output .= $socialmedia->castSocialMediaItem( get_field( 'social_media', $person->ID ) );
+            
+            if( get_field( 'social_media', $person->ID )["social_media"]  ){
+               $this->output .= $socialmedia->castSocialMediaItem( get_field( 'social_media', $person->ID ) );
+            }
+         
             
 
             $this->output .= '</div>';
