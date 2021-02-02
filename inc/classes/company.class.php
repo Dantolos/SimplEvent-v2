@@ -8,7 +8,7 @@ class Company extends Posts {
 
     public function call_Post_Wall( $labelyear = false, $order = 'ASC', $orderby = 'date', $meta_key = false ) {
      
-        $this->company = parent::call_Post_Data('company');
+        $this->company = parent::call_Post_Data('company', $order, $orderby, $meta_key );
 
         
         foreach( $this->company->posts as $company ){
