@@ -4,9 +4,9 @@ class Company extends Posts {
     public $output;
     public $company;
     public $posts = array();
+ 
 
-
-    public function call_Post_Wall( $labelyear = false ) {
+    public function call_Post_Wall( $labelyear = false, $order = 'ASC', $orderby = 'date', $meta_key = false ) {
      
         $this->company = parent::call_Post_Data('company');
 
