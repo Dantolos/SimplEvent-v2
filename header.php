@@ -74,7 +74,24 @@
 
           body {
                --primary: <?php echo esc_attr( get_option( 'primary_color_picker' ) ); ?>;
-               --secondary: <?php echo esc_attr( get_option( 'secondary_color_picker' ) ); ?>;
+               --secondary: <?php echo esc_attr( get_option( 'secondary_color_picker' ) ); ?>; 
+    
+               --dark: <?php echo esc_attr( get_option( 'dark_mode_picker' )[0] ); ?>;
+               --darkshade: <?php echo esc_attr( get_option( 'dark_mode_picker' )[1] ); ?>;
+               
+               --light: <?php echo esc_attr( get_option( 'light_mode_picker' )[0] ); ?>;
+               --lightshade: <?php echo esc_attr( get_option( 'light_mode_picker' )[1] ); ?>;
+          }
+          header {
+               <?php 
+               
+               if( isset(get_option( 'se_header_mode' )[0])  ){
+                    echo 'color: var(--dark); background-color: var(--light);';
+               } else if( isset(get_option( 'se_header_mode' )[1]) == 'Dark' ){ 
+                    echo 'color: var(--light); background-color: var(--dark);';
+               } else {
+                    echo 'color: #ffffff; background-color: var(--primary);';
+               } ?>
           }
      </style>
 
@@ -103,6 +120,10 @@ function theme_add_files()
 }
 add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 
+//including assets
+require_once('inc/assets/button.php');
+require_once('inc/assets/socialmedia.php');
+
 //including classes
 require_once('inc/classes/post.class.php');
 
@@ -111,8 +132,8 @@ require_once('inc/classes/events.class.php');
 require_once('inc/classes/people.class.php');
 require_once('inc/classes/partner.class.php');
 
-//including assets
-require_once('inc/assets/button.php');
+
+
 
 wp_head();
 ?>
@@ -128,7 +149,10 @@ wp_head();
 
           <div class="header-logo">
                <a href="<?php $url = home_url(); echo esc_url( $url ); ?>">
-                    <img src="<?php echo get_option( 'event_logo_neg' ); ?>" 
+                    <?php $logo = ( isset(get_option( 'se_header_mode' )[0]) ) ? get_option( 'event_logo' ) : get_option( 'event_logo_neg' ); 
+                    ?>
+                    
+                    <img src="<?php echo $logo; ?>" 
                          alt="SEF.Growth" 
                          title="<?php echo bloginfo('name'); ?>">
                </a>

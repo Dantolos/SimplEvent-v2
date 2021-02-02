@@ -10,4 +10,4 @@ class screenVisibility {
   
         return mode === 'above' ? above : (mode === 'below' ? below : !above && !below);
     }
-}
+} 

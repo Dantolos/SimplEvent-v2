@@ -22,7 +22,7 @@ function SimplEvent_add_admin_page() {
   //activieren custom settings
   add_action( 'admin_init', 'simplevent_custom_settings' );
 }
-add_action( 'admin_menu', 'SimplEvent_add_admin_page');
+add_action( 'admin_menu', 'SimplEvent_add_admin_page'); 
 
 //save settings and seessions
 function simplevent_custom_settings() {
@@ -88,11 +88,7 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-header-group', 'se_anmeldelink' );
   register_setting( 'simplevent-header-group', 'se_anmeldetext' );
 
-  register_setting( 'simplevent-header-group', 'se_attention' );
-  register_setting( 'simplevent-header-group', 'se_attentionbuttontext' );
-  register_setting( 'simplevent-header-group', 'se_attentiontitle' );
-  register_setting( 'simplevent-header-group', 'se_attentiontext' );
-  register_setting( 'simplevent-header-group', 'se_attentiondownload' );
+  register_setting( 'simplevent-header-group', 'se_header_mode' );
 
   register_setting( 'simplevent-header-group', 'se_videoslider_activ' );
   register_setting( 'simplevent-header-group', 'se_source' );
@@ -101,6 +97,7 @@ function simplevent_custom_settings() {
 
   //****Section
   add_settings_section( 'simplevent-header-options', 'Header', 'simplevent_header_options', 'simplevent_header');
+  add_settings_section( 'simplevent-header-style', 'Header Style', 'simplevent_header_style', 'simplevent_header');
   add_settings_section( 'simplevent-videoslider', 'Video Slider', 'simplevent_videoslider', 'simplevent_header');
 
   //****Fields
@@ -108,11 +105,7 @@ function simplevent_custom_settings() {
   add_settings_field( 'se-anmeldelink', 'Anmeldung Link', 'simplevent_se_anmeldelink', 'simplevent_header', 'simplevent-header-options' );
   add_settings_field( 'se-anmeldetext', 'Anmeldung Text', 'simplevent_se_anmeldetext', 'simplevent_header', 'simplevent-header-options' );
 
-  add_settings_field( 'se-attention', 'Attention Aktiv', 'simplevent_se_attention', 'simplevent_header', 'simplevent-header-options' );
-  add_settings_field( 'se-attentionbuttontext', 'Attention Buttontext', 'simplevent_se_attentionbuttontext', 'simplevent_header', 'simplevent-header-options' );
-  add_settings_field( 'se-attentiontitle', 'Attention Title', 'simplevent_se_attentiontitle', 'simplevent_header', 'simplevent-header-options' );
-  add_settings_field( 'se-attentiontext', 'Attention Text', 'simplevent_se_attentiontext', 'simplevent_header', 'simplevent-header-options' );
-  add_settings_field( 'se-attentiondownload', 'Attention Download', 'simplevent_se_attentiondownload', 'simplevent_header', 'simplevent-header-options' );
+  add_settings_field( 'se-header-mode', 'Header Style Mode', 'simplevent_se_header_mode', 'simplevent_header', 'simplevent-header-style' );
 
   add_settings_field( 'se-videoslider_activ', 'Activate', 'simplevent_se_videoslider_activ', 'simplevent_header', 'simplevent-videoslider' );
   add_settings_field( 'se-source', 'Attention Text', 'simplevent_se_source', 'simplevent_header', 'simplevent-videoslider' );
@@ -182,6 +175,10 @@ function simplevent_analytics() {
 
 function simplevent_header_options() {
   echo '';
+}
+ 
+function simplevent_header_style() {
+     echo '';
 }
 
 function simplevent_videoslider() {
@@ -332,30 +329,19 @@ function simplevent_se_anmeldelink() {
   $anmeldelink = get_option( 'se_anmeldelink' );
   echo '<input type="text" name="se_anmeldelink" value="' .$anmeldelink. '" placeholder="URL"/>';
 }
-//--------Attention
-function simplevent_se_attention() {
-  $attention = get_option( 'se_attention' );
-  if($attention == 'on'){
-    $attention = 'checked';
-  }
-  echo '<input type="checkbox" name="se_attention" ' .$attention. '/>';
+
+//header style
+function simplevent_se_header_mode() {
+     $modesSaved = get_option( 'se_header_mode' );
+     $modes= array('Light', 'Dark', 'Colorful');
+     foreach($modes as $key => $mode){
+          $check = ( isset($modesSaved[$key]) ) ? 'checked' : '';
+          echo '<input type="checkbox" id="'.$mode.'" name="se_header_mode['.$key.']" value="'.$mode.'" '.$check.'>';
+          echo '<label for="'.$mode.'">'.$mode.'</label><br>';
+   
+     }    
 }
-function simplevent_se_attentionbuttontext() {
-  $attentionbuttontext = get_option( 'se_attentionbuttontext' );
-  echo '<input type="text" name="se_attentionbuttontext" value="' .$attentionbuttontext. '" placeholder="Buttontext"/>';
-}
-function simplevent_se_attentiontitle() {
-  $attentiontitle = get_option( 'se_attentiontitle' );
-  echo '<input type="text" name="se_attentiontitle" value="' .$attentiontitle. '" placeholder="Titel"/>';
-}
-function simplevent_se_attentiontext() {
-  $attentiontext = get_option( 'se_attentiontext' );
-  echo '<textarea type="textarea" rows="10" name="se_attentiontext"  style="width: 100%;">' . $attentiontext . '</textarea>';
-}
-function simplevent_se_attentiondownload() {
-  $attentiondownload = esc_attr( get_option( 'se_attentiondownload' ) );
-  echo '<input type="button" style="width:25%;" value="Download" class="button button-secondary upload-button" data-target="se-attentiondownload"/><input type="" style="width:73%;" id="se-attentiondownload" name="se_attentiondownload" value="' .$attentiondownload. '"/>';
-}
+
 
 //-------Slidervideo simplevent_se_videosliderbuttonlink
 function simplevent_se_videoslider_activ() {

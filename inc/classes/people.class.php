@@ -1,9 +1,10 @@
-<?php 
-class People{
+<?php  
 
+class People{
+ 
     public $output;
     public $people;
-
+ 
     public function __construct() {
         $post_args = array(
             'post_type' => 'peoples', 
@@ -22,6 +23,7 @@ class People{
             $firma = ( get_field('firma', $person->ID) ) ? ', ' . get_field('firma', $person->ID) : '';
             $this->output .= '<p>' . esc_attr( get_field('funktion', $person->ID) ) . $firma . '</p>';
 
+            //Banchen
             $this->output .= '<p class="se2-people-branche">';
             if(get_the_terms($person->ID, 'branche')){
                foreach(get_the_terms($person->ID, 'branche') as $key => $branche ) {
@@ -30,8 +32,12 @@ class People{
                     $this->output .= '<span style="' . $spanstyle . '">' . esc_attr($branche->name) . ' </span>';
                 }
             }
-            
             $this->output .= '</p>';
+
+            //Social Media
+            $socialmedia = new SocialMedia;
+          $this->output .= $socialmedia->castSocialMediaItem( get_field( 'social_media', $person->ID ) );
+            
 
             $this->output .= '</div>';
             $this->output .= '</div>';

@@ -26,7 +26,15 @@ for( let COUNTER of COUNTERELEMENTS ){
                     counting( COUNTER, NUMB, STARTNUMB );
                }, 10 );
           }
-     })
+     }) 
+     window.onscroll = function() {
+          if(VISIBILITY.visible(COUNTER)) {
+               counter = setInterval( ()=> {
+                    STARTNUMB = STARTNUMB + STEPS;
+                    counting( COUNTER, NUMB, STARTNUMB );
+               }, 10 );
+          }  
+     }
    
 }
 

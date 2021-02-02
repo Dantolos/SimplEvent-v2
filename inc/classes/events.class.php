@@ -5,9 +5,9 @@ class Events extends Posts {
      public $eventData;
      
      //POST WALL
-     public function call_Events_Wall( $year = false ) {
+     public function call_Events_Wall( $year = false, $order = 'ASC', $orderby = 'date', $meta_key = false ) {
 
-          $this->eventData = parent::call_Post_Data('event');
+          $this->eventData = parent::call_Post_Data('event', $order, $orderby, $meta_key );
      
           foreach ( $this->eventData->posts as $key => $event ) {
                
