@@ -33,10 +33,23 @@ class Walker_Nav_Primary extends Walker_Nav_menu {
 
         $output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
 
-        $attributes = ! empty( $item->attr_title ) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
-        $attributes .= ! empty( $item->target ) ? ' target="' . esc_attr($item->target) . '"' : '';
-        $attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
-        $attributes .= ! empty( $item->url ) ? ' href="' . esc_attr($item->url) . '"' : '';
+        $attributes = '';
+        if(! empty( $item->url ) && $item->url != '#'){
+          $attributes = ! empty( $item->attr_title ) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+          $attributes .= ! empty( $item->target ) ? ' target="' . esc_attr($item->target) . '"' : '';
+          $attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr($item->xfn) . '"' : ''; 
+          $attributes .= ! empty( $item->url ) ? ' href="' . esc_attr($item->url) . '"' : '';
+        } elseif ($args->walker->has_children) {
+          foreach( wp_get_nav_menu_items( 'Hauptmenu' ) as $menu ){
+               if( $menu->menu_item_parent == $item->ID ){
+                    $attributes = ! empty( $menu->title ) ? ' title="redirect-to-' . esc_attr($menu->title) . '"' : '';
+                    $attributes .= ! empty( $menu->target ) ? ' target="' . esc_attr($menu->target) . '"' : '';
+                    $attributes .= ! empty( $menu->url ) ? ' href="' . esc_attr($menu->url) . '"' : '';
+                    break;
+               }
+          }
+        }
+        
 
         $attributes .= ( $args->walker->has_children ) ? ' class="parent-menu-item"' : '';
 
