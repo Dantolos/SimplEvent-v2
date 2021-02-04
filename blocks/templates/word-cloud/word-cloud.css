@@ -1,0 +1,8 @@
+.word-cloud {
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+     min-width: fit-content;
+     font-size:200%;
+     font-weight: 800;
+}

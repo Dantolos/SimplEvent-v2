@@ -115,6 +115,9 @@ function se2_enqueue_styles_scripts_block()
 
     wp_enqueue_style( 'block-reference-slider', get_stylesheet_directory_uri() . '/blocks/templates/reference-slider/reference-slider.css', '', $fileversion );
     wp_enqueue_script( 'block-reference-slider-script', get_stylesheet_directory_uri() . '/blocks/templates/reference-slider/reference-slider.js', array('jquery'), $fileversion, true);
+    
+    wp_enqueue_style( 'block-word-cloud', get_stylesheet_directory_uri() . '/blocks/templates/word-cloud/word-cloud.css', '', $fileversion );
+    wp_enqueue_script( 'block-word-cloud-script', get_stylesheet_directory_uri() . '/blocks/templates/word-cloud/word-cloud.js', array('jquery'), $fileversion, true);
 
 }
 

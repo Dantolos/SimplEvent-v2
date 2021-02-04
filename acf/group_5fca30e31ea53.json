@@ -300,6 +300,7 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "layouts": {
                         "layout_5fd2085c384c2": {
                             "key": "layout_5fd2085c384c2",
@@ -408,12 +409,38 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_601c08379c9cc": {
+                            "key": "layout_601c08379c9cc",
+                            "name": "twitter",
+                            "label": "Twitter",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_601c08379c9cd",
+                                    "label": "Link",
+                                    "name": "sm_link",
+                                    "type": "url",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": ""
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Add Social Media",
                     "min": "",
-                    "max": "",
-                    "wpml_cf_preferences": 1
+                    "max": ""
                 },
                 {
                     "key": "field_5fca3ce39c772",
@@ -816,5 +843,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1612432021
+    "modified": 1612449867
 }

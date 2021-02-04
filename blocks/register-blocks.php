@@ -56,6 +56,16 @@ function register_acf_block_types() {
           'icon'              => 'heart',
           'keywords'          => array( 'reference', 'slider' ),
      ));
+     // word cloud
+     acf_register_block_type(array(
+          'name'              => 'word-cloud',
+          'title'             => __('Word Cloud'),
+          'description'       => __('List a selection of tags, taxonomies or posts as word-cloud.'),
+          'render_template'   => 'blocks/templates/word-cloud/word-cloud.php',
+          'category'          => 'formatting',
+          'icon'              => 'cloud',
+          'keywords'          => array( 'word', 'cloud', 'wordcloud', 'word-cloud' ),
+     ));
 }
 // Check if function exists and hook into setup.
 if( function_exists('acf_register_block_type') ) {

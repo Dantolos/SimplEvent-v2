@@ -22,11 +22,13 @@ header {
     //LOGO
     //------------------------------
     .header-logo {
-          position:fixed;
           left:10%;
-          top:15px;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          bottom: 0;
           max-height:40px;
-          max-width: var(--headerLogoWidth);
+          width: var(--headerLogoWidth);
           @include for_breakpoint( 'mobile' ){
                left:5%;
                top:20px;
@@ -35,7 +37,7 @@ header {
 
           a img {
                height:100%;
-               max-height:100%;
+          
                max-width:100%;
           }
     }
