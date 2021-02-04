@@ -89,6 +89,7 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-header-group', 'se_anmeldetext' );
 
   register_setting( 'simplevent-header-group', 'se_header_mode' );
+  register_setting( 'simplevent-header-group', 'se_header_logowidth' );
 
   register_setting( 'simplevent-header-group', 'se_videoslider_activ' );
   register_setting( 'simplevent-header-group', 'se_source' );
@@ -106,6 +107,7 @@ function simplevent_custom_settings() {
   add_settings_field( 'se-anmeldetext', 'Anmeldung Text', 'simplevent_se_anmeldetext', 'simplevent_header', 'simplevent-header-options' );
 
   add_settings_field( 'se-header-mode', 'Header Style Mode', 'simplevent_se_header_mode', 'simplevent_header', 'simplevent-header-style' );
+  add_settings_field( 'se-header-logowidth', 'Logo Width', 'simplevent_se_header_logowidth', 'simplevent_header', 'simplevent-header-style' );
 
   add_settings_field( 'se-videoslider_activ', 'Activate', 'simplevent_se_videoslider_activ', 'simplevent_header', 'simplevent-videoslider' );
   add_settings_field( 'se-source', 'Attention Text', 'simplevent_se_source', 'simplevent_header', 'simplevent-videoslider' );
@@ -341,7 +343,14 @@ function simplevent_se_header_mode() {
    
      }    
 }
-
+function simplevent_se_header_logowidth() {
+     $logowidth = get_option( 'se_header_logowidth' );
+     echo '<div class="range-input">';
+          echo '<label>Definierung der maximalen Breite des Logos im Header im Verhätniss zur Browserbreite. (Maximal 50%)</label><br />';
+          echo '<input type="range" name="se_header_logowidth" value="' .$logowidth. '" min="5" max="50" onchange="changeVaule(event);" />';
+          echo '<input type="number" name="se_header_logowidth" value="' .$logowidth. '" min="5" max="50" onchange="changeVaule(event);" />';
+     echo '</div>';
+}
 
 //-------Slidervideo simplevent_se_videosliderbuttonlink
 function simplevent_se_videoslider_activ() {

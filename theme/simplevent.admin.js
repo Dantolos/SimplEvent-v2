@@ -53,4 +53,10 @@ jQuery(function($) {
      });
  
  });
- 
+ 
+
+ function changeVaule(event) {
+     for( let inputfield of event.path[1].children ){
+          inputfield.value = event.target.value
+     }
+ }

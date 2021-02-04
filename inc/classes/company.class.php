@@ -6,9 +6,9 @@ class Company extends Posts {
     public $posts = array();
  
 
-    public function call_Post_Wall( $labelyear = false, $order = 'ASC', $orderby = 'date', $meta_key = false ) {
+    public function call_Post_Wall( $labelyear = false, $order = 'ASC', $orderby = 'date', $acfField = false, $subField = false, $dateFormat = false ) {
      
-        $this->company = parent::call_Post_Data('company', $order, $orderby, $meta_key );
+        $this->company = parent::call_Post_Data('company', $order, $orderby, $acfField, $subField, $dateFormat );
 
         
         foreach( $this->company->posts as $company ){
@@ -18,17 +18,19 @@ class Company extends Posts {
           }
             if( get_field('erfolgsgeschicht', $company->ID)['public'] ){
 
-              
-
                 $post = array();
                 $post['ID'] = $company->ID;
                 $post['title'] = esc_attr(get_field('erfolgsgeschicht', $company->ID)['title']) ?: '';
                 $post['content'] = get_field('erfolgsgeschicht', $company->ID)['content'] ?: '';
                 $post['thumbnail'] = esc_url(get_field('erfolgsgeschicht', $company->ID)['thumbnail']) ?: '';
+                $post['date'] = date( 'd. M. Y', $date);
 
                 $this->posts[$company->ID] = $post;
             }
         }
+
+       //reverse the array
+        $this->posts = array_reverse( $this->posts, true );
 
         foreach( $this->posts as $post ) {
 

@@ -5,7 +5,10 @@ footer {
      color: $light;
      padding: 15px 5vw;
      font-size: .8em; 
-
+     @include for_breakpoint( 'mobile' ){
+          max-height:unset;
+     }
+     
      display:flex;
      flex-direction: row;
      justify-content: space-between;

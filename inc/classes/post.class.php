@@ -16,12 +16,12 @@ class Posts {
                if( $postdatas->posts  ){
                     foreach( $postdatas->posts as $key => $post ){
                          if($subField) {
-                              $postdatas->posts[$key]->label = get_field( $acfField, $post->ID )[$subField];
+                              $postdatas->posts[$key]->date = get_field( $acfField, $post->ID )[$subField];
                          } else {
-                              $postdatas->posts[$key]->label = get_field( $acfField, $post->ID );
+                              $postdatas->posts[$key]->date = get_field( $acfField, $post->ID );
                          }
                          if($dateFormat){
-                              strtotime($postdatas->posts[$key]->label);
+                             strtotime($postdatas->posts[$key]->date); 
                          }
                          
                     }
@@ -31,7 +31,7 @@ class Posts {
                {
                    if ( $a->label == $b->label )
                        return 0;
-                   return $a->label < $b->label ? -1 : 1;
+                   return $a->label > $b->label ? -1 : 1;
                }
                
                // Sort our multidimensional array by sub array value

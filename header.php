@@ -73,6 +73,7 @@
           } ?>
 
           body {
+               /*COLORS*/
                --primary: <?php echo esc_attr( get_option( 'primary_color_picker' ) ); ?>;
                --secondary: <?php echo esc_attr( get_option( 'secondary_color_picker' ) ); ?>; 
     
@@ -81,6 +82,9 @@
                
                --light: <?php echo esc_attr( get_option( 'light_mode_picker' )[0] ); ?>;
                --lightshade: <?php echo esc_attr( get_option( 'light_mode_picker' )[1] ); ?>;
+
+               /*HEADER*/
+               --headerLogoWidth: <?php echo esc_attr( get_option('se_header_logowidth') ) . 'vw'; ?>
           }
           header {
                <?php 
