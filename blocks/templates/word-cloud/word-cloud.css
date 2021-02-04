@@ -2,7 +2,21 @@
      display: flex;
      justify-content: center;
      flex-wrap: wrap;
+     align-items: baseline;
      min-width: fit-content;
-     font-size:200%;
+     font-size:220%;
      font-weight: 800;
+
 }
+.word-cloud span {
+     text-transform: uppercase;
+     text-align: center;
+}
+.word-cloud span:hover {
+     color: var(--secondary);
+     cursor: pointer;
+}
+.sec-word {
+     opacity: .6;
+     margin:5px 10px;    
+}

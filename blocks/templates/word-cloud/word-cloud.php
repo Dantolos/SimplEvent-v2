@@ -30,10 +30,12 @@ $posts = get_field('type')
     <?php
           $countLoop = 1;
          foreach($posts as $post){
-              $style = ( $countLoop%2 == 0 ) ? 'sec' : '';
+              $fontsize = rand(60, 100) / 100;
+              $style = ( $countLoop%2 == 0 ) ? 'sec-word' : '';
               $degree = !empty(get_field('speaker_degree', $post )) ? get_field('speaker_degree', $post ) . ' ' : '';
-              echo '<span wordid="'.$post.'">'.$degree.esc_attr(get_field('speaker_vorname', $post )).' '.esc_attr(get_field('speaker_nachname', $post )).'</span>';
-         }          
+              echo '<span wordid="'.$post.'" class="'.$style.'" style="font-size:'.$fontsize.'em;">'.$degree.esc_attr(get_field('speaker_vorname', $post )).' '.esc_attr(get_field('speaker_nachname', $post )).'</span>';
+              $countLoop++;
+          }          
     ?>
    
 </div>
