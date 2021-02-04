@@ -29,9 +29,9 @@ class Posts {
                
                function subval_sort( $a, $b )
                {
-                   if ( $a->label == $b->label )
+                   if ( $a->date == $b->date )
                        return 0;
-                   return $a->label > $b->label ? -1 : 1;
+                   return ( $a->date > $b->date ) ? -1 : 1;
                }
                
                // Sort our multidimensional array by sub array value
