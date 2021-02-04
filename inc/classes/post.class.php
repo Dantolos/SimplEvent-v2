@@ -21,7 +21,7 @@ class Posts {
                               $postdatas->posts[$key]->date = get_field( $acfField, $post->ID );
                          }
                          if($dateFormat){
-                             strtotime($postdatas->posts[$key]->date); 
+                             intval(date( 'Ymd', strtotime($postdatas->posts[$key]->date))); 
                          }
                          
                     }
