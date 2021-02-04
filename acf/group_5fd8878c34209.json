@@ -155,8 +155,8 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 1,
-                    "display_format": "m\/d\/Y",
-                    "return_format": "m\/d\/Y",
+                    "display_format": "d\/m\/Y",
+                    "return_format": "d\/m\/Y",
                     "first_day": 1
                 },
                 {
@@ -216,5 +216,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1612431022
+    "modified": 1612432036
 }
