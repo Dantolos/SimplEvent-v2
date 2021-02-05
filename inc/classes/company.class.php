@@ -30,7 +30,7 @@ class Company extends Posts {
         }
 
        //reverse the array
-        $this->posts = array_reverse( $this->posts, true );
+        
 
         foreach( $this->posts as $post ) {
 
