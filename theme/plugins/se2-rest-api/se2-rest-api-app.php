@@ -71,6 +71,7 @@ function se2_partner_rest( WP_REST_Request $request ){
 add_action('rest_api_init', function() {
      register_rest_route('se2/app', 'partner', [
           'method' => 'GET',
-          'callback' => 'se2_partner_rest'
+          'callback' => 'se2_partner_rest',
+          'permission_callback' => '__return_true'
      ]);
 });
