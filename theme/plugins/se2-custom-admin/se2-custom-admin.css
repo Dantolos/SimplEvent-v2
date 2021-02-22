@@ -1,0 +1,19 @@
+
+
+#adminmenu .wp-submenu-head, #adminmenu a.menu-top {
+    font-size: 13px; color:#d6d6d6;
+}
+#adminmenu .wp-submenu a { font-size: 12px; font-weight: 300; }
+#adminmenu div.wp-menu-image { margin-right:5px; height:20px; }
+#adminmenu div.wp-menu-image:before { font-size: 12px; }
+#adminmenu .wp-has-current-submenu div.wp-menu-image:before { font-size: 12px;}
+
+#adminmenu div.wp-menu-name { padding: 4px;}
+#adminmenu li.menu-top { min-height: 28px; }
+
+#adminmenu .wp-has-current-submenu ul>li>a, .folded #adminmenu li.menu-top .wp-submenu>li>a {
+     padding: 3px 12px;
+}
+.wp-menu-separator{
+     border-bottom: 1px solid black;
+}

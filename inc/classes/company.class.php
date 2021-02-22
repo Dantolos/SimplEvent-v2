@@ -57,7 +57,7 @@ class Company extends Posts {
     //CATEGORIE: YEARS
     function call_Companies_Categories( $type = false ){
      $result = '';
-     $this->companyData = parent::call_Post_Data('company');
+     $this->companyData = parent::call_Post_Data('company',  'DSC', 'meta_value', 'Key data', 'label', true );
 
      //YEAR
      if($type = 'year'){

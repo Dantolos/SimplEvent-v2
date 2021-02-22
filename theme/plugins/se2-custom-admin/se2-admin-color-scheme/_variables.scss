@@ -1,0 +1,63 @@
+// assign default value to all undefined variables
+
+
+// core variables
+
+$text-color: #fff !default;
+$base-color: #23282d !default;
+$icon-color: var(--primary);
+$highlight-color: var(--primary) !default;
+$notification-color: var(--secondary)!default;
+
+
+// global 
+
+$body-background: #f1f1f1 !default;
+
+$link:var(--primary) !default;
+$link-focus:var(--secondary) !default;
+
+$button-color: $highlight-color !default;
+$button-text-color: $text-color !default;
+
+$form-checked: #7e8993 !default;
+
+// admin menu & admin-bar
+
+$menu-text: $text-color !default;
+$menu-icon: $icon-color !default;
+$menu-background: $base-color !default;
+
+$menu-highlight-text: $text-color !default;
+$menu-highlight-icon: $text-color !default;
+$menu-highlight-background: $highlight-color !default;
+
+$menu-current-text: $menu-highlight-text !default;
+$menu-current-icon: $menu-highlight-icon !default;
+$menu-current-background: $menu-highlight-background !default;
+
+$menu-submenu-text: var(--light) !default;
+$menu-submenu-background: var(--darkshade) !default;
+$menu-submenu-background-alt: var(--light) !default;
+
+$menu-submenu-focus-text: $highlight-color !default;
+$menu-submenu-current-text: $text-color !default;
+
+$menu-bubble-text: $text-color !default;
+$menu-bubble-background: $notification-color !default;
+$menu-bubble-current-text: $text-color !default;
+$menu-bubble-current-background: $menu-submenu-background !default;
+
+$menu-collapse-text: $menu-icon !default;
+$menu-collapse-icon: $menu-icon !default;
+$menu-collapse-focus-text: $text-color !default;
+$menu-collapse-focus-icon: $menu-highlight-icon !default;
+
+$adminbar-avatar-frame: var(--light) !default;
+$adminbar-input-background: var(--lightshade) !default;
+
+$adminbar-recovery-exit-text: $menu-bubble-text !default;
+$adminbar-recovery-exit-background: $menu-bubble-background !default;
+$adminbar-recovery-exit-background-alt: var(--darkshade) !default;
+
+$menu-customizer-text: var(--dark) !default;

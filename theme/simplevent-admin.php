@@ -1,4 +1,4 @@
-<img src="<?php echo get_template_directory_uri() . '/img/simplevent-icon.svg'; ?>" alt="" height="80px" style="border-bottom: 2px solid #6b6b6b;margin-top:30px; margin-bottom:10px; width:97.5%;" >
+<img src="<?php echo get_template_directory_uri() . '/theme/Wordmark-pos.svg'; ?>" alt="" height="50px" style="margin-top:30px; margin-bottom:10px; width:97.5%;" >
 <h2></h2>
 <style>
   /*--COLOR--*/

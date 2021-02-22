@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 function SimplEvent_add_admin_page() {
 
   //Generate Simplevent Page
-  add_menu_page( 'SimplEvent Theme Options', 'SimplEvent', 'manage_options', 'aagi_simplevent', 'simplevent_theme_create_page', get_template_directory_uri() . '/theme/simplevent-icon.svg', 110 );
+  add_menu_page( 'SimplEvent Theme Options', 'SimplEvent', 'manage_options', 'aagi_simplevent', 'simplevent_theme_create_page', get_template_directory_uri() . '/theme/Signum-neg.svg', 1 );
 
   //Generate SimplEvent Sub Pages
   add_submenu_page( 'aagi_simplevent', 'SimplEvent Theme Options', 'General', 'manage_options', 'aagi_simplevent', 'simplevent_theme_create_page' );

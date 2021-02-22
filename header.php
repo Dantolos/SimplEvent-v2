@@ -9,7 +9,7 @@
      <meta name="description" content="<?php echo __('Jedes Jahr treffen sich 1350 Führungspersönlichkeiten aus Wirtschaft, Wissenschaft, Politik und Medien zum aktiven Meinungsaustausch und branchenübergreifenden Dialog.'); ?>">
      <meta name="copyright" content="<?php bloginfo('name'); ?> 2020-2021" />
 
-     <?php
+     <?php 
      //Google Analytics
      if(get_option( 'google_analytics_ua' )){
           $anonym = ( get_option( 'anonymize_ip' ) == 'on' ) ? '{ \'anonymize_ip\': true }' : '';
