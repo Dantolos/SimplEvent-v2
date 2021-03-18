@@ -15,7 +15,7 @@ header {
     
 
     @include for_breakpoint( 'mobile' ){
-          height:20vw;
+          height:16vw;
      }
 
     //------------------------------
@@ -31,8 +31,9 @@ header {
           width: var(--headerLogoWidth);
           @include for_breakpoint( 'mobile' ){
                left:5%;
-               top:20px;
-               max-height:30px;
+               top:0px;
+               max-height:50px;
+               width: 40%;
           }
 
           a img {
@@ -200,7 +201,7 @@ header {
      //BURGERMENU
      #burger-menu {
           position: fixed;
-          top: 6.25vw;
+          top: 5vw;
           right: 5vw;
           height: 8vh;
           width: 10vw;
@@ -235,35 +236,35 @@ header {
      
           }
 
-        #modebutton, #languagebutton a button {
-            min-width:20px;
-            text-transform: uppercase;
-            padding:10px 5px 0;
-        }
-        #languagebutton {
-            a button {
-                padding-right:5px 10px;
-            }
-            
-            a {
-                &:last-of-type {
-                    padding-right:10px;
-                    margin-right:10px;
-                    border-right: 1px solid var(--midColor);
-                }
-            }
-            
-        }
-        
-        #header_anmeldebutton {
-             background-color: $secondary;
-             color:white;
-             height:100%;
-            
-             font-weight: 800;
-             padding:6px 10px;
-             text-transform: uppercase;
-        }
+          #modebutton, #languagebutton a button {
+               min-width:20px;
+               text-transform: uppercase;
+               padding:5px 15px 5px 10px;
+          }
+          #languagebutton {
+               a button {
+                    padding-right:5px 10px;
+               }
+               
+               a {
+                    &:last-of-type {
+                         padding-right:10px;
+                         margin-right:10px;
+                         border-right: 1px solid var(--midColor);
+                    }
+               }
+               
+          }
+          
+          #header_anmeldebutton {
+               background-color: $secondary;
+               color:white;
+               height:100%;
+               
+               font-weight: 800;
+               padding:6px 10px;
+               text-transform: uppercase;
+          }
        
     }
 }

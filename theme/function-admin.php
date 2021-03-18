@@ -11,13 +11,14 @@ error_reporting(E_ALL);
 function SimplEvent_add_admin_page() {
 
   //Generate Simplevent Page
-  add_menu_page( 'SimplEvent Theme Options', 'SimplEvent', 'manage_options', 'aagi_simplevent', 'simplevent_theme_create_page', get_template_directory_uri() . '/theme/Signum-neg.svg', 1 );
+  add_menu_page( 'SimplEvent Theme Options', 'SimplEvent', 'se2_options', 'aagi_simplevent', 'simplevent_theme_create_page', get_template_directory_uri() . '/theme/Signum-neg.svg', 1 );
 
   //Generate SimplEvent Sub Pages
-  add_submenu_page( 'aagi_simplevent', 'SimplEvent Theme Options', 'General', 'manage_options', 'aagi_simplevent', 'simplevent_theme_create_page' );
-  add_submenu_page( 'aagi_simplevent', 'SimplEvent Header Options', 'Header', 'manage_options', 'simplevent_header', 'simplevent_theme_header_page' );
-  add_submenu_page( 'aagi_simplevent', 'SimplEvent Footer Options', 'Footer', 'manage_options', 'simplevent_footer', 'simplevent_theme_footer_page' );
-  add_submenu_page( 'aagi_simplevent', 'SimplEvent Live Options', 'Live', 'manage_options', 'simplevent_live', 'simplevent_theme_live_page' );
+  add_submenu_page( 'aagi_simplevent', 'SimplEvent Theme Options', 'General', 'se2_options', 'aagi_simplevent', 'simplevent_theme_create_page' );
+  add_submenu_page( 'aagi_simplevent', 'SimplEvent Header Options', 'Header', 'se2_options_header', 'simplevent_header', 'simplevent_theme_header_page' );
+  add_submenu_page( 'aagi_simplevent', 'SimplEvent Footer Options', 'Footer', 'se2_options_footer', 'simplevent_footer', 'simplevent_theme_footer_page' );
+  add_submenu_page( 'aagi_simplevent', 'SimplEvent Live Options', 'Live', 'se2_options_live', 'simplevent_live', 'simplevent_theme_live_page' );
+  add_submenu_page( 'aagi_simplevent', 'SimplEvent Settings Options', 'Settings', 'se2_options_settings', 'simplevent_settings', 'simplevent_theme_settings_page' );
 
   //activieren custom settings
   add_action( 'admin_init', 'simplevent_custom_settings' );
@@ -143,7 +144,7 @@ function simplevent_custom_settings() {
 
   add_settings_field( 'footer-categories', 'Kategorien', 'simplevent_se_footer_categories', 'simplevent_footer', 'simplevent-footer-partner' );
 
-  //----------------------------------Live ---------------------------------------//
+  //----------------------------------Live--------------------------------------//
 
   //****Settings
   register_setting( 'simplevent-live-group', 'se_livestream' );
@@ -157,6 +158,19 @@ function simplevent_custom_settings() {
   add_settings_field( 'se-livestream', 'Livestream Aktiv', 'simplevent_se_livestream', 'simplevent_live', 'simplevent-live-options' );
   add_settings_field( 'se-iframe', 'iFrame', 'simplevent_se_iframe', 'simplevent_live', 'simplevent-live-options' );
   add_settings_field( 'se-programm', 'Programm Link', 'simplevent_se_programm', 'simplevent_live', 'simplevent-live-options' );
+
+
+   //----------------------------------Settings ---------------------------------------//
+
+  //****Settings
+  register_setting( 'simplevent-settingspage-group', 'post_visibility' );
+
+
+  //****Section
+  add_settings_section( 'simplevent-capabilities-options', 'Capabilities', 'simplevent_settings_options', 'simplevent_settings');
+
+  //****Fields
+  add_settings_field( 'se-post_visibility', 'Post Visibility', 'simplevent_post_visibility', 'simplevent_settings', 'simplevent-capabilities-options', array( 'class' => 'full-width' ) );
 
 
 }
@@ -201,9 +215,15 @@ function simplevent_footer_partner() {
 }
 
 function simplevent_live_options() {
-  echo 'Livestream De/aktivieren';
+     echo 'Livestream De/aktivieren';
 }
 
+
+function simplevent_settings_options() {
+     echo 'Anzeige von Post-Admin-Menu in den verschiedenen Roles';
+     echo '<i>(bearbeitung erlaubt für Grafik und Komm)</i>';
+}
+   
 
 //---------------------------------------------OUTPUTS------------------------------------//
 
@@ -266,28 +286,28 @@ function simplevent_secondary_color_picker() {
   echo '<input class="se-color-picker" type="text" name="secondary_color_picker" value="' .$secondarycolor. '" data-default-color="#282828" />';
 }
 function simplevent_light_mode_picker() {
-  $lightmode = get_option( 'light_mode_picker' );
-  $stdLight = array( '#FFFFFF', '#f1f1f1');
-  $lightColors = (!is_array($lightmode)) ? $stdLight : $lightmode;
-  $fieldName = array('Color', 'Shading');
-  $cKey = 0;
-  foreach($lightColors as $key => $color ){
-    echo '<p>'.$fieldName[$cKey].'</p>';
-    echo '<input class="se-color-picker" type="text" name="light_mode_picker['.$cKey.']" value="' .$color. '" data-default-color="'.$stdLight[$cKey].'" />';
-    $cKey++;
-  }
+     $lightmode = get_option( 'light_mode_picker' );
+     $stdLight = array( '#FFFFFF', '#f1f1f1');
+     $lightColors = (!is_array($lightmode)) ? $stdLight : $lightmode;
+     $fieldName = array('Color', 'Shading');
+     $cKey = 0;
+     foreach($lightColors as $key => $color ){
+          echo '<p>'.$fieldName[$cKey].'</p>';
+          echo '<input class="se-color-picker" type="text" name="light_mode_picker['.$cKey.']" value="' .$color. '" data-default-color="'.$stdLight[$cKey].'" />';
+          $cKey++;
+     }
 }
 function simplevent_dark_mode_picker() {
-  $darkmode = get_option( 'dark_mode_picker' );
-  $stdDark = array( '#1c1c1c', '#141414');
-  $darkColors = (!is_array($darkmode)) ? $stdDark : $darkmode;
-  $fieldName = array('Color', 'Shading');
-  $cKey = 0;
-  foreach($darkColors as $key => $color ){
-    echo '<p>'.$fieldName[$cKey].'</p>';
-    echo '<input class="se-color-picker" type="text" name="dark_mode_picker['.$cKey.']" value="' .$color. '" data-default-color="'.$stdDark[$cKey].'" />';
-    $cKey++;
-  }
+     $darkmode = get_option( 'dark_mode_picker' );
+     $stdDark = array( '#1c1c1c', '#141414');
+     $darkColors = (!is_array($darkmode)) ? $stdDark : $darkmode;
+     $fieldName = array('Color', 'Shading');
+     $cKey = 0;
+     foreach($darkColors as $key => $color ){
+          echo '<p>'.$fieldName[$cKey].'</p>';
+          echo '<input class="se-color-picker" type="text" name="dark_mode_picker['.$cKey.']" value="' .$color. '" data-default-color="'.$stdDark[$cKey].'" />';
+          $cKey++;
+     }
 }
 
 //Fonts
@@ -430,6 +450,45 @@ function simplevent_se_programm() {
   echo '<input type="text" name="se_programm" value="' .$se_programm. '" placeholder="/programm"/>';
 }
 
+
+//----------------------------------Settings ---------------------------------------//
+function simplevent_post_visibility($args) {
+     $vibilityArray = get_option( 'post_visibility' );
+     $roles = [
+          'grafik' => 'Grafik',
+          'kommunikation' => 'Kommunikation', 
+          'projektleiter' => 'Projektleiter',
+          'hoti' => 'HOTI'
+     ];
+     $capas = [
+          'companies' => 'Companies',
+          'partners' => 'Partners',
+          'people' => 'People',
+          'events' => 'Events',
+          'speakers' => 'Speaker',
+          'sessions' => 'sessions'
+     ];
+
+     foreach($roles as $k => $role ){
+          $currentRole = current_user_can($k) ? 'se2-current-user-role' : '';
+          echo '<div class="se2-setting-rows '.$currentRole.'">';
+          echo '<b>'.$role.'</b>';
+          foreach($capas as $val => $capa ){
+               $checked = ( isset($vibilityArray[$k][$val]) ) ? 'checked' : '';
+               echo '<div style="width:100%;margin-top:10px;">';
+               echo '<input type="checkbox" id="'.$val.'" name="post_visibility['.$k.']['.$val.']" value="'.$val.'" '.$checked.'>';
+               echo '<label for="'.$val.'">'.$capa.'</label><br>';
+               echo '</div>';
+          }
+          if($currentRole){
+               echo '<p style="margin-top:10px; font-size:.8em; opacity:.6;"><i ><b>Ansicht deiner Rolle</b><br />Respektiere die der anderen!</i><p>';
+          }
+          
+          echo '</div>';
+     }
+}
+
+
 //---------------------------------------------TEMPLATES------------------------------------//
 function simplevent_theme_create_page() {
   require_once( get_template_directory() . '/theme/templates/simplevent-admin.php' );
@@ -446,3 +505,8 @@ function simplevent_theme_footer_page(){
 function simplevent_theme_live_page(){
   require_once( get_template_directory() . '/theme/templates/simplevent-live.php' );
 }
+
+function simplevent_theme_settings_page(){
+     require_once( get_template_directory() . '/theme/templates/simplevent-settings.php' );
+}
+

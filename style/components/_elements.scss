@@ -36,8 +36,9 @@ button {
     width:100vw; height:100vh;
 
     .se-lightbox-closerBackground {
-        background-color: var(--secondColor);
-        opacity: .8;
+        
+        backdrop-filter: blur(40px);
+
         height:100%; width:100%;
     }
 
@@ -45,5 +46,43 @@ button {
         position: absolute;
         right:5vw; top:5vw;
         height:25px; width:25px;
+        cursor: pointer;
+        svg {
+            -webkit-filter: drop-shadow(0px 2px 4px var(--secondColor));
+            filter: drop-shadow(0px 2px 4px var(--secondColor));
+            line{
+                stroke:var(--primeColor);
+                
+            }
+        }
+            
     }
 }
+
+
+//------------------------------
+//DROPDOWNS
+//------------------------------
+select {
+     // A reset of styles, including removing the default dropdown arrow
+     //appearance: none;
+     
+     // Additional resets for further consistency
+     background-color: transparent;
+     border: none;
+     padding: .2 1em .2 0;
+     margin: 0 5px 0 0;
+     width: 100%;
+     font-family: inherit;
+     font-size: inherit;
+     cursor: pointer;
+     line-height: inherit;
+     outline: none;
+
+     option {
+          background-color: var(--shadeColor);
+          
+     }
+    
+}
+

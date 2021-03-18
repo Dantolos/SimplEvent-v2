@@ -47,28 +47,28 @@
 
      <style>
           /*FONT*/
-          <?php if( !get_option( 'font_name' ) || !get_option( 'font_link' ) ) { ?>
-               @font-face {
-                    font-family: 'PTSansPro';
-                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.eot'); /* IE9 Compat Modes */
-                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.woff2') format('woff2'), /* Super Modern Browsers */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.woff') format('woff'), /* Pretty Modern Browsers */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PT_Sans_Pro-Extra_Light.otf')  format('opentype')
-               }
-               @font-face {
-                    font-family: 'PTSansPro';
-                    font-weight: bold;
-                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.eot'); /* IE9 Compat Modes */
-                    src: url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.woff2') format('woff2'), /* Super Modern Browsers */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.woff') format('woff'), /* Pretty Modern Browsers */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PTSansPro-ExtraBold.ttf')  format('truetype'), /* Safari, Android, iOS */
-                         url('https://sef-growth.ch/wp-content/themes/SimplEvent_v2/fonts/PT_Sans_Pro-Extra_Bold.otf')  format('opentype')
-               }
-               body { font-family: 'PTSansPro', Fallback, sans-serif; }
-          <?php } else {
+          <?php if( !get_option( 'font_name' ) && !get_option( 'font_link' ) ) { 
+               echo '@font-face {';
+                    echo 'font-family: "PTSansPro";';
+                    echo 'src: url("' . get_template_directory_uri() . '/fonts/PTSansPro-Light.eot");';
+                    echo 'src: url("' . get_template_directory_uri() . '/fonts/PTSansPro-Light.eot?#iefix") format("embedded-opentype"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PTSansPro-Light.woff2") format("woff2"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PTSansPro-Light.woff") format("woff"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PTSansPro-Light.ttf")  format("truetype"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PT_Sans_Pro-Light.otf")  format("opentype")';
+               echo '}';
+               echo '@font-face {';
+                    echo 'font-family: "PTSansPro";';
+                    echo 'font-weight: bold;';
+                    echo 'src: url("' . get_template_directory_uri() . '/fonts/PTSansPro-ExtraBold.eot");';
+                    echo 'src: url("' . get_template_directory_uri() . '/fonts/PTSansPro-ExtraBold.eot?#iefix") format("embedded-opentype"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PTSansPro-ExtraBold.woff2") format("woff2"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PTSansPro-ExtraBold.woff") format("woff"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PTSansPro-ExtraBold.ttf")  format("truetype"),';
+                         echo 'url("' . get_template_directory_uri() . '/fonts/PT_Sans_Pro-Extra_Bold.otf")  format("opentype")';
+               echo '}';
+               echo 'body { font-family: "PTSansPro", Fallback, sans-serif; }';
+          } else {
                echo 'body { ' . get_option( 'font_name' ) . ' }';
           } ?>
 
@@ -88,14 +88,14 @@
           }
           header {
                <?php 
-               
                if( isset(get_option( 'se_header_mode' )[0])  ){
                     echo 'color: var(--dark); background-color: var(--light);';
                } else if( isset(get_option( 'se_header_mode' )[1]) == 'Dark' ){ 
                     echo 'color: var(--light); background-color: var(--dark);';
                } else {
                     echo 'color: #ffffff; background-color: var(--primary);';
-               } ?>
+               } 
+               ?>
           }
      </style>
 
@@ -104,12 +104,15 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.35'; 
-    wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.01' );
+     $scriptversion = '1.0.36'; 
+    wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.02' );
     wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
     
-    //3rd lybraris
-    wp_enqueue_script( 'gsap-js', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js', true );
+    //3rd libraries
+
+    //gsap
+    wp_enqueue_script( 'gsap-js', get_template_directory_uri() . '/scripts/libraries/gsap/gsap.min.js', true );
+    wp_enqueue_script( 'gsap-morph-svg', get_template_directory_uri() . '/scripts/libraries/gsap/MorphSVGPlugin.min.js', true );
 
     wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), $scriptversion, true );
 
@@ -124,6 +127,10 @@ function theme_add_files()
 }
 add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 
+//including supports
+require_once('inc/supports/date.php');
+require_once('inc/supports/forms.php');
+
 //including assets
 require_once('inc/assets/button.php');
 require_once('inc/assets/socialmedia.php');
@@ -135,6 +142,7 @@ require_once('inc/classes/company.class.php');
 require_once('inc/classes/events.class.php');
 require_once('inc/classes/people.class.php');
 require_once('inc/classes/partner.class.php');
+require_once('inc/classes/lineup.class.php');
 
 
 
@@ -201,7 +209,6 @@ wp_head();
                               }
                               echo join( $langs );
                          }
-
                     ?>
                     </div>
 
@@ -210,8 +217,6 @@ wp_head();
                     <?php
                     //ANMELDEBUTTON
                     $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
-
-              
                          $seanmeldung = esc_attr( get_option( 'se_anmeldung' ) );
                          if( $seanmeldung == 'on') { ?>
                               <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">

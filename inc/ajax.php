@@ -8,10 +8,17 @@ ini_set('display_errors', 0); */
   AJAX Functions
   ==================
 */
+
+
 require_once('classes/post.class.php');
 require_once('classes/partner.class.php');
 require_once('classes/company.class.php');
 require_once('classes/events.class.php');
+require_once('classes/lineup.class.php');
+
+//including supports
+require_once('supports/date.php');
+require_once('supports/forms.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -68,6 +75,30 @@ function categorie()
               break;
     }
     wp_send_json($result);
+   
+
+    die();
+}
+
+
+/*-------------LINE UP---------------*/
+add_action('wp_ajax_nopriv_lineup', 'lineup');
+add_action('wp_ajax_lineup', 'lineup'); //nur für angemeldete (admins)
+
+function lineup() 
+{
+     $ARGS = json_decode(json_encode($_POST['details']));
+   
+
+     $arguments = array(
+          'view' => $ARGS->view,
+          'cat' => $ARGS->cat
+     );
+     
+    $LineUp = new LineUp;
+    //$postID = $_POST['pid'];
+    
+    wp_send_json( $LineUp->cast_line_up_overview( $arguments ) ); 
    
 
     die();

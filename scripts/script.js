@@ -3,6 +3,7 @@ gsap.config({
 });
 /* bdedect = new Detect(); */
 
+var LOADER = new se2_Loader();
 var AJAX = new se2_Ajax();
 var LIGHTBOX = new Lightbox();
 
@@ -150,28 +151,24 @@ for( let PARTNER of PARTNERS ){
 
 var POSTTHUMBS = document.querySelectorAll('[lb]') 
 
-console.log(POSTTHUMBS);
-
-
 for( let POST of POSTTHUMBS ) {
-    POST.addEventListener( 'click', async ()=> {
-        console.log(POST.getAttribute('postid'))
-        var callData = {
-            lbid : POST.getAttribute('postid'),
-            action : POST.getAttribute('lb')
-        }
-        LIGHTBOX.openLightbox( 'AX', callData );
-
-    })
+     POST.addEventListener( 'click', async ()=> {
+          call_post_lightbox(POST)
+     })
 } 
 
-jQuery(document).ajaxComplete( function($){
+jQuery( document ).ajaxComplete(function(){ 
+
+          POSTTHUMBS = document.querySelectorAll('[lb]') 
+          for( let POST of POSTTHUMBS ) {
+               POST.addEventListener( 'click', async ()=> {
+                    call_post_lightbox(POST)
+               })
+          } 
      
-     POSTTHUMBS = document.querySelectorAll('[lb]') 
+});
 
-     console.log(POSTTHUMBS);
-
-     for( let POST of POSTTHUMBS ) {
+function call_post_lightbox(POST){
      POST.addEventListener( 'click', async ()=> {
           console.log(POST.getAttribute('postid'))
           var callData = {
@@ -181,9 +178,7 @@ jQuery(document).ajaxComplete( function($){
           LIGHTBOX.openLightbox( 'AX', callData );
 
      })
-     } 
-
-});
+}
 
 const CATEGORIECONTAINER = document.getElementsByClassName('categorie-container');
 
@@ -195,7 +190,7 @@ if( CATEGORIECONTAINER.length > 0){
                console.log(CATEGORIECONTAINER[0].getAttribute('type'))
                var callData = {
                     year : CATEGORIE.getAttribute('year'),
-                    type: CATEGORIECONTAINER[0].getAttribute('type'),
+                    type : CATEGORIECONTAINER[0].getAttribute('type'),
                     action : 'categorie'
                }
                AJAX.call_Ajax( callData, 'se-wall', true );
@@ -205,4 +200,5 @@ if( CATEGORIECONTAINER.length > 0){
           })
      }
 }
+
 

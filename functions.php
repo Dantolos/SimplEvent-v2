@@ -37,7 +37,7 @@ require get_template_directory() . '/theme/plugins/se2-custom-admin/se2-custom-a
 require get_template_directory() . '/inc/ajax.php';
 
 function hook_ajax_script(){
-
+     wp_enqueue_script( 'loader-js', get_bloginfo('template_url')."/scripts/inc/loader.js" );
     wp_enqueue_script( 'ajax-js', get_bloginfo('template_url')."/scripts/inc/ajax.js" );
     
 }
@@ -82,7 +82,7 @@ function theme_add_scripts()
 
      foreach ($JsIncList as $JsInc) 
      {
-          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.01', true );
+          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.02', true );
      }
      
      /*------------------------------Send Global Variables---------------------------*/
@@ -98,9 +98,10 @@ function theme_add_scripts()
           'ajaxurl' => admin_url('admin-ajax.php'),
           'cookieAcc' =>  $cookieAccepted,
           'page' => $currpageVar,
+          'icon' => file_get_contents( get_option( 'event_icon_neg' ) ),
           //'info' => $quickInfoAktiv
      );
-     $scriptToAdGlobal = array('ajax-js', 'script-js',   );
+     $scriptToAdGlobal = array('ajax-js', 'script-js', 'loader-js'  );
      foreach( $scriptToAdGlobal as $script ){
           wp_localize_script( $script, 'globalURL', $wnm_custom );
      }
@@ -121,7 +122,7 @@ add_action( 'wp_enqueue_scripts', 'se2_enqueue_styles_scripts_block' ); //add st
 
 function se2_enqueue_styles_scripts_block() 
 {
-    $fileversion = '1.0.09'; 
+    $fileversion = '1.0.10'; 
     wp_enqueue_style( 'additional-block-styles', get_stylesheet_directory_uri() . '/blocks/templates/additional-styles/add-block-styles.css', '', $fileversion);
 
     wp_enqueue_style( 'block-testimonial', get_stylesheet_directory_uri() . '/blocks/templates/testimonials/testimonials.css', '', $fileversion );

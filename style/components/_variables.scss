@@ -8,11 +8,11 @@ $secondary: var(--secondary);
 .secondary-txt { color: $secondary; }
 
 //shades
-$dark: #1c1c1c;
-$dark_shade: #141414;
+$dark: var(--dark);
+$dark_shade: var(--darkshade);
 
-$light: #FFFFFF;
-$light_shade:#f1f1f1;
+$light: var(--light);
+$light_shade:var(--lightshade);
 
 .primary-txt { color: $primary; }
 .secondary-txt { color: $secondary; }

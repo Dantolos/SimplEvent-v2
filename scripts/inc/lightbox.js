@@ -18,16 +18,20 @@ class Lightbox {
             //check
             if( !type || !data )
             {
-                console.log('type or data missed!')
-                return;
+               console.log('type or data missed!')
+               return;
+            }
+            if(  document.querySelector('.se-lightbox-container') ){
+               return;
             }
     
             //create LB Container       
             this.LB_output = document.createElement('DIV');
             this.LB_output.classList.add('se-lightbox-container');
-                
-            document.body.appendChild(this.LB_output);
-    
+            
+          
+          document.body.appendChild(this.LB_output);
+          
             //create LB CloseBackground
             this.LB_CloseBackground = document.createElement('DIV');
             this.LB_CloseBackground.classList.add('se-lightbox-closerBackground');
@@ -173,8 +177,9 @@ class Lightbox {
                     {
                         for (let index = 0; index < LB_Container.length; index++) {
                             LB_Container[index].parentNode.removeChild(LB_Container[index]);
-                            jQuery('.se-lightbox-container').remove();
-                        }    
+                            
+                        }   
+                        jQuery('.se-lightbox-container').remove(); 
                     }, 200);
                 }
             }

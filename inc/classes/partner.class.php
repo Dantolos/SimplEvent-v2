@@ -8,7 +8,7 @@ class Partner {
     public function call_Partner_in_Categorie( $catID, $catTitle = false, $formatet = true )
     {
           $partner_args = array(
-               'post_type' => 'partners', 'orderby' => 'term_order', 'order' => 'ASC', 'tax_query' => array(
+               'post_type' => 'partners', 'orderby' => 'title', 'order' => 'ASC', 'tax_query' => array(
                     array(
                          'taxonomy' => 'partner_categories', 'field' => 'term_id', 'terms' => $catID,
                     ),

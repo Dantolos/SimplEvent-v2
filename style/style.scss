@@ -5,6 +5,7 @@
 @import 'components/elements';
 @import 'components/socialmedia';
 
+@import 'components/loader';
 * {
     transform: all();
     transition-duration: 200ms;
@@ -22,7 +23,7 @@
      min-height: calc(100vh - 80px);
      @include for_breakpoint( 'mobile' ){
           overflow-x: hidden;
-          top: 75px;
+          top: 16vw;
      }
      
      #content-container {
@@ -43,6 +44,7 @@
 @import 'components/posts';
 @import 'components/people';
 @import 'components/partner';
+@import 'components/lineup';
 
 //BLOCKS Theme-specific
 @import 'components/blocks/testimonial';
