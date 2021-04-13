@@ -4,7 +4,8 @@
 class LineUp {
 
      public $output = '';
-     public $speakerCard;
+     public $speakerCard, $speakerLightbox;
+
      public $speakerIDs = array();
      
      public $forms;
@@ -69,7 +70,7 @@ class LineUp {
      }
 
      public function cast_speaker_list( $speakerID ){
-          $this->speakerCard = '<div class="se2-speaker-list-profile">'; 
+          $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" speakerid="'.$speakerID.'">'; 
 
                $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
                
@@ -99,7 +100,7 @@ class LineUp {
      }
      
      public function cast_speaker_grid( $speakerID ){
-          $this->speakerCard = '<div class="se2-speaker-grid-profile">'; 
+          $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
 
                $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
                $this->speakerCard .= '<div class="se2-speaker-grid-content">';
@@ -124,14 +125,60 @@ class LineUp {
           $speakerIDs = $this->call_speaker_data( $args['cat'] );
           //cast view        
           foreach( $speakerIDs as $speakerID ){
-               if( empty($args) || $args['view'] == 'grid' ){
+               if( empty($args) || $args['view'] === 'grid' ){
                     $this->output .= $this->cast_speaker_grid($speakerID);
-               }else if( $args['view'] == 'list' ){
+               }else if( $args['view'] === 'list' ){
                     $this->output .= $this->cast_speaker_list($speakerID);
                }
           }
           $this->output .= '</div>';
           return $this->output;
+     }
+
+     //SPEAKER LIGHTBOX 
+     public function cast_speaker_lightbox( $speakerID ){
+          $this->speakerLightbox = '<div class="speaker-lb-container">';
+
+          $this->speakerLightbox .= '<div class="speaker-lb-head">';
+               $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+               
+               $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
+                    $speakername = ( get_field('speaker_vorname', $speakerID) ) 
+                    ? 
+                         get_field('speaker_degree', $speakerID) 
+                         . ' ' . get_field('speaker_vorname', $speakerID) 
+                         . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
+                    : 
+                         get_the_title( $speakerID );
+                    $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.'</h2>';
+                    $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).'</p>';
+                    $this->speakerLightbox .= get_field( 'speaker_cv', $speakerID );
+                    
+                    if( have_rows('review_jahr',  $speakerID ) ){
+                         foreach( get_field( 'review_jahr', $speakerID ) as $review ){
+                              if( $review['review_public'] ){
+                                   
+                                   $this->speakerLightbox .= '<h6>REVIEW <b>'. $review['jahr']->slug .'</b></h6>';
+                                   $this->speakerLightbox .= '<h3><b>'.$review['review_titel'].'</b></h3>';
+                                   if( $review['review_video'] ){
+                                        $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
+                                   }
+                                   
+                              }
+                         }                          
+                    }
+
+                    $this->speakerLightbox .= get_field( 'review_text', $speakerID );
+                    
+
+
+               $this->speakerLightbox .= '</div>';
+
+
+          $this->speakerLightbox .= '</div>';
+
+          $this->speakerLightbox .= '</div>';
+          return $this->speakerLightbox;
      }
 
      //SET CARD CASTER FRONTPAGE

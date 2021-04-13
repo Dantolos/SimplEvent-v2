@@ -11,6 +11,8 @@
     transition-duration: 200ms;
 }
 
+html {  scroll-behavior: smooth; }
+
 #master-container {
      width: 100vw;
      /* max-width:1848px; */

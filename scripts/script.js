@@ -21,6 +21,11 @@ let COOKIE = new se2_Cookies();
 let ANCHOR = new se2_Anchor();
 ANCHOR.goTO();
 
+
+
+
+
+
 //---------------------------------
 //DARKMODE
 //---------------------------------
@@ -134,15 +139,14 @@ for( let PARTNER of PARTNERS ){
         gsap.to(PARTNER.querySelector('img'), { duration: .2, scale: 1, ease: Power1.easeOut });
     })
 
-    //lightbox
-    PARTNER.addEventListener('click', e => {
-        var callData = {
-            pid : PARTNER.getAttribute('pid'),
-            action : 'partner_infos'
-        }
-        LIGHTBOX.openLightbox( 'AX', callData );
-    })
-    
+     //lightbox
+     PARTNER.addEventListener('click', e => {
+          var callData = {
+               pid : PARTNER.getAttribute('pid'),
+               action : 'partner_infos'
+          }
+          LIGHTBOX.openLightbox( 'AX', callData );
+     })
 }
 
 //---------------------------------

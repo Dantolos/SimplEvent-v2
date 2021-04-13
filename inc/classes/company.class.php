@@ -60,7 +60,7 @@ class Company extends Posts {
      $this->companyData = parent::call_Post_Data('company',  'DSC', 'meta_value', 'Key data', 'label', true );
 
      //YEAR
-     if($type = 'year'){
+     if($type === 'year'){
           $years = array();
           foreach( $this->companyData->posts as $company ){
                if( get_field('Key data', $company->ID ) ){

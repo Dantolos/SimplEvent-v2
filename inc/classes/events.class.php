@@ -95,7 +95,7 @@ class Events extends Posts {
           $this->eventData = parent::call_Post_Data('event');
 
           //YEAR
-          if($type = 'year'){
+          if($type === 'year'){
                
                $years = array();
                foreach( $this->eventData->posts as $event ){
@@ -123,7 +123,7 @@ class Events extends Posts {
 
      function formating_Date_Language( $value, $type ){
 
-          if( $type == 'time' ){
+          if( $type === 'time' ){
                //TIME
                $time = '';
                switch (ICL_LANGUAGE_CODE) {
@@ -141,7 +141,7 @@ class Events extends Posts {
                          break;
                }   
                return $time;
-          } else if( $type == 'date' ) {
+          } else if( $type === 'date' ) {
                //DATE
                $date = '';
                switch (ICL_LANGUAGE_CODE) {

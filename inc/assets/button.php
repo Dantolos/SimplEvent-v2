@@ -38,7 +38,7 @@ class Button {
         if( intval($link) )
         {
             $this->paramLink = 'paramlink="' . $link . '"';
-        } else if( $link[0] == '_' ) {
+        } else if( $link[0] === '_' ) {
             $this->paramLink = 'trigger="' . $link . '"';
         } else {
             $this->buttonOutput .= '<a class="' . $this->colorclass . '" href="' . $link . '" target="' . $this->target . '">';

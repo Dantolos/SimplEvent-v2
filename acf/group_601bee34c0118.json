@@ -334,7 +334,7 @@
                     "add_term": 0,
                     "save_terms": 0,
                     "load_terms": 0,
-                    "return_format": "id",
+                    "return_format": "object",
                     "multiple": 0
                 },
                 {
@@ -398,6 +398,26 @@
                     "delay": 0
                 },
                 {
+                    "key": "field_601bf93f2fd82",
+                    "label": "Video",
+                    "name": "review_video",
+                    "type": "text",
+                    "instructions": "xdentx Aufzeichnungen; 73\/4678\/110071",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
                     "key": "field_601bf8ea2fd81",
                     "label": "Galerie",
                     "name": "review_galerie",
@@ -426,9 +446,9 @@
                     "wpml_cf_preferences": 1
                 },
                 {
-                    "key": "field_601bf93f2fd82",
-                    "label": "Video",
-                    "name": "review_video",
+                    "key": "field_60585bfe5bb19",
+                    "label": "Video Embed",
+                    "name": "review_embed",
                     "type": "oembed",
                     "instructions": "",
                     "required": 0,
@@ -438,9 +458,9 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "width": "",
-                    "height": "",
-                    "wpml_cf_preferences": 1
+                    "height": ""
                 }
             ]
         }
@@ -462,5 +482,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1612447416
+    "modified": 1616407875
 }

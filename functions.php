@@ -10,27 +10,30 @@ require get_template_directory() . '/theme/enqeue.php';
 add_theme_support('editor-styles');
 add_editor_style( get_template_directory_uri() . '/style/dist/style.min.css' );
 
-/*-------------------------------------------------------------*/
-/*--------------------IMPLEMENT CUSTOM API---------------------*/
-/*-------------------------------------------------------------*/
-
-require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
-
-
-/*-------------------------------------------------------------*/
-/*---------------------CUSTOM USER ROLES-----------------------*/
-/*-------------------------------------------------------------*/
-
-require get_template_directory() . '/theme/userroles/userroles.php';
-require get_template_directory() . '/theme/userroles/capabilities.php';
+if(is_user_logged_in()){
+     /*-------------------------------------------------------------*/
+     /*--------------------IMPLEMENT CUSTOM API---------------------*/
+     /*-------------------------------------------------------------*/
+     
+     
+     require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
+     
 
 
-/*-------------------------------------------------------------*/
-/*---------------------ADMIN CUSTOMIZE------------------------*/
-/*-------------------------------------------------------------*/
+     /*-------------------------------------------------------------*/
+     /*---------------------CUSTOM USER ROLES-----------------------*/
+     /*-------------------------------------------------------------*/
+     if(!isset($_COOKIE['capabilities'])){
+          require get_template_directory() . '/theme/userroles/userroles.php';
+          require get_template_directory() . '/theme/userroles/capabilities.php';
+     }
 
-require get_template_directory() . '/theme/plugins/se2-custom-admin/se2-custom-admin.php';
+     /*-------------------------------------------------------------*/
+     /*---------------------ADMIN CUSTOMIZE------------------------*/
+     /*-------------------------------------------------------------*/
 
+     require get_template_directory() . '/theme/plugins/se2-custom-admin/se2-custom-admin.php';
+}
 /*-------------------------------------------------------------*/
 /*------------------------ENABLE AJAX--------------------------*/
 /*-------------------------------------------------------------*/
@@ -38,7 +41,7 @@ require get_template_directory() . '/inc/ajax.php';
 
 function hook_ajax_script(){
      wp_enqueue_script( 'loader-js', get_bloginfo('template_url')."/scripts/inc/loader.js" );
-    wp_enqueue_script( 'ajax-js', get_bloginfo('template_url')."/scripts/inc/ajax.js" );
+     wp_enqueue_script( 'ajax-js', get_bloginfo('template_url')."/scripts/inc/ajax.js" );
     
 }
 add_action( 'wp_enqueue_scripts', 'hook_ajax_script' );
@@ -82,7 +85,7 @@ function theme_add_scripts()
 
      foreach ($JsIncList as $JsInc) 
      {
-          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.02', true );
+          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.03', true );
      }
      
      /*------------------------------Send Global Variables---------------------------*/
@@ -122,7 +125,7 @@ add_action( 'wp_enqueue_scripts', 'se2_enqueue_styles_scripts_block' ); //add st
 
 function se2_enqueue_styles_scripts_block() 
 {
-    $fileversion = '1.0.10'; 
+    $fileversion = '1.0.11'; 
     wp_enqueue_style( 'additional-block-styles', get_stylesheet_directory_uri() . '/blocks/templates/additional-styles/add-block-styles.css', '', $fileversion);
 
     wp_enqueue_style( 'block-testimonial', get_stylesheet_directory_uri() . '/blocks/templates/testimonials/testimonials.css', '', $fileversion );
@@ -141,6 +144,12 @@ function se2_enqueue_styles_scripts_block()
     
     wp_enqueue_style( 'block-word-cloud', get_stylesheet_directory_uri() . '/blocks/templates/word-cloud/word-cloud.css', '', $fileversion );
     wp_enqueue_script( 'block-word-cloud-script', get_stylesheet_directory_uri() . '/blocks/templates/word-cloud/word-cloud.js', array('jquery'), $fileversion, true);
+
+    wp_enqueue_style( 'block-strip', get_stylesheet_directory_uri() . '/blocks/templates/strips/strips.css', '', $fileversion );
+    wp_enqueue_script( 'block-strip-script', get_stylesheet_directory_uri() . '/blocks/templates/strips/strips.js', array('jquery'), $fileversion, true);
+    
+    wp_enqueue_style( 'block-restapi', get_stylesheet_directory_uri() . '/blocks/templates/restapi/restapi.css', '', $fileversion );
+    wp_enqueue_script( 'block-restapi-script', get_stylesheet_directory_uri() . '/blocks/templates/restapi/restapi.js', array('jquery'), $fileversion, true);
 
 }
 

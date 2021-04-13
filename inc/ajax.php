@@ -103,3 +103,21 @@ function lineup()
 
     die();
 }
+
+/*-------------SPEAKER LIGHTBOX---------------*/
+//speaker-lightbox
+add_action('wp_ajax_nopriv_speaker_lightbox', 'speaker_lightbox');
+add_action('wp_ajax_speaker_lightbox', 'speaker_lightbox'); //nur für angemeldete (admins)
+
+function speaker_lightbox() 
+{
+     $speakerID = $_POST['speakerid'];
+
+     $LineUp = new LineUp;
+     //$postID = $_POST['pid'];
+     
+     wp_send_json( $LineUp->cast_speaker_lightbox( $speakerID ) ); 
+     
+
+     die();
+}

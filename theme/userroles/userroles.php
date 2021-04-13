@@ -46,6 +46,10 @@ function se3_custom_user_role_capabilities() {
           'jahr',
      );
 
+     $allItems = [];
+     $allItems['posttypes'] = $allPostTypes;
+     $allItems['taxonomies'] = $allTaxonomies;
+
      //******************************************************
      //---ADMIN----------------------------------------------
 
@@ -91,7 +95,42 @@ function se3_custom_user_role_capabilities() {
 
      //******************************************************
      //---GRAFIK---------------------------------------------
+     add_role( 'grafik', 'Grafik', );
+     $grafik = get_role('grafik');
 
+     $grafik->add_cap('read');
+     $grafik->add_cap('upload_files');
+
+     filter_visible_posttypes( $grafik, $allItems, $PostTypesSettings['grafik']);
+
+     $grafik->add_cap('manage_categories' );
+     $grafik->add_cap('manage_links' );
+     $grafik->add_cap('unfiltered_html');
+     $grafik->add_cap('assign_terms');
+     
+     $grafik->add_cap('hide_post_section'); 
+     $grafik->add_cap('hide_default_terms'); 
+
+     //PAGE CAPABILITIES
+     $grafik->add_cap('edit_others_pages' );
+     $grafik->add_cap('edit_pages' );
+     $grafik->add_cap('edit_page' );
+     $grafik->add_cap('edit_private_pages' );
+     $grafik->add_cap('edit_published_pages' );
+     $grafik->add_cap('publish_pages' );
+     $grafik->add_cap('read_private_pages' );
+
+     $grafik->add_cap('create Reusable Blocks' );
+     $grafik->add_cap('edit Reusable Blocks' );
+     $grafik->add_cap('read Reusable Blocks' );
+     $grafik->add_cap('delete Reusable Blocks' );
+
+     $grafik->add_cap('se2_options');
+     $grafik->add_cap('se2_options_header');
+     $grafik->add_cap('se2_options_footer');
+     $grafik->add_cap('se2_options_live');
+     $grafik->add_cap('se2_options_settings');
+    
      
      //---GRAFIK-END-----------------------------------------
      //******************************************************
@@ -100,10 +139,14 @@ function se3_custom_user_role_capabilities() {
      //---KOMM-----------------------------------------------
 
      add_role( 'kommunikation', 'Kommunikation', );
-
+    
      $komm = get_role('kommunikation');
      $komm->add_cap('read');
      $komm->add_cap('upload_files');
+
+      //POST TYPE CAPABILITIES
+      filter_visible_posttypes( $komm, $allItems, $PostTypesSettings['kommunikation']);
+
 
      $komm->add_cap('manage_categories' );
      $komm->add_cap('manage_links' );
@@ -127,12 +170,8 @@ function se3_custom_user_role_capabilities() {
      $komm->add_cap('read Reusable Blocks' );
      $komm->add_cap('delete Reusable Blocks' );
 
-     //POST TYPE CAPABILITIES
      
-     filter_visible_posttypes( $komm, $allPostTypes, $PostTypesSettings['kommunikation']);
-     
-   
-   
+       
      //SE2
      $komm->add_cap('manage_options');
      $komm->add_cap('se2_options');
@@ -158,50 +197,34 @@ function se3_custom_user_role_capabilities() {
      $pl->add_cap('hide_post_section'); 
      $pl->add_cap('hide_default_terms'); 
 
-     //POST TYPE CAPABILITIES
-     $plPostTypes = array(
-          [ 
-               'singular' => 'company', 
-               'plural'   => 'companies'
-          ],[ 
-               'singular' => 'partner', 
-               'plural'   => 'companies'
-          ],[ 
-               'singular' => 'person', 
-               'plural'   => 'people'
-          ],[ 
-               'singular' => 'event', 
-               'plural'   => 'events'
-          ],[ 
-               'singular' => 'speaker', 
-               'plural'   => 'speakers'
-          ],[ 
-               'singular' => 'session', 
-               'plural'   => 'sessions'
-          ],
-     );
+ 
+     filter_visible_posttypes( $pl, $allItems, $PostTypesSettings['projektleiter']);
 
-     foreach( $plPostTypes as $PTpl ){
-          $pl->add_cap('edit_'.$PTpl['singular']);
-          $pl->add_cap('read_'.$PTpl['singular']);
-     
-          $pl->add_cap('create_'.$PTpl['plural']);
-     
-          $pl->add_cap('edit_'.$PTpl['plural']);
-          $pl->add_cap('read_'.$PTpl['plural']);
-          $pl->add_cap('edit_others_'.$PTpl['plural']);
-          $pl->add_cap('publish_'.$PTpl['plural']);
-          $pl->add_cap('read_private_'.$PTpl['plural']);
-          $pl->add_cap('edit_private_'.$PTpl['plural']);
-          $pl->add_cap('edit_published_'.$PTpl['plural']);
-     }
-     
+     $pl->add_cap('se2_options');
+     $pl->add_cap('se2_options_header');
+
      //---PL-END---------------------------------------------
      //******************************************************
 
      //******************************************************
      //---HOTI---------------------------------------------
+     add_role( 'hoti', 'HOTI', );
 
+     $hoti = get_role('hoti');
+     $hoti->add_cap('read');
+
+     $hoti->add_cap('manage_links' );
+     $hoti->add_cap('unfiltered_html');
+     $hoti->add_cap('assign_terms');
+
+     $hoti->add_cap('hide_post_section'); 
+     $hoti->add_cap('hide_default_terms'); 
+
+ 
+     filter_visible_posttypes( $hoti, $allItems, $PostTypesSettings['projektleiter']);
+
+     $hoti->add_cap('se2_options');
+     $hoti->add_cap('se2_options_header');
      
      //---HOTI-END-----------------------------------------
      //******************************************************
@@ -214,7 +237,7 @@ function se3_custom_user_role_capabilities() {
    function filter_visible_posttypes( $role, $wholeCollection, $filter ){
      reset_post_permissions( $role, $wholeCollection );
      if( isset( $filter ) ){
-          foreach( $wholeCollection as $posttype ){
+          foreach( $wholeCollection['posttypes'] as $posttype ){
                if( isset( $filter[$posttype['plural']] ) ){
                     $role->add_cap('edit_'.$posttype['singular']);
                     $role->add_cap('read_'.$posttype['singular']);
@@ -229,6 +252,16 @@ function se3_custom_user_role_capabilities() {
                     $role->add_cap('edit_private_'.$posttype['plural']);
                     $role->add_cap('edit_published_'.$posttype['plural']);
 
+                    //add needed taxonomies
+                    if($posttype['terms']){
+                         foreach($posttype['terms'] as $posttax){
+                              
+                              $role->add_cap('manage_'.$posttax);
+                              $role->add_cap('edit_'.$posttax);
+                              $role->add_cap('delete_'.$posttax);
+                              $role->add_cap('assign_'.$posttax);
+                         }
+                    }
                     // exclude roles from delete capability
                     if(  current_user_can('kommunikation') 
                          || current_user_can('projektleiter') 
@@ -242,6 +275,8 @@ function se3_custom_user_role_capabilities() {
                          $role->add_cap('delete_published_'.$posttype['plural']);
                          $role->add_cap('delete_private_'.$posttype['plural']);
                }
+
+               
           }
      }
 }
@@ -250,7 +285,7 @@ function se3_custom_user_role_capabilities() {
 //reset post typer
 function reset_post_permissions( $toResetRole, $wholeCollection ){
      if( isset( $toResetRole ) ){
-          foreach( $wholeCollection as $allPT ){
+          foreach( $wholeCollection['posttypes'] as $allPT ){
                $toResetRole->remove_cap('edit_'.$allPT['singular']);
                $toResetRole->remove_cap('read_'.$allPT['singular']);
           
@@ -270,6 +305,19 @@ function reset_post_permissions( $toResetRole, $wholeCollection ){
                $toResetRole->remove_cap('delete_private_'.$allPT['plural']);
                $toResetRole->remove_cap('delete_published_'.$allPT['plural']);
                $toResetRole->remove_cap('delete_private_'.$allPT['plural']);
+
+               
+          }
+          //reset taxonomies 
+          foreach( $wholeCollection['taxonomies'] as $tax ){
+               $toResetRole->remove_cap('manage_'.$tax);
+               $toResetRole->remove_cap('edit_'.$tax);
+               $toResetRole->remove_cap('delete_'.$tax);
+               $toResetRole->remove_cap('assign_'.$tax);
           }
      }
-}
+}
+
+
+//SET COOKIE
+setcookie( 'capabilities' , 'set' , time() + (86400 * 30) , '/' );

@@ -2,6 +2,30 @@
 // ACF Custom Blocks **************************************************************************************
 function register_acf_block_types() {
 
+     // strips
+     acf_register_block_type(array(
+          'name'              => 'strips',
+          'title'             => __('Strip'),
+          'description'       => __('Create strips in different Versions to organise layout vertical.'),
+          'render_template'   => 'blocks/templates/strips/strips.php',
+          'category'          => 'formatting',
+          'icon'              => 'align-wide',
+          'keywords'          => array( 'strip', 'strips' ),
+          'supports'          => array( 'jsx' => true ),
+     ));
+
+     // restapi
+     acf_register_block_type(array(
+          'name'              => 'restapi',
+          'title'             => __('restAPI'),
+          'description'       => __('Create strips in different Versions to organise layout vertical.'),
+          'render_template'   => 'blocks/templates/restapi/restapi.php',
+          'category'          => 'formatting',
+          'icon'              => 'share',
+          'keywords'          => array( 'restapi', 'api', 'rest' ),
+          'supports'          => array( 'jsx' => true ),
+     ));
+
     // testimonial
     acf_register_block_type(array(
         'name'              => 'testimonial',

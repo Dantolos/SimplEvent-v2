@@ -1,0 +1,8 @@
+#content-container {
+     scroll-snap-type: y mandatory;
+}
+
+.fullpage {
+     height: calc(100vh - 80px);
+     scroll-snap-align: cenn;
+}

@@ -99,31 +99,37 @@
           }
      </style>
 
+
+
 <?php
 
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.36'; 
-    wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.02' );
-    wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
-    
-    //3rd libraries
-
-    //gsap
-    wp_enqueue_script( 'gsap-js', get_template_directory_uri() . '/scripts/libraries/gsap/gsap.min.js', true );
-    wp_enqueue_script( 'gsap-morph-svg', get_template_directory_uri() . '/scripts/libraries/gsap/MorphSVGPlugin.min.js', true );
-
-    wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), $scriptversion, true );
-
- 
-    //include Mobile Scripts
-    if ( wp_is_mobile() ) {
-     wp_enqueue_script( 'mobile-script-js', get_template_directory_uri() . '/scripts/mobile-script.js', array('jquery'), $scriptversion, true );        // wp_enqueue_script( 'mobile-script-js', get_template_directory_uri() . '/js/mobile.script.js', array('jquery'), '1.0.10', true );
-    } else {
-        /* Include/display resources targeted to laptops/desktops here */
-    }
+     $scriptversion = '1.0.37'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.02' );
+     wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
      
+     //3rd libraries
+     //wp_enqueue_script( 'smooth-scrollbar', get_template_directory_uri() . '/scripts/libraries/smooth-scrollbar/smooth-scrollbar.js', true );
+
+     //gsap
+     wp_enqueue_script( 'gsap-js', get_template_directory_uri() . '/scripts/libraries/gsap/gsap.min.js', true );
+     wp_enqueue_script( 'gsap-morph-svg', get_template_directory_uri() . '/scripts/libraries/gsap/MorphSVGPlugin.min.js', true );
+     wp_enqueue_script( 'gsap-scrollto', get_template_directory_uri() . '/scripts/libraries/gsap/ScrollToPlugin.min.js', true );
+     wp_enqueue_script( 'gsap-scrolltrigger', get_template_directory_uri() . '/scripts/libraries/gsap/ScrollTrigger.min.js', true );
+     
+
+     wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), $scriptversion, true );
+
+     
+     //include Mobile Scripts
+     if ( wp_is_mobile() ) {
+          wp_enqueue_script( 'mobile-script-js', get_template_directory_uri() . '/scripts/mobile-script.js', array('jquery'), $scriptversion, true );        // wp_enqueue_script( 'mobile-script-js', get_template_directory_uri() . '/js/mobile.script.js', array('jquery'), '1.0.10', true );
+     } else {
+          /* Include/display resources targeted to laptops/desktops here */
+     }
+          
 }
 add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 
@@ -149,6 +155,8 @@ require_once('inc/classes/lineup.class.php');
 
 wp_head();
 ?>
+
+
 
 <style>
     
@@ -218,7 +226,7 @@ wp_head();
                     //ANMELDEBUTTON
                     $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
                          $seanmeldung = esc_attr( get_option( 'se_anmeldung' ) );
-                         if( $seanmeldung == 'on') { ?>
+                         if( $seanmeldung === 'on') { ?>
                               <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">
                               <div id="header_anmeldebutton">
                                    <?php

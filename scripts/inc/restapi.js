@@ -48,17 +48,14 @@ var seREST = function(restAPIURL)
         if(globalURL.lang){
             switch (globalURL.lang) {
                 case 'de':
-                    console.log(this.langCode)
                     title = data.acf.ds_title_de;
                     text = data.acf.ds_text_de;
                     break;
                 case 'en':
-                    console.log(this.langCode)
                     title = data.acf.ds_title_en;
                     text = data.acf.ds_text_en;
                     break;
                 case 'fr':
-                    console.log(this.langCode)
                     title = data.acf.ds_title_fr;
                     text = data.acf.ds_text_fr;
                     break;
