@@ -21,11 +21,12 @@ if( !empty($block['align']) ) {
    $className .= ' align' . $block['align'];
 }
 
-$api = new stdClass();
-$api->URL = get_field('restapi_url');
-$api->Function = get_field('function');
+$api = array(
+     'URL' => get_field('restapi_url'),
+     'Function' => get_field('function')
+);
 
-wp_localize_script( 'block-restapi-script', 'api', json_encode( $api ) );
+wp_localize_script( 'block-restapi-script', 'api', $api );
 
 ?>
 

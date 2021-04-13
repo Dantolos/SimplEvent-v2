@@ -1,7 +1,8 @@
 
 if( typeof api !== 'undefined' ){
-     var apiURL = JSON.parse(api).URL;
-     var apiFunction = JSON.parse(api).Function;
+
+     var apiURL = api.URL;
+     var apiFunction = api.Function;
     
      seREST = new seREST();
      seREST.callRestAPI( apiURL, apiFunction );
