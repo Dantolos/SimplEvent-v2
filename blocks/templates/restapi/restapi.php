@@ -29,10 +29,17 @@ $api = array(
 wp_localize_script( 'block-restapi-script', 'api', $api );
 
 ?>
-
+<?php
+//for visualization in backend
+if( is_user_logged_in() && is_admin() ){ echo '<style>#api_target{ background-color:rgba(255,255,255,.8);padding:20px;}</style>'; }
+?>
 
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
     <div id="api_target">
-
+     <?php
+     //for visualization in backend
+     if( is_user_logged_in() && is_admin() ){ echo '<h2>RestAPI Block</h2><p>'.$api['URL'].'</p>'; }
+     ?>
+     
     </div>
 </div>

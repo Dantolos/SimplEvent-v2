@@ -34,6 +34,7 @@ function register_acf_block_types() {
         'render_template'   => 'blocks/templates/testimonials/testimonials.php',
         'category'          => 'formatting',
         'icon'              => 'admin-comments',
+        'editor_script'     => 'block-testimonial-script',
         'keywords'          => array( 'testimonial', 'quote' ),
     ));
 
@@ -95,3 +96,15 @@ function register_acf_block_types() {
 if( function_exists('acf_register_block_type') ) {
    add_action('acf/init', 'register_acf_block_types');
 }
+
+
+
+//JS Blocks
+function se2_register_custom_blocks(){
+     wp_register_script( 'se2block-speaker-js', get_template_directory_uri(  ) . '/blocks/templates/speakers/block_speakers.js', array( 'wp-blocks' ) );
+
+     register_block_type( 'se2block/speaker', array(
+          'editor_script' => 'se2block-speaker-js',
+     ) );
+}
+add_action( 'init', 'se2_register_custom_blocks');

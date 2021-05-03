@@ -1,0 +1,147 @@
+//SCHEDULE
+@mixin slotBGgradiant {
+     background:var(--shadeColor);
+     //background: linear-gradient(top, var(--shadeColor) 0%,  var(--secondColor) 74%,  var(--secondColor) 100%);
+ }
+
+.se2-schedule-container {
+     
+     width:90vw;
+     margin:50px 5vw;
+     position: relative;
+
+     .schedule-grid {
+          width:100%;
+          height:fit-content;
+          
+          .schedule-hour {
+               position: relative;
+               width:100%;
+               height: 150px;
+
+               h5 {
+                    position: absolute;
+                    top:-8px;
+                    left:5px;
+                    padding:2px 5px;
+                    background-color:var(--secondColor);
+                    /* color:var(--secondColor); */ 
+                    border: 1px solid var(--shadeColor);
+                    border-radius:5px;
+               }
+
+               
+
+               .schedule-5min {
+                    height:8.33%;
+                    width:100%;
+                    border-bottom: 1px dashed var(--shadeColor);
+                   
+               }
+               
+               &:nth-child(even){
+                    
+                    background-color: var(--shadeColor);
+                    .schedule-5min { 
+                         border-bottom: 1px dashed var(--secondColor);
+                    }
+               }
+          }
+     }
+
+     
+     
+     .schedule-program {
+          position:absolute;
+          top:0;
+          left:20%;
+          width:82%;
+          cursor:pointer;
+          .schedule-slot {
+               position: absolute;
+               height:50px;
+               top:0;
+               width:100%;
+               border-radius:4px;
+               /* border: 1px solid var(--midColor); */
+               
+               @include dropShadow;
+               background-color: var(--secondColor);
+               padding:0px;
+               overflow-y: hidden;
+               scrollbar-width: none; 
+               -ms-overflow-style: none;
+               &::-webkit-scrollbar { display:none; }
+               
+               .schedule-container {
+                    padding: 5px 20px;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    height:fit-content;
+                    min-height:100%;
+                    position: relative;
+                    border-radius:5px;
+                    .schedule-slot-time {
+                         position: absolute;
+                         opacity: .8;
+                         top:0;
+                         right:0;
+                         padding:2px 5px;
+                         color: var(--primeColor);
+                         background-color:var(--secondColor);
+                         //border: 1px solid var(--primeColor);
+                         border-radius:0 5px 0 5px;
+                         backdrop-filter: brightness(60%)
+                    }
+
+               }
+          }
+          &:nth-child(even){
+               left:0;
+          }
+          &:nth-child(odd){
+               right:0;
+          }
+          .schedule-speaker .schedule-container {
+               //background-color:$primary;
+               border-style: solid;
+               border-width:  0 0 0 4px;
+               border-color: $primary;
+               @include slotBGgradiant;
+               //order-color:linear-gradient(to top, rgba(255,255,255,.2), $primary);
+          }
+          
+          .schedule-session .schedule-container {
+               //background-color: $secondary;
+               border-style: solid;
+               border-width: 0 0 0 4px;
+               border-color: $secondary;
+               @include slotBGgradiant;
+          }
+
+          .schedule-separator .schedule-container {
+               background-image: linear-gradient(to top, var(--primeColor), var(--midColor));
+               //background-color: var(--midColor);
+               color:var(--secondColor);
+          }
+     }
+
+}
+
+
+
+.schedule-slot-speaker-image {
+    
+     width:50px;
+     height:50px;
+     @include imageSettings;
+     border-radius:50%;
+}
+.schedule-slot-info {
+     width:100%;
+     display:none;
+     p { margin-bottom:0;}
+}

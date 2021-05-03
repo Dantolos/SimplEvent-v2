@@ -23,7 +23,7 @@ html {  scroll-behavior: smooth; }
      margin: auto;
      background-color:var(--secondColor);
      min-height: calc(100vh - 80px);
-     @include for_breakpoint( 'mobile' ){
+     @include breakpoint( 's' ){
           overflow-x: hidden;
           top: 16vw;
      }
@@ -47,6 +47,7 @@ html {  scroll-behavior: smooth; }
 @import 'components/people';
 @import 'components/partner';
 @import 'components/lineup';
+@import 'components/programm';
 
 //BLOCKS Theme-specific
 @import 'components/blocks/testimonial';

@@ -1,0 +1,194 @@
+{
+    "key": "group_6088218e167d6",
+    "title": "Page | Programm",
+    "fields": [
+        {
+            "key": "field_6088267381ba5",
+            "label": "Jahr",
+            "name": "jahr",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "taxonomy": "jahr",
+            "field_type": "select",
+            "allow_null": 0,
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        },
+        {
+            "key": "field_6088229681b9e",
+            "label": "Event Tag",
+            "name": "event_tag",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "wpml_cf_preferences": 1,
+            "sub_fields": [
+                {
+                    "key": "field_6088232381b9f",
+                    "label": "Datum",
+                    "name": "datum",
+                    "type": "date_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "display_format": "d\/m\/Y",
+                    "return_format": "d\/m\/Y",
+                    "first_day": 1,
+                    "wpml_cf_preferences": 1
+                },
+                {
+                    "key": "field_6088237681ba0",
+                    "label": "Programm Slots",
+                    "name": "programm_slots",
+                    "type": "flexible_content",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "layouts": {
+                        "layout_6088238bd4b52": {
+                            "key": "layout_6088238bd4b52",
+                            "name": "standard",
+                            "label": "Standard",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_6088239281ba1",
+                                    "label": "Start",
+                                    "name": "start",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "10",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "display_format": "H:i:s",
+                                    "return_format": "H:i:s",
+                                    "wpml_cf_preferences": 1
+                                },
+                                {
+                                    "key": "field_6088249c81ba2",
+                                    "label": "Ende",
+                                    "name": "ende",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "10",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "display_format": "H:i:s",
+                                    "return_format": "H:i:s",
+                                    "wpml_cf_preferences": 1
+                                },
+                                {
+                                    "key": "field_608824e581ba3",
+                                    "label": "Bezeichnung",
+                                    "name": "bezeichnung",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "40",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 2,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_6088255a81ba4",
+                                    "label": "Link",
+                                    "name": "link",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "40",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "url",
+                                    "wpml_cf_preferences": 2
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
+                        }
+                    },
+                    "button_label": "Eintrag hinzufügen",
+                    "min": "",
+                    "max": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "Templates\/program.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "comments",
+        "featured_image",
+        "categories",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": true,
+    "description": "",
+    "modified": 1619536070
+}

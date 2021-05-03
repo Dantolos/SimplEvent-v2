@@ -17,7 +17,7 @@ if(TESTIMONIALS.length > 0){
             loadNextSlide( SLIDENR, TESTIMONIALS )
         }
         , 300) 
-    }, 6000)
+    }, 6000) 
 }
 
 
@@ -35,7 +35,7 @@ function loadNextSlide( eleID, slideArray ) {
     console.log(slideArray.length)
     let nextSlide = document.querySelector('[slide="' + eleID + '"]');
 
-    nextSlide.style.display = 'block';
+    nextSlide.style.display = 'flex';
     gsap.fromTo( nextSlide, { duration: .1, opacity:0, x: '0', ease: Power1.easeOut  }, {  opacity: 1 } )
     gsap.from( nextSlide.querySelector('.testimonial-portrait'), { duration: .2,  ease: Power1.easeOut  })
     gsap.from( nextSlide.querySelector('.testimonial-text'), { duration: .3, ease: Power1.easeOut  })

@@ -1,10 +1,12 @@
-
+.testimonial-portrait {
+    @include imageSettings;
+}
 .testimonial-text{
-    color:$primaryText !important; 
-    background-color:$primary;
+    color:var(--midColor)  !important; 
+    
     p {
         margin-top: 1em;
-        color:$primaryText !important; 
+        color:var(--midColor)  !important; 
     };
 }
 

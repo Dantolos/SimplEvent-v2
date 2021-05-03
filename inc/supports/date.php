@@ -42,4 +42,5 @@ class Date_Format {
                return $date;
           }
      }
+
 }

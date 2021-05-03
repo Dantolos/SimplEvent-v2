@@ -1,4 +1,4 @@
-const VISIBILITY = new screenVisibility();
+
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,25 +8,47 @@ const FOCUSTARGETS = document.getElementsByClassName('focus-target')
 
 
 FOCUSTARGETS.forEach(element => {
+
+
      ScrollTrigger.create({
           markers: false,
           
           trigger: element,
           start: "top center",
           end: "110% 90%",
-          onEnter: ({progress, direction, isActive}) => { scrollToStrip( element ) },
-          onEnterBack: ({progress, direction, isActive}) => { scrollToStrip( element ) } 
+          onEnter: ({progress, direction, isActive}) => { focusScrollAnimation( element ) },
+          onEnterBack: ({progress, direction, isActive}) => { focusScrollAnimation( element ) } 
      })
 });
-
-
-
-function scrollToStrip(stripElement){
+ 
+function focusScrollAnimation(stripElement){
      gsap.to( window, { delay: .2, duration: .5, scrollTo: stripElement.offsetTop, autoKill: true })
 
      if( animated ){
-          gsap.from( stripElement.querySelectorAll('div > *'), .1, JSON.parse(StripAnimation) )
+       
+
+          
+
+          contentAnimation(stripElement)
      }
      
 }
 
+function contentAnimation(elements) {
+  
+     var animationsSettings = JSON.parse(StripAnimation);
+     console.log( animationsSettings )
+
+     animationsSettings['stagger'] /= 10;
+     
+
+     gsap.from( 
+          elements.querySelectorAll('div > *'), 
+          animationsSettings['duration'], 
+          {
+               opacity: animationsSettings['from']['opacity'],
+
+          }
+        
+     )
+}

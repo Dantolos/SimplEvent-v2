@@ -596,6 +596,138 @@
             ]
         },
         {
+            "key": "field_608038ff0bf8d",
+            "label": "Award",
+            "name": "award",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "wpml_cf_preferences": 1,
+            "sub_fields": [
+                {
+                    "key": "field_608039380bf8e",
+                    "label": "Award Candidate",
+                    "name": "award_candidate",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 0,
+                    "wpml_cf_preferences": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_60803bdfc2b5f",
+                    "label": "Jahr",
+                    "name": "jahr",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_608039380bf8e",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "taxonomy": "jahr",
+                    "field_type": "multi_select",
+                    "allow_null": 0,
+                    "add_term": 0,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "multiple": 0
+                },
+                {
+                    "key": "field_608039710bf8f",
+                    "label": "Kategorie",
+                    "name": "kategorie",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_608039380bf8e",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "choices": {
+                        "inventors": "inventors",
+                        "start up": "start up",
+                        "Innovation Leaders": "Innovation Leaders"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_60803a940bf90",
+                    "label": "Gewinner",
+                    "name": "gewinner",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_608039380bf8e",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 0,
+                    "wpml_cf_preferences": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                }
+            ]
+        },
+        {
             "key": "field_5fd206de90772",
             "label": "Erfolgsgeschicht",
             "name": "erfolgsgeschicht",
@@ -843,5 +975,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1612449867
+    "modified": 1619016805
 }

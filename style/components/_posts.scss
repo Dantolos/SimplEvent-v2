@@ -60,7 +60,7 @@
     h2, h3, p {color: $dark;}
     background-color: $light; 
     @include dropShadow;
-    @include for_breakpoint( 'mobile' ){
+    @include breakpoint( 's' ){
         width: 90vw;
     }
 
