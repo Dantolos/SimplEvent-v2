@@ -1,0 +1,11 @@
+#IGNORING BY PUBLISHING SIMPLEVENT V2
+#ignore modules
+node_modules
+
+#ignore compile config files
+babel.config.json
+webpack.config.js
+gulpfile.js
+
+#ignore jsx files for wp blocks
+blocks/src/
