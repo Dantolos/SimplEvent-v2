@@ -150,6 +150,9 @@ function se2_enqueue_styles_scripts_block()
     
     wp_enqueue_style( 'block-restapi', get_stylesheet_directory_uri() . '/blocks/templates/restapi/restapi.css', '', $fileversion );
     wp_enqueue_script( 'block-restapi-script', get_stylesheet_directory_uri() . '/blocks/templates/restapi/restapi.js', array('jquery'), $fileversion, true);
+   
+    wp_enqueue_style( 'block-speaker-card', get_stylesheet_directory_uri() . '/blocks/templates/speaker-card/speaker-card.css', '', $fileversion );
+    wp_enqueue_script( 'block-speaker-card-script', get_stylesheet_directory_uri() . '/blocks/templates/speaker-card/speaker-card.js', array('jquery'), $fileversion, true);
 
 }
 
