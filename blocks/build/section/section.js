@@ -131,9 +131,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
-var _wp$editor = wp.editor,
-    RichText = _wp$editor.RichText,
-    InspectorControls = _wp$editor.InspectorControls;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    InspectorControls = _wp$blockEditor.InspectorControls;
 var PanelBody = wp.components.PanelBody;
 
 var SE2_container = /*#__PURE__*/function (_Component) {
@@ -141,40 +141,49 @@ var SE2_container = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(SE2_container);
 
-  function SE2_container() {
+  function SE2_container(props) {
     var _this;
 
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, SE2_container);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _this = _super.call(this, props);
 
-    _this = _super.call.apply(_super, [this].concat(args));
+    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "changeMargin", function (event) {
+      _this.setState(function (prevState) {
+        return {
+          margin: {
+            top: event.target.value
+          }
+        };
+      }, function () {
+        return _this.sendStyleChanges(_this.state);
+      });
+    });
 
-    _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6___default()(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this), "state", {
+    var defaultStyle = {
       margin: {
-        top: 0,
+        top: 50,
         right: 0,
         bottom: 0,
         left: 0
       }
-    });
-
+    };
+    _this.state = defaultStyle;
+    _this.sendStyleChanges = _this.sendStyleChanges.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
+    _this.changeMargin = _this.changeMargin.bind(_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2___default()(_this));
     return _this;
   }
 
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(SE2_container, [{
+    key: "sendStyleChanges",
+    value: function sendStyleChanges(style) {
+      this.props.styleHandler(style);
+    }
+  }, {
     key: "render",
     value: function render() {
-      /* setMargin() {
-           let inputName = e;
-           let inputValue = el.target.value;
-           
-           let statusCopy = Object.assign({}, this.state);
-           statusCopy.formInputs[inputName].value = inputValue;
-             this.setState(statusCopy);                            
-      } */
+      var _this2 = this;
+
       return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(InspectorControls, {
         style: {
           marginBottom: '40px'
@@ -186,19 +195,21 @@ var SE2_container = /*#__PURE__*/function (_Component) {
           width: '50%'
         },
         onChange: function onChange(value) {
-          console.logs(value);
+          _this2.changeMargin;
         },
         isDragEnabled: true,
         isShiftStepEnabled: true,
         shiftStep: 1,
         step: 1,
         value: this.state.margin.top
-      }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
+      })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("button", {
+        onClick: this.sendStyleChanges
+      }, "CLICK")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
         className: "se2-container",
         style: {
           marginTop: "".concat(this.state.margin.top, "px")
         }
-      })];
+      }, this.props.children)];
     }
   }]);
 
@@ -235,19 +246,25 @@ registerBlockType('se2block/section', {
   category: 'se2',
   //custom attributes
   attributes: {
-    margin: {
-      type: 'object',
-      default: {
-        top: 0,
-        right: 0
-      }
+    containerstyle: {
+      type: 'object'
     }
   },
-  //custom functions
   //built-in functions
-  edit: function edit(props) {
-    console.log(props.attributes);
-    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_container__WEBPACK_IMPORTED_MODULE_2__["default"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", null, "HELLOOOOOO"))];
+  edit: function edit(_ref) {
+    var attributes = _ref.attributes,
+        setAttributes = _ref.setAttributes;
+
+    function containerStyle(e) {
+      setAttributes({
+        containerstyle: e
+      });
+      console.log('STYLE:', attributes);
+    }
+
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      styleHandler: containerStyle
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", null, "Margin: "))];
   },
   save: function save() {}
 });
