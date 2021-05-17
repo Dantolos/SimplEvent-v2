@@ -21,7 +21,7 @@ if( !empty($block['align']) ) {
    $className .= ' align' . $block['align'];
 }
 
-?>
+?> 
 
 
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
@@ -32,7 +32,7 @@ if( !empty($block['align']) ) {
             while( have_rows( 'testimonials', $companyID ) ) : the_row();
             ?>
                 <div class="testimonial-container" slide="<?php echo $key; ?>">
-                    <div class="testimonial-portrait" style="background-image:url(<?php echo esc_url(get_sub_field('portrait')); ?>);"></div>
+                    <div class="testimonial-portrait-container"><div class="testimonial-portrait" style="background-image:url(<?php echo esc_url(get_sub_field('portrait')); ?>);"></div></div>
                     <div class="testimonial-text">
                         <blockquote><i><?php echo get_sub_field('quote'); ?></i></blockquote>
                         <p><b><?php echo esc_attr( get_sub_field('reference')['name'] ); ?></b> <?php echo esc_attr( (get_sub_field('reference')['position']) ); ?></p>

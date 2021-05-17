@@ -7,7 +7,7 @@ var SPEAKERS = document.querySelectorAll('.speaker-profile')
 var args = {
      view : 'grid',
      cat : 'all',
-     sort : 'asc'
+     sort : ''
 };
 
 
@@ -25,11 +25,19 @@ CATFORM.addEventListener( 'change', (e)=>{
 //order
 const ORDERBUTTON = document.querySelector('.se2-lineup-filter-sort')
 
-ORDERBUTTON.addEventListener('click', ()=>{
-     let startSort = args.sort
-     args.sort = (args.sort == 'asc') ? 'dsc' : 'asc';
-     gsap.to( '#'+startSort, .2, { morphSVG: '#'+args.sort})
+var sortTL = gsap.timeline({ defaults: {duration: .5}})
+var SORTICON = document.getElementById('dsc');
+sortTL.to(SORTICON, {morphSVG:"#asc"} );
 
+ORDERBUTTON.addEventListener('click', ()=>{
+     args.sort = (args.sort == 'asc') ? 'dsc' : 'asc';
+     sortTL.play()
+     if( args.sort == 'dsc' ){
+          sortTL.play()
+     } else {
+          sortTL.reverse()
+     }
+     
      CALL_AJAX_LINEUP(args)
 })
 
@@ -43,12 +51,13 @@ for(let VIEWS of VIEWBUTTONS ){
                VIEWS.classList.add('active-icon')
                args.view = VIEWS.getAttribute('view')
                CALL_AJAX_LINEUP(args)
+               console.log(args)
           }
      })
-}
+} 
 
 function CALL_AJAX_LINEUP( a ){
-
+     console.log(a)
      var callData = {
           details : a,
           action : 'lineup'
@@ -57,6 +66,7 @@ function CALL_AJAX_LINEUP( a ){
 
      jQuery( document ).ajaxComplete(function(){ 
           CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
+          CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-profile'))
      })
 
 }
@@ -75,11 +85,11 @@ function CALL_ANIMATION(S){
                if( S[0].classList.contains('se2-speaker-grid-profile') ){
                     for(let SPEAKER of S){
                          SPEAKER.addEventListener('mouseover', e=>{
-                              gsap.to( SPEAKER.querySelector('.se2-speaker-grid-image'), .2, { scale: 1.1 }  )
-                              gsap.to( SPEAKER.querySelector('.se2-speaker-grid-content'), .2, { opacity: 1, backdropFilter: 'blur(5px)' } )
+                              gsap.to( SPEAKER.querySelector('.se2-speaker-grid-image'), .1, { scale: 1.1 }  )
+                              gsap.to( SPEAKER.querySelector('.se2-speaker-grid-content'), .1, { opacity: 1, backdropFilter: 'blur(5px)' } )
                          })
                          SPEAKER.addEventListener('mouseleave', e=>{
-                              gsap.to( SPEAKER.querySelector('.se2-speaker-grid-content'), .5, { opacity: 0, backdropFilter: 'blur(0px)' } )
+                              gsap.to( SPEAKER.querySelector('.se2-speaker-grid-content'), .5, { opacity: 1, backdropFilter: 'blur(0px)' } )
                               gsap.to( SPEAKER.querySelector('.se2-speaker-grid-image'), .4, { scale: 1 }  )
                          })
                     }
@@ -100,7 +110,6 @@ function CALL_SPEAKER_LIGHTBOX(S){
                          action : 'speaker_lightbox'
                     }
                     LIGHTBOX.openLightbox( 'AX', callData );
-                    console.log('adfasdf')
                })
           }
      } catch (error) {
@@ -108,12 +117,17 @@ function CALL_SPEAKER_LIGHTBOX(S){
      }
      jQuery( document ).ajaxComplete(function(){ 
           let speakerLB = document.querySelector('.speaker-lb-container');
-          gsap.from(speakerLB, .2, { x: '-100%', ease:Power1.easeOut } )
-          TweenMax.staggerFrom('.speaker-stagger', .2, { opacity:0,x: '-100%', delay: 0.05 }, 0.05 )
+          gsap.fromTo(document.querySelector('.speaker-lb-container'), .2, { x: '-100%', ease:Power1.easeOut }, { x: '0' } )
+          TweenMax.staggerFromTo('.speaker-stagger', .2, { opacity:0, x: '-100%', delay: 0.1 }, { opacity:1, x: '0' }, 0.05 )
 
           let reviewVideo = document.querySelector('.review-video')
-          let newHeight = reviewVideo.offsetWidth / 16 * 9
-          reviewVideo.style.height = newHeight + 'px'
-          console.log(newHeight + 'px')
+          try{
+               let newHeight = reviewVideo.offsetWidth / 16 * 9
+               reviewVideo.style.height = newHeight + 'px'
+          } catch (error) {
+               console.log(error)
+          }
+        
+          
      })
 }

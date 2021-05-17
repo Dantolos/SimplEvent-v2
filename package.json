@@ -1,0 +1,40 @@
+{
+  "name": "simplevent-v2",
+  "version": "1.0.0",
+  "description": "Wordpress Theme to manage event websites.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dantolos/SimplEvent-v2.git"
+  },
+  "author": "Dantolos",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Dantolos/SimplEvent-v2/issues"
+  },
+  "homepage": "https://github.com/Dantolos/SimplEvent-v2#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
+    "@wordpress/babel-preset-default": "^5.2.2",
+    "@wordpress/browserslist-config": "^3.0.3",
+    "@wordpress/scripts": "15.0.1",
+    "autoprefixer": "^10.2.5",
+    "browserslist": "^4.16.6",
+    "cssnano": "^5.0.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-replace": "^1.1.2",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2"
+  },
+  "scripts": {
+    "build:section": "wp-scripts build blocks/src/section/section.js --output-path=blocks/build/section",
+    "start:section": "wp-scripts start blocks/src/section/section.js --output-path=blocks/build/section"
+  }
+}

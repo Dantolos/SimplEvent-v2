@@ -89,10 +89,10 @@ function lineup()
 {
      $ARGS = json_decode(json_encode($_POST['details']));
    
-
      $arguments = array(
           'view' => $ARGS->view,
-          'cat' => $ARGS->cat
+          'cat' => $ARGS->cat,
+          'sort' => $ARGS->sort,
      );
      
     $LineUp = new LineUp;

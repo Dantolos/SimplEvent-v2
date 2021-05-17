@@ -3,6 +3,66 @@
     "title": "People",
     "fields": [
         {
+            "key": "field_607d6d6aff131",
+            "label": "Degree",
+            "name": "degree",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_607d6d8cff132",
+            "label": "Vorname",
+            "name": "vorname",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_607d6da1ff133",
+            "label": "Nachname",
+            "name": "nachname",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5e6a5791716dd",
             "label": "Funktion",
             "name": "funktion",
@@ -107,5 +167,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1613652013
+    "modified": 1618832819
 }

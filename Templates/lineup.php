@@ -16,7 +16,7 @@ echo $LineUp->cast_line_up_filter_section();
 
 $args = array(
      'view' => 'grid',
-     'order' => 'ASC',
+     'sort' => 'ASC',
      'cat' => 'all'
 );
 echo $LineUp->cast_line_up_overview( $args );

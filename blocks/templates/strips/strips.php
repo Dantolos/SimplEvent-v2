@@ -44,27 +44,34 @@ switch ( get_field('type')) {
           break;
      case 'image':
           $backgroundImage = get_field('background_image_group')['image'] ?: false;
-      
           break;
      case 'video':
           $backgroundVideo = get_field('background_video_group')['video'] ?: false;
-          
           break;
      default:
           # code...
           break;
 }
 
-$animation = new stdClass();
+$animation = array();
 if( get_field('animatieren') ){
-     var_dump(get_field('animation_settings_group')['animation']);
+     
      $animationsSettings = get_field('animation_settings_group')['animation'];
-     $animation->duration = $animationsSettings['duration'] ?: 1;
-     $animation->stagger = $animationsSettings['stagger'] ?: false;
+     $animation = [
+          'duration' => $animationsSettings['duration'],
+          'stagger'  => $animationsSettings['stagger'],
+     ];
 
+     foreach ( $animationsSettings['properties_from'] as $key => $from ) {
+          $animation['from'][$key] = $from;
+     }
 
-     $animation->opacity = 0;
-     $animation->y = '-100px';
+     foreach ( $animationsSettings['properties_to'] as $key => $to ) {
+          $animation['to'][$key] = $to;
+     }
+     
+  
+
      wp_localize_script( 'block-strip-script', 'StripAnimation', json_encode( $animation ) );
 }
 

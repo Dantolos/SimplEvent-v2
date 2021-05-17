@@ -106,7 +106,7 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.37'; 
+     $scriptversion = '1.0.38'; 
      wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.02' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/dist/style.min.css', '', $scriptversion );
      
@@ -136,6 +136,7 @@ add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 //including supports
 require_once('inc/supports/date.php');
 require_once('inc/supports/forms.php');
+require_once('inc/supports/schedule.php');
 
 //including assets
 require_once('inc/assets/button.php');

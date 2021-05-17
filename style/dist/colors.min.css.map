@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../theme/plugins/se2-custom-admin/se2-admin-color-scheme/colors.scss"
+    ],
+    "names": [],
+    "file": "colors.min.css"
+}

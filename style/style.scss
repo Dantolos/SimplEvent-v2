@@ -11,19 +11,20 @@
     transition-duration: 200ms;
 }
 
+
 html {  scroll-behavior: smooth; }
 
 #master-container {
      width: 100vw;
      /* max-width:1848px; */
-     position: absolute;
+     position: absolute; 
      top: 80px;
      left: 0;
      right: 0;
      margin: auto;
      background-color:var(--secondColor);
      min-height: calc(100vh - 80px);
-     @include for_breakpoint( 'mobile' ){
+     @include breakpoint( 's' ){
           overflow-x: hidden;
           top: 16vw;
      }
@@ -47,6 +48,7 @@ html {  scroll-behavior: smooth; }
 @import 'components/people';
 @import 'components/partner';
 @import 'components/lineup';
+@import 'components/programm';
 
 //BLOCKS Theme-specific
 @import 'components/blocks/testimonial';

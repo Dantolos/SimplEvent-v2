@@ -5,7 +5,7 @@ footer {
      color: $light;
      padding: 15px 5vw;
      font-size: .8em; 
-     @include for_breakpoint( 'mobile' ){
+     @include breakpoint( 's' ){
           max-height:unset;
      }
      
@@ -37,14 +37,14 @@ footer {
           max-width:60%;
           display: flex;
           flex-wrap: wrap;
-          @include for_breakpoint( 'mobile' ){
+          @include breakpoint( 's' ){
                width:100%;
                max-width:unset;
           }
           
           .footer-partner-categorie {
                margin-left:50px;
-               @include for_breakpoint( 'mobile' ){
+               @include breakpoint( 's' ){
                     margin-left:0px;
                     margin-top:25px;
                     margin-bottom:10px;
@@ -54,7 +54,7 @@ footer {
                     color:$light_shade;
                     opacity: .6;
                     font-weight: 200;
-                    @include for_breakpoint( 'mobile' ){
+                    @include breakpoint( 's' ){
                          text-align: center;
                          width: 100%;
                     }
@@ -62,7 +62,7 @@ footer {
                .footer-partner-logo-container{
                     display: flex;
                     align-items: center;
-                    @include for_breakpoint( 'mobile' ){
+                    @include breakpoint( 's' ){
                          justify-content: center;
                     }
                     a {
@@ -73,7 +73,7 @@ footer {
                          margin-right:20px;
                          max-width:110px;
                          max-height:45px;
-                         @include for_breakpoint( 'mobile' ){
+                         @include breakpoint( 's' ){
                               margin-right:15px;
                               margin-left:15px;
                          }

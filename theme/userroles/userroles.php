@@ -87,6 +87,7 @@ function se3_custom_user_role_capabilities() {
      $admin->add_cap('se2_options');
      $admin->add_cap('se2_options_header');
      $admin->add_cap('se2_options_footer');
+     $admin->add_cap('se2_options_event');
      $admin->add_cap('se2_options_live');
      $admin->add_cap('se2_options_settings');
     

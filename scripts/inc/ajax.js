@@ -28,6 +28,7 @@ class se2_Ajax
                          
                   try {
                       response = decodeURI(response);
+                  
                   }
                   catch(err) {
                       console.log(err.message);
