@@ -1,5 +1,8 @@
 console.log('schedule')
-var ACTIVEDAY = document.querySelector('.day-tab-activ ').getAttribute('day')
+if (document.querySelector('.day-tab-activ ')) {
+     var ACTIVEDAY = document.querySelector('.day-tab-activ ').getAttribute('day')
+
+}
 var SLOTS = document.getElementsByClassName('schedule-slot');
 const DAYTABS = document.getElementById('daytabs');
 
