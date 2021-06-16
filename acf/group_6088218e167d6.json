@@ -22,7 +22,7 @@
             "add_term": 1,
             "save_terms": 0,
             "load_terms": 0,
-            "return_format": "id",
+            "return_format": "object",
             "multiple": 0
         },
         {
@@ -76,7 +76,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 0,
+                    "wpml_cf_preferences": 2,
                     "layouts": {
                         "layout_6088238bd4b52": {
                             "key": "layout_6088238bd4b52",
@@ -190,5 +190,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1621603786
+    "modified": 1623748597
 }
