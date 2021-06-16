@@ -1,16 +1,22 @@
 <?php 
 function se2_block_category( $categories, $post ) {
+     if ( $post->post_type !== 'page' ) {
+          return $categories;
+     }
 	return array_merge(
 		$categories,
 		array(
 			array(
 				'slug' => 'se2',
 				'title' => __( 'SimplEvent', 'se2-blocks' ),
+                    'icon' => get_template_directory_uri().'/theme/simplevent-icon.svg'
 			),
 		)
 	);
+     array_unshift( $categories, $custom_category_one, $custom_category_two, $custom_category_three );
+     return $categories;
 }
-add_filter( 'block_categories', 'se2_block_category', 1, 2);
+add_filter( 'block_categories', 'se2_block_category', 10, 2);
 
 // ACF Custom Blocks **************************************************************************************
 function register_acf_block_types() {
@@ -105,16 +111,7 @@ function register_acf_block_types() {
           'keywords'          => array( 'word', 'cloud', 'wordcloud', 'word-cloud' ),
      ));
 
-     // Speaker Card
-     acf_register_block_type(array(
-          'name'              => 'speaker-card',
-          'title'             => __('Speaker Card'),
-          'description'       => __('List a selection of tags, taxonomies or posts as word-cloud.'),
-          'render_template'   => 'blocks/templates/speaker-card/speaker-card.php',
-          'category'          => 'se2',
-          'icon'              => 'cloud',
-          'keywords'          => array( 'speaker', 'card', 'referent' ),
-     ));
+   
 }
 // Check if function exists and hook into setup.
 if( function_exists('acf_register_block_type') ) {
@@ -126,9 +123,15 @@ if( function_exists('acf_register_block_type') ) {
 //JS Blocks
 function se2_register_custom_blocks(){
      wp_register_script( 'se2block-section-js', get_template_directory_uri(  ) . '/blocks/build/section/section.js', array( 'wp-blocks', 'wp-editor' ) );
-
      register_block_type( 'se2block/section', array(
           'editor_script' => 'se2block-section-js',
      ) );
+
+     wp_register_script( 'se2block-speaker-card-js', get_template_directory_uri(  ) . '/blocks/build/speaker-card/speaker-card.js', array( 'wp-blocks', 'wp-editor' ) );
+     register_block_type( 'se2block/speaker-card', array(
+          'editor_script' => 'se2block-speaker-card-js',
+     ) );
 }
 add_action( 'init', 'se2_register_custom_blocks'); 
+
+

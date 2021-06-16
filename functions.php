@@ -169,6 +169,26 @@ function mytheme_setup_theme_supported_features() {
             'slug' => 'secondary-color',
             'color' => esc_attr( get_option( 'secondary_color_picker' ) ),
         ),
+        array(
+            'name' => esc_attr__( 'dark', 'themeLangDomain' ),
+            'slug' => 'dark-color',
+            'color' => esc_attr( get_option( 'dark_mode_picker' )[0] ),
+        ),
+        array(
+            'name' => esc_attr__( 'darkshade', 'themeLangDomain' ),
+            'slug' => 'darkshade-color',
+            'color' => esc_attr( get_option( 'dark_mode_picker' )[1] ),
+        ),
+        array(
+            'name' => esc_attr__( 'light', 'themeLangDomain' ),
+            'slug' => 'light-color',
+            'color' => esc_attr( get_option( 'light_mode_picker' )[0] ),
+        ),
+        array(
+            'name' => esc_attr__( 'lightshade', 'themeLangDomain' ),
+            'slug' => 'lightshade-color',
+            'color' => esc_attr( get_option( 'light_mode_picker' )[1] ),
+        ),
         
     ) );
 }

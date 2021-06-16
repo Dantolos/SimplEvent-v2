@@ -1,40 +1,81 @@
-<?php
-
-/*
-  ==================
-  SimplEvent: ENQUEUE FUNCTIONS
-  ==================
-*/
-
-function se_load_admin_scripts( $hook ){
-
-  if (    'toplevel_page_aagi_simplevent' != $hook 
-          && 'simplevent_page_simplevent_header' != $hook 
-          && 'simplevent_page_simplevent_sidebar' != $hook 
-          && 'simplevent_page_simplevent_footer' != $hook 
-          && 'simplevent_page_simplevent_event' != $hook
-          && 'simplevent_page_simplevent_live' != $hook
-          && 'simplevent_page_simplevent_settings' != $hook
-     ){ //checken damit nur auf entsprechenden Seiten eingefügt wird
-    return;
-  }
-
-  wp_register_style('se_admin', get_template_directory_uri() . '/theme/simplevent.admin.css', array(), '1.0.0', 'all' );
-  wp_enqueue_style('se_admin');
-
-
-  wp_enqueue_media(); //import media uploader
-
-  wp_register_script( 'se_admin-script', get_template_directory_uri() . '/theme/simplevent.admin.js', array('jquery'), '1.0.0', true );
-  wp_enqueue_script( 'se_admin-script' );
-
-  // Add the color picker css file
-  wp_enqueue_style( 'wp-color-picker' );
-
-  // Include our custom jQuery file with WordPress Color Picker dependency
-  wp_enqueue_script( 'se-color-picker', get_template_directory_uri() . '/theme/colorpicker-script.js', array( 'jquery', 'wp-color-picker' ), false, true  );
-  wp_enqueue_script('jquery-ui-datepicker');
-  wp_enqueue_style('e2b-admin-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css',false,"1.9.0",false);
-
-}
-add_action('admin_enqueue_scripts', 'se_load_admin_scripts'); //only print in WP Backend
+<?php
+
+
+
+/*
+
+  ==================
+
+  SimplEvent: ENQUEUE FUNCTIONS
+
+  ==================
+
+*/
+
+
+
+function se_load_admin_scripts( $hook ){
+
+
+
+  if (    'toplevel_page_aagi_simplevent' != $hook 
+
+          && 'simplevent_page_simplevent_header' != $hook 
+
+          && 'simplevent_page_simplevent_sidebar' != $hook 
+
+          && 'simplevent_page_simplevent_footer' != $hook 
+
+          && 'simplevent_page_simplevent_event' != $hook
+
+          && 'simplevent_page_simplevent_live' != $hook
+
+          && 'simplevent_page_simplevent_settings' != $hook
+
+     ){ //checken damit nur auf entsprechenden Seiten eingefügt wird
+
+    return;
+
+  }
+
+
+
+  wp_register_style('se_admin', get_template_directory_uri() . '/theme/simplevent.admin.css', array(), '1.0.0', 'all' );
+
+  wp_enqueue_style('se_admin');
+
+
+
+
+
+  wp_enqueue_media(); //import media uploader
+
+
+
+  wp_register_script( 'se_admin-script', get_template_directory_uri() . '/theme/simplevent.admin.js', array('jquery'), '1.0.0', true );
+
+  wp_enqueue_script( 'se_admin-script' );
+
+
+
+  // Add the color picker css file
+
+  wp_enqueue_style( 'wp-color-picker' );
+
+
+
+  // Include our custom jQuery file with WordPress Color Picker dependency
+
+  wp_enqueue_script( 'se-color-picker', get_template_directory_uri() . '/theme/colorpicker-script.js', array( 'jquery', 'wp-color-picker' ), false, true  );
+
+  wp_enqueue_script('jquery-ui-datepicker');
+  wp_enqueue_style('e2b-admin-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css',false,"1.9.0",false);
+
+  wp_enqueue_style('e2b-admin-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css',false,"1.9.0",false);
+
+
+
+}
+
+add_action('admin_enqueue_scripts', 'se_load_admin_scripts'); //only print in WP Backend
+

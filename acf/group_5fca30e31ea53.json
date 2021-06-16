@@ -684,11 +684,7 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 1,
-                    "choices": {
-                        "inventors": "inventors",
-                        "start up": "start up",
-                        "Innovation Leaders": "Innovation Leaders"
-                    },
+                    "choices": [],
                     "default_value": false,
                     "allow_null": 0,
                     "multiple": 0,
@@ -975,5 +971,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1619016805
+    "modified": 1621603785
 }
