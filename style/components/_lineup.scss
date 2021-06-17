@@ -63,7 +63,7 @@
      flex-wrap: wrap;
      width:100%;
      margin-bottom: 20px;
-     
+     padding:10px;
      border:1px solid var(--shadeColor);
      border-radius: 3px;
      &:hover {
@@ -76,7 +76,7 @@
      .se2-speaker-profile-image {
           width: 80px;
           height:80px;
-          margin:1.5%;
+          margin-right:20px;
           border-radius: 50%;
           @include imageSettings;
      }
@@ -86,13 +86,15 @@
           flex-direction: column;
           justify-content: center;
           
+          width: calc(100% - 140px);
+          min-width: 220px;
+
+
           padding: 10px 0;
 
           h4 { margin-bottom:5px;}
-          p { 
+          p:first-of-type { 
                color:$primary; margin-bottom:0; line-height: 1rem; 
-               
-          
           }
      }
 

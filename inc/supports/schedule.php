@@ -118,7 +118,7 @@ class se2_Schedule {
                $durationM = date( 'i', strtotime(get_field('speaker_zeit', $speakerID)['ende'])) - date( 'i', strtotime(get_field('speaker_zeit', $speakerID)['start']));
                $duration = ($durationH * 60) + $durationM;
 
-               $speaker_slots .= '<div class="schedule-slot schedule-speaker" start="'.$start.'" dur="'.$duration.'" ende="'.$ende.'" date="'.$speakerDate.'">';
+               $speaker_slots .= '<div class="schedule-slot schedule-speaker" start="'.$start.'" dur="'.$duration.'" ende="'.$ende.'" date="'.$speakerDate.'" speakerid="'.$speakerID.'">';
 
                     $speaker_slots .= '<div class="schedule-container">';
                          //slot time
@@ -155,9 +155,24 @@ class se2_Schedule {
 
           $sessions_slots = '';
           $sessionSlots = get_option('sessions_slots');
-
+          
         
           foreach($sessionSlots as $sessionSlot ){
+
+               $sessionsArgs = array(
+                    'numberposts'	=> -1,
+                    'post_type'	=> 'sessions',
+                    'meta_query'	=> array(
+                         array(
+                              'key'	 	=> 'slot',
+                              'value'	  	=> sprintf('"%s"', $sessionSlot['label']),
+                              'compare' 	=> 'LIKE',
+                         ),
+                    )
+                    
+               );
+               $sessions = new WP_Query( $sessionsArgs );
+
                $slotDate = strtotime( str_replace( '/', '-', $sessionSlot['date'] ) );
                if( $slotDate !== $day ){
                     continue;
@@ -165,10 +180,23 @@ class se2_Schedule {
      
                $timestamps = $this->set_start_duration_end_timestampts( $sessionSlot['start'], $sessionSlot['ende'] );
 
-               $sessions_slots .= '<div class="schedule-slot schedule-session" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$slotDate.'">';
+               $sessions_slots .= '<div class="schedule-slot schedule-session-slot" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$slotDate.'">';
                     $sessions_slots .= '<div class="schedule-container">';
-                    $sessions_slots .= '<div class="schedule-slot-time">' . $timestamps['start'] . ' - ' . $timestamps['ende'] . '</div>';
-                    $sessions_slots .= '<h4>'.$sessionSlot['value'].'</h4>';
+                         $sessions_slots .= '<div class="schedule-slot-time">' . $timestamps['start'] . ' - ' . $timestamps['ende'] . '</div>';
+                         $sessions_slots .= '<h4>'.$sessionSlot['value'].'</h4>';
+
+                         //SESSIONS
+
+                         $sessions_slots .= '<div class="schedule-sessions">';
+                         foreach($sessions->posts as $session){
+                              $sessionID = $session->ID;
+                              $sessions_slots .= '<div class="schedule-session" sessionid="'.$sessionID.'">';
+                              $sessions_slots .= '<div class="schedule-session-image" style="background-image:url('.get_field('session_bild', $sessionID ).');"></div>';
+                              $sessions_slots .= '<h5>'.get_field('titel', $sessionID).'</h5>';
+                              $sessions_slots .= '</div>';
+                         }
+                         $sessions_slots .= '</div>';
+
                     $sessions_slots .= '</div>';
                $sessions_slots .= '</div>';
 

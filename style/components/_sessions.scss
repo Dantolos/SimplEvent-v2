@@ -1,0 +1,53 @@
+//LIGHTBOX
+.session-lb-container {
+     position: fixed;
+     top:0;
+     left:0;
+     width:87vw;
+     height:100vh;
+     background-color:var(--secondColor);
+
+     .session-lb-head {
+          
+          .session-lb-image {
+               width:100%;
+               height:20vh;
+               min-width:220px;
+               min-height:250px;
+               @include imageSettings;
+          }
+
+          .session-lb-content {
+               height: 70vh;
+               padding:5% 15%;
+               width:100%;
+               overflow-y: scroll;
+               @include hideScrollbar;
+
+               .session-lb-sponsors{
+                    margin-top:20px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    h6:first-of-type{
+                         width:100%;
+                         text-align: center;
+                    }
+
+                    .session-lb-sponsor{
+                         width:20%;
+                         margin:20px 20px;
+                         min-width:80px;
+                         img {
+                              width:100%;
+                         }
+                    }
+               }
+          }
+
+
+
+         
+     }
+}
