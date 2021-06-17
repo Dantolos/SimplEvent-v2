@@ -3,8 +3,12 @@ class Events extends Posts {
 
      public $output;
      public $eventData;
-     public $dateFormat = new Date_Format;
+     public $dateFormat;
      //POST WALL
+     public function __construct(){
+          $this->dateFormat = new Date_Format;
+     }
+
      public function call_Events_Wall( $year = false, $order = 'ASC', $orderby = 'date', $acfField = false, $subField = false, $dateFormat = false ) {
 
           $this->eventData = parent::call_Post_Data('event', $order, $orderby, $acfField, $subField, $dateFormat );
