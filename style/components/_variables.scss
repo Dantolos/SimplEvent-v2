@@ -21,6 +21,13 @@ $light_shade:var(--lightshade);
 .light-txt { color: $light; }
 .light-shade-txt { color: $light_shade; }
 
+.primary-bg { background-color: $primary; }
+.secondary-bg { background-color: $secondary; }
+.dark-bg { background-color: $dark; }
+.dark-shade-bg { background-color: $dark_shade; }
+.light-bg { background-color: $light; }
+.light-shade-bg { background-color: $light_shade; }
+
 body {
     background-color: var(--shadeColor);
     
