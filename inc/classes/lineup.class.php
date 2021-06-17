@@ -9,7 +9,6 @@ class LineUp {
      public $forms;
      public $dateFormat;
 
-
      public function __construct() {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;

@@ -4,6 +4,8 @@ class Events extends Posts {
      public $output;
      public $eventData;
      public $dateFormat;
+
+     
      //POST WALL
      public function __construct(){
           $this->dateFormat = new Date_Format;
