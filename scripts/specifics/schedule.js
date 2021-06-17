@@ -1,27 +1,28 @@
 console.log('schedule')
-if (document.querySelector('.day-tab-activ ')) {
-     var ACTIVEDAY = document.querySelector('.day-tab-activ ').getAttribute('day')
 
+const DAYTABS = document.getElementById('daytabs');
+if (DAYTABS) {
+     for (let index = 0; index < DAYTABS.childNodes.length; index++) {
+          DAYTAB = DAYTABS.childNodes[index]
+          DAYTAB.addEventListener('click', (date) => {
+               let newPosition = -Math.abs(index * 100) + '%'
+               gsap.to(document.getElementsByClassName('schedule-program-day'), {
+                    duration: .2, x: newPosition, ease: Power4.easeOut
+               })
+               for (let DAYBUTTON of DAYTABS.childNodes) {
+                    if (DAYBUTTON.getAttribute("day") === DAYTABS.childNodes[index].getAttribute("day")) {
+                         DAYBUTTON.classList.add("day-tab-activ");
+                    } else {
+                         DAYBUTTON.classList.remove("day-tab-activ");
+                    }
+               }
+          })
+     }
 }
 var SLOTS = document.getElementsByClassName('schedule-slot');
-const DAYTABS = document.getElementById('daytabs');
 
-for (let index = 0; index < DAYTABS.childNodes.length; index++) {
-     DAYTAB = DAYTABS.childNodes[index]
-     DAYTAB.addEventListener('click', (date) => {
-          let newPosition = -Math.abs(index * 100) + '%'
-          gsap.to(document.getElementsByClassName('schedule-program-day'), {
-               duration: .2, x: newPosition, ease: Power4.easeOut
-          })
-          for (let DAYBUTTON of DAYTABS.childNodes) {
-               if (DAYBUTTON.getAttribute("day") === DAYTABS.childNodes[index].getAttribute("day")) {
-                    DAYBUTTON.classList.add("day-tab-activ");
-               } else {
-                    DAYBUTTON.classList.remove("day-tab-activ");
-               }
-          }
-     })
-}
+
+
 
 nSLOTS = Array.prototype.slice.call(SLOTS);
 
@@ -109,4 +110,16 @@ for (let SLOT of SLOTS) {
      });
 
 }
+
+
+//SPEAKER SLOTS
+const SPEAKERSLOTS = document.querySelectorAll('.schedule-speaker')
+LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(SPEAKERSLOTS)
+
+
+//SESSION SLOTS
+const SESSIONSLOTS = document.querySelectorAll('.schedule-session')
+LB_SESSION.CALL_SESSION_LIGHTBOX(SESSIONSLOTS)
+
+
 

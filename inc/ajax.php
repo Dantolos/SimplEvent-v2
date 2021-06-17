@@ -15,6 +15,7 @@ require_once('classes/partner.class.php');
 require_once('classes/company.class.php');
 require_once('classes/events.class.php');
 require_once('classes/lineup.class.php');
+require_once('classes/sessions.class.php');
 
 //including supports
 require_once('supports/date.php');
@@ -112,12 +113,25 @@ add_action('wp_ajax_speaker_lightbox', 'speaker_lightbox'); //nur für angemelde
 function speaker_lightbox() 
 {
      $speakerID = $_POST['speakerid'];
-
      $LineUp = new LineUp;
-     //$postID = $_POST['pid'];
      
      wp_send_json( $LineUp->cast_speaker_lightbox( $speakerID ) ); 
      
+     die();
+}
 
+
+/*-------------SESSION LIGHTBOX---------------*/
+//session-lightbox
+add_action('wp_ajax_nopriv_session_lightbox', 'session_lightbox');
+add_action('wp_ajax_session_lightbox', 'session_lightbox'); //nur für angemeldete (admins)
+
+function session_lightbox() 
+{
+     $sessionID = $_POST['sessionid'];
+     $Sessions = new Sessions;
+     
+     wp_send_json( $Sessions->cast_session_lightbox( $sessionID ) ); 
+     
      die();
 }

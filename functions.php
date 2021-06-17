@@ -80,7 +80,9 @@ function theme_add_scripts()
           array('lightbox-js', 'lightbox.js'),
           array('restapi-js', 'restapi.js'),
           array('cookies-js', 'cookies.js'),
-          array('galery-js', 'galery.js' )
+          array('galery-js', 'galery.js' ),
+          array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),
+          array('lightbox-session-js', 'lightbox/lb-session.js' )
      );
 
      foreach ($JsIncList as $JsInc) 
