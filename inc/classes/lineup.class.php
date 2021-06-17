@@ -150,7 +150,9 @@ class LineUp {
                                    the_title();
 
                          $this->speakerCard .= '<h4>'.$name.'</h4>';
-                         $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).'</p>';
+                         $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+
+                         $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
 
                          if( $showCV ){
                               $this->speakerCard .= '<p>'.get_field( 'speaker_cv', $speakerID ).'</p>';
@@ -185,7 +187,8 @@ class LineUp {
                          the_title();
 
                $this->speakerCard .= '<h4>'.$name.'</h4>';
-               $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).'</p>';
+               $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+               $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
                $this->speakerCard .= '</div>';
 
           $this->speakerCard .= '</div>';
@@ -236,7 +239,8 @@ class LineUp {
                          get_the_title( $speakerID );
 
                     $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.'</h2>';
-                    $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).'</p>';
+                    $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+                    $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
                     $this->speakerLightbox .= get_field( 'speaker_cv', $speakerID );
                     
 
