@@ -3,7 +3,7 @@ class Events extends Posts {
 
      public $output;
      public $eventData;
-     
+     public $dateFormat = new Date_Format;
      //POST WALL
      public function call_Events_Wall( $year = false, $order = 'ASC', $orderby = 'date', $acfField = false, $subField = false, $dateFormat = false ) {
 
@@ -11,7 +11,7 @@ class Events extends Posts {
      
           foreach ( $this->eventData->posts as $key => $event ) {
                
-               $date = strtotime( get_field('eckdaten', $event->ID )['date'] );
+               $date = strtotime( str_replace( '/', '-', get_field('eckdaten', $event->ID )['date'] ));
                $time = strtotime( get_field('eckdaten', $event->ID )['time'] );
 
                if( $year && date( 'Y', $date) != $year ) {
@@ -31,8 +31,8 @@ class Events extends Posts {
                $this->output .= '<p class="secondary-txt">'; 
               
                if( $date || $time ){
-                    $date = ($date) ? $this->formating_Date_Language( $date, 'date' ) : '';
-                    $time = ($time) ? ' | ' . $this->formating_Date_Language( $time, 'time' ) : '';
+                    $date = ($date) ?  $this->dateFormat->formating_Date_Language( $date, 'date' ) : '';
+                    $time = ($time) ? ' | ' . $this->dateFormat->formating_Date_Language( $time, 'time' ) : '';
                     $this->output .= '<p class="secondary-txt">' . esc_attr( $date ) . esc_attr( $time ) . '</p>';
 
                }
