@@ -1,5 +1,7 @@
 console.log('schedule')
 
+
+
 const DAYTABS = document.getElementById('daytabs');
 if (DAYTABS) {
      for (let index = 0; index < DAYTABS.childNodes.length; index++) {
@@ -43,6 +45,8 @@ console.log(nSLOTS)
 var GRID = document.getElementsByClassName('schedule-5min');
 var pageoffset = document.querySelector('.schedule-grid').getBoundingClientRect().top;
 
+var firstSlotPosition = 2400;
+
 function SET_SLOT_POSITION() {
      for (let i = 0; i < nSLOTS.length; i++) {
           let start = nSLOTS[i].getAttribute('start');
@@ -55,9 +59,16 @@ function SET_SLOT_POSITION() {
                continue;
           }
           nSLOTS[i].style.top = (minSections.getBoundingClientRect().top - pageoffset) + 'px';
+          if ((minSections.getBoundingClientRect().top - pageoffset) < firstSlotPosition) {
+               firstSlotPosition = (minSections.getBoundingClientRect().top - pageoffset);
+          }
           //nSLOTS[i].style.left = '20%';
           nSLOTS[i].style.height = (duration / 5) * minSections.offsetHeight + 'px';
      }
+
+     // Scroll timeline to first slot
+     jQuery(window).scrollTop(firstSlotPosition - 50)
+
 }
 
 SET_SLOT_POSITION()
@@ -89,25 +100,45 @@ for (let n = 0; n < nSLOTS.length; n++) {
           }
      }
 }
-
-
+console.log('DEVICE: ',)
+var slotToggler = false;
 for (let SLOT of SLOTS) {
 
-     SLOT.addEventListener('mouseover', (e) => {
-          SLOT.style.zIndex = 1000;
-          SLOT.style.overflowY = 'visible';
-          gsap.set(SLOT.querySelector('.schedule-slot-info'), { y: 20 })
-          gsap.to(SLOT.querySelector('.schedule-container'), { duration: .1, scale: 1.02 })
-          gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .1, y: 0, display: 'block' })
-     });
+     if (!DETECT.detectMobile()) {
+          SLOT.addEventListener('mouseover', (e) => {
+               SLOT.style.zIndex = 1000;
+               SLOT.style.overflowY = 'visible';
+               gsap.set(SLOT.querySelector('.schedule-slot-info'), { y: 20 })
+               gsap.to(SLOT.querySelector('.schedule-container'), { duration: .1, scale: 1.02 })
+               gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .1, y: 0, display: 'block' })
+          });
 
-     SLOT.addEventListener('mouseleave', () => {
-          SLOT.style.zIndex = 'unset';
-          SLOT.style.overflowY = 'hidden';
+          SLOT.addEventListener('mouseleave', () => {
+               SLOT.style.zIndex = 'unset';
+               SLOT.style.overflowY = 'hidden';
 
-          gsap.to(SLOT.querySelector('.schedule-container'), { duration: .2, scale: 1 })
-          gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .2, y: 20, display: 'none' })
-     });
+               gsap.to(SLOT.querySelector('.schedule-container'), { duration: .2, scale: 1 })
+               gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .2, y: 20, display: 'none' })
+          });
+     } else {
+
+          SLOT.addEventListener('click', (e) => {
+
+               if (!slotToggler || slotToggler != SLOT) {
+                    slotToggler = SLOT;
+                    SLOT.style.zIndex = 1000;
+                    SLOT.style.overflowY = 'visible';
+                    gsap.set(SLOT.querySelector('.schedule-slot-info'), { y: 20 })
+                    gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .1, y: 0, display: 'block' })
+               } else {
+                    slotToggler = false;
+                    SLOT.style.zIndex = 'unset';
+                    SLOT.style.overflowY = 'hidden';
+                    gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .2, y: 20, display: 'none' })
+               }
+          });
+
+     }
 
 }
 
@@ -116,6 +147,8 @@ for (let SLOT of SLOTS) {
 const SPEAKERSLOTS = document.querySelectorAll('.schedule-speaker')
 LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(SPEAKERSLOTS)
 
+const PANELSPEAKERSLOTS = document.querySelectorAll('.schedule-slot-panel-speaker')
+LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(PANELSPEAKERSLOTS)
 
 //SESSION SLOTS
 const SESSIONSLOTS = document.querySelectorAll('.schedule-session')

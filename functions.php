@@ -87,7 +87,7 @@ function theme_add_scripts()
 
      foreach ($JsIncList as $JsInc) 
      {
-          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.05', true );
+          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.06', true );
      }
      
      /*------------------------------Send Global Variables---------------------------*/
@@ -127,7 +127,7 @@ add_action( 'wp_enqueue_scripts', 'se2_enqueue_styles_scripts_block' ); //add st
 
 function se2_enqueue_styles_scripts_block() 
 {
-    $fileversion = '1.0.14'; 
+    $fileversion = '1.0.15'; 
     wp_enqueue_style( 'additional-block-styles', get_stylesheet_directory_uri() . '/blocks/templates/additional-styles/add-block-styles.css', '', $fileversion);
 
     wp_enqueue_style( 'block-testimonial', get_stylesheet_directory_uri() . '/blocks/templates/testimonials/testimonials.css', '', $fileversion );

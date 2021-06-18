@@ -1,7 +1,8 @@
 gsap.config({
      nullTargetWarn: false,
 });
-/* bdedect = new Detect(); */
+
+var DETECT = new Detect();
 
 var LOADER = new se2_Loader();
 var AJAX = new se2_Ajax();
