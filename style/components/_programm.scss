@@ -16,6 +16,12 @@
      background-color:var(--secondColor);
      align-items: flex-end;
      border-bottom:4px solid var(--shadeColor);
+
+     @include breakpoint( 'm' ){
+          width: 100vw;
+     }
+
+
      button {
           height:50px;
           padding:1% 15px ;
@@ -46,7 +52,10 @@
      width:90vw;
      margin:50px 5vw;
      position: relative;
-
+     @include breakpoint( 'm' ){
+          width: 100vw;
+          margin:50px 0;
+     }
 
      .schedule-grid {
           width:100%;
@@ -104,7 +113,10 @@
           width:85%;
           height: 100%;
           //cursor:pointer;
-
+          @include breakpoint( 's' ){
+               left:0;
+               width: 100%;
+          }
           .schedule-program-day {
           
                width:100%;
@@ -121,7 +133,7 @@
                     border-radius:1px;
                     /* border: 1px solid var(--midColor); */
                     
-                    @include dropShadow;
+                    //@include dropShadow;
                     background-color: var(--secondColor);
                     padding:0px;
                     overflow-y: hidden;
@@ -150,7 +162,8 @@
                               background-color:var(--secondColor);
                               //border: 1px solid var(--primeColor);
                               border-radius:0 1px 0 1px;
-                              backdrop-filter: brightness(60%)
+                              backdrop-filter: brightness(60%);
+                              font-size: 1em;
                          }
 
                     }
@@ -161,7 +174,9 @@
                &:nth-child(odd){
                     right:0;
                }
-               .schedule-speaker .schedule-container {
+               .schedule-speaker .schedule-container,
+               .schedule-separator-placeholder .schedule-container
+               {
                     //background-color:$primary;
                     border-style: solid;
                     border-width:  0 0 0 4px;
@@ -178,11 +193,17 @@
                     @include slotBGgradiant;
                }
 
-               .schedule-separator .schedule-container {
+               .schedule-separator-standard .schedule-container {
                     background-image: linear-gradient(to top, var(--primeColor), var(--midColor));
                     //background-color: var(--midColor);
                     color:var(--secondColor);
                }
+               .schedule-separator-filler .schedule-container {
+                    background-color:  $secondary;
+                    color:var(--secondColor);
+               }
+
+
                .schedule-speaker, .schedule-session-slot { cursor: pointer; }
           }
      }
@@ -191,13 +212,6 @@
 
 
 
-.schedule-slot-speaker-image {
-    
-     width:50px;
-     height:50px;
-     @include imageSettings;
-     border-radius:50%;
-}
 .schedule-slot-info {
      width:100%;
      display:none;
@@ -223,12 +237,44 @@
                     width:100%;
                     height:80px;
                     @include imageSettings;
-
                }
-               h5 {
+               h6 {
                     padding:10px;
                }
           }
      }
      
+}
+
+//SPEAKER
+.schedule-speaker {
+     .schedule-container {
+          
+          .schedule-slot-speaker-content{
+               display: flex;
+               flex-direction: row;
+               width:100%;
+               .schedule-slot-speaker-image {
+                    
+                    width:50px;
+                    height:50px;
+                    @include imageSettings;
+                    border-radius:50%;
+                    margin-right:5%;
+               }
+
+               .schedule-slot-speaker-name {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width:calc(95% - 50px);
+                    h5{
+                         margin-bottom:2px;
+                    }
+                    h6{
+                         color: $primary;
+                    }
+               }
+          }
+     }
 }

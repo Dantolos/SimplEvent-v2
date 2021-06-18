@@ -96,9 +96,9 @@ for (let SLOT of SLOTS) {
      SLOT.addEventListener('mouseover', (e) => {
           SLOT.style.zIndex = 1000;
           SLOT.style.overflowY = 'visible';
-
+          gsap.set(SLOT.querySelector('.schedule-slot-info'), { y: 20 })
           gsap.to(SLOT.querySelector('.schedule-container'), { duration: .1, scale: 1.02 })
-          gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .3, scaleY: 1 })
+          gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .1, y: 0, display: 'block' })
      });
 
      SLOT.addEventListener('mouseleave', () => {
@@ -106,7 +106,7 @@ for (let SLOT of SLOTS) {
           SLOT.style.overflowY = 'hidden';
 
           gsap.to(SLOT.querySelector('.schedule-container'), { duration: .2, scale: 1 })
-          gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .3, scaleY: 0 })
+          gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .2, y: 20, display: 'none' })
      });
 
 }
