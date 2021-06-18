@@ -317,6 +317,86 @@
                             ],
                             "min": "",
                             "max": ""
+                        },
+                        "layout_60cc7309236cf": {
+                            "key": "layout_60cc7309236cf",
+                            "name": "show",
+                            "label": "Show Element",
+                            "display": "block",
+                            "sub_fields": [
+                                {
+                                    "key": "field_60cc7309236d0",
+                                    "label": "Start",
+                                    "name": "start",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "10",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "display_format": "H:i",
+                                    "return_format": "H:i"
+                                },
+                                {
+                                    "key": "field_60cc7309236d1",
+                                    "label": "Ende",
+                                    "name": "ende",
+                                    "type": "time_picker",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "10",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "display_format": "H:i",
+                                    "return_format": "H:i"
+                                },
+                                {
+                                    "key": "field_60cc7309236d2",
+                                    "label": "Bezeichnung",
+                                    "name": "bezeichnung",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "40",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 2,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_60cc7309236d3",
+                                    "label": "Link",
+                                    "name": "link",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "40",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 2,
+                                    "return_format": "url"
+                                }
+                            ],
+                            "min": "",
+                            "max": ""
                         }
                     },
                     "button_label": "Programm Slot hinzufügen",
@@ -352,5 +432,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1624003542
+    "modified": 1624011573
 }
