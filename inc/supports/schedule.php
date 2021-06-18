@@ -43,7 +43,7 @@ class se2_Schedule {
           
 
           //build up schedule Grid
-          $this->scheduleGrid .= '<div class="schedule-grid">';
+          $this->scheduleGrid .= '<div class="schedule-grid" id="schedule-timeline">';
 
           for ($i=5; $i < 20; $i++) { 
 
@@ -276,6 +276,44 @@ class se2_Schedule {
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                              $separators_slots .= '</div>';
+                         $separators_slots .= '</div>';
+                    }
+
+                    // STANDARD PANEL
+                    if($sep['acf_fc_layout'] === 'panel'){
+                         $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
+                         $separators_slots .= '<div class="schedule-slot schedule-separator-panel" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                              $separators_slots .= '<div class="schedule-container">';
+                              $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+
+                              $separators_slots .= '<div class="schedule-slot-info">';
+                                   $separators_slots .= '<div class="schedule-slot-panel-speakers">';
+                                   foreach( $sep['speaker'] as $panelSpeaker ){
+                                   
+                                        $separators_slots .= '<div class="schedule-slot-panel-speaker" speakerid="'. $panelSpeaker .'">';
+                                             $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
+
+                                             $name = ( get_field('speaker_vorname', $panelSpeaker) ) 
+                                             ? 
+                                                  get_field('speaker_degree', $panelSpeaker) 
+                                                  . ' ' . get_field('speaker_vorname', $panelSpeaker) 
+                                                  . ' <b>' . get_field('speaker_nachname', $panelSpeaker) . '</b>'
+                                             : 
+                                                  the_title();
+
+                                             $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
+                                                  $separators_slots .= '<h5>'.$name.'</h5>';
+                                                  $separators_slots .= '<div class="schedule-slot-info">';
+                                                       $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).'</h6>';
+                                                  $separators_slots .= '</div>';
+                                             $separators_slots .= '</div>';
+                                        $separators_slots .= '</div>';
+                                   } 
+                                   $separators_slots .= '</div>';       
+                              $separators_slots .= '</div>';
+
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
