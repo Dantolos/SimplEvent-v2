@@ -22,7 +22,7 @@ $Partner = new Partner;
                <div class="footer-partner-container">   
                     <?php 
                     $PartnerCategories = get_option( 'se_footer_categories' );
-                         if( isset($PartnerCategories) ){
+                    if( isset($PartnerCategories) && count($PartnerCategories) > 0 ){
                          foreach($PartnerCategories as $PartnerCategorie){
                               $catTitle = get_term($PartnerCategorie);    
                               echo '<div class="footer-partner-categorie">';

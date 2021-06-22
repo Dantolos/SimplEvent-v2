@@ -190,6 +190,9 @@
                max-height: 70vh;
                overflow: scroll;
                @include hideScrollbar;
+               @include breakpoint( 's' ){
+                    width: 100%;
+               }
                h2 {
                     margin-bottom: 0;
                }
