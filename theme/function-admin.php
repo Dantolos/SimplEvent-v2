@@ -63,107 +63,64 @@ function simplevent_custom_settings() {
   //****Settings
 
   register_setting( 'simplevent-settings-group', 'event_logo' );
-
   register_setting( 'simplevent-settings-group', 'event_logo_neg' );
-
   register_setting( 'simplevent-settings-group', 'event_icon' );
-
   register_setting( 'simplevent-settings-group', 'event_icon_neg' );
 
-
-
   register_setting( 'simplevent-settings-group', 'twitter_link' );
-
   register_setting( 'simplevent-settings-group', 'youtube_link' );
-
   register_setting( 'simplevent-settings-group', 'facebook_link' );
-
   register_setting( 'simplevent-settings-group', 'linkedin_link' );
-
   register_setting( 'simplevent-settings-group', 'insta_link' );
 
-
-
   register_setting( 'simplevent-settings-group', 'primary_color_picker' );
-
   register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
-
   register_setting( 'simplevent-settings-group', 'light_mode_picker' );
-
   register_setting( 'simplevent-settings-group', 'dark_mode_picker' );
 
-
-
   register_setting( 'simplevent-settings-group', 'font_name' );
-
   register_setting( 'simplevent-settings-group', 'font_link' );
 
- 
+  register_setting( 'simplevent-settings-group', 'title_font' );
+  register_setting( 'simplevent-settings-group', 'title_font_name' );
+  register_setting( 'simplevent-settings-group', 'title_font_link' );
 
   register_setting( 'simplevent-settings-group', 'google_analytics_ua' );
-
   register_setting( 'simplevent-settings-group', 'anonymize_ip' );
 
 
-
   //****SECTIONS
-
   add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
-
   add_settings_section( 'simplevent-color-options', 'Colors', 'simplevent_color_options', 'aagi_simplevent');
-
   add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
-
   add_settings_section( 'simplevent-analytics', 'Analytics', 'simplevent_analytics', 'aagi_simplevent');
 
 
-
-
-
   //****fields
-
   add_settings_field( 'event_logo', 'Logo', 'simplevent_event_logo', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'event_logo_neg', 'Logo Negativ', 'simplevent_event_logo_neg', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'event_icon', 'Icon', 'simplevent_event_icon', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
 
-
-
-
-
   add_settings_field( 'twitter-link', 'Twitter', 'simplevent_twitter_link', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'youtube-link', 'Youtube', 'simplevent_youtube_link', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'facebook-link', 'Facebook', 'simplevent_facebook_link', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'linkedin-link', 'LinkedIn', 'simplevent_linkedin_link', 'aagi_simplevent', 'simplevent-general-options' );
-
   add_settings_field( 'insta-link', 'Instagramm', 'simplevent_insta_link', 'aagi_simplevent', 'simplevent-general-options' );
 
-
-
   add_settings_field( 'primary-color-picker', 'Primary Color', 'simplevent_primary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
-
   add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
-
   add_settings_field( 'light-mode-picker', 'Light Mode', 'simplevent_light_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
-
   add_settings_field( 'dark-mode-picker', 'Dark Mode', 'simplevent_dark_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
 
-
-
   add_settings_field( 'font-name', 'Font Name', 'simplevent_font_name', 'aagi_simplevent', 'simplevent-fonts' );
-
   add_settings_field( 'font-link', 'Font Link', 'simplevent_font_link', 'aagi_simplevent', 'simplevent-fonts' );
 
-
+  add_settings_field( 'title-font', 'Title Font', 'simplevent_title_font', 'aagi_simplevent', 'simplevent-fonts' );
+  add_settings_field( 'title-font-name', 'Title Font Name', 'simplevent_title_font_name', 'aagi_simplevent', 'simplevent-fonts' );
+  add_settings_field( 'title-font-link', 'Title Font Link', 'simplevent_title_font_link', 'aagi_simplevent', 'simplevent-fonts' );
 
   add_settings_field( 'google-analytics-ua', 'Google Analytics', 'simplevent_google_analytics_ua', 'aagi_simplevent', 'simplevent-analytics' );
-
   add_settings_field( 'anonymize-ip', 'Anonymize IP', 'simplevent_anonymize_ip', 'aagi_simplevent', 'simplevent-analytics' );
 
 
@@ -175,25 +132,20 @@ function simplevent_custom_settings() {
   //****Settings
 
   register_setting( 'simplevent-header-group', 'se_anmeldung' );
-
   register_setting( 'simplevent-header-group', 'se_anmeldelink' );
-
   register_setting( 'simplevent-header-group', 'se_anmeldetext' );
 
 
 
   register_setting( 'simplevent-header-group', 'se_header_mode' );
-
   register_setting( 'simplevent-header-group', 'se_header_logowidth' );
 
+  register_setting( 'simplevent-header-group', 'se_header_language' );
 
 
   register_setting( 'simplevent-header-group', 'se_videoslider_activ' );
-
   register_setting( 'simplevent-header-group', 'se_source' );
-
   register_setting( 'simplevent-header-group', 'se_videosliderbuttontext' );
-
   register_setting( 'simplevent-header-group', 'se_videosliderbuttonlink' );
 
 
@@ -201,9 +153,8 @@ function simplevent_custom_settings() {
   //****Section
 
   add_settings_section( 'simplevent-header-options', 'Header', 'simplevent_header_options', 'simplevent_header');
-
   add_settings_section( 'simplevent-header-style', 'Header Style', 'simplevent_header_style', 'simplevent_header');
-
+  add_settings_section( 'simplevent-header-language', 'Header Language Menu', 'simplevent_header_language', 'simplevent_header');
   add_settings_section( 'simplevent-videoslider', 'Video Slider', 'simplevent_videoslider', 'simplevent_header');
 
 
@@ -211,25 +162,17 @@ function simplevent_custom_settings() {
   //****Fields
 
   add_settings_field( 'se-anmeldung', 'Anmeldung Aktiv', 'simplevent_se_anmeldung', 'simplevent_header', 'simplevent-header-options' );
-
   add_settings_field( 'se-anmeldelink', 'Anmeldung Link', 'simplevent_se_anmeldelink', 'simplevent_header', 'simplevent-header-options' );
-
   add_settings_field( 'se-anmeldetext', 'Anmeldung Text', 'simplevent_se_anmeldetext', 'simplevent_header', 'simplevent-header-options' );
 
-
-
   add_settings_field( 'se-header-mode', 'Header Style Mode', 'simplevent_se_header_mode', 'simplevent_header', 'simplevent-header-style' );
-
   add_settings_field( 'se-header-logowidth', 'Logo Width', 'simplevent_se_header_logowidth', 'simplevent_header', 'simplevent-header-style' );
 
-
+  add_settings_field( 'se-header-language-menu', 'Show Language Menu', 'simplevent_se_header_language_menu', 'simplevent_header', 'simplevent-header-language' );
 
   add_settings_field( 'se-videoslider_activ', 'Activate', 'simplevent_se_videoslider_activ', 'simplevent_header', 'simplevent-videoslider' );
-
   add_settings_field( 'se-source', 'Attention Text', 'simplevent_se_source', 'simplevent_header', 'simplevent-videoslider' );
-
   add_settings_field( 'se-videosliderbuttontext', 'Button Text', 'simplevent_se_videosliderbuttontext', 'simplevent_header', 'simplevent-videoslider' );
-
   add_settings_field( 'se-videosliderbuttonlink', 'Button Link', 'simplevent_se_videosliderbuttonlink', 'simplevent_header', 'simplevent-videoslider' );
 
 
@@ -245,7 +188,6 @@ function simplevent_custom_settings() {
 
 
   register_setting( 'simplevent-footer-group', 'se_contact_name' );
-
   register_setting( 'simplevent-footer-group', 'se_contact_address' );
 
   register_setting( 'simplevent-footer-group', 'se_contact_phone' );
@@ -463,41 +405,33 @@ function simplevent_analytics() {
 
 
 function simplevent_header_options() {
-
   echo '';
-
 }
 
  
 
 function simplevent_header_style() {
-
      echo '';
-
 }
 
-
+function simplevent_header_language(){
+     echo '';
+}
 
 function simplevent_videoslider() {
-
   echo '';
-
 }
 
 
 
 function simplevent_footer_options() {
-
   echo '';
-
 }
 
 
 
 function simplevent_footer_contact() {
-
      echo 'Kontakt Informationen';
-
 }
 
 
@@ -505,9 +439,7 @@ function simplevent_footer_contact() {
 
 
 function simplevent_footer_partner() {
-
      echo 'Mainpartner Kategorie auswählen, welche im Footer erscheinen sollen.';
-
 }
 
 
@@ -569,25 +501,17 @@ function simplevent_settings_options() {
 function simplevent_event_logo() {
 
   $logo = esc_attr( get_option( 'event_logo' ) );
-
   echo '<div class="image-preview"><img src="'.get_option( 'event_logo' ).'" /></div>';
-
-
 
   echo '<input type="button" style="width:25%;" value="Logo" class="button button-secondary upload-button" data-target="event-logo"/><input type="" style="width:73%;" id="event-logo" name="event_logo" value="' .$logo. '"/>';
 
 }
 
 function simplevent_event_logo_neg() {
-
      $logoNeg = esc_attr( get_option( 'event_logo_neg' ) );
-
      echo '<div class="image-preview image-neg"><img src="'.get_option( 'event_logo_neg' ).'" /></div>';
 
-
-
      echo '<input type="button" style="width:25%;" value="Logo Negativ" class="button button-secondary upload-button" data-target="event-logo-neg"/><input type="" style="width:73%;" id="event-logo-neg" name="event_logo_neg" value="' .$logoNeg. '"/>';
-
    }
 
 function simplevent_event_icon() {
@@ -731,21 +655,43 @@ function simplevent_dark_mode_picker() {
 //Fonts
 
 function simplevent_font_name() {
-
      $fontName = esc_attr( get_option( 'font_name' ) );
-
      echo '<input type="text" name="font_name" value="' .$fontName. '" placeholder="font-family: \'Roboto\', sans-serif;" />';
-
 }
 
 function simplevent_font_link() {
-
      $fontLink= esc_attr( get_option( 'font_link' ) );
-
      echo '<input type="text" name="font_link" value="' .$fontLink. '" placeholder="Google-Font Link-Tag" />';
+}
+
+function simplevent_title_font() {
+
+     $titleFont = esc_attr( get_option( 'title_font' ) );
+
+     if($titleFont == 'on'){ 
+       $titleFont = 'checked';
+     }
+   
+     echo '<input type="checkbox" name="title_font" ' .$titleFont. '/>';
+     echo 'anwählen um eine Schriftart für Titel (h1-h3) zu ändern';
 
 }
 
+function simplevent_title_font_name() {
+
+     $titleFontName = esc_attr( get_option( 'title_font_name' ) );
+
+     echo '<input type="text" name="title_font_name" value="' .$titleFontName. '" placeholder="font-family: \'Roboto\', sans-serif;" />';
+
+}
+
+function simplevent_title_font_link() {
+
+     $titleFontLink= esc_attr( get_option( 'title_font_link' ) );
+
+     echo '<input type="text" name="title_font_link" value="' .$titleFontLink. '" placeholder="Google-Font Link-Tag" />';
+
+}
 
 
 //Analytics
@@ -815,41 +761,34 @@ function simplevent_se_anmeldelink() {
 //header style
 
 function simplevent_se_header_mode() {
-
      $modesSaved = get_option( 'se_header_mode' );
-
      $modes= array('Light', 'Dark', 'Colorful');
-
      foreach($modes as $key => $mode){
-
           $check = ( isset($modesSaved[$key]) ) ? 'checked' : '';
-
           echo '<input type="checkbox" id="'.$mode.'" name="se_header_mode['.$key.']" value="'.$mode.'" '.$check.'>';
-
           echo '<label for="'.$mode.'">'.$mode.'</label><br>';
-
-   
-
      }    
-
 }
 
 function simplevent_se_header_logowidth() {
 
      $logowidth = get_option( 'se_header_logowidth' );
-
      echo '<div class="range-input">';
-
           echo '<label>Definierung der maximalen Breite des Logos im Header im Verhätniss zur Browserbreite. (Maximal 50%)</label><br />';
-
           echo '<input type="range" name="se_header_logowidth" value="' .$logowidth. '" min="5" max="50" onchange="changeVaule(event);" />';
-
           echo '<input type="number" name="se_header_logowidth" value="' .$logowidth. '" min="5" max="50" onchange="changeVaule(event);" />';
-
      echo '</div>';
 
 }
 
+//------- Language Menu
+function simplevent_se_header_language_menu() {
+     $selangmenu = esc_attr( get_option( 'se_header_language' ) );
+     if($selangmenu == 'on'){
+       $selangmenu = 'checked';
+     }
+     echo '<input type="checkbox" name="se_header_language" ' .$selangmenu. '/>';
+}
 
 
 //-------Slidervideo simplevent_se_videosliderbuttonlink

@@ -43,6 +43,11 @@
           echo '<link rel="preconnect" href="https://fonts.gstatic.com">';
           echo '<link href="'.get_option( 'font_link' ).'" rel="stylesheet">';
      }
+
+     if( get_option( 'title_font' ) && get_option( 'title_font_name' ) && get_option( 'title_font_link' ) ) {
+          echo '<link rel="preconnect" href="https://fonts.gstatic.com">';
+          echo '<link href="'.get_option( 'title_font_link' ).'" rel="stylesheet">';
+     }
      ?>
 
      <style>
@@ -70,7 +75,12 @@
                echo 'body { font-family: "PTSansPro", Fallback, sans-serif; }';
           } else {
                echo 'body { ' . get_option( 'font_name' ) . ' }';
-          } ?>
+          } 
+          if( get_option( 'title_font' ) && get_option( 'title_font_name' ) && get_option( 'title_font_link' ) ) {
+               echo 'h1, h2, h3 { ' . get_option( 'title_font_name' ) . ' font-weight:800 !important; text-transform: none !important; }';
+          }
+          
+          ?>
 
           body {
                /*COLORS*/
@@ -106,8 +116,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.41'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.04' );
+     $scriptversion = '1.0.45'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.05' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -207,21 +217,23 @@ wp_head();
                ?>
 
                <div id="extramenu">
-                    <div id="languagebutton">
-                    <?php  
-                         //display language menu
-                         $languages = icl_get_languages('');
-                         if(1 < count($languages))
-                         {
-                              foreach($languages as $l)
+               <?php
+               //SPRACHMENU
+               $langMenu = esc_attr( get_option( 'se_header_language' ));
+                    if( $langMenu === 'on') { 
+                         echo '<div id="languagebutton">';
+                              //display language menu
+                              $languages = icl_get_languages('');
+                              if(1 < count($languages))
                               {
-                              if(!$l['active']) $langs[] = '<a href="' . $l['url'] . '"><button>' . $l['language_code'] . '</button></a>';
+                                   foreach($languages as $l)
+                                   {
+                                   if(!$l['active']) $langs[] = '<a href="' . $l['url'] . '"><button>' . $l['language_code'] . '</button></a>';
+                                   }
+                                   echo join( $langs );
                               }
-                              echo join( $langs );
-                         }
-                    ?>
-                    </div>
-
+                         echo '</div>'; 
+                    }?>
                     <button id="modebutton">Darkmode</button>
 
                     <?php
