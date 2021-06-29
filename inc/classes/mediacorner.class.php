@@ -211,18 +211,18 @@ class Mediacorner {
           $gallerie = $galleries[$gallerieNR];
           if(count( $gallerie['photos'] ) > 0){
                foreach( $gallerie['photos'] as $photo ){
-                    $folderContent .= '<a href="'.$photo['url'].'" download>';
+                    //$folderContent .= '<a href="'.$photo['url'].'" download>';
                     $folderContent .= '<div class="se2-galleries-photo">';
-                         $folderContent .= '<div class="se2-galleries-photo-thumbnail">';
+                         $folderContent .= '<div class="se2-galleries-photo-thumbnail" imageurl="'.$photo['url'].'">';
                               $folderContent .= '<img src="'.$photo['sizes']['medium'].'"/>';
                          $folderContent .= '</div>';
                          $folderContent .= '<div class="se2-galleries-photo-desc" >';
                               $folderContent .= '<h6><b>'.$photo['title'].'</b></h6>';
-                              $folderContent .= '<h6><i>'.$photo['width'].' x '.$photo['width'].'px</i></h6>';
+                              $folderContent .= '<h6><i>'.$photo['width'].' x '.$photo['height'].'px</i></h6>';
                               $folderContent .= '<h6>'.$this->fileSize->getRemoteFilesize( $photo['url'] ).'</h6>';
                          $folderContent .= '</div>';
                     $folderContent .= '</div>';
-                    $folderContent .= '</a>';
+                    //$folderContent .= '</a>';
                }
           } else {
                $folderContent = '<div style="text-align:center;color:rgba(0,0,0,.4);display:flex;justify-content:center;align-items:center;"><h4>'.__( 'In diesem Ordner konnten noch keine Fotos gefunden werden.', 'SimplEvent' ).'</h4></div>'; 

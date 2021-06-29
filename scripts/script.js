@@ -100,12 +100,13 @@ function negateImages(images) {
 //---------------------------------
 //HEADER
 //---------------------------------
-const LANGUEGEBUTTONS = document.getElementById('languagebutton').children;
 
-for (let langbutton of LANGUEGEBUTTONS) {
-     langbutton.querySelector('button').style.width = langbutton.querySelector('button').offsetHeight + 5 + 'px';
+const LANGUEGEBUTTONS = (document.getElementById('languagebutton').children) ? document.getElementById('languagebutton').children : false
+if (LANGUEGEBUTTONS) {
+     for (let langbutton of LANGUEGEBUTTONS) {
+          langbutton.querySelector('button').style.width = langbutton.querySelector('button').offsetHeight + 5 + 'px';
+     }
 }
-
 
 
 
