@@ -30,7 +30,11 @@
      <?php 
           //FAVICON
           if( get_option( 'event_icon' ) || get_option( 'event_icon_neg' ) ){
-               $favicon = ($_COOKIE["mode"]) ? get_option( 'event_icon_neg' ) : get_option( 'event_icon' );
+               if(isset($_COOKIE["mode"])){
+                    $favicon = ($_COOKIE["mode"]) ? get_option( 'event_icon_neg' ) : get_option( 'event_icon' );
+               } else {
+                    $favicon = get_option( 'event_icon' );
+               }
                echo '<link rel="icon" type="image/svg+xml" href="'.$favicon.'">';
                echo '<link rel="alternate icon" href="'.$favicon.'">';
                echo '<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01">';
@@ -147,6 +151,7 @@ add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 require_once('inc/supports/date.php');
 require_once('inc/supports/forms.php');
 require_once('inc/supports/schedule.php');
+require_once('inc/supports/files.php');
 
 //including assets
 require_once('inc/assets/button.php');
@@ -161,7 +166,7 @@ require_once('inc/classes/people.class.php');
 require_once('inc/classes/partner.class.php');
 require_once('inc/classes/lineup.class.php');
 require_once('inc/classes/sessions.class.php');
-
+require_once('inc/classes/mediacorner.class.php');
 
 
 

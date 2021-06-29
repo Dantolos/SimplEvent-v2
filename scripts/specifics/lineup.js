@@ -51,9 +51,7 @@ const ORDERBUTTON = document.querySelector('.se2-lineup-filter-sort')
 
 
 var sortTL = gsap.timeline({ defaults: { duration: .5 } })
-
 var SORTICON = document.getElementById('dsc');
-
 sortTL.to(SORTICON, { morphSVG: "#asc" });
 
 
@@ -61,20 +59,13 @@ sortTL.to(SORTICON, { morphSVG: "#asc" });
 ORDERBUTTON.addEventListener('click', () => {
 
      args.sort = (args.sort == 'asc') ? 'dsc' : 'asc';
-
      sortTL.play()
 
      if (args.sort == 'dsc') {
-
           sortTL.play()
-
      } else {
-
           sortTL.reverse()
-
      }
-
-
 
      CALL_AJAX_LINEUP(args)
 
@@ -95,13 +86,9 @@ for (let VIEWS of VIEWBUTTONS) {
           if (!VIEWS.classList.contains('active-icon')) {
 
                VIEWBUTTONS.forEach(el => el.classList.remove('active-icon'))
-
                VIEWS.classList.add('active-icon')
-
                args.view = VIEWS.getAttribute('view')
-
                CALL_AJAX_LINEUP(args)
-
                console.log(args)
 
           }
@@ -117,23 +104,16 @@ function CALL_AJAX_LINEUP(a) {
      console.log(a)
 
      var callData = {
-
           details: a,
-
           action: 'lineup'
-
      }
 
      AJAX.call_Ajax(callData, 'se2-lineup-container', true);
 
 
-
      jQuery(document).ajaxComplete(function () {
-
           CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
-
           LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-profile'))
-
      })
 
 
