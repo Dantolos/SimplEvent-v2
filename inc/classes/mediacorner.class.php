@@ -89,7 +89,7 @@ class Mediacorner {
           $logoDownloads = '<div class="se2-logos">';
           $logoDownloads .= '<h4 style="width:100%;">'.__('Logos', 'SimplEvent').'</h4>';
 
-          $logos = get_field('logos', $pageID);
+          $logos = (get_field('logos', $pageID)) ? get_field('logos', $pageID) : null;
           if( isset($logos)){
                foreach( $logos as $logo ){
                     $logo = $logo['logo'];
@@ -108,34 +108,37 @@ class Mediacorner {
                     $logoDownloads .= '<div class="se2-logo-download">';
 
                          //RGB
-                         $logoDownloads .= '<div class="se2-logo-download-rgb">';
+                         if( isset( $logo['files_rgb'] ) ){
+                              $logoDownloads .= '<div class="se2-logo-download-rgb">';
+                                   $logoDownloads .= '<div><h6><b>Digital</b><i> (rgb)</i></h6></div>';
                               
-                              $logoDownloads .= '<div><h6><b>Digital</b><i> (rgb)</i></h6></div>';
-                               
-                              foreach($logo['files_rgb'] as $key => $fileFormat ){
-                                   $logoDownloads .= '<a href="'.$fileFormat.'" download>';
-                                   $logoDownloads .= '<div class="se2-logo-download-rgb-svg se2-logo-download-button file-container">';
-                                   $logoDownloads .= $this->fileDownload[$key];
-                                   $logoDownloads .= '</div>';
-                                   $logoDownloads .= '</a>';
-                              }
-                         $logoDownloads .= '</div>';  
-                         
-                         //CMYK
-                         $logoDownloads .= '<div class="se2-logo-download-cmyk">';
-                              
-                              $logoDownloads .= '<div><h6><b>Print</b><i> (cmyk)</i></h6></div>';
-                               
-                              foreach($logo['files_cmyk'] as $key => $fileFormat ){
-                                   if($fileFormat){
+                                   foreach($logo['files_rgb'] as $key => $fileFormat ){
+                                        
+                                        if( !$fileFormat ){ continue;  }
                                         $logoDownloads .= '<a href="'.$fileFormat.'" download>';
                                         $logoDownloads .= '<div class="se2-logo-download-rgb-svg se2-logo-download-button file-container">';
                                         $logoDownloads .= $this->fileDownload[$key];
                                         $logoDownloads .= '</div>';
                                         $logoDownloads .= '</a>';
                                    }
-                              }
-                         $logoDownloads .= '</div>';  
+                              $logoDownloads .= '</div>';  
+                         }
+                         //CMYK
+                         if( isset( $logo['files_cmyk'] ) ){
+                              $logoDownloads .= '<div class="se2-logo-download-cmyk">';
+                                   $logoDownloads .= '<div><h6><b>Print</b><i> (cmyk)</i></h6></div>';
+                                   
+                                   foreach($logo['files_cmyk'] as $key => $fileFormat ){
+                                      
+                                        if( !$fileFormat ){ continue; }
+                                        $logoDownloads .= '<a href="'.$fileFormat.'" download>';
+                                        $logoDownloads .= '<div class="se2-logo-download-rgb-svg se2-logo-download-button file-container">';
+                                        $logoDownloads .= $this->fileDownload[$key];
+                                        $logoDownloads .= '</div>';
+                                        $logoDownloads .= '</a>';
+                                   }
+                              $logoDownloads .= '</div>';  
+                         }
                     $logoDownloads .= '</div>';
                     $logoDownloads .= '</div>';
                }
@@ -145,7 +148,8 @@ class Mediacorner {
      }
 
      public function cast_photo_archive($pageID){
-          $galleries = get_field('galleries', $pageID);
+          $galleries = (get_field('galleries', $pageID)) ? get_field('galleries', $pageID) : false;
+          if(!$galleries){ exit(); }
           $photoArchive = '<div class="se2-galleries-matrix" pageid="'.$pageID.'">';
 
           $photoArchive .= '<div class="se2-galleries-titlebar">';
@@ -191,8 +195,6 @@ class Mediacorner {
      public function cast_folder_content($pageID, $gallerieNR = 0){
           $folderContent = '';
           
-          
-
           $galleries = [];
           $gallerieQuery = get_field( 'galleries', $pageID );
           if( is_array(get_field( 'galleries', $pageID) ) ){
@@ -207,7 +209,7 @@ class Mediacorner {
           }
           //var_dump($galleries);     
           $gallerie = $galleries[$gallerieNR];
-          if(count($gallerie) > 0){
+          if(count( $gallerie['photos'] ) > 0){
                foreach( $gallerie['photos'] as $photo ){
                     $folderContent .= '<a href="'.$photo['url'].'" download>';
                     $folderContent .= '<div class="se2-galleries-photo">';
@@ -222,6 +224,8 @@ class Mediacorner {
                     $folderContent .= '</div>';
                     $folderContent .= '</a>';
                }
+          } else {
+               $folderContent = '<div style="text-align:center;color:rgba(0,0,0,.4);display:flex;justify-content:center;align-items:center;"><h4>'.__( 'In diesem Ordner konnten noch keine Fotos gefunden werden.', 'SimplEvent' ).'</h4></div>'; 
           }
           return $folderContent;
      }
