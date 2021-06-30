@@ -35,6 +35,7 @@
     "gulp-uglify": "^3.0.2"
   },
   "scripts": {
+    "gulp": "gulp",
     "build:section": "wp-scripts build blocks/src/section/section.js --output-path=blocks/build/section",
     "start:section": "wp-scripts start blocks/src/section/section.js --output-path=blocks/build/section",
     "build:speakercard": "wp-scripts build blocks/src/speaker-card/speaker-card.js --output-path=blocks/build/speaker-card",
