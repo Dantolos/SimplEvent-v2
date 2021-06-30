@@ -65,7 +65,7 @@ class Events extends Posts {
      //LIGHTBOX
      public function call_Event_Lightbox( $ID ){
           intval($ID);
-          $this->output = '<div class="se2-post-lightbox">';
+          $this->output = '<div class="se2-post-lightbox">'; 
           
           //GALLERY
           if( count(get_field('media', $ID)['gallery']) > 0 ) {
