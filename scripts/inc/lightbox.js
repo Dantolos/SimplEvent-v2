@@ -126,7 +126,7 @@ class Lightbox {
             }
         }
 
-        //-------------FUNCTIONS------------
+        //-------------FUNCTIONS------------ 
         //arrow function
         if (contentArray !== undefined) {
             var currentIMG = contentArray.indexOf(data);

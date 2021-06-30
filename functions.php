@@ -257,13 +257,11 @@ add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
 /*------------------------SVG Erlauben-------------------------*/
 /*-------------------------------------------------------------*/
 
-function cc_mime_types($mimes) 
-{
-  $mimes['svg'] = 'image/svg+xml';
-  return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
-
+add_filter( 'upload_mimes', function ( $mime_types ) {
+    $mime_types['svg'] = 'image/svg+xml';
+    $mime_types[ 'eps' ] = 'application/postscript';
+    return $mime_types;
+} );
 
 /*-------------------------------------------------------------*/
 /*-------------JPEG-Komprimierung deaktivieren-----------------*/

@@ -16,10 +16,12 @@ require_once('classes/company.class.php');
 require_once('classes/events.class.php');
 require_once('classes/lineup.class.php');
 require_once('classes/sessions.class.php');
+require_once('classes/mediacorner.class.php');
 
 //including supports
 require_once('supports/date.php');
 require_once('supports/forms.php');
+require_once('supports/files.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -135,3 +137,20 @@ function session_lightbox()
      
      die();
 }
+
+/*-------------PHOTO GALLERY FOLDER---------------*/
+//photo-gallerie
+add_action('wp_ajax_nopriv_photo_folder', 'photo_folder');
+add_action('wp_ajax_photo_folder', 'photo_folder'); //nur für angemeldete (admins)
+
+function photo_folder() 
+{
+     $pageID = $_POST['pageid'];
+     $folder = $_POST['folder'];
+     $MediaCorner = new Mediacorner;
+     
+     wp_send_json( $MediaCorner->cast_folder_content( $pageID, $folder ) ); 
+     
+     die();
+}
+

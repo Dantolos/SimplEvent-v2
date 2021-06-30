@@ -21,21 +21,24 @@ $Partner = new Partner;
                
                <div class="footer-partner-container">   
                     <?php 
-                    $PartnerCategories = get_option( 'se_footer_categories' );
-                    if( isset($PartnerCategories) && count($PartnerCategories) > 0 ){
-                         foreach($PartnerCategories as $PartnerCategorie){
-                              $catTitle = get_term($PartnerCategorie);    
-                              echo '<div class="footer-partner-categorie">';
-                                   echo '<p class="footer-partner-categorie-title">'.$catTitle->name .'</p>';
-                                   $PartnerData = $Partner->call_Partner_in_Categorie( $PartnerCategorie, false, false );
-                                   echo '<div class="footer-partner-logo-container">';
-                                   foreach( $PartnerData as $SinglePartner ){
-                                        echo '<a href="'.$SinglePartner['link'].'" title="'.$SinglePartner['name'].' Website" target="_blank">';
-                                        echo '<img src="'.$SinglePartner['logo-neg'].'" alt="'.$SinglePartner['name'].'"/>';
-                                        echo '</a>';
-                                   }
+                    $PartnerCategories = (get_option( 'se_footer_categories' )) ? get_option( 'se_footer_categories' ) : '';
+				   
+                    if( isset($PartnerCategories)){
+                         if (is_array($PartnerCategories) || is_object($PartnerCategories)){
+                              foreach($PartnerCategories as $PartnerCategorie){
+                                   $catTitle = get_term($PartnerCategorie);    
+                                   echo '<div class="footer-partner-categorie">';
+                                        echo '<p class="footer-partner-categorie-title">'.$catTitle->name .'</p>';
+                                        $PartnerData = $Partner->call_Partner_in_Categorie( $PartnerCategorie, false, false );
+                                        echo '<div class="footer-partner-logo-container">';
+                                        foreach( $PartnerData as $SinglePartner ){
+                                             echo '<a href="'.$SinglePartner['link'].'" title="'.$SinglePartner['name'].' Website" target="_blank">';
+                                             echo '<img src="'.$SinglePartner['logo-neg'].'" alt="'.$SinglePartner['name'].'"/>';
+                                             echo '</a>';
+                                        }
+                                        echo '</div>';
                                    echo '</div>';
-                              echo '</div>';
+                              }
                          }
                     }
                     ?>
