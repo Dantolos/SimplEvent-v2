@@ -256,7 +256,14 @@ add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
 /*-------------------------------------------------------------*/
 /*------------------------SVG Erlauben-------------------------*/
 /*-------------------------------------------------------------*/
-
+add_filter( 'wp_check_filetype_and_ext', 'my_svgs_disable_real_mime_check', 10, 4 );
+function my_svgs_disable_real_mime_check( $data, $file, $filename, $mimes ) {
+  $wp_filetype = wp_check_filetype( $filename, $mimes );	
+  $ext = $wp_filetype['ext'];
+  $type = $wp_filetype['type'];
+  $proper_filename = $data['proper_filename'];
+  return compact( 'ext', 'type', 'proper_filename' );
+}
 add_filter( 'upload_mimes', function ( $mime_types ) {
     $mime_types['svg'] = 'image/svg+xml';
     $mime_types[ 'eps' ] = 'application/postscript';
