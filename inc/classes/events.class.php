@@ -38,7 +38,7 @@ class Events extends Posts {
               
                if( $date || $time ){
                     $date = ($date) ?  $this->dateFormat->formating_Date_Language( get_field('eckdaten', $event->ID )['date'], 'date' ) : '';
-                    $time = ($time) ? ' | ' . $this->dateFormat->formating_Date_Language( $time, 'time' ) : '';
+                    $time = ($time) ? ' | ' . $this->dateFormat->formating_Date_Language( get_field('eckdaten', $event->ID )['time'], 'time' ) : '';
                     $this->output .= '<p class="secondary-txt">' . esc_attr( $date ) . esc_attr( $time ) . '</p>';
 
                }
