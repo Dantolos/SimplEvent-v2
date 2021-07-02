@@ -167,6 +167,7 @@ require_once('inc/classes/partner.class.php');
 require_once('inc/classes/lineup.class.php');
 require_once('inc/classes/sessions.class.php');
 require_once('inc/classes/mediacorner.class.php');
+require_once('inc/classes/award.class.php');
 
 
 

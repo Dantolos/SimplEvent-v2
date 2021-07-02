@@ -31,7 +31,7 @@ html {  scroll-behavior: smooth; }
      
      #content-container {
 
-          min-height: calc(100vh - 320px);
+          min-height: calc(100vh - 280px);
      }
 }
 
@@ -51,6 +51,7 @@ html {  scroll-behavior: smooth; }
 @import 'components/sessions';
 @import 'components/programm';
 @import 'components/mediacorner';
+@import 'components/award';
 
 //BLOCKS Theme-specific
 @import 'components/blocks/testimonial';

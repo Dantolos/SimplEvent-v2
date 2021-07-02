@@ -134,6 +134,31 @@
                     "mime_types": ""
                 },
                 {
+                    "key": "field_60dd9f21c511f",
+                    "label": "Mood Image",
+                    "name": "mood_image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "wpml_cf_preferences": 1
+                },
+                {
                     "key": "field_5fca43cf42caf",
                     "label": "Video",
                     "name": "video",
@@ -473,14 +498,14 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "post_type": [
-                        "post"
+                        "peoples"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
                     "multiple": 1,
                     "return_format": "id",
-                    "wpml_cf_preferences": 1,
                     "ui": 1
                 },
                 {
@@ -498,7 +523,7 @@
                     },
                     "wpml_cf_preferences": 1,
                     "post_type": [
-                        "post"
+                        "partners"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
@@ -632,6 +657,33 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_60defd70aad7a",
+                    "label": "Award",
+                    "name": "awardtype",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "clone": [
+                        "field_60defcc498bb0"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0,
+                    "choices": {
+                        "trendradar": "Trendradar",
+                        "sea": "SEF.Award",
+                        "": ""
+                    }
+                },
+                {
                     "key": "field_60803bdfc2b5f",
                     "label": "Jahr",
                     "name": "jahr",
@@ -684,7 +736,13 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 1,
-                    "choices": [],
+                    "choices": {
+                        "trend": "Trendradar",
+                        "": "",
+                        "dienstl": "Dienstleistung",
+                        "prod": "Produktion",
+                        "tech": "Hightech\/Biotech"
+                    },
                     "default_value": false,
                     "allow_null": 0,
                     "multiple": 0,
@@ -971,5 +1029,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1621603785
+    "modified": 1625230716
 }
