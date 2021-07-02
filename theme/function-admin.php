@@ -241,73 +241,40 @@ function simplevent_custom_settings() {
 
 
   //****Settings
-
   register_setting( 'simplevent-event-group', 'facts_active' );
-
   register_setting( 'simplevent-event-group', 'facts_date' );
-
   register_setting( 'simplevent-event-group', 'facts_location' );
-
   register_setting( 'simplevent-event-group', 'facts_participants' );
-
   register_setting( 'simplevent-event-group', 'facts_languages' );
-
   register_setting( 'simplevent-event-group', 'facts_pricing' );
 
-
-
   register_setting( 'simplevent-event-group', 'sessions_active' );
-
   register_setting( 'simplevent-event-group', 'sessions_slots' );
 
-  
-
   register_setting( 'simplevent-event-group', 'award_active' );
-
   register_setting( 'simplevent-event-group', 'award_categories' );
-
-
-
-
-
+  register_setting( 'simplevent-event-group', 'awards' );
 
 
   //****Section
-
   add_settings_section( 'simplevent-event-facts', 'Facts', 'simplevent_event_facts', 'simplevent_event');
-
   add_settings_section( 'simplevent-event-sessions', 'Sessions', 'simplevent_event_sessions', 'simplevent_event');
-
   add_settings_section( 'simplevent-event-award', 'Award', 'simplevent_event_award', 'simplevent_event');
 
 
-
-
-
   //****Fields
-
   add_settings_field( 'facts-active', 'Facts Aktiv', 'simplevent_facts_active', 'simplevent_event', 'simplevent-event-facts' );
-
   add_settings_field( 'facts-date', 'Date', 'simplevent_facts_date', 'simplevent_event', 'simplevent-event-facts' );
-
   add_settings_field( 'facts-location', 'Location', 'simplevent_facts_location', 'simplevent_event', 'simplevent-event-facts' );
-
   add_settings_field( 'facts-participants', 'Participants', 'simplevent_facts_participants', 'simplevent_event', 'simplevent-event-facts' );
-
   add_settings_field( 'facts-languages', 'Languages', 'simplevent_facts_languages', 'simplevent_event', 'simplevent-event-facts' );
-
   add_settings_field( 'facts-pricing', 'Pricing', 'simplevent_facts_pricing', 'simplevent_event', 'simplevent-event-facts' );
 
-
-
   add_settings_field( 'sessions-active', 'Sessions', 'simplevent_sessions_active', 'simplevent_event', 'simplevent-event-sessions' );
-
   add_settings_field( 'sessions-slots', 'Slots', 'simplevent_sessions_slots', 'simplevent_event', 'simplevent-event-sessions' );
 
-
-
   add_settings_field( 'award-active', 'Award', 'simplevent_award_active', 'simplevent_event', 'simplevent-event-award' );
-
+  add_settings_field( 'awards', 'Awards', 'simplevent_awards', 'simplevent_event', 'simplevent-event-award' );
   add_settings_field( 'award-categories', 'Kategorien', 'simplevent_award_categories', 'simplevent_event', 'simplevent-event-award' );
 
 
@@ -319,29 +286,19 @@ function simplevent_custom_settings() {
 
 
   //****Settings
-
   register_setting( 'simplevent-live-group', 'se_livestream' );
-
   register_setting( 'simplevent-live-group', 'se_iframe' );
-
   register_setting( 'simplevent-live-group', 'se_programm' );
 
 
-
   //****Section
-
   add_settings_section( 'simplevent-live-options', 'Live', 'simplevent_live_options', 'simplevent_live');
 
 
-
   //****Fields
-
   add_settings_field( 'se-livestream', 'Livestream Aktiv', 'simplevent_se_livestream', 'simplevent_live', 'simplevent-live-options' );
-
   add_settings_field( 'se-iframe', 'iFrame', 'simplevent_se_iframe', 'simplevent_live', 'simplevent-live-options' );
-
   add_settings_field( 'se-programm', 'Programm Link', 'simplevent_se_programm', 'simplevent_live', 'simplevent-live-options' );
-
 
 
 
@@ -796,11 +753,8 @@ function simplevent_se_header_language_menu() {
 function simplevent_se_videoslider_activ() {
 
   $videoslider = get_option( 'se_videoslider_activ' );
-
   if($videoslider == 'on'){
-
     $videoslider = 'checked';
-
   }
 
   echo '<input type="checkbox" name="se_videoslider_activ" ' .$videoslider. '/>';
@@ -808,27 +762,18 @@ function simplevent_se_videoslider_activ() {
 }
 
 function simplevent_se_source() {
-
   $source = get_option( 'se_source' );
-
   echo '<input type="text" name="se_source" value="' .$source. '" placeholder="Source Link"/>';
-
 }
 
 function simplevent_se_videosliderbuttontext() {
-
   $videosliderbuttontext = get_option( 'se_videosliderbuttontext' );
-
   echo '<input type="text" name="se_videosliderbuttontext" value="' .$videosliderbuttontext. '" placeholder=""/>';
-
 }
 
 function simplevent_se_videosliderbuttonlink() {
-
   $videosliderbuttonlink = get_option( 'se_videosliderbuttonlink' );
-
   echo '<input type="text" name="se_videosliderbuttonlink" value="' .$videosliderbuttonlink. '" placeholder="https://..."/>';
-
 }
 
 
@@ -840,67 +785,42 @@ function simplevent_se_videosliderbuttonlink() {
 
 
 function simplevent_se_c_text() {
-
   $se_c_text = get_option( 'se_c_text' );
-
   echo '<input type="text" name="se_c_text" value="' .$se_c_text. '" placeholder="Swiss Economic Forum | 2017"/>';
-
 }
 
 
 
 function simplevent_se_contact_name() {
-
      $se_contact_name = get_option( 'se_contact_name' );
-
      echo '<input type="text" name="se_contact_name" value="' .$se_contact_name. '" placeholder="Name"/>';
-
 }
 
 function simplevent_se_contact_address() {
-
      $contact_address = get_option( 'se_contact_address' );
-
      echo '<textarea type="textarea" rows="3" name="se_contact_address"  style="width: 100%;">' . $contact_address . '</textarea>';
-
 }
 
 function simplevent_se_contact_phone() {
-
      $se_contact_phone = get_option( 'se_contact_phone' );
-
      echo '<input type="text" name="se_contact_phone" value="' .$se_contact_phone. '" placeholder="+00 000 00 00"/>';
-
 }
 
 function simplevent_se_contact_email() {
-
      $se_contact_email = get_option( 'se_contact_email' );
-
      echo '<input type="text" name="se_contact_email" value="' .$se_contact_email. '" placeholder="aaa@bb.c"/>';
-
 }
 
 
 
 function simplevent_se_footer_categories($args) {
-
      $categiories = get_option( 'se_footer_categories' );
-
      $partnerCategories = get_terms( array('taxonomy' => 'partner_categories') );
-
      foreach($partnerCategories as $key => $partnerCategory){
-
           $check = ( isset($categiories[$key]) ) ? 'checked' : '';
-
           echo '<input type="checkbox" id="'.$partnerCategory->term_id.'" name="se_footer_categories['.$key.']" value="'.$partnerCategory->term_id.'" '.$check.'>';
-
           echo '<label for="'.$partnerCategory->term_id.'">'.$partnerCategory->name.'</label><br>';
-
-   
-
      }    
-
 }
 
 
@@ -910,23 +830,17 @@ function simplevent_se_footer_categories($args) {
 
 
 function simplevent_facts_active() {
-
      $factsactiv = esc_attr( get_option( 'facts_active' ) );
-
      if($factsactiv == 'on'){
-
        $factsactiv = 'checked';
-
      }
 
      echo '<input type="checkbox" name="facts_active" ' . $factsactiv . '/>';
-
 }
 
    
 
 function simplevent_facts_date() {
-
      $facts_date = get_option( 'facts_date' );
      $EventDate = ['from' => false, 'to' => false ];
      $dates =  ( !is_array($facts_date) ) ? $EventDate : $facts_date;
@@ -1093,7 +1007,31 @@ function simplevent_award_active(){
 
 }
 
+function simplevent_awards(){
 
+     $awards = get_option('awards');
+
+     $awardsBase = [
+               'label' => '',
+               'value' => ''
+          ];
+
+     $awards = ( !is_array( $awards ) ) ? $awardsBase : $awards;
+    
+     echo '<div class="Session_Slots">';
+          for ($i=0; $i < 3; $i++) { 
+
+               $awards[$i] = ( !is_array( $awards ) ) ? $awardsBase : $awards[$i]; 
+
+               echo '<div style="width:100%;">';
+                    echo '<input style="width:20%;" type="text" name="awards['.$i.'][label]" value="' .$awards[$i]['label']. '" placeholder="label"/>';
+                    echo '<input style="width:50%;" type="text" name="awards['.$i.'][value]" value="' .$awards[$i]['value']. '" placeholder="value"/>';
+               echo '</div>';
+          }    
+
+     echo '</div>';
+
+}
 
 function simplevent_award_categories(){
 
@@ -1106,9 +1044,13 @@ function simplevent_award_categories(){
 
      $award_categories = ( !is_array( $award_categories ) ) ? $awardKategorieBase : $award_categories;
 
-     echo '<div class="Session_Slots">';
-          for ($i=0; $i < 3; $i++) { 
+     for ($in=1; $in < (count( get_option('awards') )+1); $in++) { 
+          $ind = $in -1;
+          if( empty(get_option('awards')[$ind]['value']) ){ continue; }
+          echo '<div class="Session_Slots">';
+          echo '<h4>'. get_option('awards')[$ind]['value'] .'</h4>';
 
+          for ($i=($in * 3); $i < ($in * 3 + 3); $i++) { 
                $award_categories[$i] = ( !is_array( $award_categories ) ) ? $awardKategorieBase : $award_categories[$i]; 
 
                echo '<div style="width:100%;">';
@@ -1117,7 +1059,9 @@ function simplevent_award_categories(){
                echo '</div>';
           }    
 
-     echo '</div>';
+          echo '</div>';
+          
+     }
 
 }
 

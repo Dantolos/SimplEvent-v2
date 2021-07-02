@@ -11,28 +11,34 @@ add_theme_support('editor-styles');
 add_editor_style( get_template_directory_uri() . '/style/dist/style.min.css' );
 
 if(is_user_logged_in()){
-     /*-------------------------------------------------------------*/
-     /*--------------------IMPLEMENT CUSTOM API---------------------*/
-     /*-------------------------------------------------------------*/
+    /*-------------------------------------------------------------*/
+    /*--------------------IMPLEMENT CUSTOM API---------------------*/
+    /*-------------------------------------------------------------*/
+        
+    require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
+    
+
+
+    /*-------------------------------------------------------------*/
+    /*---------------------CUSTOM USER ROLES-----------------------*/
+    /*-------------------------------------------------------------*/
+    if(!isset($_COOKIE['capabilities'])){
+        require get_template_directory() . '/theme/userroles/userroles.php';
+        require get_template_directory() . '/theme/userroles/capabilities.php';
+    }
+
+    /*-------------------------------------------------------------*/
+    /*---------------------ADMIN CUSTOMIZE------------------------*/
+    /*-------------------------------------------------------------*/
+    require get_template_directory() . '/theme/plugins/se2-custom-admin/se2-custom-admin.php';
+
      
-     
-     require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
-      
+    /*-------------------------------------------------------------*/
+    /*---------------------CUSTOM COLUMNS------------------------*/
+    /*-------------------------------------------------------------*/
+    require get_template_directory() . '/theme/plugins/se2-custom-columns/se2-custom-columns.php';
 
 
-     /*-------------------------------------------------------------*/
-     /*---------------------CUSTOM USER ROLES-----------------------*/
-     /*-------------------------------------------------------------*/
-     if(!isset($_COOKIE['capabilities'])){
-          require get_template_directory() . '/theme/userroles/userroles.php';
-          require get_template_directory() . '/theme/userroles/capabilities.php';
-     }
-
-     /*-------------------------------------------------------------*/
-     /*---------------------ADMIN CUSTOMIZE------------------------*/
-     /*-------------------------------------------------------------*/
-
-     require get_template_directory() . '/theme/plugins/se2-custom-admin/se2-custom-admin.php';
 }
 /*-------------------------------------------------------------*/
 /*------------------------ENABLE AJAX--------------------------*/
@@ -72,44 +78,43 @@ function my_acf_json_load_point( $paths ) {
 /*-------------------------------------------------------------*/
 function theme_add_scripts() 
 {
-    
-     $JsIncList = array(
-          array('anchor-js', 'anchor.js' ),
-          array('visibility-js', 'visibility.js'),
-          array('detects-js', 'detects.js' ),
-          array('lightbox-js', 'lightbox.js'),
-          array('restapi-js', 'restapi.js'),
-          array('cookies-js', 'cookies.js'),
-          array('galery-js', 'galery.js' ),
-          array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),
-          array('lightbox-session-js', 'lightbox/lb-session.js' )
-     );
+    $JsIncList = array(
+        array('anchor-js', 'anchor.js' ),
+        array('visibility-js', 'visibility.js'),
+        array('detects-js', 'detects.js' ),
+        array('lightbox-js', 'lightbox.js'),
+        array('restapi-js', 'restapi.js'),
+        array('cookies-js', 'cookies.js'),
+        array('galery-js', 'galery.js' ),
+        array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),
+        array('lightbox-session-js', 'lightbox/lb-session.js' )
+    );
 
-     foreach ($JsIncList as $JsInc) 
-     {
-          wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.06', true );
-     }
+    foreach ($JsIncList as $JsInc) 
+    {
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.06', true );
+    }
      
-     /*------------------------------Send Global Variables---------------------------*/
-     $cookieAccepted = 'N';
-     if ( function_exists('cn_cookies_accepted') && cn_cookies_accepted() ) {
-          $cookieAccepted = 'Y';
-     }
-     $currpageVar = (is_front_page()) ? 'home' : 'n';
-     //$quickInfoAktiv = ($_GET['info']) ? $_GET['info'] : 'aa';
-     $wnm_custom = array( 
-          'templateUrl' => get_template_directory_uri(), 
-          'lang' => ICL_LANGUAGE_CODE,
-          'ajaxurl' => admin_url('admin-ajax.php'),
-          'cookieAcc' =>  $cookieAccepted,
-          'page' => $currpageVar,
-          'icon' => file_get_contents( get_option( 'event_icon_neg' ) ),
-          //'info' => $quickInfoAktiv
-     );
-     $scriptToAdGlobal = array('ajax-js', 'script-js', 'loader-js'  );
-     foreach( $scriptToAdGlobal as $script ){
-          wp_localize_script( $script, 'globalURL', $wnm_custom );
-     }
+    /*------------------------------Send Global Variables---------------------------*/
+    $cookieAccepted = 'N';
+    if ( function_exists('cn_cookies_accepted') && cn_cookies_accepted() ) {
+        $cookieAccepted = 'Y';
+    }
+    $currpageVar = (is_front_page()) ? 'home' : 'n';
+    //$quickInfoAktiv = ($_GET['info']) ? $_GET['info'] : 'aa';
+    $wnm_custom = array( 
+        'templateUrl' => get_template_directory_uri(), 
+        'lang' => ICL_LANGUAGE_CODE,
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'cookieAcc' =>  $cookieAccepted,
+        'page' => $currpageVar,
+        'icon' => file_get_contents( get_option( 'event_icon_neg' ) ),
+        //'info' => $quickInfoAktiv
+    );
+    $scriptToAdGlobal = array('ajax-js', 'script-js', 'loader-js'  );
+    foreach( $scriptToAdGlobal as $script ){
+        wp_localize_script( $script, 'globalURL', $wnm_custom );
+    }
 
 }
 add_action( 'wp_enqueue_scripts', 'theme_add_scripts' );
@@ -225,7 +230,32 @@ function acf_load_slot_field_choices( $field ) {
      return $field;
 }
 
-add_filter('acf/load_field/name=slot', 'acf_load_slot_field_choices');
+add_filter('acf/load_field/name=awardtype', 'acf_load_awards_choices');
+
+function acf_load_awards_choices( $field ) {
+    $field['choices'] = array();
+    
+    if( is_array(get_option('awards')) ) {
+         
+         // while has rows
+         foreach( get_option('awards') as $award ) {
+             
+             // vars
+             $value = $award['value'];
+             $label = $award['label'];
+ 
+             
+             // append to choices
+             $field['choices'][ $label ] = $value;
+             
+         }
+         
+    }
+
+    return $field;
+}
+
+add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
 
 function acf_load_award_categorie_choices( $field ) {
      $field['choices'] = array();
@@ -455,3 +485,6 @@ add_action('admin_init', function () {
          remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
      }
  });
+
+
+
