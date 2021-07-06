@@ -2,6 +2,7 @@
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
+     justify-content: center;
      width:100%;
      margin-top:50px;
 }
@@ -46,7 +47,7 @@
      }
 
      text-align: center;
-     
+     h4{margin-top: 15px;}
      &:hover {
           @include dropShadow;
           .finalist-box-logo {
@@ -64,4 +65,96 @@
            
           }
      }
+}
+
+.hall-of-fame-jahr {
+     margin-top:50px;
+     h3 {
+          text-align:center;
+     }
+}
+
+.candidate-box {
+     cursor: pointer;
+}
+
+//LIGHTBOX
+.candidate-lb-container {
+     position: fixed;
+     top:0;
+     left:0;
+     width:87vw;
+     height:100vh;
+     background-color:var(--secondColor);
+
+     .candidate-logo {
+          @include dropShadow;
+          background-color: $light;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 120px;
+          width: 120px;
+          position:absolute;
+          right: 10%;
+          top: 23vh;
+         
+          transform: translateY(-15%);
+          img {
+               height: auto;
+               max-height: 80%;
+               max-width: 80%;
+               width: auto;
+          }
+          .candidate-winner-flag {
+               background-color: $primary;
+               color: $light;
+               padding: 2px 8px;
+               border-radius: 3px;
+               position: absolute;
+               bottom: -8px;
+          }
+     }
+
+     .candidate-lb-head {
+          
+          .candidate-lb-image {
+               width:100%;
+               height:20vh;
+               min-width:220px;
+               min-height:250px;
+               @include imageSettings;
+          }
+     }
+     .candidate-lb-content {
+          height: 70vh;
+          padding:5% 15%;
+          width:100%;
+          overflow-y: scroll;
+          @include hideScrollbar;
+
+          .candidate-lb-sponsors{
+               margin-top:20px;
+               display: flex;
+               flex-direction: row;
+               flex-wrap: wrap;
+               justify-content: center;
+               h6:first-of-type{
+                    width:100%;
+                    text-align: center;
+               }
+
+               .candidate-lb-sponsor{
+                    width:20%;
+                    margin:20px 20px;
+                    min-width:80px;
+                    img {
+                         width:100%;
+                    }
+               }
+          }
+     }
+
+
 }

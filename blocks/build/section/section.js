@@ -164,7 +164,9 @@ var SE2_container = /*#__PURE__*/function (_Component) {
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'scroll',
-      backgroundPosition: 'center'
+      backgroundPosition: 'center',
+      video: 'none',
+      videoURL: 'none'
     };
 
     if (Object.values(_this.props.styleProps).length > 0) {
@@ -248,6 +250,20 @@ var SE2_container = /*#__PURE__*/function (_Component) {
         backgroundAttachment: this.state.backgroundAttachment,
         backgroundPosition: this.state.backgroundPosition
       };
+      var videoURL = 'none';
+
+      if (this.state.videoURL !== 'none') {
+        videoURL = "".concat(this.state.videoURL);
+      }
+
+      if (this.state.videoURL !== 'none') {
+        console.log('VIDEO:', this.state.videoURL); //this.props.video = `<video width="320" height="240" controls><source src="${videoURL.url}" type="${videoURL.mime}"></video>`
+
+        this.props.video = '';
+      } else {
+        this.props.video = '';
+      }
+
       return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(InspectorControls, {
         style: {
           marginBottom: '40px'
@@ -331,6 +347,43 @@ var SE2_container = /*#__PURE__*/function (_Component) {
           label: 'Local'
         }]
       })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelBody, {
+        title: 'Video',
+        initialOpen: false
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("strong", null, "Video")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(MediaUploadCheck, {
+        style: {
+          margin: '40px 0'
+        }
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(MediaUpload, {
+        onSelect: function onSelect(media) {
+          return _this3.changeSettings(media, 'videoURL');
+        },
+        value: this.state.backgroundImage,
+        render: function render(_ref2) {
+          var open = _ref2.open;
+          return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", null, _this3.state.backgroundImage !== 'none' ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("video", {
+            style: {
+              margin: '20px 0'
+            },
+            width: "320",
+            height: "240"
+          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("source", {
+            src: _this3.props.videoURL,
+            type: "video/mp4"
+          })) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
+            style: {
+              margin: '20px 0',
+              color: 'grey',
+              backgroundColor: 'lightgrey',
+              width: '100%',
+              textAlign: 'center',
+              padding: '10px'
+            }
+          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("strong", null, "No Image")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(Button, {
+            isPrimary: true,
+            onClick: open
+          }, "Select Video"));
+        }
+      }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(PanelBody, {
         title: 'Spacing',
         initialOpen: false
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["__experimentalBoxControl"], {
@@ -400,7 +453,7 @@ var SE2_container = /*#__PURE__*/function (_Component) {
       }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
         className: "se2-container",
         style: this.props.SE2containerStyle
-      }, this.props.children)];
+      }, this.props.video, this.props.children)];
     }
   }]);
 

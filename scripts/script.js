@@ -28,7 +28,7 @@ ANCHOR.goTO();
 //---------------------------------
 let LB_SPEAKER = new se2_LB_Speaker();
 let LB_SESSION = new se2_LB_Session();
-
+let LB_CANDIDATE = new se2_LB_Candidate();
 
 
 //---------------------------------

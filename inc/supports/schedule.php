@@ -191,12 +191,10 @@ class se2_Schedule {
                $sessions_slots .= '<div class="schedule-slot schedule-session-slot" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$slotDate.'">';
                     $sessions_slots .= '<div class="schedule-container">';
                          
-
                          $sessions_slots .= $this->slot_time( $sessionSlot['start'], $sessionSlot['ende'] );
-
                          $sessions_slots .= '<h5>'.$sessionSlot['value'].'</h5>';
-                         //SESSIONS
 
+                         //SESSIONS
                          $sessions_slots .= '<div class="schedule-slot-info">';
                          $sessions_slots .= '<div class="schedule-sessions ">';
                          foreach($sessions->posts as $session){
