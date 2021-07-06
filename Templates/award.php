@@ -4,7 +4,7 @@
  */
 get_header();
 
-wp_enqueue_script( 'JS-award', get_template_directory_uri() . '/scripts/specifics/award.js', array('jquery'), '1.0.01', true );
+wp_enqueue_script( 'JS-award', get_template_directory_uri() . '/scripts/specifics/award.js', array('jquery'), '1.0.10', true );
 
 the_content();
 
