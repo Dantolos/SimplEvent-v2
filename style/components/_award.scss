@@ -13,6 +13,13 @@
      border: 1px solid var(--shadeColor);
      border-radius:5px;
      padding:5px;
+     @include breakpoint( 'm' ){
+          width:48%;
+     }
+     @include breakpoint( 's' ){
+          width:98%;
+     }
+
      .finalist-box-logo {
           @include dropShadow;
           background-color: $light;
@@ -99,7 +106,7 @@
           position:absolute;
           right: 10%;
           top: 23vh;
-         
+          
           transform: translateY(-15%);
           img {
                height: auto;
