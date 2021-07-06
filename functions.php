@@ -10,12 +10,14 @@ require get_template_directory() . '/theme/enqeue.php';
 add_theme_support('editor-styles');
 add_editor_style( get_template_directory_uri() . '/style/dist/style.min.css' );
 
+/*-------------------------------------------------------------*/
+/*--------------------IMPLEMENT CUSTOM API---------------------*/
+/*-------------------------------------------------------------*/
+    
+require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
+
 if(is_user_logged_in()){
-    /*-------------------------------------------------------------*/
-    /*--------------------IMPLEMENT CUSTOM API---------------------*/
-    /*-------------------------------------------------------------*/
-        
-    require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
+    
     
 
 
@@ -87,7 +89,8 @@ function theme_add_scripts()
         array('cookies-js', 'cookies.js'),
         array('galery-js', 'galery.js' ),
         array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),
-        array('lightbox-session-js', 'lightbox/lb-session.js' )
+        array('lightbox-session-js', 'lightbox/lb-session.js' ),
+        array('lightbox-candidate-js', 'lightbox/lb-candidate.js' )
     );
 
     foreach ($JsIncList as $JsInc) 
@@ -132,7 +135,7 @@ add_action( 'wp_enqueue_scripts', 'se2_enqueue_styles_scripts_block' ); //add st
 
 function se2_enqueue_styles_scripts_block() 
 {
-    $fileversion = '1.0.15'; 
+    $fileversion = '1.0.16'; 
     wp_enqueue_style( 'additional-block-styles', get_stylesheet_directory_uri() . '/blocks/templates/additional-styles/add-block-styles.css', '', $fileversion);
 
     wp_enqueue_style( 'block-testimonial', get_stylesheet_directory_uri() . '/blocks/templates/testimonials/testimonials.css', '', $fileversion );

@@ -15,7 +15,7 @@ class LineUp {
      }
 
 
-     public function call_speaker_data( $cat = 'all', $order = false ) {
+     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all' ) {
           $speaker_args = array(
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
@@ -25,8 +25,20 @@ class LineUp {
 
           foreach( $speakerData->posts as $speaker ){
 
-               if( $cat != 'all' && in_array( $cat, get_field('speaker_kategorie', $speaker->ID) ) ){
+               if( $cat != 'all' && !in_array( $cat, get_field('speaker_kategorie', $speaker->ID) ) ){
                     continue;
+               }
+               
+               $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
+               if($year != 'all'){
+                    $isInYear = false;
+                    
+                    foreach ( $speakeryears as $speakeryear ) {
+                         if( $speakeryear->term_id == $year) {
+                              $isInYear = true;
+                         }
+                    }
+                    if( !$isInYear ){ continue; }
                }
 
                array_push( $this->speakerIDs, $speaker->ID );
@@ -202,7 +214,7 @@ class LineUp {
           $this->output = '<div id="lineup-container" class="se2-lineup-container container">';
 
           //query IDs
-          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'] );
+          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'], $args['year'] );
 
           //cast view        
           foreach( $speakerIDs as $speakerID ){
@@ -283,4 +295,4 @@ class LineUp {
           return $this->speakerCardBlock;
      }
 
-}
+} 

@@ -17,6 +17,8 @@ require_once('classes/events.class.php');
 require_once('classes/lineup.class.php');
 require_once('classes/sessions.class.php');
 require_once('classes/mediacorner.class.php');
+require_once('classes/award.class.php');
+
 
 //including supports
 require_once('supports/date.php');
@@ -153,4 +155,21 @@ function photo_folder()
      
      die();
 }
+
+
+/*-------------AWARD---------------*/
+//candidate-lightbox
+add_action('wp_ajax_nopriv_candidate_lightbox', 'candidate_lightbox');
+add_action('wp_ajax_candidate_lightbox', 'candidate_lightbox'); //nur für angemeldete (admins)
+
+function candidate_lightbox() 
+{
+     $candidateID = $_POST['candidate'];
+     $Award = new Award;
+     
+     wp_send_json( $Award->cast_candidate_lightbox( $candidateID ) ); 
+     
+     die();
+}
+
 

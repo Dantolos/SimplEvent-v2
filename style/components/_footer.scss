@@ -62,6 +62,8 @@ footer {
                .footer-partner-logo-container{
                     display: flex;
                     align-items: center;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
                     @include breakpoint( 's' ){
                          justify-content: center;
                     }

@@ -10,6 +10,7 @@ function se2_partner_rest( WP_REST_Request $request ){
 
      $args = array(
           'post_type' => 'partners',
+          'numberposts' => -1
      );
 
      $partners = get_posts( $args );
@@ -141,6 +142,7 @@ function se2_speakers_rest( WP_REST_Request $request ){
 
      $args = array(
           'post_type' => 'speakers',
+          'numberposts' => -1
      );
      $speakers = get_posts( $args );
      $result = [];
@@ -264,12 +266,14 @@ add_action('rest_api_init', function() {
      register_rest_route('se2/app', 'partner', [
           'method' => 'GET',
           'callback' => 'se2_partner_rest',
-          'permission_callback' => '__return_true'
+          'permission_callback' => '__return_true',
+          'show_in_rest' => true
      ]);
      register_rest_route('se2/app', 'speaker', [
           'method' => 'GET',
           'callback' => 'se2_speakers_rest',
-          'permission_callback' => '__return_true'
+          'permission_callback' => '__return_true',
+          'show_in_rest' => true
      ]);
 
 });
