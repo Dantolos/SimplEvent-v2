@@ -205,11 +205,11 @@ function mytheme_setup_theme_supported_features() {
  
 add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features' );
 
-
+ 
 /*-------------------------------------------------------------*/
 /*----------------------ACF ADD CHOICES------------------------*/
 /*-------------------------------------------------------------*/
-
+add_filter('acf/load_field/name=slot', 'acf_load_slot_field_choices');
 function acf_load_slot_field_choices( $field ) {
      $field['choices'] = array();
      
