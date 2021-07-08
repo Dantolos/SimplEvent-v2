@@ -239,9 +239,11 @@ wp_head();
                                    echo join( $langs );
                               }
                          echo '</div>'; 
-                    }?>
-                    <button id="modebutton">Darkmode</button>
-
+                    }
+                    if( get_option( 'se_header_mode_menu' ) == 'on' ){
+                         echo '<button id="modebutton">Darkmode</button>';
+                    }
+                    ?>
                     <?php
                     //ANMELDEBUTTON
                     $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
@@ -250,7 +252,6 @@ wp_head();
                               <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">
                               <div id="header_anmeldebutton">
                                    <?php
-
                                    echo __($regBtnText, 'SimplEvent');
                                    ?>
                               </div>
