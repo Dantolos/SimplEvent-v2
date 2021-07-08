@@ -93,6 +93,10 @@ function theme_add_scripts()
         array('lightbox-candidate-js', 'lightbox/lb-candidate.js' )
     );
 
+    if( get_option( 'se_header_mode_menu' ) == 'on' ){
+        array_push( $JsIncList, array( 'mode-js', 'mode.js' ) );
+    }
+    
     foreach ($JsIncList as $JsInc) 
     {
         wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.07', true );
@@ -482,12 +486,29 @@ add_action('admin_init', function () {
      remove_menu_page('edit-comments.php');
  });
  
- // Remove comments links from admin bar
- add_action('init', function () {
-     if (is_admin_bar_showing()) {
-         remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
-     }
- });
+// Remove comments links from admin bar
+add_action('init', function () {
+    if (is_admin_bar_showing()) {
+        remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
+    }
+});
 
 
 
+function kb_template_redirect() {
+    global $post;
+    $post_slug = $post->ID;
+    if(is_singular('speakers')) {
+        $lineup = get_pages( array(
+            'post_type' => 'page',
+            'meta_key' => '_wp_page_template',
+            'hierarchical' => 0,
+            'meta_value' => 'Templates/lineup.php'
+        ));
+        var_dump( get_permalink( $lineup[0]->ID ) );
+        $url =  get_permalink( $lineup[0]->ID ) . '?s=' . $post_slug;
+        wp_redirect( $url );
+        exit();
+    }
+}
+add_action('template_redirect', 'kb_template_redirect');

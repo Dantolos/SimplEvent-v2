@@ -135,13 +135,11 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-header-group', 'se_anmeldelink' );
   register_setting( 'simplevent-header-group', 'se_anmeldetext' );
 
-
-
   register_setting( 'simplevent-header-group', 'se_header_mode' );
   register_setting( 'simplevent-header-group', 'se_header_logowidth' );
 
   register_setting( 'simplevent-header-group', 'se_header_language' );
-
+  register_setting( 'simplevent-header-group', 'se_header_mode_menu' );
 
   register_setting( 'simplevent-header-group', 'se_videoslider_activ' );
   register_setting( 'simplevent-header-group', 'se_source' );
@@ -169,6 +167,7 @@ function simplevent_custom_settings() {
   add_settings_field( 'se-header-logowidth', 'Logo Width', 'simplevent_se_header_logowidth', 'simplevent_header', 'simplevent-header-style' );
 
   add_settings_field( 'se-header-language-menu', 'Show Language Menu', 'simplevent_se_header_language_menu', 'simplevent_header', 'simplevent-header-language' );
+  add_settings_field( 'se-header-mode-menu', 'Show Mode', 'simplevent_se_header_mode_menu', 'simplevent_header', 'simplevent-header-language' );
 
   add_settings_field( 'se-videoslider_activ', 'Activate', 'simplevent_se_videoslider_activ', 'simplevent_header', 'simplevent-videoslider' );
   add_settings_field( 'se-source', 'Attention Text', 'simplevent_se_source', 'simplevent_header', 'simplevent-videoslider' );
@@ -747,6 +746,13 @@ function simplevent_se_header_language_menu() {
      echo '<input type="checkbox" name="se_header_language" ' .$selangmenu. '/>';
 }
 
+function simplevent_se_header_mode_menu() {
+     $seMode = esc_attr( get_option( 'se_header_mode_menu' ) );
+     if($seMode == 'on'){
+       $seMode = 'checked';
+     }
+     echo '<input type="checkbox" name="se_header_mode_menu" ' .$seMode. '/>';
+}
 
 //-------Slidervideo simplevent_se_videosliderbuttonlink
 
