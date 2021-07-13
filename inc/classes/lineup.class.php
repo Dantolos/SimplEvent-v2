@@ -34,7 +34,7 @@ class LineUp {
                     $isInYear = false;
                     
                     foreach ( $speakeryears as $speakeryear ) {
-                         if( $speakeryear->term_id == $year) {
+                         if( $speakeryear->term_id == $year) { 
                               $isInYear = true;
                          }
                     }
@@ -211,10 +211,26 @@ class LineUp {
 
      public function cast_line_up_overview( $args = array() ) {
 
-          $this->output = '<div id="lineup-container" class="se2-lineup-container container">';
+          //std year
+          $currYear = false;
+          $cY = date('Y');
+          if( get_term_by('slug', $cY , 'jahr') ){
+               $currYear = get_term_by('slug', $cY, 'jahr')->term_id;
+          } else {
+               $minus = 1;
+               while( $currYear === false ){
+                    $YearDate = date('Y', strtotime($cY.' -'.$minus.' year'));
+                    if(get_term_by('slug', $YearDate, 'jahr')){
+                         $currYear = get_term_by('slug', $YearDate, 'jahr')->term_id;
+                    }
+                    $minus++;
+               }
+          }
+
+          $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'">';
 
           //query IDs
-          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'], $args['year'] );
+          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'] );
 
           //cast view        
           foreach( $speakerIDs as $speakerID ){

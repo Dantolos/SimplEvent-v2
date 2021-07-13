@@ -7,32 +7,21 @@ var SPEAKERS = document.querySelectorAll('.speaker-profile')
 
 
 //stadard-ansicht
-
+var currenYear = document.getElementById('lineup-container').getAttribute('year')
 var args = {
-
      view: 'grid',
-
      cat: 'all',
-
-     sort: ''
-
+     sort: '',
+     year: currenYear
 };
 
 
-
-
-
 const LINEUPCONTAINER = document.getElementById('lineup-container')
-
 console.log('asdfaslkjdfh')
 
 
-
 //categories
-
 const CATFORM = document.getElementById('speechcat')
-
-
 
 CATFORM.addEventListener('change', (e) => {
 
@@ -45,15 +34,11 @@ CATFORM.addEventListener('change', (e) => {
 
 
 //order
-
 const ORDERBUTTON = document.querySelector('.se2-lineup-filter-sort')
-
-
 
 var sortTL = gsap.timeline({ defaults: { duration: .5 } })
 var SORTICON = document.getElementById('dsc');
 sortTL.to(SORTICON, { morphSVG: "#asc" });
-
 
 
 ORDERBUTTON.addEventListener('click', () => {
@@ -74,7 +59,6 @@ ORDERBUTTON.addEventListener('click', () => {
 
 
 //view
-
 const VIEWBUTTONS = document.querySelectorAll('.viewbutton')
 
 
@@ -110,20 +94,12 @@ function CALL_AJAX_LINEUP(a) {
 
      AJAX.call_Ajax(callData, 'se2-lineup-container', true);
 
-
      jQuery(document).ajaxComplete(function () {
           CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
           LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-profile'))
      })
 
-
-
 }
-
-
-
-
-
 
 
 
@@ -131,10 +107,7 @@ function CALL_AJAX_LINEUP(a) {
 //listelemennts, animations
 
 CALL_ANIMATION(SPEAKERS)
-
 LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(SPEAKERS)
-
-
 
 
 function CALL_ANIMATION(S) {
