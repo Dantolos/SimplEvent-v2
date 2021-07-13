@@ -31,9 +31,9 @@ let LB_SESSION = new se2_LB_Session();
 let LB_CANDIDATE = new se2_LB_Candidate();
 
 
-
 //std light mode
 document.querySelector('body').classList.add('light');
+
 
 //---------------------------------
 //HEADER

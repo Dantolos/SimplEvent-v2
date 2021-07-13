@@ -94,10 +94,11 @@ function lineup()
 {
      $ARGS = json_decode(json_encode($_POST['details']));
    
-     $arguments = array(
+     $arguments = array( 
           'view' => $ARGS->view,
           'cat' => $ARGS->cat,
           'sort' => $ARGS->sort,
+          'year' => $ARGS->year,
      );
      
     $LineUp = new LineUp;
@@ -105,7 +106,6 @@ function lineup()
     
     wp_send_json( $LineUp->cast_line_up_overview( $arguments ) ); 
    
-
     die();
 }
 
