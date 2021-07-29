@@ -250,19 +250,17 @@ var SE2_container = /*#__PURE__*/function (_Component) {
         backgroundAttachment: this.state.backgroundAttachment,
         backgroundPosition: this.state.backgroundPosition
       };
-      var videoURL = 'none';
-
+      /* var videoURL = 'none'
       if (this.state.videoURL !== 'none') {
-        videoURL = "".concat(this.state.videoURL);
+           videoURL = `${this.state.videoURL}`
       }
-
       if (this.state.videoURL !== 'none') {
-        console.log('VIDEO:', this.state.videoURL); //this.props.video = `<video width="320" height="240" controls><source src="${videoURL.url}" type="${videoURL.mime}"></video>`
-
-        this.props.video = '';
+           console.log('VIDEO:', this.state.videoURL)
+           //this.props.video = `<video width="320" height="240" controls><source src="${videoURL.url}" type="${videoURL.mime}"></video>`
+           this.props.video = ''
       } else {
-        this.props.video = '';
-      }
+           this.props.video = ''
+      } */
 
       return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(InspectorControls, {
         style: {
@@ -453,7 +451,7 @@ var SE2_container = /*#__PURE__*/function (_Component) {
       }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])("div", {
         className: "se2-container",
         style: this.props.SE2containerStyle
-      }, this.props.video, this.props.children)];
+      }, this.props.children)];
     }
   }]);
 
