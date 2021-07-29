@@ -43,6 +43,7 @@
     "start": "wp-scripts start"
   },
   "dependencies": {
+    "@wordpress/components": "^15.0.0",
     "uuid": "^3.4.0"
   }
 }
