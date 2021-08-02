@@ -13,7 +13,18 @@ add_editor_style( get_template_directory_uri() . '/style/dist/style.min.css' );
 /*-------------------------------------------------------------*/
 /*--------------------IMPLEMENT CUSTOM API---------------------*/
 /*-------------------------------------------------------------*/
-    
+function my_customize_rest_cors() {
+    remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
+    add_filter( 'rest_pre_serve_request', function( $value ) {
+        header( 'Access-Control-Allow-Origin: *' );
+        header( 'Access-Control-Allow-Methods: GET' );
+        header( 'Access-Control-Allow-Credentials: true' );
+        header( 'Access-Control-Expose-Headers: Link', false );
+        return $value;
+    } );
+}
+add_action( 'rest_api_init', 'my_customize_rest_cors', 15 );
+
 require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
 
 if(is_user_logged_in()){
