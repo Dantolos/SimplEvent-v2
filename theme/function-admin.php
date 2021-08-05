@@ -146,7 +146,7 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-header-group', 'se_videosliderbuttontext' );
   register_setting( 'simplevent-header-group', 'se_videosliderbuttonlink' );
 
-
+  register_setting( 'simplevent-header-group', 'se_cta_activ' );
 
   //****Section
 
@@ -154,6 +154,7 @@ function simplevent_custom_settings() {
   add_settings_section( 'simplevent-header-style', 'Header Style', 'simplevent_header_style', 'simplevent_header');
   add_settings_section( 'simplevent-header-language', 'Header Language Menu', 'simplevent_header_language', 'simplevent_header');
   add_settings_section( 'simplevent-videoslider', 'Video Slider', 'simplevent_videoslider', 'simplevent_header');
+  add_settings_section( 'simplevent-cta', 'Call to Action', 'simplevent_cta', 'simplevent_header');
 
 
 
@@ -174,7 +175,7 @@ function simplevent_custom_settings() {
   add_settings_field( 'se-videosliderbuttontext', 'Button Text', 'simplevent_se_videosliderbuttontext', 'simplevent_header', 'simplevent-videoslider' );
   add_settings_field( 'se-videosliderbuttonlink', 'Button Link', 'simplevent_se_videosliderbuttonlink', 'simplevent_header', 'simplevent-videoslider' );
 
-
+  add_settings_field( 'se-cta_activ', 'Call to Action aktivieren', 'simplevent_se_cta_activ', 'simplevent_header', 'simplevent-cta' );
 
 
 
@@ -184,47 +185,28 @@ function simplevent_custom_settings() {
 
   register_setting( 'simplevent-footer-group', 'se_c_text' );
 
-
-
   register_setting( 'simplevent-footer-group', 'se_contact_name' );
   register_setting( 'simplevent-footer-group', 'se_contact_address' );
 
   register_setting( 'simplevent-footer-group', 'se_contact_phone' );
-
   register_setting( 'simplevent-footer-group', 'se_contact_email' );
-
 
 
   register_setting( 'simplevent-footer-group', 'se_footer_categories' );
 
-  
-
-
 
   //****Section
-
   add_settings_section( 'simplevent-footer-options', 'Footer', 'simplevent_footer_options', 'simplevent_footer');
-
   add_settings_section( 'simplevent-footer-contact', 'Contact', 'simplevent_footer_contact', 'simplevent_footer');
-
   add_settings_section( 'simplevent-footer-partner', 'Partner', 'simplevent_footer_partner', 'simplevent_footer');
 
 
-
-
-
   //****Fields
-
   add_settings_field( 'ctext', 'Copyright Text', 'simplevent_se_c_text', 'simplevent_footer', 'simplevent-footer-options' );
 
-
-
   add_settings_field( 'contact-name', 'Name', 'simplevent_se_contact_name', 'simplevent_footer', 'simplevent-footer-contact' );
-
   add_settings_field( 'contact-address', 'Adresse', 'simplevent_se_contact_address', 'simplevent_footer', 'simplevent-footer-contact' );
-
   add_settings_field( 'contact-phone', 'Telefon Nummer', 'simplevent_se_contact_phone', 'simplevent_footer', 'simplevent-footer-contact' );
-
   add_settings_field( 'contact-email', 'E-Mail', 'simplevent_se_contact_email', 'simplevent_footer', 'simplevent-footer-contact' );
 
 
@@ -236,8 +218,6 @@ function simplevent_custom_settings() {
 
 
   //----------------------------------Event--------------------------------------//
-
-
 
   //****Settings
   register_setting( 'simplevent-event-group', 'facts_active' );
@@ -289,10 +269,8 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-live-group', 'se_iframe' );
   register_setting( 'simplevent-live-group', 'se_programm' );
 
-
   //****Section
   add_settings_section( 'simplevent-live-options', 'Live', 'simplevent_live_options', 'simplevent_live');
-
 
   //****Fields
   add_settings_field( 'se-livestream', 'Livestream Aktiv', 'simplevent_se_livestream', 'simplevent_live', 'simplevent-live-options' );
@@ -378,6 +356,9 @@ function simplevent_videoslider() {
   echo '';
 }
 
+function simplevent_cta(){
+     echo '';
+}
 
 
 function simplevent_footer_options() {
@@ -783,6 +764,14 @@ function simplevent_se_videosliderbuttonlink() {
 }
 
 
+
+function simplevent_se_cta_activ() {
+     $se_cta_activ = esc_attr( get_option( 'se_cta_activ' ) );
+     if($se_cta_activ == 'on'){
+       $se_cta_activ = 'checked';
+     }
+     echo '<input type="checkbox" name="se_cta_activ" ' .$se_cta_activ. '/>';
+}
 
 
 

@@ -273,6 +273,17 @@ wp_head();
     -----MAIN MENU--END
     ------------------>
 
+
+     <?php 
+     // ------CTA------
+     $cta = new se2_CTA;
+     if(get_option( 'se_cta_activ' ) === 'on'){
+          echo $cta->cast_cta_button();
+     }
+     
+     ?>
+
+
     <div id="master-container">
           <div id="content-container">
            
