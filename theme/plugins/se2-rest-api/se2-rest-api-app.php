@@ -85,13 +85,15 @@ function se2_partner_rest( WP_REST_Request $request ){
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
                          $result[$i]['logos'][$key] = [
-                              'positiv' => !empty (get_field('partner-logo', $postID)) ? get_field('partner-logo', $postID) : '',
-                              'negativ' => !empty (get_field('partner-logo-neg', $postID)) ? get_field('partner-logo', $postID) : ''
+                              
+
+                              'positiv' => !empty (get_field('partner-logo', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ) : '',
+                              'negativ' => !empty (get_field('partner-logo-neg', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ): ''
                          ];
                     }
                } else {
-                    $result[$i]['logos']['positiv'] = !empty (get_field('partner-logo', $postID)) ? get_field('partner-logo', $postID) : '';
-                    $result[$i]['logos']['negativ'] = !empty (get_field('partner-logo-neg', $postID)) ? get_field('partner-logo', $postID) : '';
+                    $result[$i]['logos']['positiv'] = !empty (get_field('partner-logo', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ) : '';
+                    $result[$i]['logos']['negativ'] = !empty (get_field('partner-logo-neg', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ) : '';
                }
 
 
@@ -194,7 +196,8 @@ function se2_speakers_rest( WP_REST_Request $request ){
                //----- RESULT
            
                $result[$i]['ID'] = $postID;
-               $result[$i]['portrait'] = get_field('speaker_bild', $postID);
+
+               $result[$i]['portrait'] = cast_array_url_base64(get_field('speaker_bild', $postID));
 
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
@@ -246,6 +249,17 @@ function se2_speakers_rest( WP_REST_Request $request ){
 }
 
 
+
+function cast_array_url_base64($path){
+
+     $image = file_get_contents($path);
+     $base64 = base64_encode($image);
+
+     return array(
+          'url' => $path,
+          'base64' => $base64
+     );
+}
 
 
 
