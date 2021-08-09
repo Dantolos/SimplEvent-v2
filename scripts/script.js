@@ -115,7 +115,7 @@ jQuery(document).ajaxComplete(function () {
      }
 
 });
-
+ 
 function call_post_lightbox(POST) {
      POST.addEventListener('click', async () => {
           console.log(POST.getAttribute('postid'))

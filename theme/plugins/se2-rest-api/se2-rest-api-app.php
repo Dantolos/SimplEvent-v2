@@ -85,8 +85,6 @@ function se2_partner_rest( WP_REST_Request $request ){
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
                          $result[$i]['logos'][$key] = [
-                              
-
                               'positiv' => !empty (get_field('partner-logo', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ) : '',
                               'negativ' => !empty (get_field('partner-logo-neg', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ): ''
                          ];
@@ -260,11 +258,6 @@ function cast_array_url_base64($path){
           'base64' => $base64
      );
 }
-
-
-
-
-
 
 
 function langcode_post_id($post_id){

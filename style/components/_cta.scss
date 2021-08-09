@@ -1,0 +1,53 @@
+
+#cta-button {
+    cursor:pointer;
+    position:fixed;
+    right:20px;
+    bottom:20%;
+    z-index:9000;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: fit-content;
+    .cta-butto-icon {
+        width:55px;
+        height:55px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width:35px;
+            height:35px;
+        }
+    }
+    .cta-tooltip { 
+        right:20px;
+        bottom:20%;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        padding: 5px 20px 5px 20px;
+        height:fit-content;
+        margin-right:10px;
+    }
+    
+}
+
+//LIGHTBOX
+
+.api-lightbox {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    background-color:var(--secondColor);
+    color: var(--primeColor);
+    max-height:80vh;
+    max-width:80vw;
+    padding:5%;
+    overflow-y: scroll;
+    @include hideScrollbar;
+}

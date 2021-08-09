@@ -146,6 +146,8 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-header-group', 'se_videosliderbuttontext' );
   register_setting( 'simplevent-header-group', 'se_videosliderbuttonlink' );
 
+  register_setting( 'simplevent-header-group', 'se_cta_activ' );
+  register_setting( 'simplevent-header-group', 'se_cta' );
 
 
   //****Section
@@ -154,6 +156,7 @@ function simplevent_custom_settings() {
   add_settings_section( 'simplevent-header-style', 'Header Style', 'simplevent_header_style', 'simplevent_header');
   add_settings_section( 'simplevent-header-language', 'Header Language Menu', 'simplevent_header_language', 'simplevent_header');
   add_settings_section( 'simplevent-videoslider', 'Video Slider', 'simplevent_videoslider', 'simplevent_header');
+  add_settings_section( 'simplevent-cta', 'Call to Action', 'simplevent_cta', 'simplevent_header');
 
 
 
@@ -174,7 +177,8 @@ function simplevent_custom_settings() {
   add_settings_field( 'se-videosliderbuttontext', 'Button Text', 'simplevent_se_videosliderbuttontext', 'simplevent_header', 'simplevent-videoslider' );
   add_settings_field( 'se-videosliderbuttonlink', 'Button Link', 'simplevent_se_videosliderbuttonlink', 'simplevent_header', 'simplevent-videoslider' );
 
-
+  add_settings_field( 'se-cta_activ', 'Call to Action aktivieren', 'simplevent_se_cta_activ', 'simplevent_header', 'simplevent-cta' );
+  add_settings_field( 'se-cta', 'CTA Content', 'simplevent_se_cta', 'simplevent_header', 'simplevent-cta' );
 
 
 
@@ -184,47 +188,28 @@ function simplevent_custom_settings() {
 
   register_setting( 'simplevent-footer-group', 'se_c_text' );
 
-
-
   register_setting( 'simplevent-footer-group', 'se_contact_name' );
   register_setting( 'simplevent-footer-group', 'se_contact_address' );
 
   register_setting( 'simplevent-footer-group', 'se_contact_phone' );
-
   register_setting( 'simplevent-footer-group', 'se_contact_email' );
-
 
 
   register_setting( 'simplevent-footer-group', 'se_footer_categories' );
 
-  
-
-
 
   //****Section
-
   add_settings_section( 'simplevent-footer-options', 'Footer', 'simplevent_footer_options', 'simplevent_footer');
-
   add_settings_section( 'simplevent-footer-contact', 'Contact', 'simplevent_footer_contact', 'simplevent_footer');
-
   add_settings_section( 'simplevent-footer-partner', 'Partner', 'simplevent_footer_partner', 'simplevent_footer');
 
 
-
-
-
   //****Fields
-
   add_settings_field( 'ctext', 'Copyright Text', 'simplevent_se_c_text', 'simplevent_footer', 'simplevent-footer-options' );
 
-
-
   add_settings_field( 'contact-name', 'Name', 'simplevent_se_contact_name', 'simplevent_footer', 'simplevent-footer-contact' );
-
   add_settings_field( 'contact-address', 'Adresse', 'simplevent_se_contact_address', 'simplevent_footer', 'simplevent-footer-contact' );
-
   add_settings_field( 'contact-phone', 'Telefon Nummer', 'simplevent_se_contact_phone', 'simplevent_footer', 'simplevent-footer-contact' );
-
   add_settings_field( 'contact-email', 'E-Mail', 'simplevent_se_contact_email', 'simplevent_footer', 'simplevent-footer-contact' );
 
 
@@ -236,8 +221,6 @@ function simplevent_custom_settings() {
 
 
   //----------------------------------Event--------------------------------------//
-
-
 
   //****Settings
   register_setting( 'simplevent-event-group', 'facts_active' );
@@ -289,10 +272,8 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-live-group', 'se_iframe' );
   register_setting( 'simplevent-live-group', 'se_programm' );
 
-
   //****Section
   add_settings_section( 'simplevent-live-options', 'Live', 'simplevent_live_options', 'simplevent_live');
-
 
   //****Fields
   add_settings_field( 'se-livestream', 'Livestream Aktiv', 'simplevent_se_livestream', 'simplevent_live', 'simplevent-live-options' );
@@ -378,6 +359,9 @@ function simplevent_videoslider() {
   echo '';
 }
 
+function simplevent_cta(){
+     echo '';
+}
 
 
 function simplevent_footer_options() {
@@ -475,9 +459,6 @@ function simplevent_event_icon() {
   $icon = esc_attr( get_option( 'event_icon' ) );
 
   echo '<div class="image-preview"><img src="'.get_option( 'event_icon' ).'" /></div>';
-
-
-
   echo '<input type="button" style="width:25%;" value="Icon" class="button button-secondary upload-button" data-target="event-icon"/><input type="" style="width:73%;" id="event-icon" name="event_icon" value="' .$icon. '"/>';
 
 }
@@ -487,9 +468,6 @@ function simplevent_event_icon_neg() {
   $iconNeg = esc_attr( get_option( 'event_icon_neg' ) );
 
   echo '<div class="image-preview image-neg"><img src="'.get_option( 'event_icon_neg' ).'" /></div>';
-
-
-
   echo '<input type="button" style="width:25%;" value="Icon Negativ" class="button button-secondary upload-button" data-target="event-icon-neg"/><input type="" style="width:73%;" id="event-icon-neg" name="event_icon_neg" value="' .$iconNeg. '"/>';
 
 }
@@ -723,7 +701,7 @@ function simplevent_se_header_mode() {
           $check = ( isset($modesSaved[$key]) ) ? 'checked' : '';
           echo '<input type="checkbox" id="'.$mode.'" name="se_header_mode['.$key.']" value="'.$mode.'" '.$check.'>';
           echo '<label for="'.$mode.'">'.$mode.'</label><br>';
-     }    
+     }
 }
 
 function simplevent_se_header_logowidth() {
@@ -782,7 +760,40 @@ function simplevent_se_videosliderbuttonlink() {
   echo '<input type="text" name="se_videosliderbuttonlink" value="' .$videosliderbuttonlink. '" placeholder="https://..."/>';
 }
 
+//                                                     *******
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CTA <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//                                                     *******
 
+function simplevent_se_cta_activ() {
+     $se_cta_activ = esc_attr( get_option( 'se_cta_activ' ) );
+     if($se_cta_activ == 'on'){
+       $se_cta_activ = 'checked';
+     }
+     echo '<input type="checkbox" name="se_cta_activ" ' .$se_cta_activ. '/>';
+}
+
+function simplevent_se_cta() {
+     $se_cta_std = [
+          'icon'         => '',
+          'buttontext'   => '',
+          'buttoncolor'  => '#ffffff',
+          'api'          => ''
+     ];
+     $se_cta_content = (get_option( 'se_cta' )) ? get_option('se_cta') : $se_cta_std;
+
+     echo '<p><b>Icon</b></p>';
+     echo '<div class="image-preview image-neg"><img src="'. $se_cta_content['icon'].'" /></div>';
+     echo '<input type="button" style="width:25%;" value="Icon" class="button button-secondary upload-button" data-target="cta-icon"/><input type="" style="width:73%;" id="cta-icon" name="se_cta[icon]" value="' .$se_cta_content['icon']. '"/>';
+     
+     echo '<p style="margin-top:20px;"><b>Button Text</b></p>';
+     echo '<input type="text" name="se_cta[buttontext]" value="' .$se_cta_content['buttontext']. '" placeholder="Button Text"/>';
+
+     echo '<p style="margin-top:20px;"><b>Button-Color</b></p>';
+     echo '<input class="se-color-picker" type="text" name="se_cta[buttoncolor]" value="' .$se_cta_content['buttoncolor']. '" data-default-color="'.$se_cta_std['buttoncolor'].'" />';
+
+     echo '<p style="margin-top:20px;"><b>API URL</b></p>';
+     echo '<input type="text" name="se_cta[api]" value="' .$se_cta_content['api']. '" placeholder="API URL"/>';
+}
 
 
 

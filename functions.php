@@ -32,11 +32,14 @@ add_action( 'rest_api_init', 'my_customize_rest_cors', 15 );
 
 require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app.php';
 
+/*-------------------------------------------------------------*/
+/*----------------------------CTA------------------------------*/
+/*-------------------------------------------------------------*/
+require get_template_directory() . '/theme/plugins/se2-cta/se2-cta.php';
+
+/*-------------------------------------------------------------*/
 if(is_user_logged_in()){
     
-    
-
-
     /*-------------------------------------------------------------*/
     /*---------------------CUSTOM USER ROLES-----------------------*/
     /*-------------------------------------------------------------*/
@@ -100,8 +103,8 @@ function theme_add_scripts()
         array('anchor-js', 'anchor.js' ),
         array('visibility-js', 'visibility.js'),
         array('detects-js', 'detects.js' ),
-        array('lightbox-js', 'lightbox.js'),
         array('restapi-js', 'restapi.js'),
+        array('lightbox-js', 'lightbox.js'),     
         array('cookies-js', 'cookies.js'),
         array('galery-js', 'galery.js' ),
         array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),

@@ -1,8 +1,9 @@
+
 var seREST = function(restAPIURL) 
 {
 
    
-    this.callRestAPI = function( restAPIURL, Type='privacy' )
+    this.callRestAPI = function( restAPIURL, Type='none' )
     {
         ourRequest = new XMLHttpRequest();
         ourRequest.open('GET', restAPIURL);
@@ -16,6 +17,9 @@ var seREST = function(restAPIURL)
                         break;
                     case 'privacy':
                         doPrivacy( data );
+                        break;
+                    case 'lightbox':
+                        doLightbox( data );
                         break;
                     default:
                         return data;
@@ -73,6 +77,38 @@ var seREST = function(restAPIURL)
         output += '</div>';
         jQuery('#api_target').append( output )
         
+    }
+
+    function doLightbox( data ){
+        console.log(data)
+        var title, text, output; 
+
+        if(globalURL.lang){
+            switch (globalURL.lang) {
+                case 'de':
+                    title = data[0].acf.de.title;
+                    text = data[0].acf.de.text;
+                    break;
+                case 'en':
+                    title = data[0].acf.en.ds_title_en;
+                    text = data[0].acf.en.ds_text_en;
+                    break;
+                case 'fr':
+                    title = data[0].acf.fr.ds_title_fr;
+                    text = data[0].acf.fr.ds_text_fr;
+                    break;
+                default:
+                    title = data[0].acf.en.ds_title_de;
+                    text = data[0].acf.en.ds_text_de;
+                    break;
+            } 
+        }
+
+        output = '<div class="api-lightbox">';
+        output += '<h1 style="margin-bottom:20px;">' + title + '</h1>';
+        output += text;
+        output += '</div>';
+        jQuery('.se-lightbox-container').append( output )
     }
     
 
