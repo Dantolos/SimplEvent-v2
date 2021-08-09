@@ -1,4 +1,5 @@
 var AJAX = new se2_Ajax();
+var seREST = new seREST();
 
 class Lightbox {
 
@@ -113,6 +114,11 @@ class Lightbox {
         //create AX LB
         if (type == 'AX') {
             AJAX.call_Ajax(data, this.LB_output.getAttribute('class'))
+        }
+
+        //create api LB
+        if (type == 'api') {
+            seREST.callRestAPI( data, 'lightbox' )
         }
 
         //-------------LB Types--------------
