@@ -176,10 +176,10 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                          $result[$i]['kategorie'][$key] = $terms->name;
                     }
                } else {
-                    $result[$i]['sss'][$key] = 'asdf';
+                    $result[$i]['sss'] = 'asdf';
                     $result[$i][$termID] = $terms->name;
                }
-               $result[$i]['sss'][$key] = 'asdf';
+               $result[$i]['sss'] = 'asdf';
           }
      }
 
