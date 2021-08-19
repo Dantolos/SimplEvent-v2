@@ -150,7 +150,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                
                $termID = $partnerCategories[$i]->term_id;
                $result[$i]['ID'] = $partnerCategories[$i]->term_id;
-               $result[$i]['1'] = '1';
+               $result[$i]['1'] = '1.1';
 
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
@@ -171,8 +171,9 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                }  
                $result[$i]['5'] = '5';
                if( !$langFilter ) {
+                    $result[$i]['6'] = '6';
                     foreach($translationsArray as $key => $langID){
-                         $result[$i]['6'] = '6';
+                         
                          $sitepress->switch_lang($key);
                          $terms = get_term_by( 'id', $termID, 'partner_categories' ); 
                          $result[$i]['sss'][$key] = 'asdf';
