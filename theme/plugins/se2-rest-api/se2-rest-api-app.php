@@ -162,6 +162,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                foreach( $translations as $trans){
                     $translationsArray[$trans->language_code] = $trans->element_id;
                }
+               $result[$i]['4'] = '4';
                //FILTERS
                //language (param l=*language-code*)
                if(isset($_GET['l']) && $_GET['l'] != $lang['language_code']){
