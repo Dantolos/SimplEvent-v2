@@ -135,7 +135,7 @@ function se2_partner_rest( WP_REST_Request $request ){
 // KATEGORIERN
 function se2_partner_categories_rest( WP_REST_Request $request ){
 
-     global $sitepress;
+     
 
      $partnerCategories = get_terms( array(
           'taxonomy' => 'partner_categories',
@@ -151,7 +151,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
             
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
-
+               global $sitepress;
                $trid = $sitepress->get_element_trid($termID);
                $translations = $sitepress->get_element_translations($trid, 'partner_categories');
                $translationsArray = [];
