@@ -147,7 +147,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
      
      if(!empty($partnerCategories)){
           for ($i=0; $i < count($partnerCategories); $i++) { 
-               global $sitepress;
+               
                $termID = $partnerCategories[$i]->term_id;
                $result[$i]['ID'] = $partnerCategories[$i]->term_id;
                $result[$i]['1'] = '1.2';
@@ -155,14 +155,18 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
                $result[$i]['2'] = '2';
+
+               global $sitepress;
                $trid = $sitepress->get_element_trid( $partnerCategories[$i]->term_id );
-               $translations = $sitepress->get_element_translations($trid, 'partner_categories');
+               $translations = $sitepress->get_element_translations( $trid, 'partner_categories' );
                $translationsArray = [];
+
                $result[$i]['3'] = '3';
                foreach( $translations as $trans){
                     $translationsArray[$trans->language_code] = $trans->element_id;
                }
                $result[$i]['4'] = $trid;
+
                //FILTERS
                //language (param l=*language-code*)
                if(isset($_GET['l']) && $_GET['l'] != $lang['language_code']){
@@ -170,6 +174,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                     continue;
                }  
                $result[$i]['5'] = '5';
+               
                if( !$langFilter ) {
                     $result[$i]['6.1'] = '6';
                     foreach($translationsArray as $key => $langID){
