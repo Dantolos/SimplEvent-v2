@@ -179,6 +179,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                     $result[$i]['sss'][$key] = 'asdf';
                     $result[$i][$termID] = $terms->name;
                }
+               $result[$i]['sss'][$key] = 'asdf';
           }
      }
 
