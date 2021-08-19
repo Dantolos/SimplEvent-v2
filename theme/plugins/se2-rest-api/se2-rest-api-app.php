@@ -135,14 +135,14 @@ function se2_partner_rest( WP_REST_Request $request ){
 // KATEGORIERN
 function se2_partner_categories_rest( WP_REST_Request $request ){
 
-     global $sitepress;
+     
 
      $partnerCategories = get_terms( array(
           'taxonomy' => 'partner_categories',
           'hide_empty' => true,
       ) );;
 
-     $result;
+     $result = [];
 
      if(!empty($partnerCategories)){
           for ($i=0; $i < count($partnerCategories); $i++) { 
@@ -151,7 +151,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
             
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
-
+               global $sitepress;
                $trid = $sitepress->get_element_trid($termID);
                $translations = $sitepress->get_element_translations($trid, 'partner_categories');
                $translationsArray = [];
@@ -171,10 +171,10 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                     foreach($translationsArray as $key => $langID){
                          $sitepress->switch_lang($key);
                          $terms = get_term_by( 'id', $termID, 'partner_categories' ); 
-                         $result[$termID][$key] = $terms->name;
+                         $result[$i][$termID][$key] = $terms->name;
                     }
                } else {
-                    $result[$termID] = $terms->name;
+                    $result[$i][$termID] = $terms->name;
                }
           }
      }
