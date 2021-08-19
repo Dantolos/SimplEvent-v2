@@ -158,7 +158,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                $trid = $sitepress->get_element_trid($termID);
                $translations = $sitepress->get_element_translations($trid, 'partner_categories');
                $translationsArray = [];
-               $result[$i]['2'] = '3';
+               $result[$i]['3'] = '3';
                foreach( $translations as $trans){
                     $translationsArray[$trans->language_code] = $trans->element_id;
                }
