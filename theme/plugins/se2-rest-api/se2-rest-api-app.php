@@ -142,7 +142,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
           'hide_empty' => true,
       ) );;
 
-     $result;
+     $result = [];
 
      if(!empty($partnerCategories)){
           for ($i=0; $i < count($partnerCategories); $i++) { 
