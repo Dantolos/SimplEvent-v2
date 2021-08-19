@@ -172,6 +172,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
+                         $result[$i]['5'] = '5';
                          $sitepress->switch_lang($key);
                          $terms = get_term_by( 'id', $termID, 'partner_categories' ); 
                          $result[$i]['sss'][$key] = 'asdf';
