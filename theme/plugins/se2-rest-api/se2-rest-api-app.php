@@ -143,15 +143,16 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
       ) );;
 
      $result = [];
-
+     
+     global $sitepress;
      if(!empty($partnerCategories)){
           for ($i=0; $i < count($partnerCategories); $i++) { 
                
                $termID = $partnerCategories[$i]->term_id;
-            
+               $result[$i]['ID'] = $partnerCategories[$i]->term_id;
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
-               global $sitepress;
+               
                $trid = $sitepress->get_element_trid($termID);
                $translations = $sitepress->get_element_translations($trid, 'partner_categories');
                $translationsArray = [];
