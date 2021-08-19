@@ -137,47 +137,29 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
 
      
 
-     $partnerCategories = get_terms( array(
-          'taxonomy' => 'partner_categories',
-          'hide_empty' => true,
-      ) );;
-
+     $partnerCategories = get_terms(  array( 'taxonomy' => 'partner_categories', 'hide_empty' => false, ) );
+     $count = count($partnerCategories);
      $result = [];
+     if ( $count > 0 ){
+         
+          foreach ( $partnerCategories as $category ) {
+               $languages = ['de', 'en', 'fr'];
+               
+               foreach($languages as $lang){
+                    $partnerCategorieID = icl_object_id($category->term_id,'partner_categories',false, $lang);
+                    if($partnerCategorieID){
+                         $result[$category->term_id][$lang]['ID'] = $partnerCategorieID;
+                         $result[$category->term_id][$lang]['Bezeichnung'] = get_term_by( 'id', $partnerCategorieID, 'partner_categories'  )->name;
 
-     if(!empty($partnerCategories)){
-          for ($i=0; $i < count($partnerCategories); $i++) { 
-               
-               $termID = $partnerCategories[$i]->term_id;
-            
-               $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
-               $langFilter = false; 
-               global $sitepress;
-               $trid = $sitepress->get_element_trid($termID);
-               $translations = $sitepress->get_element_translations($trid, 'partner_categories');
-               $translationsArray = [];
-          
-               foreach( $translations as $trans){
-                    $translationsArray[$trans->language_code] = $trans->element_id;
-               }
-               //FILTERS
-               //language (param l=*language-code*)
-               if(isset($_GET['l']) && $_GET['l'] != $lang['language_code']){
-                    $langFilter = true;
-                    continue;
-               }  
-             
-               
-               if( !$langFilter ) {
-                    foreach($translationsArray as $key => $langID){
-                         $sitepress->switch_lang($key);
-                         $terms = get_term_by( 'id', $termID, 'partner_categories' ); 
-                         $result[$i][$termID][$key] = $terms->name;
                     }
-               } else {
-                    $result[$i][$termID] = $terms->name;
                }
+              
+
           }
+          
      }
+
+     
 
      array_values($result);
      return $result;
