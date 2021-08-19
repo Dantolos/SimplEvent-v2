@@ -157,7 +157,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                $result[$i]['2'] = '2';
 
                global $sitepress;
-               $trid = $sitepress->get_element_trid( $partnerCategories[$i]->term_id );
+               $trid = $sitepress->get_element_trid( $termID );
                $translations = $sitepress->get_element_translations( $trid, 'partner_categories' );
                $translationsArray = [];
 
@@ -174,7 +174,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                     continue;
                }  
                $result[$i]['5'] = '5';
-               
+
                if( !$langFilter ) {
                     $result[$i]['6.1'] = '6';
                     foreach($translationsArray as $key => $langID){
