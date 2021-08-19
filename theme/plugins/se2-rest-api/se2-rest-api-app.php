@@ -157,8 +157,8 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                $result[$i]['2'] = '2';
 
                global $sitepress;
-               $trid = apply_filters( 'wpml_element_trid', NULL, $termID );
-               $translations = $sitepress->get_element_translations( $trid, 'partner_categories' );
+               $trid = $sitepress->get_element_trid( $partnerCategories[$i]->term_id); 
+               $translations = $sitepress->get_element_translations($trid, 'tax_{partner_categories}');
                $translationsArray = [];
 
                $result[$i]['3'] =  $trid;
@@ -166,7 +166,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                foreach( $translations as $trans){
                     $translationsArray[$trans->language_code] = $trans->element_id;
                }
-               $result[$i]['4'] = $trid;
+               $result[$i]['4'] = $translationsArray;
 
                //FILTERS
                //language (param l=*language-code*)
@@ -189,7 +189,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                     $result[$i]['6.2'] = '6';
                     $result[$i]['sss'] = 'asdf';
                     $result[$i][$termID] = $terms->name;
-               }
+               } 
                
           }
      }
