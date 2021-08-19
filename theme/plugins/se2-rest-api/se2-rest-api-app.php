@@ -144,10 +144,10 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
 
      $result = [];
      
-     global $sitepress;
+     
      if(!empty($partnerCategories)){
           for ($i=0; $i < count($partnerCategories); $i++) { 
-               
+               global $sitepress;
                $termID = $partnerCategories[$i]->term_id;
                $result[$i]['ID'] = $partnerCategories[$i]->term_id;
                $result[$i]['1'] = '1.1';
