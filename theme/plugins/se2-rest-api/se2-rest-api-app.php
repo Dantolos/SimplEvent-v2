@@ -132,7 +132,57 @@ function se2_partner_rest( WP_REST_Request $request ){
      return $result;
 }
 
+// KATEGORIERN
+function se2_partner_categories_rest( WP_REST_Request $request ){
 
+     global $sitepress;
+
+     $partnerCategories = get_terms( array(
+          'taxonomy' => 'partner_categories',
+          'hide_empty' => true,
+      ) );;
+
+     $result;
+
+     if(!empty($partnerCategories)){
+          for ($i=0; $i < count($partnerCategories); $i++) { 
+               
+               $termID = $partnerCategories[$i]->term_id;
+            
+               $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
+               $langFilter = false; 
+
+               $trid = $sitepress->get_element_trid($termID);
+               $translations = $sitepress->get_element_translations($trid, 'partner_categories');
+               $translationsArray = [];
+          
+               foreach( $translations as $trans){
+                    $translationsArray[$trans->language_code] = $trans->element_id;
+               }
+               //FILTERS
+               //language (param l=*language-code*)
+               if(isset($_GET['l']) && $_GET['l'] != $lang['language_code']){
+                    $langFilter = true;
+                    continue;
+               }  
+             
+               
+               if( !$langFilter ) {
+                    foreach($translationsArray as $key => $langID){
+                         $sitepress->switch_lang($key);
+                         $terms = get_term_by( 'id', $termID, 'partner_categories' ); 
+                         $result[$termID][$key] = $terms->name;
+                    }
+               } else {
+                    $result[$termID] = $terms->name;
+               }
+          }
+     }
+
+     array_values($result);
+     return $result;
+}
+//------------------------------------------------------
 
 //------------------------------------------------------
 // SPEAKER
@@ -273,6 +323,12 @@ add_action('rest_api_init', function() {
      register_rest_route('se2/app', 'partner', [
           'method' => 'GET',
           'callback' => 'se2_partner_rest',
+          'permission_callback' => '__return_true',
+          'show_in_rest' => true
+     ]);
+     register_rest_route('se2/app', 'partner-kategorie', [
+          'method' => 'GET',
+          'callback' => 'se2_partner_categories_rest',
           'permission_callback' => '__return_true',
           'show_in_rest' => true
      ]);
