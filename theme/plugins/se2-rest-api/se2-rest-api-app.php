@@ -73,7 +73,8 @@ function se2_partner_rest( WP_REST_Request $request ){
 
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
-                         $result[$i]['company'][$key] = get_the_title($langID);
+                         $translate_postID = icl_object_id( $langID, 'post', false, $key );
+                         $result[$i]['company'][$key] = get_the_title($translate_postID);
                     }
                } else {
                     $result[$i]['company'] = $partners[$i]->post_title;
@@ -84,9 +85,10 @@ function se2_partner_rest( WP_REST_Request $request ){
                //$result[$i]['language'] = $lang['language_code'];
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
+                         $translate_postID = icl_object_id( $langID, 'post', false, $key );
                          $result[$i]['logos'][$key] = [
-                              'positiv' => !empty (get_field('partner-logo', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ) : '',
-                              'negativ' => !empty (get_field('partner-logo-neg', $postID)) ? cast_array_url_base64( get_field('partner-logo', $postID) ): ''
+                              'positiv' => !empty (get_field('partner-logo', $translate_postID)) ? cast_array_url_base64( get_field('partner-logo', $translate_postID) ) : '',
+                              'negativ' => !empty (get_field('partner-logo-neg', $translate_postID)) ? cast_array_url_base64( get_field('partner-logo', $translate_postID) ): ''
                          ];
                     }
                } else {
@@ -110,7 +112,8 @@ function se2_partner_rest( WP_REST_Request $request ){
 
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
-                         $result[$i]['text'][$key] = get_field('partner-text', $langID );
+                         $translate_postID = icl_object_id( $langID, 'post', false, $key );
+                         $result[$i]['text'][$key] = get_field('partner-text', $translate_postID );
                     }
                }else {
                     $result[$i]['text'] = get_field('partner-text', $postID);
@@ -141,19 +144,23 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
      $count = count($partnerCategories);
      $result = [];
      if ( $count > 0 ){
-         
+          global $sitepress;
+          $current_lang = $sitepress->get_current_language();
           foreach ( $partnerCategories as $category ) {
                $languages = ['de', 'en', 'fr'];
                
                foreach($languages as $lang){
-                    $partnerCategorieID = icl_object_id($category->term_id,'partner_categories',false, $lang);
+                    $partnerCategorieID =  apply_filters( 'wpml_object_id', $category->term_id, 'partner_categories', FALSE, $lang); 
                     if($partnerCategorieID){
+                         $sitepress->switch_lang($lang);
+                         $translate_postID = icl_object_id( $partnerCategorieID, 'partner_categories', false, $lang );
+                         
                          $result[$category->term_id][$lang]['ID'] = $partnerCategorieID;
-                         $result[$category->term_id][$lang]['Bezeichnung'] = get_term_by( 'id', $partnerCategorieID, 'partner_categories'  )->name;
+                         $result[$category->term_id][$lang]['Bezeichnung'] = get_term( $partnerCategorieID, 'partner_categories', $lang )->name;
 
                     }
                }
-              
+               $sitepress->switch_lang($current_lang);
 
           }
           
@@ -231,7 +238,8 @@ function se2_speakers_rest( WP_REST_Request $request ){
 
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
-                         $result[$i]['degree'][$key] = get_field('speaker_degree', $postID);
+                         $translate_postID = icl_object_id( $langID, 'post', false, $key );
+                         $result[$i]['degree'][$key] = get_field('speaker_degree', $translate_postID);
                     }
                }else {
                     $result[$i]['degree'] = get_field('speaker_degree', $postID);
@@ -242,7 +250,8 @@ function se2_speakers_rest( WP_REST_Request $request ){
                
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
-                         $result[$i]['function'][$key] = get_field('speaker_funktion', $postID);
+                         $translate_postID = icl_object_id( $langID, 'post', false, $key ); 
+                         $result[$i]['function'][$key] = get_field('speaker_funktion', $translate_postID);
                     }
                }else {
                     $result[$i]['function'] = get_field('speaker_funktion', $postID);
@@ -251,7 +260,8 @@ function se2_speakers_rest( WP_REST_Request $request ){
 
                if( !$langFilter ) {
                     foreach($translationsArray as $key => $langID){
-                         $result[$i]['cv'][$key] = get_field('speaker_cv', $postID);
+                         $translate_postID = icl_object_id( $langID, 'post', false, $key ); 
+                         $result[$i]['cv'][$key] = get_field('speaker_cv', $translate_postID);
                     }
                }else {
                     $result[$i]['cv'] = get_field('speaker_cv', $postID);
