@@ -171,7 +171,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                }  
                $result[$i]['5'] = '5';
                if( !$langFilter ) {
-                    $result[$i]['6'] = '6';
+                    $result[$i]['6.1'] = '6';
                     foreach($translationsArray as $key => $langID){
                          
                          $sitepress->switch_lang($key);
@@ -180,6 +180,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                          $result[$i]['kategorie'][$key] = $terms->name;
                     }
                } else {
+                    $result[$i]['6.2'] = '6';
                     $result[$i]['sss'] = 'asdf';
                     $result[$i][$termID] = $terms->name;
                }
