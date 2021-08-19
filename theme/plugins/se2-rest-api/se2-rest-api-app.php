@@ -150,7 +150,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                
                $termID = $partnerCategories[$i]->term_id;
                $result[$i]['ID'] = $partnerCategories[$i]->term_id;
-               $result[$i]['1'] = '1.2';
+               $result[$i]['1'] = '1.3';
 
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
