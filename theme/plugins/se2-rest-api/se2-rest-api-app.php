@@ -162,7 +162,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                foreach( $translations as $trans){
                     $translationsArray[$trans->language_code] = $trans->element_id;
                }
-               $result[$i]['4'] = '4';
+               $result[$i]['4'] = $translationsArray;
                //FILTERS
                //language (param l=*language-code*)
                if(isset($_GET['l']) && $_GET['l'] != $lang['language_code']){
@@ -173,7 +173,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                if( !$langFilter ) {
                     $result[$i]['6.1'] = '6';
                     foreach($translationsArray as $key => $langID){
-                         
+                         $result[$i]['6.1'] = '6';
                          $sitepress->switch_lang($key);
                          $terms = get_term_by( 'id', $termID, 'partner_categories' ); 
                          $result[$i]['sss'][$key] = 'asdf';
