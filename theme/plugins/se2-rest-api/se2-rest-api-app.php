@@ -155,7 +155,7 @@ function se2_partner_categories_rest( WP_REST_Request $request ){
                $lang = apply_filters( 'wpml_post_language_details', NULL, intval($termID) );
                $langFilter = false; 
                $result[$i]['2'] = '2';
-               $trid = $sitepress->get_element_trid($termID);
+               $trid = $sitepress->get_element_trid($termID, 'partner_categories');
                $translations = $sitepress->get_element_translations($trid, 'partner_categories');
                $translationsArray = [];
                $result[$i]['3'] = '3';
