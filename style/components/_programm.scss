@@ -291,6 +291,7 @@
                display: flex;
                flex-direction: row;
                width:100%;
+
                .schedule-slot-speaker-image {
                     
                     width:50px;
@@ -298,6 +299,15 @@
                     @include imageSettings;
                     border-radius:50%;
                     margin-right:5%;
+               }
+
+               .schedule-slot-title {
+                    background-color: $primary;
+                    padding:3px;
+                    border-radius: 3px;
+                    color:$light;
+                    width:fit-content;
+                    margin-bottom: 2px;
                }
 
                .schedule-slot-speaker-name {

@@ -137,9 +137,12 @@ class se2_Schedule {
                                         . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
                                    : 
                                         the_title();
-
-                                   $speaker_slots .= '<div class="schedule-slot-speaker-name">'; 
-                                        $speaker_slots .= '<h5>'.$name.'</h5>';
+                              $progtitel = get_field('programm_titel', $speakerID) ? get_field('programm_titel', $speakerID) : false;
+                                   $speaker_slots .= '<div class="schedule-slot-speaker-name">';
+                                        if($progtitel){
+                                             $speaker_slots .= '<h5 class="schedule-slot-title"><b>'.$progtitel.'</b></h5>'; 
+                                        }
+                                        $speaker_slots .= '<h4>'.$name.'</h4>';
                                         $speaker_slots .= '<div class="schedule-slot-info">';
                                              $speaker_slots .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).'</h6>';
                                         $speaker_slots .= '</div>';
