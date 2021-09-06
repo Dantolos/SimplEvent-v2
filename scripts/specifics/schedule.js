@@ -69,7 +69,7 @@ function SET_SLOT_POSITION() {
                }
                //nSLOTS[i].style.left = '20%';
                nSLOTS[i].style.height = (duration / 5) * minSections.offsetHeight + 'px';
-               
+               jQuery(window).scrollTop(firstSlotPosition - 50)
           } else {
                //TABLE
                nSLOTS[i].style.position = 'relative';
@@ -80,7 +80,6 @@ function SET_SLOT_POSITION() {
      }
 
      // Scroll timeline to first slot
-     jQuery(window).scrollTop(firstSlotPosition - 50)
 
 }
 
