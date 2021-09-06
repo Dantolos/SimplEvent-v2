@@ -55,6 +55,7 @@
      @include breakpoint( 'm' ){
           width: 100vw;
           margin:50px 0;
+          
      }
 
 
@@ -62,12 +63,14 @@
      .schedule-grid {
           width:100%;
           height:fit-content;
-          
+         
           .schedule-hour {
                position: relative;
                width:100%;
                height: 200px;
-
+               @include breakpoint( 'm' ){
+                    display: none;
+               }
                h5 {
                     position: absolute;
                     top:-8px;
@@ -113,9 +116,15 @@
           width:85%;
           height: 100%;
           //cursor:pointer;
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                left:0;
                width: 100%;
+               /* height: calc(100vh - 150px); */
+               height: fit-content;
+               position: relative;
+               overflow-y: hidden;
+               height: fit-content;
+               padding-bottom: 100px;
           }
           .schedule-program-day {
           
@@ -123,6 +132,11 @@
                height: inherit;
                position: relative;
                flex-shrink: 0;
+
+               @include breakpoint( 'm' ){
+                    top: 50px;
+               }
+
                .schedule-slot {
                     position: absolute;
                     
@@ -140,6 +154,11 @@
                     scrollbar-width: none; 
                     -ms-overflow-style: none;
                     &::-webkit-scrollbar { display:none; }
+
+                    @include breakpoint( 'm' ){
+                         height: fit-content !important;
+                         position: relative;
+                    }
                     
                     .schedule-container {
                          padding: 5px 20px;
@@ -152,11 +171,21 @@
                          min-height:100%;
                          position: relative;
                          border-radius:1px;
+
+                         @include breakpoint('m'){
+                              padding: 30px 10px 40px ;
+                              
+                         }
+                         h5 {
+                              @include breakpoint('m'){
+                               font-size: 130%;
+                              }
+                         }
                          .schedule-slot-time {
-                              position: absolute;
+                              position: relative;
                               opacity: .8;
                               top:0;
-                              right:0;
+                              right: 0;
                               padding:2px 5px;
                               color: var(--primeColor);
                               background-color:var(--secondColor);
@@ -164,6 +193,14 @@
                               border-radius:0 1px 0 1px;
                               backdrop-filter: brightness(60%);
                               font-size: 1em;
+                              @include breakpoint('m'){
+                                   right: unset;
+                                   left:0;
+                                   font-weight: bold;
+                                   text-align: center;
+                                   border-radius: 3px;
+                                   margin:10px 0;
+                              }
                          }
 
                     }
@@ -192,6 +229,8 @@
                     border-color: $secondary;
                     @include slotBGgradiant;
                }
+
+               
 
                .schedule-separator-standard .schedule-container {
                     background-image: linear-gradient(to top, var(--primeColor), var(--midColor));
@@ -236,11 +275,29 @@
                               .schedule-slot-speaker-name {
                                    width: calc(95% - 25px);
                               }
+                              @include breakpoint( 'm' ){ 
+                                   width: 100%;
+                                   margin-top:20px;
+                                   .schedule-slot-panel-speaker-image {
+                                        width:40px;
+                                        height:40px;
+                                   }
+                                   .schedule-slot-speaker-name {
+                                        width: calc(95% - 40px);
+                                   }
+                               }
                          }
                     }
                }
 
-
+               @include breakpoint( 'm' ){ 
+                    .schedule-separator-placeholder .schedule-container,
+                    .schedule-separator-panel .schedule-container,
+                    .schedule-speaker .schedule-container,
+                    .schedule-session-slot .schedule-container {
+                         border-width: 0 0 0 3px ; 
+                    }
+               }
                .schedule-speaker, .schedule-session-slot { cursor: pointer; }
           }
      }
@@ -253,6 +310,9 @@
      width:100%;
      display:none;
      p { margin-bottom:0;}
+     @include breakpoint( 'm' ){ 
+          display:block;
+     }
 }
 
 
@@ -278,7 +338,26 @@
                h6 {
                     padding:10px;
                }
+
+               @include breakpoint( 'm' ){
+                    width: 100%;
+                    max-width:unset;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    .schedule-session-image { 
+
+                         width:20%;
+                    }
+                    h6 {
+                         width:80%;
+                         padding:10px;
+                    }
+               }
+
           }
+
+          
      }
      
 }
@@ -326,9 +405,10 @@
      }
 }
 
+//not needet (temporary)
 .schedule-slot-overflow {
      color:$primary;
-     position: absolute;
+     position: sticky;
      bottom:0;
      width:100%;
      height: 40px;

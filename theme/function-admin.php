@@ -664,23 +664,6 @@ function simplevent_anonymize_ip() {
 
 }
 
-//Meta
-
-function simplevent_meta_tags() {
-     $tags = [
-          'Keywords' => '',
-          'SocialMedia' => [
-               'Title' => '', 
-               'Image' => '', 
-               'URL' => '',
-               'Description' => '',
-          ]
-     ];
-     $meta_tags = is_array(get_option('meta_tags')) ? get_option('meta_tags') : $tags;
-
-     echo '<p style="margin-top:20px;"><b>Keywords</b></p>';
-     echo '<p><i>Keywords</b>Mit Komma (,) trennen. (SEO, Keyword, ...)</i></p>';
-
 
 //Meta
 
@@ -1312,6 +1295,5 @@ function simplevent_theme_settings_page(){
      require_once( get_template_directory() . '/theme/templates/simplevent-settings.php' );
 
 }
-
 
 

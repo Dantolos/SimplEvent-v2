@@ -59,7 +59,7 @@ class se2_Schedule {
                }
                $this->scheduleGrid .= '</div>';
           }         
-
+          $this->scheduleGrid .= '</div>';
           $this->scheduleGrid .= '<div class="schedule-program">';
           //implement needed programm slots
           foreach($this->dateArray as $day){
@@ -73,7 +73,7 @@ class se2_Schedule {
                
           }
           $this->scheduleGrid .= '</div>';
-          $this->scheduleGrid .= '</div>';
+          
      }
 
 
@@ -143,9 +143,13 @@ class se2_Schedule {
                                              $speaker_slots .= '<h5 class="schedule-slot-title"><b>'.$progtitel.'</b></h5>'; 
                                         }
                                         $speaker_slots .= '<h4>'.$name.'</h4>';
+                                        $speaker_slots .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).'</h6>';
+
+                                        //on hover
                                         $speaker_slots .= '<div class="schedule-slot-info">';
-                                             $speaker_slots .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).'</h6>';
                                         $speaker_slots .= '</div>';
+
+
                                    $speaker_slots .= '</div>';
 
                                    
@@ -208,15 +212,17 @@ class se2_Schedule {
                               $sessions_slots .= '</div>';
                          }
                          $sessions_slots .= '</div>';
+
+                         //hidden
                          $sessions_slots .= '<div class="schedule-slot-info">';
                          $sessions_slots .= '</div>';
 
                     $sessions_slots .= '</div>';
 
                     //more overflow
-                    $sessions_slots .= '<div class="schedule-slot-overflow">';
+                    /* $sessions_slots .= '<div class="schedule-slot-overflow">';
                     $sessions_slots .= '<p><b>more</b></p>';
-                    $sessions_slots .= '</div>';
+                    $sessions_slots .= '</div>'; */
 
                $sessions_slots .= '</div>';
 
