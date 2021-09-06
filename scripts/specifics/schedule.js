@@ -58,12 +58,25 @@ function SET_SLOT_POSITION() {
                console.warn('Slot hidden: Time is not defined', nSLOTS[i])
                continue;
           }
-          nSLOTS[i].style.top = (minSections.getBoundingClientRect().top - pageoffset) + 'px';
-          if ((minSections.getBoundingClientRect().top - pageoffset) < firstSlotPosition) {
-               firstSlotPosition = (minSections.getBoundingClientRect().top - pageoffset);
+
+          
+          if(window.innerWidth > 1024){
+               //DESKTOP CALENDAR
+               nSLOTS[i].style.position = 'absolute';
+               nSLOTS[i].style.top = (minSections.getBoundingClientRect().top - pageoffset) + 'px';
+               if ((minSections.getBoundingClientRect().top - pageoffset) < firstSlotPosition) {
+                    firstSlotPosition = (minSections.getBoundingClientRect().top - pageoffset);
+               }
+               //nSLOTS[i].style.left = '20%';
+               nSLOTS[i].style.height = (duration / 5) * minSections.offsetHeight + 'px';
+               
+          } else {
+               //TABLE
+               nSLOTS[i].style.position = 'relative';
+               nSLOTS[i].style.top = 'unset';
+               nSLOTS[i].style.height = 'fit-content';
           }
-          //nSLOTS[i].style.left = '20%';
-          nSLOTS[i].style.height = (duration / 5) * minSections.offsetHeight + 'px';
+
      }
 
      // Scroll timeline to first slot
@@ -71,40 +84,57 @@ function SET_SLOT_POSITION() {
 
 }
 
+window.addEventListener('resize', ()=>{
+     SET_SLOT_POSITION()
+     
+          SPLIT_WIDTH()
+      
+     
+     console.log('resising')
+} )
 SET_SLOT_POSITION()
 
 
 var prevWidth = false;
 
+function SPLIT_WIDTH(){
+   
+          for (let n = 0; n < nSLOTS.length; n++) {
+               if(window.innerWidth > 1024){
+                    let start = nSLOTS[n].getAttribute('start');
+                    let end = nSLOTS[n].getAttribute('ende');
+                    let date = nSLOTS[n].getAttribute('date');
 
-for (let n = 0; n < nSLOTS.length; n++) {
-     let start = nSLOTS[n].getAttribute('start');
-     let end = nSLOTS[n].getAttribute('ende');
-     let date = nSLOTS[n].getAttribute('date');
+                    if (n > 0) {
+                         let m = n - 1;
+                         let prevend = nSLOTS[m].getAttribute('ende')
 
-     if (n > 0) {
-          let m = n - 1;
-          let prevend = nSLOTS[m].getAttribute('ende')
+                         //for (let m = 0; m < nSLOTS.length; m++) {
+                         if (date == nSLOTS[m].getAttribute('date')) {
+                              if ((start + 1) <= prevend) {
+                                   prevWidth = (prevWidth) ? false : true;
+                                   nSLOTS[n].style.width = '47.5%'
+                                   nSLOTS[m].style.width = '47.5%'
 
-          //for (let m = 0; m < nSLOTS.length; m++) {
-          if (date == nSLOTS[m].getAttribute('date')) {
-               if ((start + 1) <= prevend) {
-                    prevWidth = (prevWidth) ? false : true;
-                    nSLOTS[n].style.width = '47.5%'
-                    nSLOTS[m].style.width = '47.5%'
-
-                    if (prevWidth) {
-                         nSLOTS[n].style.marginLeft = '50%'
+                                   if (prevWidth) {
+                                        nSLOTS[n].style.marginLeft = '50%'
+                                   }
+                              } else { prevWidth = false }
+                         }
                     }
-               } else { prevWidth = false }
+               } else {
+                    nSLOTS[n].style.width = '100%'
+                    nSLOTS[n].style.marginLeft = '0'
+               }
           }
-     }
+     
 }
-console.log('DEVICE: ',)
+
+console.log('DEVICE: ', DETECT.detectMobile())
 var slotToggler = false;
 for (let SLOT of SLOTS) {
 
-     if (!DETECT.detectMobile()) {
+     if (window.innerWidth > 1024) {
           SLOT.addEventListener('mouseover', (e) => {
                SLOT.style.zIndex = 1000;
                SLOT.style.overflowY = 'visible';
@@ -124,7 +154,7 @@ for (let SLOT of SLOTS) {
 
           SLOT.addEventListener('click', (e) => {
 
-               if (!slotToggler || slotToggler != SLOT) {
+               /* if (!slotToggler || slotToggler != SLOT) {
                     slotToggler = SLOT;
                     SLOT.style.zIndex = 1000;
                     SLOT.style.overflowY = 'visible';
@@ -135,7 +165,7 @@ for (let SLOT of SLOTS) {
                     SLOT.style.zIndex = 'unset';
                     SLOT.style.overflowY = 'hidden';
                     gsap.to(SLOT.querySelector('.schedule-slot-info'), { duration: .2, y: 20, display: 'none' })
-               }
+               } */
           });
 
      }
