@@ -239,7 +239,9 @@ class Mediacorner {
           $audiosFiles = get_field('audio', $pageID);
           if(count( $audiosFiles ) > 0){
                foreach($audiosFiles as $audioFile){
-                    $autioContent .= ''
+
+                    $autioContent .= '';
+
                     $audioContent .= '<h5>'.$audioFile['file-name'].'</h5>';
                     $audioContent .= '<audio controls style="width:100%;">';
                     $audioContent .= '<source src="'.$audioFile['audio-files'].'" type="audio/ogg">';

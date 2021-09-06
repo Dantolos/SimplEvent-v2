@@ -58,37 +58,39 @@ add_action( 'admin_menu', 'SimplEvent_add_admin_page');
 
 function simplevent_custom_settings() {
 
-  //----------------------------------GENERAL ---------------------------------------//
+     //----------------------------------GENERAL ---------------------------------------//
 
-  //****Settings
+     //****Settings
 
-  register_setting( 'simplevent-settings-group', 'event_logo' );
-  register_setting( 'simplevent-settings-group', 'event_logo_neg' );
-  register_setting( 'simplevent-settings-group', 'event_icon' );
-  register_setting( 'simplevent-settings-group', 'event_icon_neg' );
+     register_setting( 'simplevent-settings-group', 'event_logo' );
+     register_setting( 'simplevent-settings-group', 'event_logo_neg' );
+     register_setting( 'simplevent-settings-group', 'event_icon' );
+     register_setting( 'simplevent-settings-group', 'event_icon_neg' );
 
-  register_setting( 'simplevent-settings-group', 'twitter_link' );
-  register_setting( 'simplevent-settings-group', 'youtube_link' );
-  register_setting( 'simplevent-settings-group', 'facebook_link' );
-  register_setting( 'simplevent-settings-group', 'linkedin_link' );
-  register_setting( 'simplevent-settings-group', 'insta_link' );
+     register_setting( 'simplevent-settings-group', 'twitter_link' );
+     register_setting( 'simplevent-settings-group', 'youtube_link' );
+     register_setting( 'simplevent-settings-group', 'facebook_link' );
+     register_setting( 'simplevent-settings-group', 'linkedin_link' );
+     register_setting( 'simplevent-settings-group', 'insta_link' );
 
-  register_setting( 'simplevent-settings-group', 'primary_color_picker' );
-  register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
-  register_setting( 'simplevent-settings-group', 'light_mode_picker' );
-  register_setting( 'simplevent-settings-group', 'dark_mode_picker' );
+     register_setting( 'simplevent-settings-group', 'primary_color_picker' );
+     register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
+     register_setting( 'simplevent-settings-group', 'light_mode_picker' );
+     register_setting( 'simplevent-settings-group', 'dark_mode_picker' );
 
-  register_setting( 'simplevent-settings-group', 'font_name' );
-  register_setting( 'simplevent-settings-group', 'font_link' );
+     register_setting( 'simplevent-settings-group', 'font_name' );
+     register_setting( 'simplevent-settings-group', 'font_link' );
 
-  register_setting( 'simplevent-settings-group', 'title_font' );
-  register_setting( 'simplevent-settings-group', 'title_font_name' );
-  register_setting( 'simplevent-settings-group', 'title_font_link' );
+     register_setting( 'simplevent-settings-group', 'title_font' );
+     register_setting( 'simplevent-settings-group', 'title_font_name' );
+     register_setting( 'simplevent-settings-group', 'title_font_link' );
 
-  register_setting( 'simplevent-settings-group', 'google_analytics_ua' );
-  register_setting( 'simplevent-settings-group', 'anonymize_ip' );
 
-  register_setting( 'simplevent-settings-group', 'meta_tags' );
+     register_setting( 'simplevent-settings-group', 'google_analytics_ua' );
+     register_setting( 'simplevent-settings-group', 'anonymize_ip' );
+
+     register_setting( 'simplevent-settings-group', 'meta_tags' );
+
 
   //****SECTIONS
   add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
@@ -99,35 +101,37 @@ function simplevent_custom_settings() {
 
 
 
-  //****fields
-  add_settings_field( 'event_logo', 'Logo', 'simplevent_event_logo', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'event_logo_neg', 'Logo Negativ', 'simplevent_event_logo_neg', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'event_icon', 'Icon', 'simplevent_event_icon', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
 
-  add_settings_field( 'twitter-link', 'Twitter', 'simplevent_twitter_link', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'youtube-link', 'Youtube', 'simplevent_youtube_link', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'facebook-link', 'Facebook', 'simplevent_facebook_link', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'linkedin-link', 'LinkedIn', 'simplevent_linkedin_link', 'aagi_simplevent', 'simplevent-general-options' );
-  add_settings_field( 'insta-link', 'Instagramm', 'simplevent_insta_link', 'aagi_simplevent', 'simplevent-general-options' );
+     //****fields
+     add_settings_field( 'event_logo', 'Logo', 'simplevent_event_logo', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'event_logo_neg', 'Logo Negativ', 'simplevent_event_logo_neg', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'event_icon', 'Icon', 'simplevent_event_icon', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
 
-  add_settings_field( 'primary-color-picker', 'Primary Color', 'simplevent_primary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
-  add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
-  add_settings_field( 'light-mode-picker', 'Light Mode', 'simplevent_light_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
-  add_settings_field( 'dark-mode-picker', 'Dark Mode', 'simplevent_dark_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
+     add_settings_field( 'twitter-link', 'Twitter', 'simplevent_twitter_link', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'youtube-link', 'Youtube', 'simplevent_youtube_link', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'facebook-link', 'Facebook', 'simplevent_facebook_link', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'linkedin-link', 'LinkedIn', 'simplevent_linkedin_link', 'aagi_simplevent', 'simplevent-general-options' );
+     add_settings_field( 'insta-link', 'Instagramm', 'simplevent_insta_link', 'aagi_simplevent', 'simplevent-general-options' );
 
-  add_settings_field( 'font-name', 'Font Name', 'simplevent_font_name', 'aagi_simplevent', 'simplevent-fonts' );
-  add_settings_field( 'font-link', 'Font Link', 'simplevent_font_link', 'aagi_simplevent', 'simplevent-fonts' );
+     add_settings_field( 'primary-color-picker', 'Primary Color', 'simplevent_primary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
+     add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
+     add_settings_field( 'light-mode-picker', 'Light Mode', 'simplevent_light_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
+     add_settings_field( 'dark-mode-picker', 'Dark Mode', 'simplevent_dark_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
 
-  add_settings_field( 'title-font', 'Title Font', 'simplevent_title_font', 'aagi_simplevent', 'simplevent-fonts' );
-  add_settings_field( 'title-font-name', 'Title Font Name', 'simplevent_title_font_name', 'aagi_simplevent', 'simplevent-fonts' );
-  add_settings_field( 'title-font-link', 'Title Font Link', 'simplevent_title_font_link', 'aagi_simplevent', 'simplevent-fonts' );
+     add_settings_field( 'font-name', 'Font Name', 'simplevent_font_name', 'aagi_simplevent', 'simplevent-fonts' );
+     add_settings_field( 'font-link', 'Font Link', 'simplevent_font_link', 'aagi_simplevent', 'simplevent-fonts' );
 
-  add_settings_field( 'google-analytics-ua', 'Google Analytics', 'simplevent_google_analytics_ua', 'aagi_simplevent', 'simplevent-analytics' );
-  add_settings_field( 'anonymize-ip', 'Anonymize IP', 'simplevent_anonymize_ip', 'aagi_simplevent', 'simplevent-analytics' );
+     add_settings_field( 'title-font', 'Title Font', 'simplevent_title_font', 'aagi_simplevent', 'simplevent-fonts' );
+     add_settings_field( 'title-font-name', 'Title Font Name', 'simplevent_title_font_name', 'aagi_simplevent', 'simplevent-fonts' );
+     add_settings_field( 'title-font-link', 'Title Font Link', 'simplevent_title_font_link', 'aagi_simplevent', 'simplevent-fonts' );
 
-  add_settings_field( 'meta_tags', 'Meta Tags', 'simplevent_meta_tags', 'aagi_simplevent', 'simplevent-meta' );
 
+     add_settings_field( 'google-analytics-ua', 'Google Analytics', 'simplevent_google_analytics_ua', 'aagi_simplevent', 'simplevent-analytics' );
+     add_settings_field( 'anonymize-ip', 'Anonymize IP', 'simplevent_anonymize_ip', 'aagi_simplevent', 'simplevent-analytics' );
+
+ 
+     add_settings_field( 'meta_tags', 'Meta Tags', 'simplevent_meta_tags', 'aagi_simplevent', 'simplevent-meta' );
 
 
 
@@ -344,8 +348,8 @@ function simplevent_analytics() {
 function simplevent_meta() {
 
      echo 'HTML Header - Meta Tags';
-   
-   }
+}
+
 
 function simplevent_header_options() {
   echo '';
@@ -660,7 +664,6 @@ function simplevent_anonymize_ip() {
 
 }
 
-
 //Meta
 
 function simplevent_meta_tags() {
@@ -678,6 +681,23 @@ function simplevent_meta_tags() {
      echo '<p style="margin-top:20px;"><b>Keywords</b></p>';
      echo '<p><i>Keywords</b>Mit Komma (,) trennen. (SEO, Keyword, ...)</i></p>';
 
+
+//Meta
+
+function simplevent_meta_tags() {
+     $tags = [
+          'Keywords' => '',
+          'SocialMedia' => [
+               'Title' => '', 
+               'Image' => '', 
+               'URL' => '',
+               'Description' => '',
+          ]
+     ];
+     $meta_tags = is_array(get_option('meta_tags')) ? get_option('meta_tags') : $tags;
+
+     echo '<p style="margin-top:20px;"><b>Keywords</b></p>';
+     echo '<p><i>Keywords</b>Mit Komma (,) trennen. (SEO, Keyword, ...)</i></p>';
      echo '<textarea type="textarea" rows="4" name="meta_tags[Keywords]"  style="width: 100%;">' . $meta_tags['Keywords'] . '</textarea>';
 
      echo '<p style="margin-top:20px;"><b>Title</b></p>';
@@ -686,7 +706,7 @@ function simplevent_meta_tags() {
      echo '<p style="margin-top:20px;"><b>Image</b></p>';
      echo '<div class="image-preview image-neg"><img src="'. $meta_tags['SocialMedia']['Image'].'" /></div>';
      echo '<input type="button" style="width:25%;" value="Image" class="button button-secondary upload-button" data-target="meta-tags-image"/><input type="" style="width:73%;" id="meta-tags-image" name="meta_tags[SocialMedia][Image]" value="' .$meta_tags['SocialMedia']['Image']. '"/>';
-     
+
      echo '<p style="margin-top:20px;"><b>URL</b></p>';
      echo '<input type="text" name="meta_tags[SocialMedia][URL]" value="'.$meta_tags['SocialMedia']['URL'].'" placeholder="URL"/>';
 
