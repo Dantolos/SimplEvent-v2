@@ -182,7 +182,7 @@
                               }
                          }
                          .schedule-slot-time {
-                              position: relative;
+                              position: absolute;
                               opacity: .8;
                               top:0;
                               right: 0;
@@ -195,6 +195,7 @@
                               font-size: 1em;
                               @include breakpoint('m'){
                                    right: unset;
+                                   position: relative;
                                    left:0;
                                    font-weight: bold;
                                    text-align: center;
