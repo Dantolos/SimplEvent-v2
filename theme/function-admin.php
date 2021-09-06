@@ -88,12 +88,15 @@ function simplevent_custom_settings() {
   register_setting( 'simplevent-settings-group', 'google_analytics_ua' );
   register_setting( 'simplevent-settings-group', 'anonymize_ip' );
 
+  register_setting( 'simplevent-settings-group', 'meta_tags' );
 
   //****SECTIONS
   add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
   add_settings_section( 'simplevent-color-options', 'Colors', 'simplevent_color_options', 'aagi_simplevent');
   add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
   add_settings_section( 'simplevent-analytics', 'Analytics', 'simplevent_analytics', 'aagi_simplevent');
+  add_settings_section( 'simplevent-meta', 'Meta', 'simplevent_meta', 'aagi_simplevent');
+
 
 
   //****fields
@@ -123,6 +126,7 @@ function simplevent_custom_settings() {
   add_settings_field( 'google-analytics-ua', 'Google Analytics', 'simplevent_google_analytics_ua', 'aagi_simplevent', 'simplevent-analytics' );
   add_settings_field( 'anonymize-ip', 'Anonymize IP', 'simplevent_anonymize_ip', 'aagi_simplevent', 'simplevent-analytics' );
 
+  add_settings_field( 'meta_tags', 'Meta Tags', 'simplevent_meta_tags', 'aagi_simplevent', 'simplevent-meta' );
 
 
 
@@ -331,15 +335,17 @@ function simplevent_fonts() {
 
 }
 
-
-
 function simplevent_analytics() {
 
   echo 'Google-Analytics einbinnden';
 
 }
 
+function simplevent_meta() {
 
+     echo 'HTML Header - Meta Tags';
+   
+   }
 
 function simplevent_header_options() {
   echo '';
@@ -654,6 +660,41 @@ function simplevent_anonymize_ip() {
 
 }
 
+
+//Meta
+
+function simplevent_meta_tags() {
+     $tags = [
+          'Keywords' => '',
+          'SocialMedia' => [
+               'Title' => '', 
+               'Image' => '', 
+               'URL' => '',
+               'Description' => '',
+          ]
+     ];
+     $meta_tags = is_array(get_option('meta_tags')) ? get_option('meta_tags') : $tags;
+
+     echo '<p style="margin-top:20px;"><b>Keywords</b></p>';
+     echo '<p><i>Keywords</b>Mit Komma (,) trennen. (SEO, Keyword, ...)</i></p>';
+
+     echo '<textarea type="textarea" rows="4" name="meta_tags[Keywords]"  style="width: 100%;">' . $meta_tags['Keywords'] . '</textarea>';
+
+     echo '<p style="margin-top:20px;"><b>Title</b></p>';
+     echo '<input type="text" name="meta_tags[SocialMedia][Title]" value="'.$meta_tags['SocialMedia']['Title'].'" placeholder="Title"/>';
+
+     echo '<p style="margin-top:20px;"><b>Image</b></p>';
+     echo '<div class="image-preview image-neg"><img src="'. $meta_tags['SocialMedia']['Image'].'" /></div>';
+     echo '<input type="button" style="width:25%;" value="Image" class="button button-secondary upload-button" data-target="meta-tags-image"/><input type="" style="width:73%;" id="meta-tags-image" name="meta_tags[SocialMedia][Image]" value="' .$meta_tags['SocialMedia']['Image']. '"/>';
+     
+     echo '<p style="margin-top:20px;"><b>URL</b></p>';
+     echo '<input type="text" name="meta_tags[SocialMedia][URL]" value="'.$meta_tags['SocialMedia']['URL'].'" placeholder="URL"/>';
+
+     echo '<p style="margin-top:20px;"><b>Description</b></p>';
+     echo '<textarea type="textarea" rows="4" name="meta_tags[SocialMedia][Description]"  style="width: 100%;">' . $meta_tags['SocialMedia']['Description'] . '</textarea>';
+
+
+}
 
 
 //----------------------------------HEADER ---------------------------------------//

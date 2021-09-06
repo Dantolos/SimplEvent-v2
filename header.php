@@ -5,9 +5,15 @@
      <meta name="viewport" content="width=device-width">
      <title><?php bloginfo('name'); ?></title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="keywords" content="<?php echo esc_attr( get_option( 'se_keywords' ) ); ?>">
-     <meta name="description" content="<?php echo __('Jedes Jahr treffen sich 1350 Führungspersönlichkeiten aus Wirtschaft, Wissenschaft, Politik und Medien zum aktiven Meinungsaustausch und branchenübergreifenden Dialog.'); ?>">
-     <meta name="copyright" content="<?php bloginfo('name'); ?> 2020-2021" />
+     <meta name="description" content="<?php echo get_option('meta_tags')['SocialMedia']['Description']; ?>">
+     <meta name="copyright" content="<?php echo bloginfo('name'); ?> 2020-2021" />
+
+     <meta name="keywords" content="<?php echo get_option('meta_tags')['Keywords']; ?>" />
+
+     <meta property="og:title" content="<?php echo get_option('meta_tags')['SocialMedia']['Title']; ?>">
+     <meta property="og:description" content="<?php echo get_option('meta_tags')['SocialMedia']['Description']; ?>">
+     <meta property="og:image" content="<?php echo get_option('meta_tags')['SocialMedia']['Image']; ?>">
+     <meta property="og:url" content="<?php echo get_option('meta_tags')['SocialMedia']['URL']; ?>">
 
      <?php 
      //Google Analytics
