@@ -198,7 +198,7 @@ class se2_Schedule {
                          $sessions_slots .= '<h5>'.$sessionSlot['value'].'</h5>';
 
                          //SESSIONS
-                         $sessions_slots .= '<div class="schedule-slot-info">';
+                         
                          $sessions_slots .= '<div class="schedule-sessions ">';
                          foreach($sessions->posts as $session){
                               $sessionID = $session->ID;
@@ -208,9 +208,16 @@ class se2_Schedule {
                               $sessions_slots .= '</div>';
                          }
                          $sessions_slots .= '</div>';
+                         $sessions_slots .= '<div class="schedule-slot-info">';
                          $sessions_slots .= '</div>';
 
                     $sessions_slots .= '</div>';
+
+                    //more overflow
+                    $sessions_slots .= '<div class="schedule-slot-overflow">';
+                    $sessions_slots .= '<p><b>more</b></p>';
+                    $sessions_slots .= '</div>';
+
                $sessions_slots .= '</div>';
 
           }

@@ -19,6 +19,8 @@ echo '<div class="container se2-mediacorner" style="margin-bottom:50px;">';
      echo $mediaCorner->cast_press_realese($pageID);
      
      echo $mediaCorner->cast_photo_archive($pageID);
+
+     echo $mediaCorner->cast_audio_archive($pageID);
      
 echo '</div>';
 
