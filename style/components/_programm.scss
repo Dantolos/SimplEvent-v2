@@ -433,8 +433,15 @@
      height: fit-content;
      position: unset;
 
-     .schedule-separator-standard {
+     .schedule-separator-standard,
+     .schedule-separator-placeholder {
           background-color: var(--shadeColor);
+          .schedule-container{
+          h5{
+               position: absolute;
+               top: 50%;
+               transform: translate(0, -50%);
+          }}
      }
 }
 .schedule-slot-liste {
@@ -450,6 +457,11 @@
 
           h5 {
                font-size: 1.8em;
+               @include breakpoint( 's' ){
+                    text-align: center;
+                    margin-bottom:20px;
+
+               }
           }
 
           @include breakpoint( 'm' ){
@@ -612,8 +624,16 @@
                     }
                }
           }
-     }
+
+
+         }    //separator
+
 }
+     
+     
+
+
+
 
 .slot-shadow {
      box-shadow: 0 3px 30px var(--shadeColor);
