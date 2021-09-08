@@ -104,7 +104,7 @@
           display:block;
      }
     
-     .schedule-program {
+     .schedule-program-kalender {
           position:absolute;
           overflow-x: hidden;
           display: flex;
@@ -137,7 +137,7 @@
                     top: 50px;
                }
 
-               .schedule-slot {
+               .schedule-slot-kalender {
                     position: absolute;
                     
                     height:50px;
@@ -275,6 +275,9 @@
                               }
                               .schedule-slot-speaker-name {
                                    width: calc(95% - 25px);
+                                   h6 {
+                                        color: $primary;
+                                   }
                               }
                               @include breakpoint( 'm' ){ 
                                    width: 100%;
@@ -420,4 +423,123 @@
      }
 
      p { text-align: center; font-size: 80%; margin-top:10px;  }
+}
+
+// ***************************************
+// LISTE
+// ***************************************
+.schedule-program-liste {
+     margin-top:75px;
+     height: fit-content;
+     position: unset;
+
+     .schedule-separator-standard {
+          background-color: var(--shadeColor);
+     }
+}
+.schedule-slot-liste {
+     margin:20px;
+     
+     .schedule-container { 
+          padding:40px 20px 40px 150px;
+        
+          border:1px solid var(--shadeColor);
+          border-radius: 3px;
+          margin:5px;
+          position: relative;
+
+          h5 {
+               font-size: 1.8em;
+          }
+
+          .schedule-slot-time {
+               position: absolute;
+               left:40px;
+               top:50%;
+               transform: translate(0, -50%);
+               width:40px;
+               
+               
+               .hour, .minute { 
+                    width:100%;
+                    text-align: center;
+                    font-size:30px !important;
+                    line-height: 10px !important;
+                    
+                    font-optical-sizing: none;
+               }
+               .hour{ font-weight: bold;}
+               .till {
+                    border-top: solid 1px var(--primeColor);
+                    width:100%;
+                    text-align: center;
+                    line-height:0 !important;
+                    font-size:14px !important;
+                    padding-top:8px;
+                    margin-top:-5px;
+                    margin-bottom: 0;
+               }
+               @include breakpoint( 'm' ){ 
+                    .hour, .minute { line-height: 12px !important; }
+               }
+               @include breakpoint( 's' ){ 
+                    .hour, .minute { line-height: 15px !important; }
+                    .till {margin-top:-2px;}
+               }
+          }
+
+
+          
+         
+
+          //Speaker
+          .schedule-slot-speaker-content {
+               h5 {
+                    font-size: 1em;
+               }
+               h4 {
+                    font-size: 1.8em;
+               }
+               .schedule-slot-speaker-image {
+                    width: 100px;
+                    height: 120px;
+                    border-radius: 0;
+                    margin-right:2.5%;
+               }
+          }
+
+          //Sessions
+          .schedule-sessions  {
+               margin-top: 20px;
+               .schedule-session {
+                    cursor: pointer;
+                    h6 {
+                         font-size:1.2em;
+                         padding:10px 0;
+                    }
+               } 
+          }
+          
+
+          //Panel
+          .schedule-slot-panel-speaker{
+               cursor: pointer;
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               margin-top:10px;
+               .schedule-slot-panel-speaker-image {
+                    width:60px;
+                    height:75px;
+                    margin-right:2.5%;
+                    @include imageSettings;
+                    
+               }
+               h6 { color:$primary; }
+          }
+     }
+}
+
+.slot-shadow {
+     box-shadow: 0 3px 30px var(--shadeColor);
 }

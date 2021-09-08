@@ -9,15 +9,28 @@ class se2_Schedule {
      public $scheduleGrid;
      public $dateArray = array();
      public $activeDay;
+     public $view;
+     public $viewClass = 'schedule-slot';
      public $year = '2021';
 
      function __construct( $pageID ) {
-       
-          
+          $this->view = get_field( 'ansicht', $pageID );
+          switch ( $this->view ) {
+               case 'kalender':
+                    $this->viewClass = '-kalender';
+                    break;
+               case 'liste':
+                    $this->viewClass = '-liste';
+                    break;
+               default:
+                    $this->viewClass = '';
+                    break;
+          }
+
           $this->year = get_field('jahr', $pageID)->slug;
 
           $this->dateFormat = new Date_Format;
-
+          
 
           //set Date-Menu to change programm date
           $this->dateArray = $this->dateFormat->date_range(get_option( 'facts_date' )['from'], get_option( 'facts_date' )['to'], "+1 day" );
@@ -34,41 +47,26 @@ class se2_Schedule {
                     }
 
                     $beautyDay = date( 'l | j. F. Y', $day  );      
-                    $checkclass = ($this->activeDay === $day ) ? 'day-tab-activ' : 'day-tab-passiv';
+                    $checkclass = ( $this->activeDay === $day ) ? 'day-tab-activ' : 'day-tab-passiv';
                     $this->scheduleGrid .= '<button class="'.$checkclass.'" value="'.$day.'" day="'.$day.'">'.$beautyDay.'</button>';
                }
                $this->scheduleGrid .= '</div>';
           }
 
-          
-
           //build up schedule Grid
-          $this->scheduleGrid .= '<div class="schedule-grid" id="schedule-timeline">';
+          if( get_field( 'ansicht', $pageID ) === 'kalender' ){
+               $this->scheduleGrid .= $this->schedule_Grid();
+          }
 
-          for ($i=5; $i < 20; $i++) { 
-
-               $hour = '1000-01-30-' . ($i + 1);
-               $timestamp = date( 'Hi', strtotime( str_replace( '/', '-',  $hour) ) );
-               $this->scheduleGrid .= '<div class="schedule-hour">';           
-               $this->scheduleGrid .= '<h5>'.$this->dateFormat->formating_Date_Language( $hour, 'time' ).'</h5>';
-
-               for ($e=0; $e < 12; $e++) { 
-                    $addtime = $e * 5;
-                    $currstamp = date('Hi',strtotime($timestamp." +".$addtime." minutes"));
-                    $this->scheduleGrid .= '<div class="schedule-5min" timestamp="' . $currstamp . '"></div>';
-               }
-               $this->scheduleGrid .= '</div>';
-          }         
-          $this->scheduleGrid .= '</div>';
-          $this->scheduleGrid .= '<div class="schedule-program">';
           //implement needed programm slots
+          $this->scheduleGrid .= '<div class="schedule-program'.$this->viewClass.'">';
           foreach($this->dateArray as $day){
                $checkclass = ($this->activeDay === $day ) ? 'day-schedule-activ' : 'day-schedule-passiv';
 
                $this->scheduleGrid .= '<div class="schedule-program-day '.$checkclass.'" day="'.$day.'">';
                $this->scheduleGrid .= $this->get_speaker($day);
                $this->scheduleGrid .= $this->get_sessions($day);
-               $this->scheduleGrid .= $this->get_separators( $pageID, $day );
+               $this->scheduleGrid .= $this->get_separators( $pageID, $day);
                $this->scheduleGrid .= '</div>';
                
           }
@@ -77,12 +75,29 @@ class se2_Schedule {
      }
 
 
+     //************************************************ */
+     //***********GRID********** */
+     public function schedule_Grid(){
+          $ScheduleGrid = '<div class="schedule-grid" id="schedule-timeline">';
 
-     public function programm_slots(){
+          for ($i=5; $i < 20; $i++) { 
+               
+               $hour = '1000-01-30-' . ($i + 1);
+               $timestamp = date( 'Hi', strtotime( str_replace( '/', '-',  $hour) ) );
+               $ScheduleGrid .= '<div class="schedule-hour">';           
+               $ScheduleGrid .= '<h5>'.$this->dateFormat->formating_Date_Language( $hour, 'time' ).'</h5>';
 
-
-
+               for ($e=0; $e < 12; $e++) { 
+                    $addtime = $e * 5;
+                    $currstamp = date('Hi',strtotime($timestamp." +".$addtime." minutes"));
+                    $ScheduleGrid .= '<div class="schedule-5min" timestamp="' . $currstamp . '"></div>';
+               }
+               $ScheduleGrid .= '</div>';
+          }         
+          $ScheduleGrid .= '</div>';
+          return $ScheduleGrid;
      }
+     
 
      // Speaker SLOTS
      // Read Slots out the speakers-posts in the selected year 
@@ -103,7 +118,7 @@ class se2_Schedule {
 
           $speakers = new WP_Query( $args );
 
-
+          
           foreach( $speakers->posts as $speaker ){
 
                $speakerID = $speaker->ID;
@@ -121,7 +136,7 @@ class se2_Schedule {
                $durationM = date( 'i', strtotime(get_field('speaker_zeit', $speakerID)['ende'])) - date( 'i', strtotime(get_field('speaker_zeit', $speakerID)['start']));
                $duration = ($durationH * 60) + $durationM;
 
-               $speaker_slots .= '<div class="schedule-slot schedule-speaker" start="'.$start.'" dur="'.$duration.'" ende="'.$ende.'" date="'.$speakerDate.'" speakerid="'.$speakerID.'">';
+               $speaker_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-speaker" start="'.$start.'" dur="'.$duration.'" ende="'.$ende.'" date="'.$speakerDate.'" speakerid="'.$speakerID.'">';
 
                     $speaker_slots .= '<div class="schedule-container">';
                          //slot time
@@ -143,7 +158,8 @@ class se2_Schedule {
                                              $speaker_slots .= '<h5 class="schedule-slot-title"><b>'.$progtitel.'</b></h5>'; 
                                         }
                                         $speaker_slots .= '<h4>'.$name.'</h4>';
-                                        $speaker_slots .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).'</h6>';
+                                        $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+                                        $speaker_slots .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</h6>';
 
                                         //on hover
                                         $speaker_slots .= '<div class="schedule-slot-info">';
@@ -152,9 +168,6 @@ class se2_Schedule {
 
                                    $speaker_slots .= '</div>';
 
-                                   
-                                   
-                                   
                          $speaker_slots .= '</div>';
                     $speaker_slots .= '</div>';
                $speaker_slots .= '</div>';
@@ -195,7 +208,7 @@ class se2_Schedule {
      
                $timestamps = $this->set_start_duration_end_timestampts( $sessionSlot['start'], $sessionSlot['ende'] );
 
-               $sessions_slots .= '<div class="schedule-slot schedule-session-slot" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$slotDate.'">';
+               $sessions_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-session-slot" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$slotDate.'">';
                     $sessions_slots .= '<div class="schedule-container">';
                          
                          $sessions_slots .= $this->slot_time( $sessionSlot['start'], $sessionSlot['ende'] );
@@ -251,10 +264,13 @@ class se2_Schedule {
                     // STANDARD LAYOUT
                     if($sep['acf_fc_layout'] === 'standard'){
                          $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot schedule-separator-standard" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-standard" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                              if($sep['lead']){
+                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                              }
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
@@ -263,10 +279,13 @@ class se2_Schedule {
                     // STANDARD FILLER
                     if($sep['acf_fc_layout'] === 'filler'){
                          $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot schedule-separator-filler" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-filler" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                              if($sep['lead']){
+                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                              }
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
@@ -275,10 +294,13 @@ class se2_Schedule {
                     // STANDARD PLACEHOLDER
                     if($sep['acf_fc_layout'] === 'placeholder'){
                          $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot schedule-separator-placeholder" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-placeholder" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                              if($sep['lead']){
+                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                              }
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
@@ -286,10 +308,13 @@ class se2_Schedule {
                     // STANDARD SHOW
                     if($sep['acf_fc_layout'] === 'show'){
                          $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot schedule-separator-show" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-show" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                              if($sep['lead']){
+                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                              }
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
@@ -297,12 +322,13 @@ class se2_Schedule {
                     // STANDARD PANEL
                     if($sep['acf_fc_layout'] === 'panel'){
                          $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot schedule-separator-panel" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-panel" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-
-                              $separators_slots .= '<div class="schedule-slot-info">';
+                              if($sep['lead']){
+                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                              }
                                    $separators_slots .= '<div class="schedule-slot-panel-speakers">';
                                    foreach( $sep['speaker'] as $panelSpeaker ){
                                    
@@ -319,13 +345,16 @@ class se2_Schedule {
 
                                              $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
                                                   $separators_slots .= '<h5>'.$name.'</h5>';
+                                                  $speakerFirma = (get_field( 'speaker_firma', $panelSpeaker )) ? ', '.get_field( 'speaker_firma', $panelSpeaker ) : '';
+                                                       $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).$speakerFirma.'</h6>';
                                                   $separators_slots .= '<div class="schedule-slot-info">';
-                                                       $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).'</h6>';
+                                                       
                                                   $separators_slots .= '</div>';
                                              $separators_slots .= '</div>';
                                         $separators_slots .= '</div>';
                                    } 
-                                   $separators_slots .= '</div>';       
+                                   $separators_slots .= '</div>';
+                              $separators_slots .= '<div class="schedule-slot-info">';       
                               $separators_slots .= '</div>';
 
                               $separators_slots .= '</div>';
@@ -362,18 +391,36 @@ class se2_Schedule {
           ];
 
           return $timestamp;
-
      }
 
      public function slot_time( $start, $ende ){
+       
           $slotTime = '<div class="schedule-slot-time">';
-               $slotTime .= date( 'H:i', strtotime($start) );
-               $slotTime .= ' - ';
-               $slotTime .= date( 'H:i', strtotime($ende) );
+
+          switch ($this->view) {
+               case 'kalender':
+                    $slotTime .= date( 'H:i', strtotime($start) );
+                    $slotTime .= ' - ';
+                    $slotTime .= date( 'H:i', strtotime($ende) );
+                    break;
+               case 'liste':
+                    $slotTime .= '<p class="hour">'.date( 'H', strtotime($start) ).'</p>';
+                    $slotTime .= '<p class="minute">'.date( 'i', strtotime($start) ).'</p>';
+                    $slotTime .= '<p class="till">'.date( 'H:i', strtotime($ende) ).'</p>';
+                    break;
+               default:
+                    $slotTime .= date( 'H:i', strtotime($start) );
+                    $slotTime .= ' - ';
+                    $slotTime .= date( 'H:i', strtotime($ende) );
+                    break;
+          }
+
+               
+
+
+
           $slotTime .= '</div>';
           return $slotTime;
      }
-
-     
 
 }
