@@ -850,8 +850,6 @@ function simplevent_se_c_text() {
   echo '<input type="text" name="se_c_text" value="' .$se_c_text. '" placeholder="Swiss Economic Forum | 2017"/>';
 }
 
-
-
 function simplevent_se_contact_name() {
      $se_contact_name = get_option( 'se_contact_name' );
      echo '<input type="text" name="se_contact_name" value="' .$se_contact_name. '" placeholder="Name"/>';

@@ -3,6 +3,32 @@
     "title": "Page | Programm",
     "fields": [
         {
+            "key": "field_61371fb5c1a26",
+            "label": "Ansicht",
+            "name": "ansicht",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "kalender": "Kalender",
+                "liste": "Liste"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "wpml_cf_preferences": 1,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
             "key": "field_6088267381ba5",
             "label": "Jahr",
             "name": "jahr",
@@ -127,7 +153,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "30",
                                         "class": "",
                                         "id": ""
                                     },
@@ -139,6 +165,26 @@
                                     "maxlength": ""
                                 },
                                 {
+                                    "key": "field_613779f937cb2",
+                                    "label": "Lead",
+                                    "name": "lead",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": 2,
+                                    "new_lines": "",
+                                    "wpml_cf_preferences": 2
+                                },
+                                {
                                     "key": "field_6088255a81ba4",
                                     "label": "Link",
                                     "name": "link",
@@ -147,12 +193,12 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "20",
                                         "class": "",
                                         "id": ""
                                     },
-                                    "return_format": "url",
-                                    "wpml_cf_preferences": 2
+                                    "wpml_cf_preferences": 2,
+                                    "return_format": "url"
                                 }
                             ],
                             "min": "",
@@ -207,7 +253,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "30",
                                         "class": "",
                                         "id": ""
                                     },
@@ -219,6 +265,26 @@
                                     "maxlength": ""
                                 },
                                 {
+                                    "key": "field_613779b837cb1",
+                                    "label": "Lead",
+                                    "name": "lead",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": 2,
+                                    "new_lines": "",
+                                    "wpml_cf_preferences": 2
+                                },
+                                {
                                     "key": "field_60cc4f7607579",
                                     "label": "Link",
                                     "name": "link",
@@ -227,7 +293,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "20",
                                         "class": "",
                                         "id": ""
                                     },
@@ -287,7 +353,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "30",
                                         "class": "",
                                         "id": ""
                                     },
@@ -299,6 +365,26 @@
                                     "maxlength": ""
                                 },
                                 {
+                                    "key": "field_61377a3b37cb3",
+                                    "label": "Lead",
+                                    "name": "lead",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": 2,
+                                    "new_lines": "",
+                                    "wpml_cf_preferences": 2
+                                },
+                                {
                                     "key": "field_60cc4fef0757e",
                                     "label": "Link",
                                     "name": "link",
@@ -307,7 +393,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "20",
                                         "class": "",
                                         "id": ""
                                     },
@@ -367,7 +453,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "30",
                                         "class": "",
                                         "id": ""
                                     },
@@ -379,6 +465,26 @@
                                     "maxlength": ""
                                 },
                                 {
+                                    "key": "field_61377a5a37cb4",
+                                    "label": "Lead",
+                                    "name": "lead",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": 2,
+                                    "new_lines": "",
+                                    "wpml_cf_preferences": 2
+                                },
+                                {
                                     "key": "field_60cc7309236d3",
                                     "label": "Link",
                                     "name": "link",
@@ -387,7 +493,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "20",
                                         "class": "",
                                         "id": ""
                                     },
@@ -447,7 +553,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "30",
                                         "class": "",
                                         "id": ""
                                     },
@@ -459,6 +565,26 @@
                                     "maxlength": ""
                                 },
                                 {
+                                    "key": "field_61377a8437cb5",
+                                    "label": "Lead",
+                                    "name": "lead",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "30",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": 2,
+                                    "new_lines": "",
+                                    "wpml_cf_preferences": 2
+                                },
+                                {
                                     "key": "field_60cca09d96bc0",
                                     "label": "Speaker",
                                     "name": "speaker",
@@ -467,7 +593,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "40",
+                                        "width": "20",
                                         "class": "",
                                         "id": ""
                                     },
@@ -519,5 +645,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1624023363
+    "modified": 1631025879
 }
