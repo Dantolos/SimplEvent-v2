@@ -201,11 +201,14 @@ class se2_Schedule {
                );
                $sessions = new WP_Query( $sessionsArgs );
 
-               $slotDate = strtotime( str_replace( '/', '-', $sessionSlot['date'] ) );
-               if( $slotDate !== $day ){
-                    continue;
+               
+               if(isset($sessionSlot['date'])){
+                    $slotDate = strtotime( str_replace( '/', '-', $sessionSlot['date'] ) );
+                    if( $slotDate !== $day ){
+                         continue; 
+                    }
                }
-     
+          
                $timestamps = $this->set_start_duration_end_timestampts( $sessionSlot['start'], $sessionSlot['ende'] );
 
                $sessions_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-session-slot" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$slotDate.'">';
