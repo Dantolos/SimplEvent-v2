@@ -36,7 +36,7 @@ header {
           @include breakpoint( 'm' ){
                left:5%;
                top:0px;
-               max-height:50px;
+               max-height:80%;
                width: 40%;
           }
 
@@ -75,12 +75,12 @@ header {
           @include breakpoint( 'm' ){
                position: absolute;
                margin: auto;
-               top:0; right:0; bottom:0; left:0;
+               right:0; bottom:40px; left:0;
                overflow-y:scroll;
                @include hideScrollbar;
                max-height:80%;
                width: 100%;
-         
+               
                li{
                    
             
@@ -257,11 +257,11 @@ header {
           
           @include breakpoint( 'm' ){
                position: absolute;
-               bottom:10px;
+               bottom:0px;
                top: unset;
                width: 100%;
                justify-content: center;
-     
+               height: 40px;
           }
 
           #modebutton, #languagebutton a button {
