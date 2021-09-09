@@ -49,8 +49,6 @@ class Walker_Nav_Primary extends Walker_Nav_menu {
                }
           }
         }
-        
-
         $attributes .= ( $args->walker->has_children ) ? ' class="parent-menu-item"' : '';
 
         $item_output = $item->befor;

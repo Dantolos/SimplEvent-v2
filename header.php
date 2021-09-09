@@ -125,8 +125,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.54'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.18' );
+     $scriptversion = '1.0.55'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.19' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -221,13 +221,13 @@ wp_head();
                     'menu'              => "Hauptmenu", 
                     'menu_class'        => "menu",
                     'container'         => "nav", 
-                    'container_class'   => "se2-navigation", 
+                    'container_class'   => "se2-navigation menu-content", 
                     'walker'            => new Walker_Nav_Primary()
                );
                wp_nav_menu( $menuArgs );
                ?>
 
-               <div id="extramenu">
+               <div id="extramenu" class="menu-content">
                <?php
                //SPRACHMENU
                $langMenu = esc_attr( get_option( 'se_header_language' ));

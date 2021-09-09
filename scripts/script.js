@@ -29,14 +29,37 @@ let LB_SPEAKER = new se2_LB_Speaker();
 let LB_SESSION = new se2_LB_Session();
 let LB_CANDIDATE = new se2_LB_Candidate();
 
-
-//std light mode
-document.querySelector('body').classList.add('light');
-
-
 //---------------------------------
 //HEADER
 //---------------------------------
+
+//MOBILE MODE BY **mBREAKPOINT** PIXELS
+const mBREAKPOINT = 1024;
+document.querySelector('body').classList.add('light');
+var BURGERRMENU = '<div id="burger-menu"><svg version="1.1" id="se_burger_menu" x="0px" y="0px" viewBox="0 0 17.5 10.5" style="enable-background:new 0 0 17.5 10.5;" xml:space="preserve"><style media="screen">#se_burger_menu {stroke:#d9d9d9;} </style><g><line LID="0" class="se_BMstroke" x1="0" y1="1" x2="17.5" y2="1"/><line LID="1" class="se_BMstroke" x1="0" y1="5.2" x2="17.5" y2="5.2"/><line LID="2" class="se_BMstroke" x1="0" y1="9.5" x2="17.5" y2="9.5"/><line LID="3" class="se_BMstroke" x1="0" y1="5.2" x2="17.5" y2="5.2"/></g></svg></div>';
+var mobileLoaded = false;
+function LOADMOBILESCRIPTS() {
+     if (window.innerWidth < mBREAKPOINT && !mobileLoaded) {
+          jQuery('header').append(BURGERRMENU);
+          jQuery('.menu-content').wrapAll('<div id="mobile-menu-wrapper" />');
+
+          let myScript = document.createElement("script");
+          myScript.setAttribute("src", globalURL.templateUrl + "/scripts/mobile-script.js");
+          document.body.appendChild(myScript);
+
+          mobileLoaded = true;
+     }
+     if (window.innerWidth > mBREAKPOINT && mobileLoaded) {
+          jQuery('.menu-content').unwrap('#mobile-menu-wrapper');
+          jQuery('#burger-menu').remove();
+          mobileLoaded = false;
+     }
+
+}
+window.addEventListener('resize', () => {
+     LOADMOBILESCRIPTS();
+});
+LOADMOBILESCRIPTS();
 
 const LANGUEGEBUTTONCONTAINER = document.getElementById('languagebutton')
 if (LANGUEGEBUTTONCONTAINER) {
@@ -115,7 +138,7 @@ jQuery(document).ajaxComplete(function () {
      }
 
 });
- 
+
 function call_post_lightbox(POST) {
      POST.addEventListener('click', async () => {
           console.log(POST.getAttribute('postid'))

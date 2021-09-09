@@ -14,7 +14,10 @@ header {
     align-items: center;
     
 
-    @include breakpoint( 's' ){
+    @include breakpoint( 'm' ){
+          height:8vw;
+     }
+     @include breakpoint( 's' ){
           height:16vw;
      }
 
@@ -25,11 +28,12 @@ header {
           left:10%;
           position: absolute;
           margin: auto;
+          z-index: 10000;
           top: 0;
           bottom: 0;
           max-height:40px;
           width: var(--headerLogoWidth);
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                left:5%;
                top:0px;
                max-height:50px;
@@ -68,12 +72,12 @@ header {
                }
           }
      
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                position: absolute;
                margin: auto;
                top:0; right:0; bottom:0; left:0;
                overflow-y:scroll;
-               
+               @include hideScrollbar;
                max-height:80%;
                width: 100%;
          
@@ -87,7 +91,7 @@ header {
         .current-menu-parent,
         .se2-current.current_page_item {
             border-bottom: 4px solid $secondary;
-            @include breakpoint( 's' ){
+            @include breakpoint( 'm' ){
                border-bottom: unset;
                color: $primaryText;
                background-color: $primary !important;
@@ -106,7 +110,7 @@ header {
             align-items: flex-end;
             align-content: flex-end;
             justify-content: flex-end;
-            @include breakpoint( 's' ){
+            @include breakpoint( 'm' ){
                width:100%;
                display: block;
            
@@ -120,13 +124,17 @@ header {
                 height:35px;
                 padding: 0 20px;
 
-                @include breakpoint( 's' ){
+                @include breakpoint( 'm' ){
                     width:100%;
                     display: block;
                     height:fit-content;
                     padding: 15px 10%;
+                    font-size: 1.2em;
                     background-color:  var(--shadeColor);
                     border-bottom:2px solid var(--secondColor);
+                    .caret {
+                         display: none;
+                    }
                 }
                 /* border-left:1px solid var(--midColor); */
                 &:hover {  border-bottom: 0px solid $primary; }
@@ -135,7 +143,8 @@ header {
                     .se2-sub-menu {
                         display: block;
                         visibility: visible; 
-                    
+                         
+                        
                         
                     }
                     
@@ -157,7 +166,7 @@ header {
                 color: var(--secondColor);
                 border-bottom: 1px solid var(--midColor);
 
-                @include breakpoint( 's' ){
+                @include breakpoint( 'm' ){
                     display: block;
                     visibility: unset; 
                     position: unset;
@@ -172,16 +181,24 @@ header {
                 li {
                     padding: 5px 20px;
                     text-decoration: none;
-                    @include breakpoint( 's' ){
+
+                    a{
+                         padding: 5px 10px;
+                        height:100%;
+                        width:100%;
+                        display: block;
+                    }
+                    @include breakpoint( 'm' ){
                         background-color:  var(--secondColor);
                         border-radius:5px;
-                        padding: 5px 10px;
+                        
                         margin:4px 0 ;
                     }
                     
                     &:hover {
                         background-color: var(--secondColor);
                         color: var(--primeColor);
+                        
                     }
 
                     
@@ -189,7 +206,7 @@ header {
 
                 .se2-current {
                     background-color:$secondary;
-                    @include breakpoint( 's' ){
+                    @include breakpoint( 'm' ){
                          color: $primaryText;
                          background-color: $secondary !important;
                     }
@@ -211,7 +228,18 @@ header {
                .active-menu {
                     stroke: var(--primeColor) !important;
                }
-          
+          @include breakpoint( 'm' ){
+               right: 3vw;
+               top: 3vw;
+               width: 5vw;
+          }
+          @include breakpoint( 's' ){
+               top: 5vw;
+               right: 5vw;
+               height: 8vh;
+               width: 10vw;
+           }
+
      }
 
     //------------------------------
@@ -227,7 +255,7 @@ header {
       
           background-color: var(--primeColor);
           
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                position: absolute;
                bottom:10px;
                top: unset;
