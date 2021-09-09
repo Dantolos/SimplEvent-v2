@@ -52,6 +52,10 @@ function LOADMOBILESCRIPTS() {
      if (window.innerWidth > mBREAKPOINT && mobileLoaded) {
           jQuery('.menu-content').unwrap('#mobile-menu-wrapper');
           jQuery('#burger-menu').remove();
+          var MOBILEMENU = document.getElementById('mobile-menu-wrapper')
+          var StaggerItems = document.querySelectorAll('.menu-item, #extramenu')
+          gsap.set(MOBILEMENU, { y: '0', scale:1, opacity: 1 })
+          gsap.set(StaggerItems, { y: '0', scale:1, opacity: 1 })
           mobileLoaded = false;
      }
 

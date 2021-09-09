@@ -140,10 +140,6 @@ function theme_add_files()
      
 
      wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), $scriptversion, true );
-
-     
-    
-          
 }
 add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 
@@ -212,9 +208,12 @@ wp_head();
                ?>
 
                <div id="extramenu" class="menu-content">
-               <?php
-               //SPRACHMENU
-               $langMenu = esc_attr( get_option( 'se_header_language' ));
+
+                   
+
+                    <?php
+                    //SPRACHMENU
+                    $langMenu = esc_attr( get_option( 'se_header_language' ));
                     if( $langMenu === 'on') { 
                          echo '<div id="languagebutton">';
                               //display language menu
@@ -229,24 +228,26 @@ wp_head();
                               }
                          echo '</div>'; 
                     }
+
+                    //ANMELDEBUTTON
+                    $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
+                    $seanmeldung = esc_attr( get_option( 'se_anmeldung' ) );
+                    if( $seanmeldung === 'on') { ?>
+                         <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">
+                         <div id="header_anmeldebutton">
+                              <?php
+                              echo __($regBtnText, 'SimplEvent');
+                              ?>
+                         </div>
+                         </a>
+                    <?php } 
+
+
                     if( get_option( 'se_header_mode_menu' ) == 'on' ){
                          echo '<button id="modebutton">Darkmode</button>';
                     }
                     ?>
-                    <?php
-                    //ANMELDEBUTTON
-                    $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
-                         $seanmeldung = esc_attr( get_option( 'se_anmeldung' ) );
-                         if( $seanmeldung === 'on') { ?>
-                              <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">
-                              <div id="header_anmeldebutton">
-                                   <?php
-                                   echo __($regBtnText, 'SimplEvent');
-                                   ?>
-                              </div>
-                              </a>
-                         <?php } 
-                     ?>
+                   
 
                </div>
 

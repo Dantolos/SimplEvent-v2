@@ -33,10 +33,9 @@ function DOMOBILEMENU() {
 
           } else {
                gsap.to(
-                    StaggerItems, .2, 
-                    {stagger: .05, y: '50vh', scale:1.2, opacity: 0, } 
-               )
-               gsap.to(MOBILEMENU, { y: '-100vh', scale:1.2, opacity: 0, ease: Power1.easeOut })
+                    StaggerItems,  
+                    { stagger: {each: .01, from: "center"} , y: '50vh', scale:1.2, opacity: 0 } )
+               gsap.to(MOBILEMENU, .2, { y: '-100vh', scale:1.2, opacity: 0, ease: Power1.easeOut })
                BURGERMENU.querySelector('#se_burger_menu').classList.remove('active-menu')
 
           }
