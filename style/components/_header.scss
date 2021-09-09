@@ -14,7 +14,7 @@ header {
     align-items: center;
     
 
-    @include breakpoint( 's' ){
+    @include breakpoint( 'm' ){
           height:16vw;
      }
 
@@ -29,7 +29,7 @@ header {
           bottom: 0;
           max-height:40px;
           width: var(--headerLogoWidth);
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                left:5%;
                top:0px;
                max-height:50px;
@@ -68,7 +68,7 @@ header {
                }
           }
      
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                position: absolute;
                margin: auto;
                top:0; right:0; bottom:0; left:0;
@@ -87,7 +87,7 @@ header {
         .current-menu-parent,
         .se2-current.current_page_item {
             border-bottom: 4px solid $secondary;
-            @include breakpoint( 's' ){
+            @include breakpoint( 'm' ){
                border-bottom: unset;
                color: $primaryText;
                background-color: $primary !important;
@@ -106,7 +106,7 @@ header {
             align-items: flex-end;
             align-content: flex-end;
             justify-content: flex-end;
-            @include breakpoint( 's' ){
+            @include breakpoint( 'm' ){
                width:100%;
                display: block;
            
@@ -120,7 +120,7 @@ header {
                 height:35px;
                 padding: 0 20px;
 
-                @include breakpoint( 's' ){
+                @include breakpoint( 'm' ){
                     width:100%;
                     display: block;
                     height:fit-content;
@@ -157,7 +157,7 @@ header {
                 color: var(--secondColor);
                 border-bottom: 1px solid var(--midColor);
 
-                @include breakpoint( 's' ){
+                @include breakpoint( 'm' ){
                     display: block;
                     visibility: unset; 
                     position: unset;
@@ -172,7 +172,7 @@ header {
                 li {
                     padding: 5px 20px;
                     text-decoration: none;
-                    @include breakpoint( 's' ){
+                    @include breakpoint( 'm' ){
                         background-color:  var(--secondColor);
                         border-radius:5px;
                         padding: 5px 10px;
@@ -189,7 +189,7 @@ header {
 
                 .se2-current {
                     background-color:$secondary;
-                    @include breakpoint( 's' ){
+                    @include breakpoint( 'm' ){
                          color: $primaryText;
                          background-color: $secondary !important;
                     }
@@ -227,7 +227,7 @@ header {
       
           background-color: var(--primeColor);
           
-          @include breakpoint( 's' ){
+          @include breakpoint( 'm' ){
                position: absolute;
                bottom:10px;
                top: unset;

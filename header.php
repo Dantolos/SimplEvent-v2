@@ -221,13 +221,13 @@ wp_head();
                     'menu'              => "Hauptmenu", 
                     'menu_class'        => "menu",
                     'container'         => "nav", 
-                    'container_class'   => "se2-navigation", 
+                    'container_class'   => "se2-navigation menu-content", 
                     'walker'            => new Walker_Nav_Primary()
                );
                wp_nav_menu( $menuArgs );
                ?>
 
-               <div id="extramenu">
+               <div id="extramenu" class="menu-content">
                <?php
                //SPRACHMENU
                $langMenu = esc_attr( get_option( 'se_header_language' ));
