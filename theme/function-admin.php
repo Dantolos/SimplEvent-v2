@@ -67,11 +67,7 @@ function simplevent_custom_settings() {
      register_setting( 'simplevent-settings-group', 'event_icon' );
      register_setting( 'simplevent-settings-group', 'event_icon_neg' );
 
-     register_setting( 'simplevent-settings-group', 'twitter_link' );
-     register_setting( 'simplevent-settings-group', 'youtube_link' );
-     register_setting( 'simplevent-settings-group', 'facebook_link' );
-     register_setting( 'simplevent-settings-group', 'linkedin_link' );
-     register_setting( 'simplevent-settings-group', 'insta_link' );
+     register_setting( 'simplevent-settings-group', 'social_media' );
 
      register_setting( 'simplevent-settings-group', 'primary_color_picker' );
      register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
@@ -108,12 +104,8 @@ function simplevent_custom_settings() {
      add_settings_field( 'event_icon', 'Icon', 'simplevent_event_icon', 'aagi_simplevent', 'simplevent-general-options' );
      add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
 
-     add_settings_field( 'twitter-link', 'Twitter', 'simplevent_twitter_link', 'aagi_simplevent', 'simplevent-general-options' );
-     add_settings_field( 'youtube-link', 'Youtube', 'simplevent_youtube_link', 'aagi_simplevent', 'simplevent-general-options' );
-     add_settings_field( 'facebook-link', 'Facebook', 'simplevent_facebook_link', 'aagi_simplevent', 'simplevent-general-options' );
-     add_settings_field( 'linkedin-link', 'LinkedIn', 'simplevent_linkedin_link', 'aagi_simplevent', 'simplevent-general-options' );
-     add_settings_field( 'insta-link', 'Instagramm', 'simplevent_insta_link', 'aagi_simplevent', 'simplevent-general-options' );
-
+     add_settings_field( 'social-media', 'Social Media', 'simplevent_social_media', 'aagi_simplevent', 'simplevent-general-options' );
+    
      add_settings_field( 'primary-color-picker', 'Primary Color', 'simplevent_primary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
      add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
      add_settings_field( 'light-mode-picker', 'Light Mode', 'simplevent_light_mode_picker', 'aagi_simplevent', 'simplevent-color-options' );
@@ -483,49 +475,33 @@ function simplevent_event_icon_neg() {
 }
 
 
+//********* SOCIAL MEDIA ***********/
+function simplevent_social_media() {
+     $socialMediaSTD = [
+          'twitter'  => '',
+          'youtube'  => '',
+          'facebook' => '',
+          'linkedin' => '',
+          'insta'    => ''
+     ];
+     $socialMedia = (get_option( 'social_media' ) ) ? get_option( 'social_media' ) : $socialMediaSTD;
 
-function simplevent_twitter_link() {
+     echo '<p style="margin-top:20px;"><b>Twitter</b></p>';
+     echo '<input type="text" name="social_media[twitter]" value="' .$socialMedia['twitter']. '" placeholder="Channel URL" />';
 
-  $twitter = esc_attr( get_option( 'twitter_link' ) );
+     echo '<p style="margin-top:20px;"><b>Youtube</b></p>';
+     echo '<input type="text" name="social_media[youtube]" value="' .$socialMedia['youtube']. '" placeholder="Channel URL" />';
 
-  echo '<input type="text" name="twitter_link" value="' .$twitter. '" placeholder="URL" />';
+     echo '<p style="margin-top:20px;"><b>Facebook</b></p>';
+     echo '<input type="text" name="social_media[facebook]" value="' .$socialMedia['facebook']. '" placeholder="Channel URL" />';
 
-}
-
-function simplevent_youtube_link() {
-
-  $youtube = esc_attr( get_option( 'youtube_link' ) );
-
-  echo '<input type="text" name="youtube_link" value="' .$youtube. '" placeholder="URL" />';
-
-}
-
-function simplevent_facebook_link() {
-
-  $facebook = esc_attr( get_option( 'facebook_link' ) );
-
-  echo '<input type="text" name="facebook_link" value="' .$facebook. '" placeholder="URL" />';
-
-}
-
-function simplevent_linkedin_link() {
-
-  $linkedin = esc_attr( get_option( 'linkedin_link' ) );
-
-  echo '<input type="text" name="linkedin_link" value="' .$linkedin. '" placeholder="URL" />';
+     echo '<p style="margin-top:20px;"><b>Linked In</b></p>';
+     echo '<input type="text" name="social_media[linkedin]" value="' .$socialMedia['linkedin']. '" placeholder="Channel URL" />';
+     
+     echo '<p style="margin-top:20px;"><b>Instagramm</b></p>';
+     echo '<input type="text" name="social_media[insta]" value="' .$socialMedia['insta']. '" placeholder="Channel URL" />';
 
 }
-
-function simplevent_insta_link() {
-
-  $insta = esc_attr( get_option( 'insta_link' ) );
-
-  echo '<input type="text" name="insta_link" value="' .$insta. '" placeholder="URL" />';
-
-}
-
-
-
 
 
 //Colors output

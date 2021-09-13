@@ -148,6 +148,7 @@ require_once('inc/supports/date.php');
 require_once('inc/supports/forms.php');
 require_once('inc/supports/schedule.php');
 require_once('inc/supports/files.php');
+require_once('inc/supports/social-media.php');
 
 //including assets
 require_once('inc/assets/button.php');
@@ -246,6 +247,17 @@ wp_head();
                     if( get_option( 'se_header_mode_menu' ) == 'on' ){
                          echo '<button id="modebutton">Darkmode</button>';
                     }
+
+
+                    //SOCIAL MEDIA
+                    $socialMedias = get_option( 'social_media' );
+                    $socialMediaIcons = new se2_SocialMedia(esc_attr( get_option( 'dark_mode_picker' )[0] ));
+                    echo '<div id="header_socialmedia">';
+                    foreach( $socialMedias as $key => $smIcon ){
+                         echo $socialMediaIcons->cast_icon($key, $smIcon );
+                    }
+                    echo '</div>';
+                
                     ?>
                    
 
