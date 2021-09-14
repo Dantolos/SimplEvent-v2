@@ -125,8 +125,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.57'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.20' );
+     $scriptversion = '1.0.58'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.21' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -140,10 +140,6 @@ function theme_add_files()
      
 
      wp_enqueue_script( 'script-js', get_template_directory_uri() . '/scripts/script.js', array('jquery'), $scriptversion, true );
-
-     
-    
-          
 }
 add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 
@@ -152,6 +148,7 @@ require_once('inc/supports/date.php');
 require_once('inc/supports/forms.php');
 require_once('inc/supports/schedule.php');
 require_once('inc/supports/files.php');
+require_once('inc/supports/social-media.php');
 
 //including assets
 require_once('inc/assets/button.php');
@@ -212,9 +209,12 @@ wp_head();
                ?>
 
                <div id="extramenu" class="menu-content">
-               <?php
-               //SPRACHMENU
-               $langMenu = esc_attr( get_option( 'se_header_language' ));
+
+                   
+
+                    <?php
+                    //SPRACHMENU
+                    $langMenu = esc_attr( get_option( 'se_header_language' ));
                     if( $langMenu === 'on') { 
                          echo '<div id="languagebutton">';
                               //display language menu
@@ -229,24 +229,39 @@ wp_head();
                               }
                          echo '</div>'; 
                     }
+
+                    //ANMELDEBUTTON
+                    $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
+                    $seanmeldung = esc_attr( get_option( 'se_anmeldung' ) );
+                    if( $seanmeldung === 'on') { ?>
+                         <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">
+                         <div id="header_anmeldebutton">
+                              <?php
+                              echo __($regBtnText, 'SimplEvent');
+                              ?>
+                         </div>
+                         </a>
+                    <?php } 
+
+
                     if( get_option( 'se_header_mode_menu' ) == 'on' ){
                          echo '<button id="modebutton">Darkmode</button>';
                     }
+
+
+                    //SOCIAL MEDIA
+                    $socialMedias = get_option( 'social_media' );
+                    $socialMediaIcons = new se2_SocialMedia(esc_attr( get_option( 'dark_mode_picker' )[0] ));
+                    echo '<div id="header_socialmedia">';
+                    if(get_option( 'social_media' )){
+                         foreach( $socialMedias as $key => $smIcon ){
+                              echo $socialMediaIcons->cast_icon($key, $smIcon );
+                         }
+                    }
+                    echo '</div>';
+                
                     ?>
-                    <?php
-                    //ANMELDEBUTTON
-                    $regBtnText = esc_attr( get_option( 'se_anmeldetext' ));
-                         $seanmeldung = esc_attr( get_option( 'se_anmeldung' ) );
-                         if( $seanmeldung === 'on') { ?>
-                              <a href="<?php echo esc_attr( get_option( 'se_anmeldelink' ) ) ; ?>" target="_blank" style="padding:0;">
-                              <div id="header_anmeldebutton">
-                                   <?php
-                                   echo __($regBtnText, 'SimplEvent');
-                                   ?>
-                              </div>
-                              </a>
-                         <?php } 
-                     ?>
+                   
 
                </div>
 

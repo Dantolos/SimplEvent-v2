@@ -134,31 +134,6 @@
                     "mime_types": ""
                 },
                 {
-                    "key": "field_60dd9f21c511f",
-                    "label": "Mood Image",
-                    "name": "mood_image",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "url",
-                    "preview_size": "medium",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "wpml_cf_preferences": 1
-                },
-                {
                     "key": "field_5fca43cf42caf",
                     "label": "Video",
                     "name": "video",
@@ -336,7 +311,7 @@
                                 {
                                     "key": "field_5fd2087c03062",
                                     "label": "Link",
-                                    "name": "sm_link",
+                                    "name": "facebook",
                                     "type": "url",
                                     "instructions": "",
                                     "required": 0,
@@ -346,9 +321,9 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
-                                    "placeholder": "",
-                                    "wpml_cf_preferences": 1
+                                    "placeholder": ""
                                 }
                             ],
                             "min": "",
@@ -363,7 +338,7 @@
                                 {
                                     "key": "field_5fd2089903064",
                                     "label": "Link",
-                                    "name": "sm_link",
+                                    "name": "insta",
                                     "type": "url",
                                     "instructions": "",
                                     "required": 0,
@@ -373,9 +348,9 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
-                                    "placeholder": "",
-                                    "wpml_cf_preferences": 1
+                                    "placeholder": ""
                                 }
                             ],
                             "min": "",
@@ -390,7 +365,7 @@
                                 {
                                     "key": "field_5fd208a803066",
                                     "label": "Link",
-                                    "name": "sm_link",
+                                    "name": "linkedin",
                                     "type": "url",
                                     "instructions": "",
                                     "required": 0,
@@ -400,9 +375,9 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
-                                    "placeholder": "",
-                                    "wpml_cf_preferences": 1
+                                    "placeholder": ""
                                 }
                             ],
                             "min": "",
@@ -417,7 +392,7 @@
                                 {
                                     "key": "field_5fd208dc03069",
                                     "label": "Link",
-                                    "name": "sm_link",
+                                    "name": "youtube",
                                     "type": "url",
                                     "instructions": "",
                                     "required": 0,
@@ -427,9 +402,9 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
-                                    "placeholder": "",
-                                    "wpml_cf_preferences": 1
+                                    "placeholder": ""
                                 }
                             ],
                             "min": "",
@@ -444,7 +419,7 @@
                                 {
                                     "key": "field_601c08379c9cd",
                                     "label": "Link",
-                                    "name": "sm_link",
+                                    "name": "twitter",
                                     "type": "url",
                                     "instructions": "",
                                     "required": 0,
@@ -498,14 +473,14 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
                     "post_type": [
-                        "peoples"
+                        "post"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
                     "multiple": 1,
                     "return_format": "id",
+                    "wpml_cf_preferences": 1,
                     "ui": 1
                 },
                 {
@@ -523,7 +498,7 @@
                     },
                     "wpml_cf_preferences": 1,
                     "post_type": [
-                        "partners"
+                        "post"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
@@ -657,33 +632,6 @@
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_60defd70aad7a",
-                    "label": "Award",
-                    "name": "awardtype",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 1,
-                    "clone": [
-                        "field_60defcc498bb0"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0,
-                    "choices": {
-                        "trendradar": "Trendradar",
-                        "sea": "SEF.Award",
-                        "": ""
-                    }
-                },
-                {
                     "key": "field_60803bdfc2b5f",
                     "label": "Jahr",
                     "name": "jahr",
@@ -737,11 +685,9 @@
                     },
                     "wpml_cf_preferences": 1,
                     "choices": {
-                        "trend": "Trendradar",
-                        "": "",
-                        "dienstl": "Dienstleistung",
-                        "prod": "Produktion",
-                        "tech": "Hightech\/Biotech"
+                        "cat1": "Dienstleistung",
+                        "cat2": "Produktion",
+                        "cat3": "Hightech\/Biotech"
                     },
                     "default_value": false,
                     "allow_null": 0,
@@ -1029,5 +975,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1625521803
+    "modified": 1631608710
 }

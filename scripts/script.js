@@ -41,8 +41,8 @@ var mobileLoaded = false;
 function LOADMOBILESCRIPTS() {
      if (window.innerWidth < mBREAKPOINT && !mobileLoaded) {
           jQuery('header').append(BURGERRMENU);
-          jQuery('.menu-content').wrapAll('<div id="mobile-menu-wrapper" />');
-
+          jQuery('.menu-content').wrapAll('<div id="mobile-menu-wrapper" style="opacity:0;"/>');
+          
           let myScript = document.createElement("script");
           myScript.setAttribute("src", globalURL.templateUrl + "/scripts/mobile-script.js");
           document.body.appendChild(myScript);
@@ -52,7 +52,12 @@ function LOADMOBILESCRIPTS() {
      if (window.innerWidth > mBREAKPOINT && mobileLoaded) {
           jQuery('.menu-content').unwrap('#mobile-menu-wrapper');
           jQuery('#burger-menu').remove();
+          var MOBILEMENU = document.getElementById('mobile-menu-wrapper')
+          var StaggerItems = document.querySelectorAll('.menu-item, #extramenu')
+          gsap.set(MOBILEMENU, { y: '0', scale: 1, opacity: 1 })
+          gsap.set(StaggerItems, { y: '0', scale: 1, opacity: 1 })
           mobileLoaded = false;
+          
      }
 
 }
@@ -69,6 +74,31 @@ if (LANGUEGEBUTTONCONTAINER) {
      }
 }
 
+var NAVLVL1 = document.querySelectorAll('.se2-lvl-1-item');
+function OpenSubMenu(){
+     for(let NAV of NAVLVL1){
+          console.log('MENU')
+          if(NAV.querySelector('.se2-sub-menu')){
+               let SUB = NAV.querySelector('.se2-sub-menu');
+               gsap.set(SUB, {opacity: 0, y: '-10px' })
+               NAV.addEventListener('mouseover', () => {
+                    SUB.style.visibility = 'visible';
+                    gsap.to(SUB, .1, { opacity: 1, y: 0 })
+               })
+               NAV.addEventListener('mouseleave', () => {
+                    gsap.to(SUB, .3, {opacity: 0, y: '-10px'})
+                    SUB.style.visibility = 'hidden';
+               })
+          }
+
+     }
+}
+if(window.innerWidth > mBREAKPOINT){
+     window.addEventListener('resize', () => {
+          OpenSubMenu();
+     });
+     OpenSubMenu();
+}
 
 
 //---------------------------------

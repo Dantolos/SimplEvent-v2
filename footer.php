@@ -14,7 +14,8 @@ $Partner = new Partner;
                     <p><?php echo get_option( 'se_contact_address' ); ?></p>
                     
                     <p><?php echo __('Tel. ', 'SimplEvent') . get_option( 'se_contact_phone' ); ?></p>
-                    
+
+                                       
                     <a class="secondary-txt" href="<?php echo 'mailto:' . get_option( 'se_contact_email' ); ?>"><?php echo str_replace( '@', '(at)', get_option( 'se_contact_email' )); ?></a>
                     <p class="copyright"><?php echo esc_attr( get_option( 'se_c_text' ) ); ?></p>
                </div>
@@ -45,21 +46,37 @@ $Partner = new Partner;
                </div>
 
                <div class="footer-menu-container">
+                    <?php 
+                    $socialMedias = get_option( 'social_media' );
+                    $socialMediaIcons = new se2_SocialMedia(esc_attr( get_option( 'dark_mode_picker' )[0] ));
+                    echo '<div id="footer_socialmedia">';
+                    if(get_option( 'social_media' )){
+                         foreach( $socialMedias as $key => $smIcon ){
+                              echo $socialMediaIcons->cast_icon($key, $smIcon );
+                         }
+                    }
+                    echo '</div>';
+                    ?>
+
                     <?php
                     $array_footermenu = wp_get_nav_menu_items('Footer Menu');
                     if($array_footermenu) 
                     {
                         $cf = 1;
+                        echo '<div class="footer-menu">';
                         foreach ($array_footermenu as $footermenu) 
                         {
                             $trenner = ($cf >= count($array_footermenu)) ? '' : '  |  ';
                             echo '<a href="' . $footermenu->url . '"><p>' . $footermenu->title . '</p></a><p>' . $trenner . '</p>';
                             $cf++;
                         }
+                        echo '</div>';
                     }
                     ?>
+                    
                </div>
 
+              
           </footer>
           </div>
      </body>

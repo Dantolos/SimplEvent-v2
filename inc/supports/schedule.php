@@ -270,10 +270,12 @@ class se2_Schedule {
                          $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-standard" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<div class="schedule-std-content">';
                               $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
                               if($sep['lead']){
                                    $separators_slots .= '<p>'.$sep['lead'].'</p>';
                               }
+                              $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
@@ -285,10 +287,12 @@ class se2_Schedule {
                          $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-filler" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-                              if($sep['lead']){
-                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
-                              }
+                              $separators_slots .= '<div class="schedule-std-content">';
+                                   $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                                   if($sep['lead']){
+                                        $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                                   }
+                                   $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
@@ -300,24 +304,28 @@ class se2_Schedule {
                          $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-placeholder" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-                              if($sep['lead']){
-                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
-                              }
+                              $separators_slots .= '<div class="schedule-std-content">';
+                                   $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                                   if($sep['lead']){
+                                        $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                                   }
+                                   $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
 
-                    // STANDARD SHOW
+                    // PANEL
                     if($sep['acf_fc_layout'] === 'show'){
                          $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
                          $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-show" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
                               $separators_slots .= '<div class="schedule-container">';
                               $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-                              if($sep['lead']){
-                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
-                              }
+                              $separators_slots .= '<div class="schedule-std-content">';
+                                   $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                                   if($sep['lead']){
+                                        $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                                   }
+                                   $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
                          $separators_slots .= '</div>';
                     }
