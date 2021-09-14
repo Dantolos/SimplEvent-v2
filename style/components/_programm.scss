@@ -435,14 +435,17 @@
      position: unset;
 
      .schedule-separator-standard,
-     .schedule-separator-placeholder {
+     .schedule-separator-placeholder,
+     .schedule-separator-show {
           background-color: var(--shadeColor);
           .schedule-container{
-          h5{
-               position: absolute;
-               top: 50%;
-               transform: translate(0, -50%);
-          }}
+               .schedule-std-content{
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    p { line-height: unset; margin-bottom: unset; }
+               }
+          }
      }
 }
 .schedule-slot-liste {

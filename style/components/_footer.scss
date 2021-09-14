@@ -3,16 +3,17 @@ footer {
      max-height:500px;
      background-color: $dark_shade;
      color: $light;
-     padding: 15px 5vw;
+     padding: 25px 5vw 0;
      font-size: .8em; 
-     @include breakpoint( 's' ){
-          max-height:unset;
-     }
-     
+    
      display:flex;
      flex-direction: row;
      justify-content: space-between;
      flex-wrap: wrap;
+
+     @include breakpoint( 's' ){
+          max-height:unset; 
+     }
 
      .footer-contact-container {
           width:fit-content;
@@ -20,6 +21,9 @@ footer {
                color: $light;
                opacity: .6;
                font-weight: 200;
+               font-size: 1em;
+               line-height:1.5em;
+               margin-bottom:0;
           }
          
           a { 
@@ -27,11 +31,26 @@ footer {
                     max-width:120px;
                     max-height:80px;
                     margin: 10px 0;
+                    @include breakpoint( 's' ){
+                         max-width: 360px; 
+                         max-height:160px;  
+                         width: 50%; 
+                    }
                }
           }
+
+         
+
           .copyright {
                margin-top:15px;
           }
+
+          @include breakpoint( 's' ){
+               line-height:1.8em; 
+               width:100%;
+               border-bottom: 1px solid $dark;    
+          }
+
      }
      .footer-partner-container {
           max-width:60%;
@@ -54,6 +73,7 @@ footer {
                     color:$light_shade;
                     opacity: .6;
                     font-weight: 200;
+                    font-size: 1em;
                     @include breakpoint( 's' ){
                          text-align: center;
                          width: 100%;
@@ -72,11 +92,12 @@ footer {
                     }
                     img {
                          margin-top:5px;
-                         margin-right:20px;
+                         margin-right:30px;
+                         margin-bottom:20px;
                          max-width:110px;
                          max-height:45px;
                          @include breakpoint( 's' ){
-                              margin-right:15px;
+                              margin-right:20px;
                               margin-left:15px;
                          }
                     }
@@ -91,22 +112,47 @@ footer {
           border-top:1px solid rgba(255,255,255,.6);
           display: flex;
           flex-direction: row;
-          justify-content: center;
+          align-items:center;
+          justify-content: space-between;
           margin-top:8px;
+          margin-bottom:10px;
           padding-top:8px;
           flex-wrap: wrap;
 
-          p {
-               color: $light;
-               opacity: .6;
-               &:hover {
-                    color:$secondary;
-                    opacity: 1;
+          .footer-menu {
+               display: flex;
+               flex-wrap: wrap;
+               p {
+                    color: $light;
+                    font-size: 1em;
+                    opacity: .6;
+                    margin-bottom:0px;
+                    &:hover {
+                         color:$secondary;
+                         opacity: 1;
+                    }
+               }
+               a {margin:0 5px;}
+          }
+
+          #footer_socialmedia {
+               margin:2px 0 0;
+               display: flex;
+               flex-direction: row;
+               justify-content: center;
+               a svg{ 
+                    width:30px;
+                    height:30px;
+                    
+                    &:hover {
+                         transform: scale(1.2);
+                         .st0 { fill:$light_shade; }
+                         .st1 { fill:$primary; }
+                    }
                }
           }
-          a {margin:0 5px;}
      }
     
-
+     
 
 }

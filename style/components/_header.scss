@@ -67,21 +67,21 @@ header {
           ul{
                padding:0;
                li{
-                    margin:0;
+                    margin:0; 
                }
           }
      
           @include breakpoint( 'm' ){
                position: absolute;
                margin: auto;
-               right:0; bottom:40px; left:0;
+               right:0; bottom:100px; left:0;
                overflow-y:scroll;
                @include hideScrollbar;
-               max-height:80%;
+               max-height:calc(80% - 60px);
+               
                width: 100%;
                
                li{
-                   
             
                }
           }
@@ -138,9 +138,25 @@ header {
 
                     &:hover {
                          .se2-sub-menu {
-                         display: block;
+                              display: block;
                          } 
                     }
+                    li {
+                         &:hover {
+                              transform: scale(1.07);
+                             
+                         
+                              @include dropShadow;
+                              
+                         }
+                    }
+
+                    &:last-of-type {
+                         .se2-sub-menu {
+                         right: 0 !important;
+
+                    }}
+               
                }
 
 
@@ -157,6 +173,7 @@ header {
                     background-color: var(--primeColor);
                     color: var(--secondColor);
                     border-bottom: 1px solid var(--midColor);
+               
 
                     @include breakpoint( 'm' ){
                          display: block;
@@ -242,7 +259,7 @@ header {
           flex-direction: row;
           height:20px;
           font-size: .8em;
-          
+          background-color: var(--secondColor);
           border-bottom:solid 1px var(--primeColor);
 
           @include breakpoint( 'm' ){
@@ -322,6 +339,7 @@ header {
                          overflow: visible;
                     }
                     .st0, .st1{transform-origin: 50% 50%;}
+                    .st1 { fill:var(--primeColor); }
                     &:hover {
                          
                          .st0 { fill:$light_shade; transform: scale(1.3,1.3); }
