@@ -16,7 +16,7 @@ function se2_block_category( $categories, $post ) {
      array_unshift( $categories, $custom_category_one, $custom_category_two, $custom_category_three );
      return $categories;
 }
-add_filter( 'block_categories', 'se2_block_category', 10, 2);
+add_filter( 'block_categories_all', 'se2_block_category', 10, 2);
 
 // ACF Custom Blocks **************************************************************************************
 function register_acf_block_types() {
