@@ -342,29 +342,31 @@ class se2_Schedule {
                                    $separators_slots .= '<p>'.$sep['lead'].'</p>';
                               }
                                    $separators_slots .= '<div class="schedule-slot-panel-speakers">';
-                                   foreach( $sep['speaker'] as $panelSpeaker ){
-                                   
-                                        $separators_slots .= '<div class="schedule-slot-panel-speaker" speakerid="'. $panelSpeaker .'">';
-                                             $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
+                                   if(count($sep['speaker']) > 0){
+                                        foreach( $sep['speaker'] as $panelSpeaker ){
+                                        
+                                             $separators_slots .= '<div class="schedule-slot-panel-speaker" speakerid="'. $panelSpeaker .'">';
+                                                  $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
 
-                                             $name = ( get_field('speaker_vorname', $panelSpeaker) ) 
-                                             ? 
-                                                  get_field('speaker_degree', $panelSpeaker) 
-                                                  . ' ' . get_field('speaker_vorname', $panelSpeaker) 
-                                                  . ' <b>' . get_field('speaker_nachname', $panelSpeaker) . '</b>'
-                                             : 
-                                                  the_title();
+                                                  $name = ( get_field('speaker_vorname', $panelSpeaker) ) 
+                                                  ? 
+                                                       get_field('speaker_degree', $panelSpeaker) 
+                                                       . ' ' . get_field('speaker_vorname', $panelSpeaker) 
+                                                       . ' <b>' . get_field('speaker_nachname', $panelSpeaker) . '</b>'
+                                                  : 
+                                                       the_title();
 
-                                             $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
-                                                  $separators_slots .= '<h5>'.$name.'</h5>';
-                                                  $speakerFirma = (get_field( 'speaker_firma', $panelSpeaker )) ? ', '.get_field( 'speaker_firma', $panelSpeaker ) : '';
-                                                       $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).$speakerFirma.'</h6>';
-                                                  $separators_slots .= '<div class="schedule-slot-info">';
-                                                       
+                                                  $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
+                                                       $separators_slots .= '<h5>'.$name.'</h5>';
+                                                       $speakerFirma = (get_field( 'speaker_firma', $panelSpeaker )) ? ', '.get_field( 'speaker_firma', $panelSpeaker ) : '';
+                                                            $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).$speakerFirma.'</h6>';
+                                                       $separators_slots .= '<div class="schedule-slot-info">';
+                                                            
+                                                       $separators_slots .= '</div>';
                                                   $separators_slots .= '</div>';
                                              $separators_slots .= '</div>';
-                                        $separators_slots .= '</div>';
-                                   } 
+                                        } 
+                                   }
                                    $separators_slots .= '</div>';
                               $separators_slots .= '<div class="schedule-slot-info">';       
                               $separators_slots .= '</div>';

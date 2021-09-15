@@ -11,19 +11,22 @@ if (DAYTABS) {
                gsap.to(document.getElementsByClassName('schedule-program-day'), {
                     duration: .2, x: newPosition, ease: Power4.easeOut
                })
+               jQuery(window).scrollTop(0)
                for (let DAYBUTTON of DAYTABS.childNodes) {
+
                     if (DAYBUTTON.getAttribute("day") === DAYTABS.childNodes[index].getAttribute("day")) {
                          DAYBUTTON.classList.add("day-tab-activ");
                     } else {
                          DAYBUTTON.classList.remove("day-tab-activ");
                     }
                }
+
           })
      }
 }
 
 
-if(document.getElementsByClassName('schedule-slot-kalender')){
+if (document.getElementsByClassName('schedule-slot-kalender')) {
      var KalenderSLOTS = document.getElementsByClassName('schedule-slot-kalender');
 }
 
@@ -44,7 +47,7 @@ console.log(nSLOTScalender)
 
 
 var GRID = document.getElementsByClassName('schedule-5min');
-if(document.querySelector('.schedule-grid')){
+if (document.querySelector('.schedule-grid')) {
      var pageoffset = document.querySelector('.schedule-grid').getBoundingClientRect().top;
 }
 var firstSlotPosition = 2400;
@@ -61,8 +64,8 @@ function SET_SLOT_POSITION() {
                continue;
           }
 
-          
-          if(window.innerWidth > 1024){
+
+          if (window.innerWidth > 1024) {
                //DESKTOP CALENDAR
                nSLOTScalender[i].style.position = 'absolute';
                nSLOTScalender[i].style.top = (minSections.getBoundingClientRect().top - pageoffset) + 'px';
@@ -85,55 +88,55 @@ function SET_SLOT_POSITION() {
 
 }
 
-window.addEventListener('resize', ()=>{
+window.addEventListener('resize', () => {
      SET_SLOT_POSITION()
-     
-          SPLIT_WIDTH()
-      
-     
+
+     SPLIT_WIDTH()
+
+
      console.log('resising')
-} )
+})
 SET_SLOT_POSITION()
 
 
 var prevWidth = false;
 
-function SPLIT_WIDTH(){
-   
-          for (let n = 0; n < nSLOTScalender.length; n++) {
-               if(window.innerWidth > 1024){
-                    let start = nSLOTScalender[n].getAttribute('start');
-                    let end = nSLOTScalender[n].getAttribute('ende');
-                    let date = nSLOTScalender[n].getAttribute('date');
+function SPLIT_WIDTH() {
 
-                    if (n > 0) {
-                         let m = n - 1;
-                         let prevend = nSLOTScalender[m].getAttribute('ende')
+     for (let n = 0; n < nSLOTScalender.length; n++) {
+          if (window.innerWidth > 1024) {
+               let start = nSLOTScalender[n].getAttribute('start');
+               let end = nSLOTScalender[n].getAttribute('ende');
+               let date = nSLOTScalender[n].getAttribute('date');
 
-                         //for (let m = 0; m < nSLOTS.length; m++) {
-                         if (date == nSLOTScalender[m].getAttribute('date')) {
-                              if ((start + 1) <= prevend) {
-                                   prevWidth = (prevWidth) ? false : true;
-                                   nSLOTScalender[n].style.width = '47.5%'
-                                   nSLOTScalender[m].style.width = '47.5%'
+               if (n > 0) {
+                    let m = n - 1;
+                    let prevend = nSLOTScalender[m].getAttribute('ende')
 
-                                   if (prevWidth) {
-                                        nSLOTScalender[n].style.marginLeft = '50%'
-                                   }
-                              } else { prevWidth = false }
-                         }
+                    //for (let m = 0; m < nSLOTS.length; m++) {
+                    if (date == nSLOTScalender[m].getAttribute('date')) {
+                         if ((start + 1) <= prevend) {
+                              prevWidth = (prevWidth) ? false : true;
+                              nSLOTScalender[n].style.width = '47.5%'
+                              nSLOTScalender[m].style.width = '47.5%'
+
+                              if (prevWidth) {
+                                   nSLOTScalender[n].style.marginLeft = '50%'
+                              }
+                         } else { prevWidth = false }
                     }
-               } else {
-                    nSLOTScalender[n].style.width = '100%'
-                    nSLOTScalender[n].style.marginLeft = '0'
                }
+          } else {
+               nSLOTScalender[n].style.width = '100%'
+               nSLOTScalender[n].style.marginLeft = '0'
           }
-     
+     }
+
 }
 
 console.log('DEVICE: ', DETECT.detectMobile())
 var slotToggler = false;
-if(KalenderSLOTS){
+if (KalenderSLOTS) {
      for (let SLOT of KalenderSLOTS) {
 
           if (window.innerWidth > 1024) {
@@ -180,7 +183,7 @@ if(KalenderSLOTS){
 // >>>>>>>>>>>>>>>>>>>>>>>>  LIST  <<<<<<<<<<<<<<<<<<<<<<<<<<
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
 var ListSLOTS;
-if(document.getElementsByClassName('schedule-slot-liste')){
+if (document.getElementsByClassName('schedule-slot-liste')) {
      ListSLOTS = document.getElementsByClassName('schedule-slot-liste');
 }
 
@@ -202,7 +205,7 @@ for (var i = 0, len = nSLOTSlist.length; i < len; i++) {
 for (let SLOT of ListSLOTS) {
      SLOT.addEventListener('mouseover', (e) => {
           SLOT.querySelector('.schedule-container').classList.add("slot-shadow")
-       
+
      });
 
      SLOT.addEventListener('mouseleave', () => {
