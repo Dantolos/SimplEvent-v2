@@ -342,7 +342,7 @@ class se2_Schedule {
                                    $separators_slots .= '<p>'.$sep['lead'].'</p>';
                               }
                                    $separators_slots .= '<div class="schedule-slot-panel-speakers">';
-                                   if(count($sep['speaker']) > 0){
+                                   if($sep['speaker'] > 0){
                                         foreach( $sep['speaker'] as $panelSpeaker ){
                                         
                                              $separators_slots .= '<div class="schedule-slot-panel-speaker" speakerid="'. $panelSpeaker .'">';
