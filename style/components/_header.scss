@@ -261,6 +261,7 @@ header {
           font-size: .8em;
           background-color: var(--secondColor);
           border-bottom:solid 1px var(--primeColor);
+          padding: 0 10px;
 
           @include breakpoint( 'm' ){
                position: absolute;

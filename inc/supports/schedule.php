@@ -60,9 +60,10 @@ class se2_Schedule {
 
           //implement needed programm slots
           $this->scheduleGrid .= '<div class="schedule-program'.$this->viewClass.'">';
+
           foreach($this->dateArray as $day){
                $checkclass = ($this->activeDay === $day ) ? 'day-schedule-activ' : 'day-schedule-passiv';
-
+               
                $this->scheduleGrid .= '<div class="schedule-program-day '.$checkclass.'" day="'.$day.'">';
                $this->scheduleGrid .= $this->get_speaker($day);
                $this->scheduleGrid .= $this->get_sessions($day);
