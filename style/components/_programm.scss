@@ -433,12 +433,16 @@
      margin-top:75px;
      height: fit-content;
      position: unset;
+     overflow-x: hidden;
+     display: flex;
+     flex-direction: row;
 
      .schedule-separator-standard,
      .schedule-separator-placeholder,
      .schedule-separator-show {
-          background-color: var(--shadeColor);
+          
           .schedule-container{
+               background-color: var(--shadeColor);
                .schedule-std-content{
                     position: absolute;
                     top: 50%;
@@ -448,9 +452,17 @@
           }
      }
 }
+
+.schedule-program-day {
+     width:100%;
+     height: inherit;
+     position: relative;
+     flex-shrink: 0;
+}
 .schedule-slot-liste {
      margin:20px;
      
+
      .schedule-container { 
           padding:40px 20px 40px 150px;
         
