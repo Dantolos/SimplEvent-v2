@@ -123,7 +123,8 @@ function se2_partner_rest( WP_REST_Request $request ){
                $socialmedialinks = get_field('social_media', $postID);
                if( $socialmedialinks['social_media'] ){
                     foreach($socialmedialinks['social_media'] as $sm){
-                         $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm['sm_link'];
+                         
+                         $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm[$sm['acf_fc_layout']];
                     }
                } else {
                     $result[$i]['social_media'] = false;
@@ -211,10 +212,11 @@ function se2_speakers_rest( WP_REST_Request $request ){
                     continue;
                }  
 
-               if( $translations[$lang['language_code']]->source_language_code ){
-                    continue;
-               } 
-
+               try {
+                    if( $translations[$lang['language_code']]->source_language_code ){
+                         continue;
+                    } 
+               } catch(Exception $e) { echo 'Exception abgefangen: ',  $e->getMessage(), "\n"; }
 
                //jahr (param j=*2021*)
                if( isset($_GET['j']) ){
@@ -276,7 +278,7 @@ function se2_speakers_rest( WP_REST_Request $request ){
                $socialmedialinks = get_field('speaker_social_media', $postID);
                if( $socialmedialinks['social_media'] ){
                     foreach($socialmedialinks['social_media'] as $sm){
-                         $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm['sm_link'];
+                         $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm[$sm['acf_fc_layout']];
                     }
                } else {
                     $result[$i]['social_media'] = false;
