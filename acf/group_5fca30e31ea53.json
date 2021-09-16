@@ -331,7 +331,7 @@
                         },
                         "layout_5fd2089903063": {
                             "key": "layout_5fd2089903063",
-                            "name": "instagramm",
+                            "name": "insta",
                             "label": "Instagramm",
                             "display": "block",
                             "sub_fields": [
@@ -975,5 +975,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1631608710
+    "modified": 1631782893
 }
