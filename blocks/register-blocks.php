@@ -1,8 +1,11 @@
 <?php 
-function se2_block_category( $categories, $post ) {
-     if ( $post->post_type !== 'page' ) {
-          return $categories;
-     }
+function se2_block_category( $categories, $block_editor_context ) {
+
+     if ( ! ( $block_editor_context instanceof WP_Block_Editor_Context ) ) {
+          return $block_categories;
+      }
+
+     
 	return array_merge(
 		$categories,
 		array(

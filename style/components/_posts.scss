@@ -11,10 +11,15 @@
         position: relative;
         background-color:var(--shadeColor);
 
+        
         .se2-post-image {
             height: 200px;
             width: 100%;
-            @include imageSettings;
+            overflow: hidden;
+            div{
+                height:100%; width:100%;
+                @include imageSettings;
+            }
         }
 
         .se2-post-logo {
@@ -28,6 +33,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            
             img {
                 width:auto;
                 height:auto;    
@@ -39,6 +45,16 @@
         .se2-post-content {
             margin:25px;
             h3 { margin:20px 0; text-transform: uppercase; }
+        }
+        
+       
+        &:hover {
+            transform: scale(1.02);
+            border-radius: 5px;
+            
+            .se2-post-image {
+                div{ transform: scale(1.2);}
+            }
         }
 
     }

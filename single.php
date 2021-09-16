@@ -1,0 +1,21 @@
+<?php
+global $post;
+$post_type = $post->post_type;
+$url = home_url();
+if($post_type === 'event'){
+    $page_details = get_pages( array(
+        'post_type' => 'page',
+        'meta_key' => '_wp_page_template',
+        'hierarchical' => 0,
+        'meta_value' => 'Templates/events.php'
+    ));
+    $url = get_permalink($page_details[0]->ID);
+}
+
+
+echo '<pre style="color:red; line-height:1em;">';
+var_dump( $url );
+echo '</pre>';
+
+wp_redirect( $url );
+exit;
