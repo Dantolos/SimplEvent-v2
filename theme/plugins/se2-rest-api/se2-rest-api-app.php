@@ -45,11 +45,11 @@ function se2_partner_rest( WP_REST_Request $request ){
                     $langFilter = true;
                     continue;
                }  
-
-               if( $translations[$lang['language_code']]->source_language_code ){
-                    continue;
-               } 
-
+               if($lang['language_code']) {
+                    if( $translations[$lang['language_code']]->source_language_code ){
+                         continue;
+                    } 
+               }
 
                //categore (param c=*term-slug*)
                if( isset($_GET['c']) ){
@@ -212,11 +212,11 @@ function se2_speakers_rest( WP_REST_Request $request ){
                     continue;
                }  
 
-               try {
+               if($lang['language_code']) {
                     if( $translations[$lang['language_code']]->source_language_code ){
                          continue;
                     } 
-               } catch(Exception $e) { echo 'Exception abgefangen: ',  $e->getMessage(), "\n"; }
+               } 
 
                //jahr (param j=*2021*)
                if( isset($_GET['j']) ){
