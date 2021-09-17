@@ -81,10 +81,21 @@ function categorie()
     }
     wp_send_json($result);
    
-
     die();
 }
 
+/*-------------Companies---------------*/
+add_action('wp_ajax_nopriv_company_lightbox', 'company_lightbox');
+add_action('wp_ajax_company_lightbox', 'company_lightbox'); //nur für angemeldete (admins)
+
+function company_lightbox() 
+{
+     $Company = new Company;
+    $postID = $_POST['lbid'];
+    
+    wp_send_json( $Company->call_Company_Lightbox( $postID ) ); 
+    die();
+}
 
 /*-------------LINE UP---------------*/
 add_action('wp_ajax_nopriv_lineup', 'lineup');
