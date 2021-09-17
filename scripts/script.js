@@ -216,7 +216,13 @@ if(searchParams.has("type")){
                }
                LIGHTBOX.openLightbox('AX', callData);
                break;
-         
+          case 'company':
+               var callData = {
+                    lbid: searchParams.get('id'),
+                    action: 'company_lightbox'
+               }
+               LIGHTBOX.openLightbox('AX', callData);
+               break;
 
           default:
                console.warn('unknown type')
