@@ -473,14 +473,14 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "post_type": [
-                        "post"
+                        "peoples"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
                     "multiple": 1,
                     "return_format": "id",
-                    "wpml_cf_preferences": 1,
                     "ui": 1
                 },
                 {
@@ -498,7 +498,7 @@
                     },
                     "wpml_cf_preferences": 1,
                     "post_type": [
-                        "post"
+                        "partners"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
@@ -975,5 +975,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1631782893
+    "modified": 1631795443
 }

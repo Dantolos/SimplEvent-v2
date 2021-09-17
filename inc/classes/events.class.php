@@ -29,7 +29,7 @@ class Events extends Posts {
 
                $this->output .= '<div class="se2-post" postid="' . $event->ID . '" lb="event_lightbox">';
                if(get_field('media', $event->ID)['gallery']){
-                    $this->output .= '<div class="se2-post-image" style="background-image:url(' . esc_url(get_field('media', $event->ID)['gallery'][0] ) . ')"></div>';
+                    $this->output .= '<div class="se2-post-image"><div style="background-image:url(' . esc_url(get_field('media', $event->ID)['gallery'][0] ) . ')"></div></div>';
                }
                $this->output .= '<div class="se2-post-content">';
                $this->output .= '<h3>' . esc_attr( get_field( 'titel', $event->ID ) ) . '</h3>';
@@ -49,6 +49,8 @@ class Events extends Posts {
                
                $introtext = str_replace( '<h3>', '<b>', $introtext ); 
                $introtext = str_replace( '</h3>', '</b><br />', $introtext ); 
+               $introtext = str_replace( '<i>', '', $introtext ); 
+               $introtext = str_replace( '</i>', '', $introtext ); 
                $tagEliminations = array("<p>", "</p>", '<div>', '</div>');
                $introtext = str_replace( $tagEliminations, '', $introtext ); 
                $introtext_length = strpos( $introtext , '.', 200 ) + 1;

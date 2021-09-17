@@ -170,7 +170,6 @@ jQuery(document).ajaxComplete(function () {
 });
 
 function call_post_lightbox(POST) {
-     POST.addEventListener('click', async () => {
           console.log(POST.getAttribute('postid'))
           var callData = {
                lbid: POST.getAttribute('postid'),
@@ -178,7 +177,6 @@ function call_post_lightbox(POST) {
           }
           LIGHTBOX.openLightbox('AX', callData);
 
-     })
 }
 
 const CATEGORIECONTAINER = document.getElementsByClassName('categorie-container');
@@ -203,3 +201,32 @@ if (CATEGORIECONTAINER.length > 0) {
 }
 
 
+//---------------------------------
+//REDIRECTION
+//---------------------------------
+const queryString = window.location.search;
+var searchParams = new URLSearchParams(queryString);
+
+if(searchParams.has("type")){
+     switch (searchParams.get('type')) {
+          case 'event':
+               var callData = {
+                    lbid: searchParams.get('id'),
+                    action: 'event_lightbox'
+               }
+               LIGHTBOX.openLightbox('AX', callData);
+               break;
+          case 'company':
+               var callData = {
+                    lbid: searchParams.get('id'),
+                    action: 'company_lightbox'
+               }
+               LIGHTBOX.openLightbox('AX', callData);
+               break;
+
+          default:
+               console.warn('unknown type')
+               break;
+     }
+     console.log(searchParams.get('id'))
+}

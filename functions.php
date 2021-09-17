@@ -118,7 +118,7 @@ function theme_add_scripts()
 
     foreach ($JsIncList as $JsInc) 
     {
-        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.22', true );
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.24', true );
     }
      
     /*------------------------------Send Global Variables---------------------------*/
