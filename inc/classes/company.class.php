@@ -93,10 +93,10 @@ class Company extends Posts {
      public function call_Company_Lightbox( $ID ){
           intval($ID);
           $this->output = '<div class="se2-post-lightbox">'; 
-                  
-          $this->output .= '<div class="se2-post-header " style="background-image:url('.esc_url(get_field('erfolgsgeschicht', $ID)['thumbnail']).');"></div>';
-
           $this->output .= '<div class="se2-post-lb-company-content">';
+
+               $this->output .= '<div class="se2-post-header " style="background-image:url('.esc_url(get_field('erfolgsgeschicht', $ID)['thumbnail']).');"></div>';
+
                $this->output .= '<div class="se2-post-lb-company-post">';
                $this->output .= '<h2>'. esc_attr(get_field('erfolgsgeschicht',$ID)['title']) .'</h2>';
                $this->output .= get_field('erfolgsgeschicht',$ID)['content'];
@@ -116,15 +116,14 @@ class Company extends Posts {
                          $this->output .= '<p class="since">since '.get_field('Key data', $ID)['Founding year'].'</p>';
                     }
 
-                    if(get_field('Key data', $ID)['website']){
-                         $this->output .= '<a href="'.get_field('Key data', $ID)['website'].'" target="_blank">';
-                         $this->output .= '<div class="se2-post-lb-company-button">'.__('Website', 'SimplEvent').'</div>';
-                    }
-
                     if(get_field('description', $ID)){
                          $this->output .= '<p style="margin-top:20px; max-width:95%;">'.get_field('description', $ID).'</p>';
                     }
                     
+                    if(get_field('Key data', $ID)['website']){
+                         $this->output .= '<a href="'.get_field('Key data', $ID)['website'].'" target="_blank">';
+                         $this->output .= '<div class="se2-post-lb-company-button">'.__('Website', 'SimplEvent').'</div>';
+                    }
                $this->output .= '</div>';
           $this->output .= '</div>';
           
