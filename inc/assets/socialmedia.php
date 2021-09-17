@@ -26,7 +26,7 @@ class SocialMedia {
 
                               break;
 
-                         case 'instagramm':
+                         case 'insta':
 
                               $this->output .= file_get_contents(get_template_directory_uri() . '/images/icons/social-media/instagram.svg');
 
