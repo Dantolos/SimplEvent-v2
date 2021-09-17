@@ -81,11 +81,7 @@
         width: 90vw;
     }
 
-    .se2-post-header {
-        @include imageSettings;
-        width:100%;
-        height:20%;
-    }
+    
 
     .se2-post-lb-content {
         position: relative;
@@ -203,14 +199,21 @@
 //COMPANY
 .se2-post-lb-company-content {
     width:100%;
-    height:80%;
+    height:100%;
     overflow-y: scroll;
     @include hideScrollbar;
+
+    .se2-post-header {
+        @include imageSettings;
+        width:100%;
+        height:45%;
+    }
+
     .se2-post-lb-company-post {
-        padding:3% 6%;
+        padding: 6%;
     }
     .se2-post-lb-company-info {
-        padding:3% 6%;
+        padding:6%;
         background-color:var(--shadeColor);
         position: relative;
 
@@ -244,6 +247,7 @@
             width:fit-content;
             padding:10px 20px;
             border-radius: 3px;
+            margin-top:20px;
             &:hover {
                 background-color:$primary;
                 transform: scale(1.05);
