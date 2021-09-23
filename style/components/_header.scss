@@ -307,7 +307,7 @@ header {
           #header_anmeldebutton {
 
                background-color: $secondary;
-               color:white;
+               color:var(--dark);
                height:25px;
                display: flex;
                align-items: center;
