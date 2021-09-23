@@ -122,9 +122,10 @@ function se2_partner_rest( WP_REST_Request $request ){
                //SOCIAL MEDIA
                $socialmedialinks = get_field('social_media', $postID);
                if( $socialmedialinks['social_media'] ){
-                    foreach($socialmedialinks['social_media'] as $sm){
-                         
-                         $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm[$sm['acf_fc_layout']];
+                    foreach($socialmedialinks['social_media'] as $sm){      
+                         if( strlen($sm[$sm['acf_fc_layout']]) > 2 ){
+                              $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm[$sm['acf_fc_layout']];
+                         }
                     }
                } else {
                     $result[$i]['social_media'] = false;
@@ -280,7 +281,8 @@ function se2_speakers_rest( WP_REST_Request $request ){
                     foreach($socialmedialinks['social_media'] as $sm){
                          $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm[$sm['acf_fc_layout']];
                     }
-               } else {
+               } 
+               if( !isset( $result[$i]['social_media'] ) ) {
                     $result[$i]['social_media'] = false;
                }
 
