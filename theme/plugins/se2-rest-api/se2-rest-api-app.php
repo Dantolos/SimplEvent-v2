@@ -281,7 +281,8 @@ function se2_speakers_rest( WP_REST_Request $request ){
                     foreach($socialmedialinks['social_media'] as $sm){
                          $result[$i]['social_media'][$sm['acf_fc_layout']] = $sm[$sm['acf_fc_layout']];
                     }
-               } else {
+               } 
+               if( !isset( $result[$i]['social_media'] ) ) {
                     $result[$i]['social_media'] = false;
                }
 
