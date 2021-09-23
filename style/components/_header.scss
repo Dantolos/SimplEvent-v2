@@ -335,6 +335,11 @@ header {
                flex-direction: row;
                a {
                     padding:0px;
+                    width: fit-content;
+                    @supports (-moz-appearance:none) {
+                         width:25px;
+                       }
+                    
                     svg {
                          height:100%;
                          overflow: visible;
