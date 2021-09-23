@@ -32,9 +32,18 @@
             width:88%;
             h2 {
                 margin-bottom: .2em;
+                font-size: 2em !important;
+                @include breakpoint( 's' ){
+                    font-size: 1.8em !important;
+                }
             }
 
-            p { color:white; }
+            p { 
+                color:rgba(255,255,255,.8); 
+                @include breakpoint( 's' ){
+                    font-size: 2rem !important;
+                }
+            }
 
             .se2-people-branche{
                 margin-top:2em;

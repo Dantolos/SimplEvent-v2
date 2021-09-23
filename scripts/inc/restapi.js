@@ -90,8 +90,8 @@ var seREST = function(restAPIURL)
                     text = data[0].acf.de.text;
                     break;
                 case 'en':
-                    title = data[0].acf.en.ds_title_en;
-                    text = data[0].acf.en.ds_text_en;
+                    title = data[0].acf.en.title;
+                    text = data[0].acf.en.text;
                     break;
                 case 'fr':
                     title = data[0].acf.fr.ds_title_fr;

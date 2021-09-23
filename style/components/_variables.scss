@@ -60,7 +60,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
 }
-.imageSettings { @include imageSettings; }
+.imageSettings { @include imageSettings; } 
 
 @mixin wallContainerFlex {
     display:flex;
