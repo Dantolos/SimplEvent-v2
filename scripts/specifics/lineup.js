@@ -17,7 +17,6 @@ var args = {
 
 
 const LINEUPCONTAINER = document.getElementById('lineup-container')
-console.log('asdfaslkjdfh')
 
 
 //categories
@@ -95,7 +94,7 @@ function CALL_AJAX_LINEUP(a) {
      AJAX.call_Ajax(callData, 'se2-lineup-container', true);
 
      jQuery(document).ajaxComplete(function () {
-          CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
+          //CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
           LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-profile'))
      })
 
@@ -121,7 +120,7 @@ function CALL_ANIMATION(S) {
 
                     for (let SPEAKER of S) {
                          SPEAKER.addEventListener('mouseover', e => {
-                              gsap.to(SPEAKER.querySelector('.se2-speaker-grid-image'), .1, { scale: 1.1 })
+                              gsap.to(SPEAKER.querySelector('.se2-speaker-grid-image'), .1, { scale: 1.05 })
                               gsap.to(SPEAKER.querySelector('.se2-speaker-grid-content'), .1, { opacity: 1, backdropFilter: 'blur(5px)' })
                          })
 

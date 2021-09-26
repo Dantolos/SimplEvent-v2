@@ -28,14 +28,12 @@
      flex-direction: column;
      align-items: center;
      justify-content: flex-start;
-     border:1px solid var(--shadeColor);
+     border:0px solid var(--shadeColor);
      border-radius: 3px;
-     &:hover {
-          background-color: $primary;
-     }
+     
      .se2-speaker-grid-image {
-          width:80px;
-          height:80px;
+          width:120px;
+          height:120px;
           border-radius: 50%;
      }
      .se2-speaker-grid-content {
@@ -46,6 +44,12 @@
           h4 { margin-bottom:5px;text-align: center; width:100%;}
           p { margin-bottom:0; line-height: 1em; text-align: center;}
 
+     }
+
+     &:hover {
+          transform:scale(.97);
+          @include dropShadow;
+          .se2-speaker-grid-image { transform: scale(1.2);}
      }
 
      @include breakpoint( 'm' ){

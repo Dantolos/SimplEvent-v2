@@ -13,6 +13,7 @@ class se2_LB_Speaker {
                               action: 'speaker_lightbox'
                          }
                          LIGHTBOX.openLightbox('AX', callData);
+                         console.log(speakerID)
                     })
                }
           } catch (error) {
@@ -30,14 +31,9 @@ class se2_LB_Speaker {
                     let newHeight = reviewVideo.offsetWidth / 16 * 9
                     reviewVideo.style.height = newHeight + 'px'
                } catch (error) {
-                    console.warn('LB SPEAKER: ', error)
+                    console.warn('LB SPEAKER: NO VIDEO ', error)
                }
 
-               try {
-                    LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-profile'))
-               } catch (error) {
-                    console.warn('LB SPEAKER: ', error)
-               }
 
           })
      }

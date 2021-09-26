@@ -32,7 +32,7 @@ $year = get_field( 'jahr', get_the_ID() );
 
 $args = array(
      'view' => 'grid',
-     'sort' => 'ASC',
+     'sort' => 'ASC', 
      'cat' => 'all',
      'year' => $year
 );
