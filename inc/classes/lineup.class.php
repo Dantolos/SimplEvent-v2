@@ -8,10 +8,12 @@ class LineUp {
      public $speakerIDs = array();
      public $forms;
      public $dateFormat;
+     public $files;
 
      public function __construct() {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;
+          $this->files = new se2_Files;
      }
 
 
@@ -138,8 +140,8 @@ class LineUp {
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
-
-               $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+               $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
+               $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.$portraitImage[0].');"></div>';
    
                $this->speakerCard .= '<div class="se2-speaker-list-profil-info">';
  
@@ -186,8 +188,9 @@ class LineUp {
      public function cast_speaker_grid( $speakerID ){
 
           $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
+               $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
 
-               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.$portraitImage[0].');"></div>';
                $this->speakerCard .= '<div class="se2-speaker-grid-content">';
 
                $name = ( get_field('speaker_vorname', $speakerID) ) 
@@ -269,7 +272,8 @@ class LineUp {
                     $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.'</h2>';
                     $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
                     $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
-                    $this->speakerLightbox .= get_field( 'speaker_cv', $speakerID );
+                    $speakerCV = get_field( 'speaker_cv', $speakerID );
+                    $this->speakerLightbox .=  $speakerCV;
                     
 
                     if( have_rows('review_jahr',  $speakerID ) ){

@@ -21,7 +21,7 @@ class se2_Ajax {
                     $('.se-loader').remove();
                 },
                 success: function (response, textStatus, XMLHttpRequest) {
-
+                    console.log(response);
                     try {
                         response = decodeURI(response);
 
