@@ -188,9 +188,9 @@ class LineUp {
      public function cast_speaker_grid( $speakerID ){
 
           $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
-               $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
-
-               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.$portraitImage[0].');"></div>';
+/*                $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
+ */
+               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
                $this->speakerCard .= '<div class="se2-speaker-grid-content">';
 
                $name = ( get_field('speaker_vorname', $speakerID) ) 
