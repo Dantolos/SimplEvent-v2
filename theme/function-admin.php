@@ -84,16 +84,17 @@ function simplevent_custom_settings() {
 
      register_setting( 'simplevent-settings-group', 'google_analytics_ua' );
      register_setting( 'simplevent-settings-group', 'anonymize_ip' );
+     register_setting( 'simplevent-settings-group', 'footer_snippets' );
 
      register_setting( 'simplevent-settings-group', 'meta_tags' );
 
 
-  //****SECTIONS
-  add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
-  add_settings_section( 'simplevent-color-options', 'Colors', 'simplevent_color_options', 'aagi_simplevent');
-  add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
-  add_settings_section( 'simplevent-analytics', 'Analytics', 'simplevent_analytics', 'aagi_simplevent');
-  add_settings_section( 'simplevent-meta', 'Meta', 'simplevent_meta', 'aagi_simplevent');
+     //****SECTIONS
+     add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
+     add_settings_section( 'simplevent-color-options', 'Colors', 'simplevent_color_options', 'aagi_simplevent');
+     add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
+     add_settings_section( 'simplevent-analytics', 'Analytics', 'simplevent_analytics', 'aagi_simplevent');
+     add_settings_section( 'simplevent-meta', 'Meta', 'simplevent_meta', 'aagi_simplevent');
 
 
 
@@ -122,7 +123,8 @@ function simplevent_custom_settings() {
      add_settings_field( 'google-analytics-ua', 'Google Analytics', 'simplevent_google_analytics_ua', 'aagi_simplevent', 'simplevent-analytics' );
      add_settings_field( 'anonymize-ip', 'Anonymize IP', 'simplevent_anonymize_ip', 'aagi_simplevent', 'simplevent-analytics' );
 
- 
+     add_settings_field( 'footer-snippets', 'Footer Snippets', 'simplevent_footer_snippets', 'aagi_simplevent', 'simplevent-analytics' );
+
      add_settings_field( 'meta_tags', 'Meta Tags', 'simplevent_meta_tags', 'aagi_simplevent', 'simplevent-meta' );
 
 
@@ -196,13 +198,12 @@ function simplevent_custom_settings() {
 
 
   register_setting( 'simplevent-footer-group', 'se_footer_categories' );
-
+  
 
   //****Section
   add_settings_section( 'simplevent-footer-options', 'Footer', 'simplevent_footer_options', 'simplevent_footer');
   add_settings_section( 'simplevent-footer-contact', 'Contact', 'simplevent_footer_contact', 'simplevent_footer');
   add_settings_section( 'simplevent-footer-partner', 'Partner', 'simplevent_footer_partner', 'simplevent_footer');
-
 
   //****Fields
   add_settings_field( 'ctext', 'Copyright Text', 'simplevent_se_c_text', 'simplevent_footer', 'simplevent-footer-options' );
@@ -211,8 +212,6 @@ function simplevent_custom_settings() {
   add_settings_field( 'contact-address', 'Adresse', 'simplevent_se_contact_address', 'simplevent_footer', 'simplevent-footer-contact' );
   add_settings_field( 'contact-phone', 'Telefon Nummer', 'simplevent_se_contact_phone', 'simplevent_footer', 'simplevent-footer-contact' );
   add_settings_field( 'contact-email', 'E-Mail', 'simplevent_se_contact_email', 'simplevent_footer', 'simplevent-footer-contact' );
-
-
 
   add_settings_field( 'footer-categories', 'Kategorien', 'simplevent_se_footer_categories', 'simplevent_footer', 'simplevent-footer-partner' );
 
@@ -383,6 +382,7 @@ function simplevent_footer_contact() {
 function simplevent_footer_partner() {
      echo 'Mainpartner Kategorie auswählen, welche im Footer erscheinen sollen.';
 }
+
 
 
 
@@ -641,6 +641,46 @@ function simplevent_anonymize_ip() {
 }
 
 
+function simplevent_footer_snippets() {
+
+     echo 'Snippets got placed directly over closing <b>body</b>-tag';
+
+     $footer_snippets = get_option('footer_snippets');
+
+     $fillerSnippets = array(
+          'LinkedIn' => [
+               'snippet' => '', 
+               'active' => ''
+          ], 
+       
+     );
+     if( is_array($footer_snippets) ){
+          if( count($footer_snippets) < count($fillerSnippets) ){
+               $footer_snippets = $fillerSnippets + $footer_snippets;
+          } 
+     }else {
+          $footer_snippets = $fillerSnippets;
+     } 
+     
+
+     foreach( $footer_snippets as $key => $snippet ){
+          echo '<div style="display:flex; flex-wrap:wrap; justify-content: space-between; width:100%;">';
+          echo '<p style="width:100% !important;"><b>'.$key.'</b></p>';
+          if( isset($snippet['active']) ){
+               if($snippet['active'] == 'on'){
+                    $snippet['active'] = 'checked';
+               }
+          } else {
+               $snippet['active'] = '';
+          }
+          echo '<input style="margin-top:5px; width:20px !important;" type="checkbox" name="footer_snippets['.$key.'][active]" ' .$snippet['active']. '/>';
+          echo '<textarea style="margin: 5px 0 0px; width: calc( 100% - 25px ) !important;" type="textarea" rows="6" name="footer_snippets['.$key.'][snippet]"  style="width: 100%;">' . $footer_snippets[$key]['snippet'] . '</textarea>';
+          echo '</div>';
+     }
+  
+}
+
+
 //Meta
 
 function simplevent_meta_tags() {
@@ -653,7 +693,7 @@ function simplevent_meta_tags() {
                'Description' => '',
           ]
      ];
-     $meta_tags = is_array(get_option('meta_tags')) ? get_option('meta_tags') : $tags;
+     $meta_tags = is_array( get_option('meta_tags') ) ? get_option('meta_tags') : $tags;
 
      echo '<p style="margin-top:20px;"><b>Keywords</b></p>';
      echo '<p><i>Keywords</b>Mit Komma (,) trennen. (SEO, Keyword, ...)</i></p>';
@@ -857,6 +897,8 @@ function simplevent_se_footer_categories($args) {
           echo '<label for="'.$partnerCategory->term_id.'">'.$partnerCategory->name.'</label><br>';
      }    
 }
+
+
 
 
 
