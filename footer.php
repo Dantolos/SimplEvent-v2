@@ -79,5 +79,20 @@ $Partner = new Partner;
               
           </footer>
           </div>
+
+
+          <?php 
+          /********FOOTER SNIPPETS********/
+          if( is_array(get_option('footer_snippets')) ){
+               $footerSnippets = get_option('footer_snippets');
+               foreach($footerSnippets as $footerSnippet){
+                    if( !isset($footerSnippet['active']) ){ continue; }
+                    if( $footerSnippet['active'] != 'on' ){ continue; }
+                    echo $footerSnippet['snippet'];
+               }
+          }
+          
+          ?>
+
      </body>
 </html>
