@@ -190,8 +190,8 @@
           }
           .speaker-lb-headinfo {
                width:75%;
-               padding:20px;
-               max-height: 70vh;
+               padding:20px 20px 0 20px;
+               max-height: 80vh;
                overflow: scroll;
                @include hideScrollbar;
                @include breakpoint( 's' ){
@@ -202,7 +202,7 @@
                }
                h6 {
                     border-bottom: solid 2px var(--shadeColor) ;
-                    margin-top:20px;
+                    margin-top:40px;
                     padding-bottom: 5px;
                }
                h3 {
@@ -212,6 +212,32 @@
                     min-height:20vw;
                }
           }
+
+          .speaker-lb-review-gallery {
+               display: flex;
+               flex-wrap: wrap;
+               margin-bottom:50px;
+               .se-review-img {
+                    width:50%;
+                    img {
+                         max-width:100%;
+                         max-height:100%;
+                    }
+               }
+               .se-review-img-active {
+                    position:static;
+                    top:0;
+                    left:0;
+                    width:100vw;
+                    height:auto;
+                    img {
+                         max-width:100%;
+                         max-height:100%;
+                    }
+               }
+          
+          }
+          
      }
 
 }

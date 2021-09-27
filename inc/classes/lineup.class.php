@@ -188,9 +188,9 @@ class LineUp {
      public function cast_speaker_grid( $speakerID ){
 
           $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
-               $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
-
-               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.$portraitImage[0].');"></div>';
+/*                $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
+ */
+               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
                $this->speakerCard .= '<div class="se2-speaker-grid-content">';
 
                $name = ( get_field('speaker_vorname', $speakerID) ) 
@@ -285,6 +285,15 @@ class LineUp {
 
                                    if( $review['review_video'] ){
                                         $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
+                                   }
+                                   $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
+
+                                   if( $review['review_galerie'] ){
+                                        $this->speakerLightbox .= '<div class="speaker-lb-review-gallery">';
+                                        foreach($review['review_galerie'] as $image){
+                                             $this->speakerLightbox .= '<div class="se-review-img" open="0"><img src="'.$image.'"></div>';
+                                        }
+                                        $this->speakerLightbox .= '</div>';
                                    }
 
                               }
