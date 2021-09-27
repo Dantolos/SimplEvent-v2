@@ -286,6 +286,15 @@ class LineUp {
                                    if( $review['review_video'] ){
                                         $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
                                    }
+                                   $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
+
+                                   if( $review['review_galerie'] ){
+                                        $this->speakerLightbox .= '<div class="speaker-lb-review-gallery">';
+                                        foreach($review['review_galerie'] as $image){
+                                             $this->speakerLightbox .= '<div class="se-review-img" open="0"><img src="'.$image.'"></div>';
+                                        }
+                                        $this->speakerLightbox .= '</div>';
+                                   }
 
                               }
 

@@ -17,7 +17,7 @@ class Lightbox {
 
         //check
         if (!type || !data) {
-            console.watn('type or data missed!')
+            console.warn('type or data missed!')
             return;
         }
         if (document.querySelector('.se-lightbox-container') && !layered) {

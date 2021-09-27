@@ -1,7 +1,7 @@
 //---------------------------------
 //LINE UP
 //---------------------------------
-
+var LIGHTBOX = new Lightbox();
 var SPEAKERS = document.querySelectorAll('.speaker-profile')
 
 
@@ -138,3 +138,34 @@ function CALL_ANIMATION(S) {
 
 }
 
+
+
+//LIGHTBOX
+
+//REVIEW GALLERY
+var REVIEWGALLERY = [];
+jQuery(document).ajaxComplete(function () {
+    
+     REVIEWGALLERY = document.querySelectorAll('.se-review-img');
+     if (REVIEWGALLERY) {
+         for (let index = 0; index < REVIEWGALLERY.length; index++) {
+               REVIEWGALLERY[index].addEventListener('click', (e)=>{
+                    console.log(REVIEWGALLERY[index].querySelector('img').getAttribute('src'))
+                    REVIEWGALLERY.forEach(function(el) { el.classList.remove('se-review-img-active') })
+                    if(REVIEWGALLERY[index].getAttribute('open', '0')){
+                         REVIEWGALLERY[index].setAttribute('open', '1')
+                         REVIEWGALLERY[index].classList.add('se-review-img-active')
+                    }else {
+                         REVIEWGALLERY[index].classList.remove('se-review-img-active')
+                         REVIEWGALLERY[index].setAttribute('open', '0')
+                         
+                    }
+                    
+                  
+               })
+              
+         }
+
+     }
+
+})

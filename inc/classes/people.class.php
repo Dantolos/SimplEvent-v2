@@ -55,8 +55,6 @@ class People{
                $this->output .= $socialmedia->castSocialMediaItem( get_field( 'social_media', $person->ID ) );
             }
          
-            
-
             $this->output .= '</div>';
             $this->output .= '</div>';
         }
