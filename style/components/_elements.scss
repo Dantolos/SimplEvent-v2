@@ -55,7 +55,10 @@ button {
                 
             }
         }
-            
+        &:hover {
+            transform: scale(.8);
+            cursor: pointer;
+        }
     }
 }
 

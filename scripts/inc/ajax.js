@@ -8,6 +8,7 @@ class se2_Ajax {
             this.parentContainer[0].innerHTML = '';
         }
 
+        console.log(dataToCall)
         LOADER.cast_Loader(this.parentContainer[0]);
 
         jQuery(document).ready(function ($) {

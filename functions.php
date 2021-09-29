@@ -530,3 +530,5 @@ function kb_template_redirect() {
     }
 }
 add_action('template_redirect', 'kb_template_redirect');
+
+
