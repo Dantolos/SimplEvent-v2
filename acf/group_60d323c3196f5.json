@@ -3,6 +3,50 @@
     "title": "Mediacorner",
     "fields": [
         {
+            "key": "field_61548e347009e",
+            "label": "Menu",
+            "name": "menu",
+            "type": "checkbox",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "info": "Informationen",
+                "mm": "Medienmitteilungen",
+                "logo": "Logos",
+                "foros": "Fotos"
+            },
+            "allow_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "array",
+            "wpml_cf_preferences": 1,
+            "save_custom": 0
+        },
+        {
+            "key": "field_61548c3977674",
+            "label": "MM",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_60d325f860dda",
             "label": "Medienmitteilungen",
             "name": "medienmitteilungen",
@@ -15,12 +59,12 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 3,
             "collapsed": "",
             "min": 0,
             "max": 0,
             "layout": "table",
             "button_label": "",
-            "wpml_cf_preferences": 1,
             "sub_fields": [
                 {
                     "key": "field_60d3263060ddb",
@@ -83,6 +127,23 @@
             ]
         },
         {
+            "key": "field_61548c9577675",
+            "label": "Logo",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_60d487dac2f04",
             "label": "Logos",
             "name": "logos",
@@ -95,11 +156,11 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
-            "collapsed": "",
+            "wpml_cf_preferences": 3,
+            "collapsed": "field_60d487e6c2f05",
             "min": 0,
             "max": 0,
-            "layout": "table",
+            "layout": "block",
             "button_label": "",
             "sub_fields": [
                 {
@@ -115,7 +176,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 3,
                     "layout": "table",
                     "sub_fields": [
                         {
@@ -143,7 +204,7 @@
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "80",
                                         "class": "",
                                         "id": ""
                                     },
@@ -153,6 +214,26 @@
                                     "prepend": "",
                                     "append": "",
                                     "maxlength": ""
+                                },
+                                {
+                                    "key": "field_60d488dfc2f0a",
+                                    "label": "Negativ",
+                                    "name": "negativ",
+                                    "type": "true_false",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "20",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 0,
+                                    "ui_on_text": "",
+                                    "ui_off_text": ""
                                 },
                                 {
                                     "key": "field_60d488a6c2f09",
@@ -198,26 +279,6 @@
                                     "max_size": "",
                                     "mime_types": "",
                                     "wpml_cf_preferences": 2
-                                },
-                                {
-                                    "key": "field_60d488dfc2f0a",
-                                    "label": "Negativ",
-                                    "name": "negativ",
-                                    "type": "true_false",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "message": "",
-                                    "default_value": 0,
-                                    "ui": 0,
-                                    "wpml_cf_preferences": 1,
-                                    "ui_on_text": "",
-                                    "ui_off_text": ""
                                 }
                             ]
                         },
@@ -235,7 +296,7 @@
                                 "id": ""
                             },
                             "wpml_cf_preferences": 2,
-                            "layout": "block",
+                            "layout": "row",
                             "sub_fields": [
                                 {
                                     "key": "field_60d4893dc2f0c",
@@ -333,7 +394,7 @@
                                 "id": ""
                             },
                             "wpml_cf_preferences": 2,
-                            "layout": "block",
+                            "layout": "row",
                             "sub_fields": [
                                 {
                                     "key": "field_60d48ab5d5963",
@@ -422,6 +483,23 @@
             ]
         },
         {
+            "key": "field_61548cac876c2",
+            "label": "Fotos",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_60d5efeb5b517",
             "label": "Galleries",
             "name": "galleries",
@@ -434,7 +512,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 3,
             "collapsed": "",
             "min": 0,
             "max": 0,
@@ -591,7 +669,7 @@
     ],
     "menu_order": 0,
     "position": "acf_after_title",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": [
@@ -609,5 +687,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1624884129
+    "modified": 1632931626
 }

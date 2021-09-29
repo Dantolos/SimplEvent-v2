@@ -8,11 +8,16 @@ wp_enqueue_script( 'JS-mediacorner', get_template_directory_uri() . '/scripts/sp
 
 the_content();
 
+$mediaCorner = new Mediacorner;
+$pageID = get_the_ID();
+
+echo '<div class="mediacorner-nav">';
+echo $mediaCorner->cast_mediacorner_nav($pageID);
+echo '</div>';
 
 echo '<div class="container se2-mediacorner" style="margin-bottom:50px;">';
 
-     $mediaCorner = new Mediacorner;
-     $pageID = get_the_ID();
+  
 
      echo $mediaCorner->cast_logo_downlaods($pageID);
 

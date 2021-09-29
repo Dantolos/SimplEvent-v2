@@ -43,7 +43,19 @@ class Mediacorner {
                               </svg>';
      }
 
-     function cast_press_realese( $pageID ){
+     public function cast_mediacorner_nav( $pageID ){
+          $mediacornerNav = '<div class="">';
+
+          $menuItems = get_field('menu', $pageID);
+          foreach( $menuItems as $item ){
+               $mediacornerNav .= '<h6>'.$item['label'].'</h6>';
+          }
+
+          $mediacornerNav .= '</div>';
+          return $mediacornerNav;
+     }
+     
+     public function cast_press_realese( $pageID ){
 
           $pressRealese = '<div class="se2-press-realese">';
           $pressRealese .= '<h4>'.__('Medienmitteilungen', 'SimplEvent').'</h4>';
@@ -86,7 +98,7 @@ class Mediacorner {
           return $pressRealese;
      }
 
-     function cast_logo_downlaods( $pageID ){
+     public function cast_logo_downlaods( $pageID ){
           $logoDownloads = '<div class="se2-logos">';
           $logoDownloads .= '<h4 style="width:100%;">'.__('Logos', 'SimplEvent').'</h4>';
 
