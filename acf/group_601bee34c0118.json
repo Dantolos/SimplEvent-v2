@@ -249,26 +249,6 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_612cc11e03097",
-            "label": "Programm Titel",
-            "name": "programm_titel",
-            "type": "text",
-            "instructions": "Wird im Programm-Raster angezeigt.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 2,
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_601bf4382fd79",
             "label": "Foto",
             "name": "speaker_bild",
@@ -334,6 +314,26 @@
             "prefix_label": 1,
             "prefix_name": 1,
             "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_6155712d739c2",
+            "label": "Lead",
+            "name": "lead",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_601bf7182fd7c",
@@ -517,11 +517,11 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1632904798
+    "modified": 1632989953
 }

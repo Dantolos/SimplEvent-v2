@@ -176,7 +176,7 @@ wp_head();
 <style>
     
 </style>
-<body>
+<body  lang="<?php echo ICL_LANGUAGE_CODE; ?>">
     <!----------------
     -----MAIN MENU----
     ------------------>

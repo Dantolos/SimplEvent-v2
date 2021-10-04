@@ -47,10 +47,11 @@ class Mediacorner {
           $mediacornerNav = '<div class="">';
 
           $menuItems = get_field('menu', $pageID);
-          foreach( $menuItems as $item ){
-               $mediacornerNav .= '<h6>'.$item['label'].'</h6>';
+          if(is_array($menuItems) ){
+               foreach( $menuItems as $item ){
+                    $mediacornerNav .= '<h5>'.$item['label'].'</h5>';
+               }
           }
-
           $mediacornerNav .= '</div>';
           return $mediacornerNav;
      }
@@ -109,18 +110,18 @@ class Mediacorner {
                     $logoDownloads .= '<div class="se2-logo">';
 
                     $logoDownloads .= '<div class="se2-logo-preview">';
-                         $logoDownloads .= '<div class="se2-logo-preview-text">';
-                              $logoDownloads .= '<h5><b>'.$logo['preview']['titel'].'</b></h5>';
-                              $logoDownloads .= '<h6>'.$logo['preview']['description'].'</h6>';
-                         $logoDownloads .= '</div>';
+                         
                          //var_dump($logo['preview']['negativ']);
                          $logoNegStyle = ($logo['preview']['negativ']) ? 'se2-logo-preview-logo-neg' : '';
                          $logoDownloads .= '<div class="se2-logo-preview-logo '.$logoNegStyle.'"><img src="'.$logo['preview']['image'].'" alt="'.$logo['preview']['titel'].'" /></div>';            
                     $logoDownloads .= '</div>';
 
                     $logoDownloads .= '<div class="se2-logo-download">';
-
-                         //RGB
+                         $logoDownloads .= '<div class="se2-logo-preview-text">';
+                              $logoDownloads .= '<h4><b>'.$logo['preview']['titel'].'</b></h4>';
+                              $logoDownloads .= '<h6>'.$logo['preview']['description'].'</h6>';
+                         $logoDownloads .= '</div>';
+                              //RGB
                          if( isset( $logo['files_rgb'] ) ){
                               $logoDownloads .= '<div class="se2-logo-download-rgb">';
                                    $logoDownloads .= '<div><h6><b>Digital</b><i> (rgb)</i></h6></div>';
@@ -152,6 +153,9 @@ class Mediacorner {
                                    }
                               $logoDownloads .= '</div>';  
                          }
+                       
+
+                         $logoDownloads .= 'Download all';
                     $logoDownloads .= '</div>';
                     $logoDownloads .= '</div>';
                }
@@ -249,17 +253,19 @@ class Mediacorner {
           $audioContent .= '<div class="audio-content-container" style="width:50%; min-width:500px; padding:;">';
           $audioContent .= '<h4>AUDIO</h4>';
           $audiosFiles = get_field('audio', $pageID);
-          if(count( $audiosFiles ) > 0){
-               foreach($audiosFiles as $audioFile){
+         
+               if(count( $audiosFiles ) > 0){
+                    foreach($audiosFiles as $audioFile){
 
-                    $autioContent .= '';
+                         $autioContent .= '';
 
-                    $audioContent .= '<h5>'.$audioFile['file-name'].'</h5>';
-                    $audioContent .= '<audio controls style="width:100%;">';
-                    $audioContent .= '<source src="'.$audioFile['audio-files'].'" type="audio/ogg">';
-                    $audioContent .= '</audio>';
+                         $audioContent .= '<h5>'.$audioFile['file-name'].'</h5>';
+                         $audioContent .= '<audio controls style="width:100%;">';
+                         $audioContent .= '<source src="'.$audioFile['audio-files'].'" type="audio/ogg">';
+                         $audioContent .= '</audio>';
+                    }
                }
-          }
+          
           $audioContent .= '</div>';
 
           return $audioContent;
