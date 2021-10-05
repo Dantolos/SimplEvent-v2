@@ -140,8 +140,8 @@ class LineUp {
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
-               $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
-               $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.$portraitImage[0].');"></div>';
+              /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
+               $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
    
                $this->speakerCard .= '<div class="se2-speaker-list-profil-info">';
  
@@ -190,7 +190,10 @@ class LineUp {
           $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
 /*                $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
  */
-               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+               $portraitImage = esc_url( get_field('speaker_bild', $speakerID ));
+         
+               
+               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.$portraitImage.');"></div>';
                $this->speakerCard .= '<div class="se2-speaker-grid-content">';
 
                $name = ( get_field('speaker_vorname', $speakerID) ) 
@@ -257,10 +260,13 @@ class LineUp {
           $this->speakerLightbox = '<div class="speaker-lb-container">';
 
           $this->speakerLightbox .= '<div class="speaker-lb-head">';
+
+               
+               
                $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
 
                $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
-
+            
                     $speakername = ( get_field('speaker_vorname', $speakerID) ) 
                     ? 
                          get_field('speaker_degree', $speakerID) 
@@ -322,6 +328,85 @@ class LineUp {
           $this->speakerCardBlock .= '</div>';
 
           return $this->speakerCardBlock;
+     }
+
+     public function gg_cast_speaker_lightbox($speakerID){
+          $this->speakerLightbox = '<div class="speaker-lb-container">';
+
+          $this->speakerLightbox .= '<div class="speaker-lb-head">';
+          $args = array( 'p' => $speakerID );
+          $myPosts = new WP_Query( $args );
+          $this->speakerLightbox .= '<pre style="color:green;">';
+          $this->speakerLightbox .= $myPosts;
+          $this->speakerLightbox .= '</pre>';
+          
+               $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+
+               $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
+            
+                    $speakername = ( get_field('speaker_vorname', $speakerID) ) 
+                    ? 
+                         get_field('speaker_degree', $speakerID) 
+                         . ' ' . get_field('speaker_vorname', $speakerID) 
+                         . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
+                    : 
+                         get_the_title( $speakerID );
+
+                    $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.' - '.$speakerID.'</h2>';
+                    $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+                    $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
+
+                    
+                    
+                    if( $myPosts->have_posts() ) {
+                         while( $myPosts->have_posts() ) {
+                              $myPosts->the_post();
+                              $this->speakerLightbox .= 'THIS POST';
+                              $this->speakerLightbox .= the_title();
+                         }
+                    }
+                    wp_reset_postdata();
+
+                    $speakerCV = get_field( 'speaker_cv', $speakerID );
+                    $this->speakerLightbox .=  $speakerCV;
+                    
+
+                    if( have_rows('review_jahr',  $speakerID ) ){
+                         foreach( get_field( 'review_jahr', $speakerID ) as $review ){
+                              if( $review['review_public'] ){
+                          
+                                   $this->speakerLightbox .= '<h6>REVIEW <b>'. $review['jahr']->slug .'</b></h6>';
+                                   $this->speakerLightbox .= '<h3><b>'.$review['review_titel'].'</b></h3>';
+
+                                   if( $review['review_video'] ){
+                                        $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
+                                   }
+                                   $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
+
+                                   if( $review['review_galerie'] ){
+                                        $this->speakerLightbox .= '<div class="speaker-lb-review-gallery">';
+                                        foreach($review['review_galerie'] as $image){
+                                             $this->speakerLightbox .= '<div class="se-review-img" open="0"><img src="'.$image.'"></div>';
+                                        }
+                                        $this->speakerLightbox .= '</div>';
+                                   }
+
+                              }
+
+                         }                          
+
+                    }
+
+                    $this->speakerLightbox .= get_field( 'review_text', $speakerID );
+
+               $this->speakerLightbox .= '</div>';
+
+          $this->speakerLightbox .= '</div>';
+
+          $this->speakerLightbox .= '</div>';
+
+          return $this->speakerLightbox;
+          
      }
 
 } 

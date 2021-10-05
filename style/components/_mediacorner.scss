@@ -2,24 +2,66 @@
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
+
+     .mediacorner-nav {
+          @include dropShadow;
+          display:flex;
+          align-items: center;
+          justify-content: flex-end;
+          height:calc( 100vh - 80px );
+          width:20vw;
+          padding:20px;
+          z-index: 5;
+          h5 {
+               color: var(--midColor);
+               width:100%;
+               text-align: right;
+               margin: 15% 0;
+               cursor: pointer;
+               &:hover {
+                    font-weight: bold;
+                    color:$primary;
+               }
+               
+          }
+          .active-nav {
+               color:$primary;
+          }
+     }
+     
+     .mediacorner-content {
+          width:80vw;
+          height:calc( 100vh - 80px );
+          padding:10% 5%;
+          overflow-y: scroll;
+          position: relative;
+          @include hideScrollbar;
+     }
 }
 
+
+
 .se2-logos {
-     width:60%;
+
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
+     
      .se2-logo {
-          width:33%;
+          width:100%;
           min-width:250px;
-          padding:5px;
+          padding: 40px 0;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+
+          border-top: 1px solid var(--primeColor);
+          margin-top:40px;
           .se2-logo-preview {
                margin-top: 2px;
-               .se2-logo-preview-text {
-                    border-bottom: 1px solid var(--primeColor);
-                    width:100%;
-                    padding:5px 0;
-               }
+               width:50%;
+               padding: 5%;
                .se2-logo-preview-logo {
                     width:100%;
                     background-color: $light_shade;
@@ -29,6 +71,7 @@
                     margin-top: 3px;
                     position: relative;
                     height:80px;
+                    
                     img {
                          position: absolute;
                          margin:auto;
@@ -43,14 +86,21 @@
                
           }
           .se2-logo-download {
+               width:50%;
+
+               .se2-logo-preview-text {
+                    h4 { margin-bottom:20px;}
+                    width:100%;
+                    padding:5px 0;
+               }
                .se2-logo-download-rgb, .se2-logo-download-cmyk {
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
-                    background-color: var(--shadeColor);
+                 
                     position: relative;
                     justify-content: flex-end;
-                    margin-top: 2px;
+                    margin-top: 4px;
                    
                     div {
                          flex-grow: 1;
@@ -69,36 +119,47 @@
 }
 
 .se2-logo-download-button {
-     background-color:$primary;
+     background-color:var(--midColor);
+     border-radius: 5px;
      position: relative;
-     height:30px;
+     height:20px;
      width:30px;
-     margin-left: 2px;
+     margin-left: 3px;
      svg{
           position: absolute;
           margin:auto;
           top:0;left:0;bottom:0;right:0;
-          fill: $light;
+          path {
+               fill:white;
+          }
      }
 }
      
 
 .se2-press-realese {
-     width:40%;
+     width:100%;
      min-width:400px;
      .se2-press-realese {
           width:100%;
           display: flex;
           flex-direction: row;
           flex-wrap: nowrap;
-          margin-top:3px;
-          
+          border-radius: 5px;
+          margin-top:10px;
+          align-items: center;
+     
+          &:hover {
+               background-color: var(--shadeColor);
+          }
 
           .se2-press-realese-icon {
-               width:10%;
+               width:30px;
+               height:35px;
                max-width: 50px;
-               padding:5px;
-               background-color: $primary;
+               padding:3px;
+               
+               background-color: var(--primeColor);
+               border-radius: 5px;
                position: relative;
                svg {
                     position: absolute;
@@ -111,16 +172,16 @@
           .se2-press-realese-desc {
                width:80%;
                padding:10px;
-               background-color: var(--shadeColor);
+               font-size: 1.2em;
                color: var(--primeColor);
-               
+               i { font-weight: 300;}
           }
      
           .se2-press-realese-date {
                width:100px;
                padding:5px;
-               background-color: $primary;
-               color: $light;
+               
+               color: var(--primeColor);
                text-align: center;
                padding:10px;
           }
@@ -133,7 +194,10 @@
      flex-direction: row;
      justify-content: space-between;
      flex-wrap: wrap;
-     margin-top:50px;
+     position: absolute;
+     top:0;
+     left:0;
+     height:100%;
 
      .se2-galleries-titlebar {
           width:100%;
@@ -149,6 +213,10 @@
           width:10%;
           min-width: 150px;
           background-color: var(--shadeColor);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
           .se2-galleries-folder {
                &:hover {
                     border: solid $primary;
@@ -191,7 +259,10 @@
           width:calc(100% - 150px);
           border-left:1% solid white;
           position: relative;
-          background-color: var(--shadeColor);
+          padding:5%;
+          height:100%;
+          overflow-y: scroll;
+          @include hideScrollbar;
 
           .se2-galleries-content {
                display:flex;
@@ -200,19 +271,33 @@
                padding:10px;
                justify-content: space-around;
                min-height:50vh;
+
                .se2-galleries-photo{
                     margin:5px;
-                    width: 120px;
+                    $thumbWidth: 180px;
+                    width: $thumbWidth;
+                    cursor: pointer;
+
                     .se2-galleries-photo-thumbnail {
-                         background-color: var(--darkshade);
+                         background-color: var(--lightshade);
                          display:flex;
                          align-items: center;
                          justify-content: center;
-                         width:120px;
-                         height:120px;
+                         overflow: hidden;
+                         width:$thumbWidth;
+                         height:$thumbWidth;
                          img {
                               max-width:100%;
                               max-height:100%;
+                         }
+                    }
+
+                    &:hover {
+                         .se2-galleries-photo-thumbnail {
+                              border-radius: 5px;
+                              img{
+                                   transform:scale(1.05);
+                              }
                          }
                     }
                }
@@ -220,12 +305,44 @@
                     width:100%;
                     text-align: center;
                     word-break: break-all;
+                    margin: 10px 0;
                     h6{
                          margin:2px;
+                         color: $dark;
+                    }
+                    .dimensions { 
+                         opacity: .6;
+
                     }
                }
           }
           
+     }
+}
+
+.audio-content-container {
+     width:100%;
+     margin:40px 0;
+     .audio-content-file {
+          width:100%;
+          margin:40px 0 80px;
+          border-top: 1px solid var(--primeColor);
+          margin-bottom: 20px;
+          h5 {
+               margin:20px 0 0;
+          }
+          .audio-download {
+               float:right;
+               color: var(--secondColor);
+               background-color: var(--primeColor);
+               border-radius: 5px;
+               padding:5px 20px;
+               width: fit-content;
+               &:hover {
+                    background-color: var(--darkshade);
+                    transform:scale(.95);
+               }
+          }
      }
 }
 

@@ -12,7 +12,13 @@
 }
 
 
-html {  scroll-behavior: smooth; }
+html {  
+     scroll-behavior: smooth; 
+     
+     -webkit-hyphens: auto;
+     -ms-hyphens: auto;
+     hyphens: auto;
+}
 
 #master-container {
      width: 100vw;
@@ -51,6 +57,7 @@ html {  scroll-behavior: smooth; }
 @import 'components/sessions';
 @import 'components/programm';
 @import 'components/mediacorner';
+@import 'components/review';
 @import 'components/award';
 
 //BLOCKS Theme-specific
