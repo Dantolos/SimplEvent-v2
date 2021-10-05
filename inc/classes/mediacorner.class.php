@@ -44,41 +44,48 @@ class Mediacorner {
      }
 
      public function cast_mediacorner_nav( $pageID ){
-          $mediacornerNav = '<div class="">';
+          $mediacornerNav = '<div class="mediacorner-nav-container" pageid="'.$pageID.'">';
 
           $menuItems = get_field('menu', $pageID);
           if(is_array($menuItems) ){
                foreach( $menuItems as $item ){
-                    $mediacornerNav .= '<h5>'.$item['label'].'</h5>';
+                    $mediacornerNav .= '<h5 class="mediacorner-nav-element" type="'.$item['value'].'">'.__($item['label'], 'SimplEvent').'</h5>';
                }
           }
           $mediacornerNav .= '</div>';
           return $mediacornerNav;
      }
      
+
+     public function cast_media_info( $pageID ){ 
+          $mediaInfo = '<div class="media-info-container">';
+          $mediaInfo .= get_field('info_content', $pageID);
+          //$mediaInfo .= the_content( $pageID );
+          $mediaInfo .= '</div>';
+          return $mediaInfo;
+     }
+
      public function cast_press_realese( $pageID ){
 
           $pressRealese = '<div class="se2-press-realese">';
           $pressRealese .= '<h4>'.__('Medienmitteilungen', 'SimplEvent').'</h4>';
           $realeses = get_field('medienmitteilungen', $pageID);
-          if( is_array($realeses)){
-               if( count($realeses) > 0){
+          $currentYear = false;
+          if( is_array($realeses) ){
+               if( count($realeses) > 0 ){
                     foreach( $realeses as $realese ){
 
                          date_default_timezone_set("Europe/Zurich");
                          if( date( 'YmdHi', strtotime( str_replace( '/', '-',  $realese['public']) )) > date( 'YmdHi' ) ){
                               continue;
                          }
+
+                         if( !$currentYear || date( 'Y', strtotime( str_replace( '/', '-',  $realese['public']) )) != $currentYear ){
+                              $currentYear = date( 'Y', strtotime( str_replace( '/', '-',  $realese['public']) ));
+                              $pressRealese .= '<div style="width:100%; border-bottom:1px solid black; margin-top: 30px;">' . $currentYear . '</div>';
+                         }
                          $pressRealese .= '<a href="'.$realese['file'].'" target="_blank">';
                          $pressRealese .= '<div class="se2-press-realese file-container">';
-
-                              $pressRealese .=    '<div class="se2-press-realese-date">'
-                                                       . $this->dateFormat->formating_Date_Language( $realese['public'], 'date' ).
-                                                  '</div>';
-
-                              $pressRealese .=    '<div class="se2-press-realese-desc">
-                                                       '.$realese['titel'].' <i>('.$this->fileSize->getRemoteFilesize( $realese['file'] ).')</i>
-                                                  </div>';
 
                               $pressRealese .=    '<div class="se2-press-realese-icon file-icon">
                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
@@ -89,6 +96,16 @@ class Mediacorner {
 
                                                        </svg>
                                                   </div>';
+                              $pressRealese .=    '<div class="se2-press-realese-desc">
+                                                       '.$realese['titel'].' <i>('.$this->fileSize->getRemoteFilesize( $realese['file'] ).')</i>
+                                                  </div>';
+
+                              $pressRealese .=    '<div class="se2-press-realese-date">'
+                                                       
+                                                       . $this->dateFormat->formating_Date_Language( $realese['public'], 'date' ).
+                                                  '</div>';
+
+                          
 
                          $pressRealese .= '</div>';
                          $pressRealese .= '</a>';
@@ -155,7 +172,7 @@ class Mediacorner {
                          }
                        
 
-                         $logoDownloads .= 'Download all';
+                         
                     $logoDownloads .= '</div>';
                     $logoDownloads .= '</div>';
                }
@@ -169,10 +186,7 @@ class Mediacorner {
           if(!$galleries){ exit(); }
           $photoArchive = '<div class="se2-galleries-matrix" pageid="'.$pageID.'">';
 
-          $photoArchive .= '<div class="se2-galleries-titlebar">';
-          $photoArchive .= '<h5>'.__('Foto Archiv', 'SimplEvent').'<h5>';
-          $photoArchive .= '</div>';
-
+          
           $photoArchive .= '<div class="se2-galleries-folder-tree">';
                $folderID = 0; 
                $gallerieID = 0; 
@@ -235,7 +249,7 @@ class Mediacorner {
                          $folderContent .= '</div>';
                          $folderContent .= '<div class="se2-galleries-photo-desc" >';
                               $folderContent .= '<h6><b>'.$photo['title'].'</b></h6>';
-                              $folderContent .= '<h6><i>'.$photo['width'].' x '.$photo['height'].'px</i></h6>';
+                              $folderContent .= '<h6 class="dimensions"><i>'.$photo['width'].' x '.$photo['height'].'px</i></h6>';
                               $folderContent .= '<h6>'.$this->fileSize->getRemoteFilesize( $photo['url'] ).'</h6>';
                          $folderContent .= '</div>';
                     $folderContent .= '</div>';
@@ -248,27 +262,30 @@ class Mediacorner {
      }
 
      public function cast_audio_archive($pageID){
-          $audioContent = '';
+          $audioCondent = '';
 
-          $audioContent .= '<div class="audio-content-container" style="width:50%; min-width:500px; padding:;">';
-          $audioContent .= '<h4>AUDIO</h4>';
-          $audiosFiles = get_field('audio', $pageID);
+          $audioCondent .= '<div class="audio-content-container">';
+          $audioCondent .= '<h4 style="width:100%;">AUDIO</h4>';
+          $audiosFiles = get_field('audio_files', $pageID);
          
                if(count( $audiosFiles ) > 0){
                     foreach($audiosFiles as $audioFile){
+                         
+                         $audioCondent .= '<div class="audio-content-file">';
 
-                         $autioContent .= '';
-
-                         $audioContent .= '<h5>'.$audioFile['file-name'].'</h5>';
-                         $audioContent .= '<audio controls style="width:100%;">';
-                         $audioContent .= '<source src="'.$audioFile['audio-files'].'" type="audio/ogg">';
-                         $audioContent .= '</audio>';
+                         $audioCondent .= '<h5>'.$audioFile['titel'].'</h5>';
+                         $audioCondent .= '<p>'.$audioFile['desc'].'</p>';
+                         $audioCondent .= '<audio controls style="width:100%;">';
+                         $audioCondent .= '<source src="'.$audioFile['files']['url'].'" type="audio/ogg">';
+                         $audioCondent .= '</audio>';
+                         $audioCondent .= '<a href="'.$audioFile['files']['url'].' " download><div class="audio-download">Download</div></a>';
+                         $audioCondent .= '</div>';
                     }
                }
           
-          $audioContent .= '</div>';
+          $audioCondent .= '</div>';
 
-          return $audioContent;
+          return $audioCondent;
      }
      
 }

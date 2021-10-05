@@ -15,19 +15,57 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "choices": {
                 "info": "Informationen",
                 "mm": "Medienmitteilungen",
                 "logo": "Logos",
-                "foros": "Fotos"
+                "fotos": "Fotos",
+                "audio": "Audio"
             },
             "allow_custom": 0,
             "default_value": [],
             "layout": "vertical",
             "toggle": 0,
             "return_format": "array",
-            "wpml_cf_preferences": 1,
             "save_custom": 0
+        },
+        {
+            "key": "field_615b1843344fa",
+            "label": "Info",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_615b186e344fb",
+            "label": "Info Content",
+            "name": "info_content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0,
+            "wpml_cf_preferences": 3
         },
         {
             "key": "field_61548c3977674",
@@ -656,6 +694,105 @@
             "max": "",
             "return_format": "object",
             "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_615b030434355",
+            "label": "Audio",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_615b032634356",
+            "label": "Audio Files",
+            "name": "audio_files",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_615b03ae34359",
+                    "label": "Titel",
+                    "name": "titel",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 3,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_615b04228219d",
+                    "label": "Desc",
+                    "name": "desc",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "",
+                    "wpml_cf_preferences": 1
+                },
+                {
+                    "key": "field_615b038534358",
+                    "label": "Files",
+                    "name": "files",
+                    "type": "file",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "wpml_cf_preferences": 1
+                }
+            ]
         }
     ],
     "location": [
@@ -687,5 +824,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1632931626
+    "modified": 1633360022
 }

@@ -151,21 +151,7 @@ function session_lightbox()
      die();
 }
 
-/*-------------PHOTO GALLERY FOLDER---------------*/
-//photo-gallerie
-add_action('wp_ajax_nopriv_photo_folder', 'photo_folder');
-add_action('wp_ajax_photo_folder', 'photo_folder'); //nur für angemeldete (admins)
 
-function photo_folder() 
-{
-     $pageID = $_POST['pageid'];
-     $folder = $_POST['folder'];
-     $MediaCorner = new Mediacorner;
-     
-     wp_send_json( $MediaCorner->cast_folder_content( $pageID, $folder ) ); 
-     
-     die();
-}
 
 
 /*-------------AWARD---------------*/
@@ -184,3 +170,55 @@ function candidate_lightbox()
 }
 
 
+/*-------------MEDIACORNER---------------*/
+
+add_action('wp_ajax_nopriv_mediacorner', 'mediacorner');
+add_action('wp_ajax_mediacorner', 'mediacorner'); //nur für angemeldete (admins)
+
+function mediacorner() 
+{
+     $mediacornerID = $_POST['id'];
+     $mediacornerType = $_POST['type'];
+     $mediaCorner = new Mediacorner;
+     switch ($mediacornerType) {
+          case 'info':
+               wp_send_json( $mediaCorner->cast_media_info( $mediacornerID ) ); 
+               break;
+          case 'mm':
+               wp_send_json( $mediaCorner->cast_press_realese( $mediacornerID ) ); 
+               break;
+          case 'logo':
+               wp_send_json( $mediaCorner->cast_logo_downlaods( $mediacornerID ) ); 
+               break;
+          case 'fotos':
+               wp_send_json( $mediaCorner->cast_photo_archive( $mediacornerID ) ); 
+               break;
+          case 'audio':
+               wp_send_json( $mediaCorner->cast_audio_archive( $mediacornerID ) ); 
+               break;
+               
+          default:
+               wp_send_json( $mediaCorner->cast_media_info( $mediacornerID ) );
+               break;
+     }
+     
+    
+     
+     die();
+}
+
+/*-------------PHOTO GALLERY FOLDER---------------*/
+//photo-gallerie
+add_action('wp_ajax_nopriv_photo_folder', 'photo_folder');
+add_action('wp_ajax_photo_folder', 'photo_folder'); //nur für angemeldete (admins)
+
+function photo_folder() 
+{
+     $pageID = $_POST['pageid'];
+     $folder = $_POST['folder'];
+     $MediaCorner = new Mediacorner;
+     
+     wp_send_json( $MediaCorner->cast_folder_content( $pageID, $folder ) ); 
+     
+     die();
+}

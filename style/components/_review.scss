@@ -1,0 +1,29 @@
+/*******************************/
+/********** OVERVIEW ***********/
+/*******************************/
+
+/*******************************/
+/*********** SINGLE ************/
+/*******************************/
+.review-single{
+    position: relative;
+    .review-single-header {
+        height:20vh;
+        width:100vw;
+        @include imageSettings;
+    }
+
+    .review-single-content {
+        position: relative;
+
+        .review-single-sidebar {
+            background-color:$light;
+            width:400px;
+
+            .review-single-video {
+                height:25vh;
+                width: 40vw;
+            }
+        }
+    }
+}
