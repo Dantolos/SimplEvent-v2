@@ -269,7 +269,7 @@ class Mediacorner {
           $audiosFiles = get_field('audio_files', $pageID);
          
                if(count( $audiosFiles ) > 0){
-                    foreach($audiosFiles as $audioFile){
+                    foreach( $audiosFiles as $audioFile ){
                          
                          $audioCondent .= '<div class="audio-content-file">';
 

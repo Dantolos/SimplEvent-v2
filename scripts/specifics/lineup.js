@@ -22,14 +22,15 @@ const LINEUPCONTAINER = document.getElementById('lineup-container')
 //categories
 const CATFORM = document.getElementById('speechcat')
 
-CATFORM.addEventListener('change', (e) => {
+if(CATFORM){
+     CATFORM.addEventListener('change', (e) => {
 
-     args.cat = CATFORM.value
+          args.cat = CATFORM.value
 
-     CALL_AJAX_LINEUP(args)
+          CALL_AJAX_LINEUP(args)
 
-})
-
+     })
+}
 
 
 //order
@@ -39,7 +40,7 @@ var sortTL = gsap.timeline({ defaults: { duration: .5 } })
 var SORTICON = document.getElementById('dsc');
 sortTL.to(SORTICON, { morphSVG: "#asc" });
 
-
+if(ORDERBUTTON){
 ORDERBUTTON.addEventListener('click', () => {
 
      args.sort = (args.sort == 'asc') ? 'dsc' : 'asc';
@@ -54,13 +55,11 @@ ORDERBUTTON.addEventListener('click', () => {
      CALL_AJAX_LINEUP(args)
 
 })
-
+}
 
 
 //view
 const VIEWBUTTONS = document.querySelectorAll('.viewbutton')
-
-
 
 for (let VIEWS of VIEWBUTTONS) {
 

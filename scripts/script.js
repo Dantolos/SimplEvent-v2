@@ -121,7 +121,7 @@ for (let PERSON of PEOPLES) {
 
 
 //---------------------------------
-//PARTNER
+//*********** PARTNER *************
 //---------------------------------
 
 const PARTNERS = document.getElementsByClassName('partner-logo-box');
