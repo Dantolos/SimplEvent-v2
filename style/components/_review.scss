@@ -44,6 +44,27 @@
                     display: flex;
                     flex-wrap: wrap;
                 }
+
+                .review-single-speaker-allspeaker {
+                    background: var(--primeColor);
+                    border-radius: 5px;
+                    float: right;
+                    padding: 0 15px 0 20px;
+                    
+            
+                    p {
+                        margin: unset; 
+                        color:var(--secondColor);
+                        &::after { 
+                            font-family: "dashicons";
+                            display: inline-block;
+                            vertical-align: middle;
+                            content: "\f345";  
+                            padding-left:10px;
+                        } 
+                    }
+                    &:hover { transform: scale(.95); }
+                }
             }
         }
         
@@ -103,7 +124,6 @@
             position: relative;
             &::before, &::after {
                 font-family: "dashicons";
-                
                 display: inline-block;
                 vertical-align: middle;
                 opacity: .5;
@@ -137,3 +157,4 @@
         }
     }
 }
+

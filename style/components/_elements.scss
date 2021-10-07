@@ -89,3 +89,24 @@ select {
     
 }
 
+//------------------------------
+//SPLIDER
+//------------------------------
+.splide {
+    .se2-speaker-grid-profile {
+        width:100%;
+    }
+}
+
+.se2-class-arrows {
+    .se2-class-arrow {
+        background: unset;
+    }
+}
+
+.se2-class-pagination {
+
+    .is-active {
+        background:$primary !important;
+    }
+}

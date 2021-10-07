@@ -4,6 +4,7 @@ class Review {
     public $dateFormat;
     public $fileSize;
     public $mediacorner;
+    public $LineUpPage;
     public $LineUp;
 
     public function __construct(){
@@ -11,15 +12,24 @@ class Review {
         $this->LineUp = new LineUp;
         $this->fileSize = new se2_Files;
 
-        $args = [
+        $MediaCornerArgs = [
             'post_type' => 'page',
             'nopaging' => true,
             'meta_key' => '_wp_page_template',
             'meta_value' => 'Templates/mediacorner.php'
         ];
-        $this->mediacorner = get_posts( $args );
+        $this->mediacorner = get_posts( $MediaCornerArgs );
         $this->mediacorner = (is_array($this->mediacorner)) ? $this->mediacorner[0]->ID : false;
 
+
+        $LineUpArgs = [
+            'post_type' => 'page',
+            'nopaging' => true,
+            'meta_key' => '_wp_page_template',
+            'meta_value' => 'Templates/lineup.php'
+        ];
+        $this->LineUpPage = get_posts( $LineUpArgs );
+        $this->LineUpPage = (is_array($this->LineUpPage)) ? $this->LineUpPage[0]->ID : false;
     }
 
     public function cast_overview_review( $pageID ){
@@ -65,12 +75,26 @@ class Review {
                     
                     if( count($speakerIDs) > 0 ){
                         $single .= '<div class="review-single-speaker">';
-                        $single .= '<h3>Speakers</h3>';
-                        $single .= '<div id="lineup-container" year="'.$review['infos']['jahr']->slug.'">';
-                        foreach ($speakerIDs as $speakerID) {
-                            $single .= $this->LineUp->cast_speaker_grid( $speakerID );
-                        }
-                        $single .= '</div>';
+                            $single .= '<h3>Speakers</h3>';
+
+                            $single .= '<div id="lineup-container" year="'.$review['infos']['jahr']->name.'" carousel="3">';
+                                
+                                $single .= '<div class="speaker-splide splide" style="width:100%;" >';
+                                    $single .= '<div class="splide__track"><ul class="splide__list">';
+                                    foreach ($speakerIDs as $speakerID) {
+                                        $single .= '<li class="splide__slide">';
+                                        $single .= $this->LineUp->cast_speaker_grid( $speakerID );
+                                        $single .= '</li>';
+                                    }
+                                    $single .= '</ul></div>';
+                                $single .= '</div>';
+                            $single .= '</div>';
+                            
+                            $single .= '<a href="'.get_permalink($this->LineUpPage).'/?j='.$review['infos']['jahr']->name.'">';
+                            $single .= '<div class="review-single-speaker-allspeaker">';
+                            $single .= '<p>'.__( 'Alle Speaker', 'SimplEvent' ).'</p>';
+                            $single .= '</div>';
+                            $single .= '</a>';
                         $single .= '</div>';
                     }
 

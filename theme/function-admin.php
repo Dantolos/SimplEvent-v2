@@ -652,10 +652,13 @@ function simplevent_footer_snippets() {
                'snippet' => '', 
                'active' => ''
           ], 
-       
+          'facebook' => [
+               'snippet' => '', 
+               'active' => ''
+          ], 
      );
      if( is_array($footer_snippets) ){
-          if( count($footer_snippets) < count($fillerSnippets) ){
+          if( count($footer_snippets) < count($fillerSnippets) || array_diff_key( $fillerSnippets, $footer_snippets ) ){
                $footer_snippets = $fillerSnippets + $footer_snippets;
           } 
      }else {

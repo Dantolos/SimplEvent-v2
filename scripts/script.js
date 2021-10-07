@@ -1,6 +1,42 @@
+//s { loadOptions } = require("@babel/core");
+
 gsap.config({
      nullTargetWarn: false,
 });
+
+
+
+var speakerSplide = document.getElementsByClassName( 'speaker-splide' );
+
+for ( var i = 0; i < speakerSplide.length; i++ ) {
+     new Splide( speakerSplide[ i ], {
+          type   : 'loop',
+          perPage:3,
+          perMove:2,
+          breakpoints: {
+               1024: {
+                    perPage:2,
+                    perMove:1
+               },
+               667:{
+                    perPage:1,
+                    perMove:1
+               }
+          },
+          classes: {
+               // Add classes for arrows.
+               arrows: 'splide__arrows se2-class-arrows',
+               arrow : 'splide__arrow se2-class-arrow',
+               prev  : 'splide__arrow--prev se2-class-prev',
+               next  : 'splide__arrow--next se2-class-next',
+
+               pagination: 'splide__pagination se2-class-pagination',
+               page      : 'splide__pagination__page se2-class-page', 
+          }
+     }
+     ).mount();
+}
+
 
 var DETECT = new Detect();
 
