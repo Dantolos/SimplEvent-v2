@@ -3,6 +3,9 @@ wp_footer();
 $Partner = new Partner;
 ?>
      </div>
+
+
+
           <footer>
                <div class="footer-contact-container">
                     <a href="<?php $url = home_url(); echo esc_url( $url ); ?>">

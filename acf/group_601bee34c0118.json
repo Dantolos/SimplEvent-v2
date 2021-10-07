@@ -318,9 +318,9 @@
         {
             "key": "field_6155712d739c2",
             "label": "Lead",
-            "name": "lead",
+            "name": "programm_titel",
             "type": "text",
-            "instructions": "",
+            "instructions": "Titelzeile, welche im Programm angezeigt wird.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -516,12 +516,12 @@
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "acf_after_title",
     "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1632989953
+    "modified": 1633433241
 }

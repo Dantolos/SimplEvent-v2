@@ -118,7 +118,7 @@ function theme_add_scripts()
 
     foreach ($JsIncList as $JsInc) 
     {
-        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.25', true );
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.26', true );
     }
      
     /*------------------------------Send Global Variables---------------------------*/
@@ -532,3 +532,9 @@ function kb_template_redirect() {
 add_action('template_redirect', 'kb_template_redirect');
 
 
+
+//Enqueue the Dashicons script
+add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
+function load_dashicons_front_end() {
+    wp_enqueue_style( 'dashicons' );
+}

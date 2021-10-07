@@ -1,3 +1,5 @@
+
+
 /*******************************/
 /********** OVERVIEW ***********/
 /*******************************/
@@ -11,19 +13,148 @@
         height:20vh;
         width:100vw;
         @include imageSettings;
+        background-attachment: fixed;
+        @include breakpoint( 'm' ){
+            height:15vh;
+        }
     }
 
     .review-single-content {
         position: relative;
 
+        //PAGE
+        .review-single-page {
+            width: calc( 100% - 400px );
+            padding:100px 10px 0 0;
+            min-height:80vh;
+            @include breakpoint( 'm' ){
+                width: 100%;
+                padding:60px 10px 0 0;
+            }
+
+            //SPEAKER
+            .review-single-speaker {
+                border-top: 1px solid var(--primeColor);
+                margin:60px 0;
+                padding:20px 0;
+
+                h4 { margin:20px 0; }
+
+                #lineup-container{
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+
+                .review-single-speaker-allspeaker {
+                    background: var(--primeColor);
+                    border-radius: 5px;
+                    float: right;
+                    padding: 0 15px 0 20px;
+                    
+            
+                    p {
+                        margin: unset; 
+                        color:var(--secondColor);
+                        &::after { 
+                            font-family: "dashicons";
+                            display: inline-block;
+                            vertical-align: middle;
+                            content: "\f345";  
+                            padding-left:10px;
+                        } 
+                    }
+                    &:hover { transform: scale(.95); }
+                }
+            }
+        }
+        
+
+        //SIDEBAR
         .review-single-sidebar {
             background-color:$light;
+            border-radius: 5px;
+            //@include dropShadow;
             width:400px;
-
+            padding:10px;
+            position: absolute;
+            right: 10px;
+            top: -50px;
+            @include breakpoint( 'm' ){
+                position: relative;
+                width: 100%;
+            }
             .review-single-video {
-                height:25vh;
-                width: 40vw;
+                height: 215px;
+                width: 100%;
+            }
+
+            .review-single-medienspiegel {
+                margin:40px 0;
+                h4 { margin:20px 0;  }
+                .data-table-row .data-table-link{
+                    &::after { content: "\f504";}
+                }
+            }
+
+            .review-single-medienmitteilungen {
+                margin:40px 0;
+                h4 { margin:20px 0;  }
+                .data-table-row .data-table-link{
+                    &::before { content: "\f123";}
+                }
             }
         }
     }
 }
+
+
+.data-table {
+    a:nth-child(even) {  
+        .data-table-row {
+          background-color: var(--shadeColor);           
+        }     
+    }
+    .data-table-row {
+        display: flex; 
+        align-items: center;
+        background-color: white;
+        padding:5px 10px;
+        .data-table-link {
+            width:70%;
+            position: relative;
+            &::before, &::after {
+                font-family: "dashicons";
+                display: inline-block;
+                vertical-align: middle;
+                opacity: .5;
+                font-size:1.2em;
+            }
+            &::before { margin:0 10px 0 0; }
+            &::after { margin:0 0 0 10px; }
+        }
+        
+        .data-table-date {
+            width:30%;
+            text-align: right;
+            opacity: .8;
+            
+        }
+        p {
+            margin:0;
+            line-height: 1.4em;
+            vertical-align: center;
+        }
+
+        &:hover {
+            @include dropShadow;
+            transform: scale(1.02);
+            .data-table-link {
+                &::before, &::after {
+                    opacity: 1;
+                    color:$primary;
+                }
+            }
+        }
+    }
+}
+
