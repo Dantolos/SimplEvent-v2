@@ -308,6 +308,7 @@ function acf_load_award_categorie_choices( $field ) {
 add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
 
 
+
 /*-------------------------------------------------------------*/
 /*------------------------SVG Erlauben-------------------------*/
 /*-------------------------------------------------------------*/

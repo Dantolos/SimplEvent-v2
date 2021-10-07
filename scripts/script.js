@@ -6,37 +6,6 @@ gsap.config({
 
 
 
-var speakerSplide = document.getElementsByClassName( 'speaker-splide' );
-
-for ( var i = 0; i < speakerSplide.length; i++ ) {
-     new Splide( speakerSplide[ i ], {
-          type   : 'loop',
-          perPage:3,
-          perMove:2,
-          breakpoints: {
-               1024: {
-                    perPage:2,
-                    perMove:1
-               },
-               667:{
-                    perPage:1,
-                    perMove:1
-               }
-          },
-          classes: {
-               // Add classes for arrows.
-               arrows: 'splide__arrows se2-class-arrows',
-               arrow : 'splide__arrow se2-class-arrow',
-               prev  : 'splide__arrow--prev se2-class-prev',
-               next  : 'splide__arrow--next se2-class-next',
-
-               pagination: 'splide__pagination se2-class-pagination',
-               page      : 'splide__pagination__page se2-class-page', 
-          }
-     }
-     ).mount();
-}
-
 
 var DETECT = new Detect();
 
@@ -266,3 +235,101 @@ if(searchParams.has("type")){
      }
      console.log(searchParams.get('id'))
 }
+
+
+//---------------------------------
+//SPLIDER
+//---------------------------------
+
+var speakerSplide = document.getElementsByClassName( 'speaker-splide' );
+
+
+for ( var i = 0; i < speakerSplide.length; i++ ) {
+     new Splide( speakerSplide[ i ], {
+          type   : 'loop',
+          perPage:3,
+          perMove:2,
+          pagination: false,
+          breakpoints: {
+               1024: {
+                    perPage:2,
+                    perMove:1
+               },
+               667:{
+                    perPage:1,
+                    perMove:1
+               }
+          },
+          classes: {
+               // Add classes for arrows.
+               arrows: 'splide__arrows se2-class-arrows',
+               arrow : 'splide__arrow se2-class-arrow',
+               prev  : 'splide__arrow--prev se2-class-prev',
+               next  : 'splide__arrow--next se2-class-next',
+
+               pagination: 'splide__pagination se2-class-pagination',
+               page      : 'splide__pagination__page se2-class-page', 
+          }
+     }
+     ).mount();
+}
+ 
+var quoteSplide = document.getElementsByClassName( 'quote-splide' );
+
+for ( var i = 0; i < quoteSplide.length; i++ ) {
+     new Splide( quoteSplide[ i ], {
+          type   : 'loop',
+          perPage:1,
+          arrows: false,
+          autoplay: true,
+          lazyLoad: 'nearby',
+          classes: {
+               pagination: 'splide__pagination se2-class-pagination',
+               page      : 'splide__pagination__page se2-class-page', 
+          }
+     }
+     ).mount();
+}
+
+
+var quoteSplide = document.querySelectorAll( '.gallery-splide' );
+console.log(quoteSplide)
+for ( var i = 0; i < quoteSplide.length; i++ ) {
+     let container = quoteSplide[ i ]
+     let mainContainer = container.querySelector('.gallery-splide-main')
+     var main = new Splide( mainContainer, {
+          type  : 'fade',
+          fixedHeight : 500,
+          rewind: true,
+          arrows: false,
+          autoplay: true,
+          lazyLoad: 'nearby',
+          classes: {
+               pagination: 'splide__pagination se2-class-pagination',
+               page      : 'splide__pagination__page se2-class-page', 
+          }
+     })
+
+     let thumbContainer = container.querySelector('.gallery-splide-thumb')
+     var thumb = new Splide( thumbContainer, {
+          fixedWidth  : 100,
+          fixedHeight : 60,
+          gap         : 10,
+          rewind      : true,
+          pagination  : false,
+          cover       : true,
+          isNavigation: true,
+          breakpoints : {
+            600: {
+              fixedWidth : 60,
+              fixedHeight: 44,
+            },
+          },
+     })
+
+     main.sync( thumb );
+     main.mount();
+     thumb.mount();
+}
+
+
