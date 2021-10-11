@@ -21,8 +21,8 @@ echo '<div class="se2-mediacorner" >';
 
      echo '<div class="mediacorner-content">';
           //echo $mediaCorner->cast_logo_downlaods($pageID);
-          echo $mediaCorner->cast_media_info($pageID);
-          //echo $mediaCorner->cast_photo_archive($pageID);
+          //echo $mediaCorner->cast_media_info($pageID);
+          echo $mediaCorner->cast_photo_archive($pageID);
           //echo $mediaCorner->cast_audio_archive($pageID);
      echo '</div>';     
 echo '</div>';

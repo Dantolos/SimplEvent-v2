@@ -198,6 +198,7 @@
      top:0;
      left:0;
      height:100%;
+     overflow-y: hidden;
 
      .se2-galleries-titlebar {
           width:100%;
@@ -271,6 +272,7 @@
                padding:10px;
                justify-content: space-around;
                min-height:50vh;
+               position: relative;
 
                .se2-galleries-photo{
                     margin:5px;
@@ -290,6 +292,12 @@
                               max-width:100%;
                               max-height:100%;
                          }
+                         
+                         
+                    }
+                    .se2-photo-actibe-thumb {
+                         border: 5px solid $primary;
+                         padding: 5px;
                     }
 
                     &:hover {
@@ -315,9 +323,27 @@
 
                     }
                }
+
+               
           }
-          
+
+        
      }
+
+     .se2-gallerie-photo-download {
+          position: sticky;
+          background-color: $secondary;
+          bottom:0;
+          padding:10px;
+          width: 100%; 
+          display: flex;
+          align-items: center;
+          justify-content: centera;
+          button {  
+               background-color: $primary;
+          }
+     }
+     
 }
 
 .audio-content-container {
