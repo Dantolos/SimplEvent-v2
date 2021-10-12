@@ -125,8 +125,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.65'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.28' );
+     $scriptversion = '1.0.66'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.29' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -134,7 +134,12 @@ function theme_add_files()
      //fontawesome
      //wp_enqueue_script( 'fontawesome', 'https://kit.fontawesome.com/a1283e1be4.js', true );
 
-     //slidejs
+     //jszip
+     
+     wp_enqueue_script( 'jszip', get_template_directory_uri() . '/scripts/libraries/JSZip/jszip.min.js', true );
+     wp_enqueue_script( 'jsziputils', get_template_directory_uri() . '/scripts/libraries/JSZip/jszip-utils.min.js', true );
+     wp_enqueue_script( 'filesaver', get_template_directory_uri() . '/scripts/libraries/JSZip/FileSaver.min.js', true );
+     //splidejs
      wp_enqueue_script( 'slidejs', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.3/dist/js/splide.min.js', true );
      wp_enqueue_style( 'slidejs-style', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@3.0.3/dist/css/splide.min.css', '', '1.0.27' );
 

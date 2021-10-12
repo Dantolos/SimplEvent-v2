@@ -211,12 +211,16 @@ class Mediacorner {
           $photoArchive .= '</div>';
 
           $photoArchive .= '<div class="se2-galleries-files">';
-
                $photoArchive .= '<div class="se2-galleries-content" >';
                $photoArchive .= $this->cast_folder_content($pageID, 0);
-               $photoArchive .= '</div>';
-          
+               $photoArchive .= '</div>';  
+                 
           $photoArchive .= '</div>';
+
+          $photoArchive .= '<div class="se2-gallerie-photo-download">';
+               $photoArchive .= '<div class="photo-download-notice"><span class="photo-count"></span> ' .__('selected photos to download in a ZIP-Folder.', 'SimplEvent').'</div>';
+               $photoArchive .= '<button id="photo-select-download">'.__('Download Selected', 'SimplEvent').'</button>';
+          $photoArchive .= '</div>';  
 
           $photoArchive .= '</div>';
           return $photoArchive;
@@ -243,8 +247,9 @@ class Mediacorner {
           if(count( $gallerie['photos'] ) > 0){
                foreach( $gallerie['photos'] as $photo ){
                     //$folderContent .= '<a href="'.$photo['url'].'" download>';
-                    $folderContent .= '<div class="se2-galleries-photo">';
+                    $folderContent .= '<div class="se2-galleries-photo thumb" imageurl="'.$photo['url'].'">';
                          $folderContent .= '<div class="se2-galleries-photo-thumbnail" imageurl="'.$photo['url'].'">';
+                              $folderContent .= '<div class="dashicons dashicons-saved se2-galleries-photo-selected"></div>';
                               $folderContent .= '<img src="'.$photo['sizes']['medium'].'"/>';
                          $folderContent .= '</div>';
                          $folderContent .= '<div class="se2-galleries-photo-desc" >';

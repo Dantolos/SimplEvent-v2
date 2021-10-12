@@ -19,8 +19,11 @@ class Review {
             'meta_value' => 'Templates/mediacorner.php'
         ];
         $this->mediacorner = get_posts( $MediaCornerArgs );
-        $this->mediacorner = (is_array($this->mediacorner)) ? $this->mediacorner[0]->ID : false;
-
+        if(is_array($this->mediacorner)){
+            $this->mediacorner = ( count($this->mediacorner) >= 1 ) ? $this->mediacorner[0]->ID : false;
+        } else {
+            $this->mediacorner = false;
+        }
 
         $LineUpArgs = [
             'post_type' => 'page',
@@ -51,8 +54,26 @@ class Review {
                     $single .= '<h4>'.$review['infos']['date'].'</h4>';
                     $single .= '<p>'.$review['infos']['desc'].'</p>';
 
-                    //SPEAKER
+                    //QUOTES
                     
+                    if( is_array( $review['infos']['quotes'] ) ){
+                        $single .= '<div class="review-signle-page-quotes quote-splide splide" style="width:100%;">';
+                        $single .= '<div class="splide__track"><ul class="splide__list">';
+                        $quotes = $review['infos']['quotes'];
+                        foreach ( $quotes as $quote ) {
+                            $single .= '<li class="splide__slide">';
+                                $single .= '<div class="review-signle-page-quote">';
+                                $single .= '<h3>'.$quote['quote'].'</h3>';
+                                $single .= '<p><b>'.$quote['author']['name'].'</b><br />'.$quote['author']['desc'].'</p>';
+                                $single .= '</div>';
+                            $single .= '</li>';
+                        }
+
+                        $single .= '</ul></div>';
+                        $single .= '</div>';
+                    }
+
+                    //SPEAKER
                     $speakerIDs = []; 
                     if( get_field($review['content']['speaker selection']) ){
                         foreach ($review['content']['speaker selection'] as $speaker ) {
@@ -98,6 +119,31 @@ class Review {
                         $single .= '</div>';
                     }
 
+                    //FOTOS
+                    if( is_array($review['content']['fotos'])){
+                        $single .= '<div class="gallery-splide">';
+                        $single .= '<div class="gallery-splide-main splide" >';
+                            $single .= '<div class="splide__track"><ul class="splide__list">';
+                            foreach ($review['content']['fotos'] as $key => $foto) {
+                                $single .= '<li class="splide__slide">';
+                                $single .= '<img src="'.esc_url($foto).'"  title="-'.$review['infos']['jahr']->name.'-'.$key.'" />';
+                                $single .= '</li>';
+                            }
+                            $single .= '</ul></div>';
+                        $single .= '</div>';
+
+                        $single .= '<div class="gallery-splide-thumb splide" >';
+                            $single .= '<div class="splide__track"><ul class="splide__list">';
+                            foreach ($review['content']['fotos'] as $key => $foto) {
+                                $single .= '<li class="splide__slide">';
+                                $single .= '<img src="'.esc_url($foto).'"  title="-'.$review['infos']['jahr']->name.'-'.$key.'" />';
+                                $single .= '</li>';
+                            }
+                            $single .= '</ul></div>';
+                        $single .= '</div>';
+                        $single .= '</div>';
+
+                    }
 
                 $single .= '</div>';
 

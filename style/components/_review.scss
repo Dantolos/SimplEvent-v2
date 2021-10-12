@@ -15,7 +15,7 @@
         @include imageSettings;
         background-attachment: fixed;
         @include breakpoint( 'm' ){
-            height:15vh;
+            height:12vh;
         }
     }
 
@@ -32,11 +32,44 @@
                 padding:60px 10px 0 0;
             }
 
+            //QOUTES
+            .review-signle-page-quotes {
+                margin: 40px 0;
+                li {  
+                    display: flex;
+                    
+                    align-items: center;
+                    justify-content: center;
+                } 
+
+                .review-signle-page-quote {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: center;
+                    width:80%;
+                    padding:60px 0;
+                    
+                    h3 { 
+                        text-align: center; 
+                        margin-bottom:10px;
+                        
+                    }
+                    p { 
+                        text-align: center; 
+                        justify-self: right;
+                        line-height:1.4em;
+                        opacity: .8;
+                    }
+                }
+            }
+
+
             //SPEAKER
             .review-single-speaker {
                 border-top: 1px solid var(--primeColor);
-                margin:60px 0;
-                padding:20px 0;
+                margin:60px 0 160px;
+                padding:20px 0 ;
 
                 h4 { margin:20px 0; }
 
@@ -75,7 +108,7 @@
             border-radius: 5px;
             //@include dropShadow;
             width:400px;
-            padding:10px;
+           
             position: absolute;
             right: 10px;
             top: -50px;

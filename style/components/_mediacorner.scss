@@ -198,6 +198,7 @@
      top:0;
      left:0;
      height:100%;
+     overflow-y: hidden;
 
      .se2-galleries-titlebar {
           width:100%;
@@ -271,12 +272,14 @@
                padding:10px;
                justify-content: space-around;
                min-height:50vh;
+               position: relative;
 
                .se2-galleries-photo{
                     margin:5px;
                     $thumbWidth: 180px;
                     width: $thumbWidth;
                     cursor: pointer;
+                    position: relative;
 
                     .se2-galleries-photo-thumbnail {
                          background-color: var(--lightshade);
@@ -290,6 +293,23 @@
                               max-width:100%;
                               max-height:100%;
                          }
+
+                         .se2-galleries-photo-selected {
+                              position: absolute;
+                              visibility: hidden;
+                              top:0; right:0;
+                              background-color: $primary;
+                              padding:0;
+                              &::before {
+                                   color:white;
+                              }
+                         }
+                         
+                         
+                    }
+                    .se2-photo-actibe-thumb {
+                         border: 5px solid $primary;
+                         padding: 5px;
                     }
 
                     &:hover {
@@ -315,9 +335,37 @@
 
                     }
                }
+
+               
           }
-          
+
+        
      }
+
+     .se2-gallerie-photo-download {
+          position: sticky;
+          background-color: $light;
+          border-top: 1px solid $primary;
+          visibility: hidden;
+          bottom:0;
+          padding:10px;
+          width: 100%; 
+          display: flex;
+          align-items:center;
+          justify-content: space-between;
+
+          .photo-download-notice {
+               color: $dark;
+               .photo-count {
+                    font-weight: bold;
+               }
+          }
+
+          button {  
+               background-color: $primary;
+          }
+     }
+     
 }
 
 .audio-content-container {

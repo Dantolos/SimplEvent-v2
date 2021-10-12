@@ -1,13 +1,14 @@
 
+
 //navigation
 const MEDIACORNERPAGEID = document.querySelector('.mediacorner-nav-container').getAttribute('pageid');
 const NAVELEMENTS = document.querySelectorAll('.mediacorner-nav-element');
 
 
-if(NAVELEMENTS && NAVELEMENTS.length > 0 ){
-     for(let navEle of NAVELEMENTS){
-                   
-          navEle.addEventListener('click', ()=> {
+if (NAVELEMENTS && NAVELEMENTS.length > 0) {
+     for (let navEle of NAVELEMENTS) {
+
+          navEle.addEventListener('click', () => {
                for (let index = 0; index < NAVELEMENTS.length; index++) {
                     NAVELEMENTS[index].classList.remove('active-nav');
                }
@@ -19,7 +20,7 @@ if(NAVELEMENTS && NAVELEMENTS.length > 0 ){
                }
                AJAX.call_Ajax(callData, 'mediacorner-content', true);
           })
-          
+
      }
 }
 
@@ -28,11 +29,11 @@ const DOWNLOADICON = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
 
 function pressrealeses() {
      var FILECONTAINERS = document.querySelectorAll('.file-container')
-     if(FILECONTAINERS && FILECONTAINERS.length > 0 ){
+     if (FILECONTAINERS && FILECONTAINERS.length > 0) {
           for (let FILECONTAINER of FILECONTAINERS) {
-     
+
                var sortTL = gsap.timeline({ defaults: { duration: .5 } })
-               if (FILECONTAINER.getAttribute('listener') !== 'true') {  
+               if (FILECONTAINER.getAttribute('listener') !== 'true') {
                     FILECONTAINER.setAttribute("listener", "true");
                     FILECONTAINER.addEventListener('mouseover', e => {
                          gsap.to(FILECONTAINER.querySelector('.fileicon'), { morphSVG: ".download", duration: .2, delay: .1 });
@@ -56,59 +57,147 @@ function pressrealeses() {
                          }
                     })
                }
-     
+
           }
      }
-} 
+}
 
 
 
- function callGalleryFotos(PAGEID, FOLDER)  {
-     
-          var current = document.getElementsByClassName("aktive-folder");
-          if (current.length > 0) {
-               current[0].className = current[0].className.replace(" aktive-folder", "");
-          }
-          FOLDER.className += " aktive-folder";
-          
-          var callData = {
-               pageid: PAGEID,
-               folder: FOLDER.getAttribute('folder'),
-               action: 'photo_folder'
-          }
-          AJAX.call_Ajax(callData, 'se2-galleries-content', true);
-    
-     
-     
+function callGalleryFotos(PAGEID, FOLDER) {
+
+     var current = document.getElementsByClassName("aktive-folder");
+     if (current.length > 0) {
+          current[0].className = current[0].className.replace(" aktive-folder", "");
+     }
+     FOLDER.className += " aktive-folder";
+
+     var callData = {
+          pageid: PAGEID,
+          folder: FOLDER.getAttribute('folder'),
+          action: 'photo_folder'
+     }
+     AJAX.call_Ajax(callData, 'se2-galleries-content', true);
+
+
+
 }
 
 function galleryMatrix() {
-    
-          var FOLDERS = document.getElementsByClassName('se2-galleries-folder')
 
-          if (FOLDERS && FOLDERS.length > 0) {
-               var PAGEID = document.querySelector('.se2-galleries-matrix').getAttribute('pageid')
-               for (let FOLDER of FOLDERS) {  
-                    if (FOLDER.getAttribute('listener') !== 'true') {   
-                         console.log(FOLDER.getAttribute('listener') )       
-                         FOLDER.setAttribute("listener", "true");             
-                         FOLDER.addEventListener('click', () => { 
-                              
-                              callGalleryFotos(PAGEID, FOLDER) 
-                         } )
-                    }
+     var FOLDERS = document.getElementsByClassName('se2-galleries-folder')
+
+     if (FOLDERS && FOLDERS.length > 0) {
+          var PAGEID = document.querySelector('.se2-galleries-matrix').getAttribute('pageid')
+          for (let FOLDER of FOLDERS) {
+               if (FOLDER.getAttribute('listener') !== 'true') {
+                    console.log(FOLDER.getAttribute('listener'))
+                    FOLDER.setAttribute("listener", "true");
+                    FOLDER.addEventListener('click', () => {
+
+                         callGalleryFotos(PAGEID, FOLDER)
+                    })
                }
-                    
           }
-       
-     
+
+     }
+
+
 }
 
-pressrealeses() 
+pressrealeses()
 galleryMatrix()
 
 jQuery(document).ajaxStop(function () {
-     pressrealeses() 
+     pressrealeses()
      galleryMatrix()
 })
+
+
+
+//Download ZIP Images
+var PHOTOS = [];
+
+jQuery(document).ajaxComplete(function () {
+     PHOTOS = [];
+})
+
+
+jQuery('.mediacorner-content').on('click', '#photo-select-download', function () {
+     generateZIP()
+})
+
+gsap.set(jQuery('.se2-gallerie-photo-download'), { y: '100px', opacity: 0 })
+
+
+
+
+jQuery('.mediacorner-content').on('click', '.thumb', function () {
+
+     jQuery(this).removeClass('thumb').addClass('thumbChecked');
+     jQuery(this).find('.se2-galleries-photo-thumbnail').addClass('se2-photo-actibe-thumb');
+     jQuery(this).find('.se2-galleries-photo-selected').css('visibility', 'visible');
+     PHOTOS.push(jQuery(this).attr('imageurl'));
+     console.log(PHOTOS);
+
+     if (PHOTOS.length != 0) {
+          var photoCount = PHOTOS.length
+          jQuery('.se2-gallerie-photo-download').css('visibility', 'visible');
+          jQuery('.se2-gallerie-photo-download').find(".photo-download-notice").find('.photo-count').text(photoCount.toString());
+          if (PHOTOS.length === 1) {
+               gsap.fromTo(jQuery('.se2-gallerie-photo-download'), .2, { y: '100px', opacity: 0 }, { y: 0, opacity: 1 })
+          }
+     }
+
+});
+
+
+
+jQuery('.mediacorner-content').on('click', '.thumbChecked', function () {
+
+     jQuery(this).removeClass('thumbChecked').addClass('thumb');
+     jQuery(this).find('.se2-galleries-photo-thumbnail').removeClass('se2-photo-actibe-thumb');
+     jQuery(this).find('.se2-galleries-photo-selected').css('visibility', 'hidden');
+     var itemtoRemove = jQuery(this).attr('src');
+     PHOTOS.splice(jQuery.inArray(itemtoRemove, PHOTOS), 1);
+     console.log(PHOTOS);
+
+     if (PHOTOS.length == 0) {
+
+          jQuery('.se2-gallerie-photo-download').css('visibility', 'hidden');
+          gsap.fromTo(jQuery('.se2-gallerie-photo-download'), .2, { y: 0, opacity: 1 }, { y: '100px', opacity: 0 })
+     } else {
+          var photoCount = PHOTOS.length
+          jQuery('.se2-gallerie-photo-download').find(".photo-download-notice").find('.photo-count').text(photoCount.toString());
+     }
+
+});
+
+
+
+function generateZIP() {
+     console.log('TEST');
+     var zip = new JSZip();
+     var count = 0;
+     var zipFilename = "Pictures.zip";
+
+     PHOTOS.forEach(function (url, i) {
+          var filename = PHOTOS[i];
+          filename = filename.split('/').slice(-1).pop()
+          filename = filename.replace(/[\/\*\|\:\<\>\?\"\\]/gi, '').replace("httpsi.imgur.com", "");
+          // loading a file and add it in a zip file
+          JSZipUtils.getBinaryContent(url, function (err, data) {
+               if (err) {
+                    throw err; // or handle the error
+               }
+               zip.file(filename, data, { binary: true });
+               count++;
+               if (count == PHOTOS.length) {
+                    zip.generateAsync({ type: 'blob' }).then(function (content) {
+                         saveAs(content, zipFilename);
+                    });
+               }
+          });
+     });
+}
 

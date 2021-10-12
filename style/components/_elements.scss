@@ -110,3 +110,26 @@ select {
         background:$primary !important;
     }
 }
+
+//gallery
+.gallery-splide{
+    .gallery-splide-main {
+        height:500px;
+    }
+    .gallery-splide-thumb {
+
+        .splide__slide {
+            opacity: 0.3;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        .splide__slide.is-active {
+            opacity: 1;
+        }
+
+    
+    }
+}

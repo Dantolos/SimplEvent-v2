@@ -118,7 +118,7 @@ function theme_add_scripts()
 
     foreach ($JsIncList as $JsInc) 
     {
-        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.26', true );
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.27', true );
     }
      
     /*------------------------------Send Global Variables---------------------------*/
@@ -306,6 +306,7 @@ function acf_load_award_categorie_choices( $field ) {
 }
 
 add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
+
 
 
 /*-------------------------------------------------------------*/
