@@ -1,4 +1,5 @@
 
+
 //navigation
 const MEDIACORNERPAGEID = document.querySelector('.mediacorner-nav-container').getAttribute('pageid');
 const NAVELEMENTS = document.querySelectorAll('.mediacorner-nav-element');
@@ -115,44 +116,64 @@ jQuery(document).ajaxStop(function () {
 
 
 //Download ZIP Images
-var DOWNLOADBUTTON = document.querySelector('#photo-select-download')
 var PHOTOS = [];
 
-
-if (DOWNLOADBUTTON) {
-     DOWNLOADBUTTON.addEventListener('click', (e) => {
-          generateZIP()
-     })
-}
+jQuery(document).ajaxComplete(function () {
+     PHOTOS = [];
+})
 
 
-jQuery('.se2-galleries-content').on('click', '.thumb', function () {
+jQuery('.mediacorner-content').on('click', '#photo-select-download', function () {
+     generateZIP()
+})
+
+gsap.set(jQuery('.se2-gallerie-photo-download'), { y: '100px', opacity: 0 })
+
+
+
+
+jQuery('.mediacorner-content').on('click', '.thumb', function () {
 
      jQuery(this).removeClass('thumb').addClass('thumbChecked');
      jQuery(this).find('.se2-galleries-photo-thumbnail').addClass('se2-photo-actibe-thumb');
+     jQuery(this).find('.se2-galleries-photo-selected').css('visibility', 'visible');
      PHOTOS.push(jQuery(this).attr('imageurl'));
      console.log(PHOTOS);
 
      if (PHOTOS.length != 0) {
-          //jQuery('.download').css("display", "block");
+          var photoCount = PHOTOS.length
+          jQuery('.se2-gallerie-photo-download').css('visibility', 'visible');
+          jQuery('.se2-gallerie-photo-download').find(".photo-download-notice").find('.photo-count').text(photoCount.toString());
+          if (PHOTOS.length === 1) {
+               gsap.fromTo(jQuery('.se2-gallerie-photo-download'), .2, { y: '100px', opacity: 0 }, { y: 0, opacity: 1 })
+          }
      }
 
 });
 
 
-jQuery('.se2-galleries-content').on('click', '.thumbChecked', function () {
+
+jQuery('.mediacorner-content').on('click', '.thumbChecked', function () {
 
      jQuery(this).removeClass('thumbChecked').addClass('thumb');
      jQuery(this).find('.se2-galleries-photo-thumbnail').removeClass('se2-photo-actibe-thumb');
+     jQuery(this).find('.se2-galleries-photo-selected').css('visibility', 'hidden');
      var itemtoRemove = jQuery(this).attr('src');
      PHOTOS.splice(jQuery.inArray(itemtoRemove, PHOTOS), 1);
      console.log(PHOTOS);
 
      if (PHOTOS.length == 0) {
-          //$('.download').css("display", "none");
+
+          jQuery('.se2-gallerie-photo-download').css('visibility', 'hidden');
+          gsap.fromTo(jQuery('.se2-gallerie-photo-download'), .2, { y: 0, opacity: 1 }, { y: '100px', opacity: 0 })
+     } else {
+          var photoCount = PHOTOS.length
+          jQuery('.se2-gallerie-photo-download').find(".photo-download-notice").find('.photo-count').text(photoCount.toString());
      }
 
 });
+
+
 
 function generateZIP() {
      console.log('TEST');
@@ -162,6 +183,7 @@ function generateZIP() {
 
      PHOTOS.forEach(function (url, i) {
           var filename = PHOTOS[i];
+          filename = filename.split('/').slice(-1).pop()
           filename = filename.replace(/[\/\*\|\:\<\>\?\"\\]/gi, '').replace("httpsi.imgur.com", "");
           // loading a file and add it in a zip file
           JSZipUtils.getBinaryContent(url, function (err, data) {
@@ -178,3 +200,4 @@ function generateZIP() {
           });
      });
 }
+

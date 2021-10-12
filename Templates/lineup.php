@@ -29,8 +29,9 @@ the_content();
 echo $LineUp->cast_line_up_filter_section();
 
 $year = get_field( 'jahr', get_the_ID() );
-if($_GET["j"]){
+if( isset( $_GET["j"] ) ){
      $yearTax = get_term_by( 'name', htmlspecialchars( $_GET["j"] ), 'jahr' );
+     $year = $yearTax->term_id;
 }
 
 $args = array(

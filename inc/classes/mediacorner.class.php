@@ -217,7 +217,10 @@ class Mediacorner {
                  
           $photoArchive .= '</div>';
 
-          $photoArchive .= '<div class="se2-gallerie-photo-download"><button id="photo-select-download">'.__('Download Selected', 'SimplEvent').'</button></div>';  
+          $photoArchive .= '<div class="se2-gallerie-photo-download">';
+               $photoArchive .= '<div class="photo-download-notice"><span class="photo-count"></span> ' .__('selected photos to download in a ZIP-Folder.', 'SimplEvent').'</div>';
+               $photoArchive .= '<button id="photo-select-download">'.__('Download Selected', 'SimplEvent').'</button>';
+          $photoArchive .= '</div>';  
 
           $photoArchive .= '</div>';
           return $photoArchive;
@@ -246,6 +249,7 @@ class Mediacorner {
                     //$folderContent .= '<a href="'.$photo['url'].'" download>';
                     $folderContent .= '<div class="se2-galleries-photo thumb" imageurl="'.$photo['url'].'">';
                          $folderContent .= '<div class="se2-galleries-photo-thumbnail" imageurl="'.$photo['url'].'">';
+                              $folderContent .= '<div class="dashicons dashicons-saved se2-galleries-photo-selected"></div>';
                               $folderContent .= '<img src="'.$photo['sizes']['medium'].'"/>';
                          $folderContent .= '</div>';
                          $folderContent .= '<div class="se2-galleries-photo-desc" >';
