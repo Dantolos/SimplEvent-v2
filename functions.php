@@ -539,3 +539,60 @@ add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
 function load_dashicons_front_end() {
     wp_enqueue_style( 'dashicons' );
 }
+
+
+  
+/*-------------------------------------------------------------*/
+/*------------------------LOGIN FORM---------------------------*/
+/*-------------------------------------------------------------*/
+
+function my_login_stylesheet() {
+    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/theme/login/login-style.css' );
+    //wp_enqueue_script( 'custom-login', get_stylesheet_directory_uri() . '/style-login.js' );
+}
+add_action( 'login_enqueue_scripts', 'my_login_stylesheet' );
+
+function my_login_logo() { 
+    ?>
+    <style type="text/css">
+        body.login {
+            background-color: <?php echo get_option( 'primary_color_picker' ); ?>;
+        }
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_option( 'event_icon' ); ?>);
+            height:65px;
+            width:320px;
+            background-size: 320px 65px;
+            background-repeat: no-repeat;
+        	padding-bottom: 30px;
+        }
+        body.login div#login form#loginform p.submit input#wp-submit {
+            background-color: <?php echo get_option( 'primary_color_picker' ); ?>;
+        }
+    
+<?php 
+    if( isset(get_option('meta_tags')['SocialMedia']['Image']) ){
+        ?>
+            body.login  {
+                
+                background-image: url(<?php echo get_option('meta_tags')['SocialMedia']['Image']; ?>);
+                background-size: cover;
+                -ms-background-size: cover;
+                -o-background-size: cover;
+                -moz-background-size: cover;
+                -webkit-background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+            </style>
+        <?php 
+    }
+    ?></style><?php
+}
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
+
+
+function the_url( $url ) {
+    return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'the_url' );

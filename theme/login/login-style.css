@@ -1,0 +1,51 @@
+body.login {  }
+body.login div#login {
+    height: 100vh;
+    background-color: white;
+    margin:unset;
+    left:0;
+    min-width: 40vw;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+
+body.login div#login h1 {
+    min-height: 20vh;
+    display: flex;
+    align-items: center;
+}
+body.login div#login h1 a {}
+body.login div#login form#loginform {
+    border: unset;
+    box-shadow: unset;
+}
+body.login div#login form#loginform p {}
+body.login div#login form#loginform p label {}
+body.login div#login form#loginform input {}
+body.login div#login form#loginform input#user_login {
+    border-radius: 0;
+    border-width: 0 0 1px 0;
+}
+.user-pass-wrap { margin: 20px 0 80px; }
+body.login div#login form#loginform input#user_pass {
+    
+    border-radius: 0;
+    border-width: 0 0 1px 0;
+}
+body.login div#login form#loginform p.forgetmenot {}
+body.login div#login form#loginform p.forgetmenot input#rememberme {}
+body.login div#login form#loginform p.submit {}
+body.login div#login form#loginform p.submit input#wp-submit {
+    border-radius: 0;
+    padding: 5px 30px;
+    border:unset;
+}
+body.login div#login p#nav {}
+body.login div#login p#nav a {}
+body.login div#login p#backtoblog {}
+body.login div#login p#backtoblog a {}
