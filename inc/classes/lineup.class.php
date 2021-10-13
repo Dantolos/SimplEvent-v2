@@ -269,13 +269,13 @@ class LineUp {
                     
                
                $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';
-               if(is_array(get_field('speaker_social_media', $speakerID))){
+               /* if(is_array(get_field('speaker_social_media', $speakerID))){
                     $this->speakerLightbox .= '<div class="speaker_socialmedia">';
                     foreach( get_field('speaker_social_media', $speakerID) as $key => $smIcon ){
                          $this->speakerLightbox .= $this->socialMedia->cast_icon( $smIcon[0]['acf_fc_layout'], $smIcon[0][$smIcon[0]['acf_fc_layout']] );
                     }
                     $this->speakerLightbox .= '</div>';
-               }
+               } */
                $this->speakerLightbox .= '</div>';
 
                $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
