@@ -1,5 +1,8 @@
-body.login {  }
+
+
+
 body.login div#login {
+    position: relative;
     height: 100vh;
     background-color: white;
     margin:unset;
@@ -11,13 +14,16 @@ body.login div#login {
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+    
 }
+
 
 
 body.login div#login h1 {
     min-height: 20vh;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 body.login div#login h1 a {}
 body.login div#login form#loginform {

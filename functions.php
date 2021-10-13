@@ -558,6 +558,16 @@ function my_login_logo() {
         body.login {
             background-color: <?php echo get_option( 'primary_color_picker' ); ?>;
         }
+        body.login  div#login:after {
+            display:block;
+            content: '';
+            position: absolute;
+            right: -100px;
+            border-left: 100px solid #ffffff;
+            border-right: 0px solid transparent;
+            border-bottom: 0 solid transparent;
+            border-top: 100vh solid transparent;
+        }
         #login h1 a, .login h1 a {
             background-image: url(<?php echo get_option( 'event_icon' ); ?>);
             height:65px;
