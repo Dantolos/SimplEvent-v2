@@ -115,6 +115,11 @@ select {
 .gallery-splide{
     .gallery-splide-main {
         height:500px;
+        .splide__slide div {
+            @include imageSettings;
+            height:100%;
+            width:100%;
+        }
     }
     .gallery-splide-thumb {
 
@@ -132,4 +137,9 @@ select {
 
     
     }
+    .splide__track {
+        margin:20px 0;
+    }
 }
+
+

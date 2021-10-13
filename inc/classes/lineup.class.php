@@ -9,11 +9,13 @@ class LineUp {
      public $forms;
      public $dateFormat;
      public $files;
+     public $socialMedia;
 
      public function __construct() {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;
           $this->files = new se2_Files;
+          $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'primary_color_picker' ) ) );
      }
 
 
@@ -261,9 +263,20 @@ class LineUp {
 
           $this->speakerLightbox .= '<div class="speaker-lb-head">';
 
+
+             
                
+                    
                
-               $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+               $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';
+               if(is_array(get_field('speaker_social_media', $speakerID))){
+                    $this->speakerLightbox .= '<div class="speaker_socialmedia">';
+                    foreach( get_field('speaker_social_media', $speakerID) as $key => $smIcon ){
+                         $this->speakerLightbox .= $this->socialMedia->cast_icon( $smIcon[0]['acf_fc_layout'], $smIcon[0][$smIcon[0]['acf_fc_layout']] );
+                    }
+                    $this->speakerLightbox .= '</div>';
+               }
+               $this->speakerLightbox .= '</div>';
 
                $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
             
@@ -294,13 +307,31 @@ class LineUp {
                                    }
                                    $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
 
-                                   if( $review['review_galerie'] ){
-                                        $this->speakerLightbox .= '<div class="speaker-lb-review-gallery">';
-                                        foreach($review['review_galerie'] as $image){
-                                             $this->speakerLightbox .= '<div class="se-review-img" open="0"><img src="'.$image.'"></div>';
-                                        }
+                                
+                                   if( is_array($review['review_galerie'])) {
+                                        $this->speakerLightbox .= '<div class="gallery-splide">';
+                                        $this->speakerLightbox .= '<h3>'.__('Fotos', 'SimplEvent').'</h3>';
+                                        $this->speakerLightbox .= '<div class="gallery-splide-main splide" >';
+                                        $this->speakerLightbox .= '<div class="splide__track"><ul class="splide__list">';
+                                             foreach ($review['review_galerie'] as $key => $foto) {
+                                                  $this->speakerLightbox .= '<li class="splide__slide">';
+                                                  $this->speakerLightbox .= '<div style="background-image: url('.esc_url($foto).')"></div>';
+                                                  $this->speakerLightbox .= '</li>';
+                                             }
+                                        $this->speakerLightbox .= '</ul></div>';
                                         $this->speakerLightbox .= '</div>';
-                                   }
+               
+                                        $this->speakerLightbox .= '<div class="gallery-splide-thumb splide" >';
+                                        $this->speakerLightbox .= '<div class="splide__track"><ul class="splide__list">';
+                                             foreach ($review['review_galerie'] as $key => $foto) {
+                                                  $this->speakerLightbox .= '<li class="splide__slide">';
+                                                  $this->speakerLightbox .= '<img src="'.esc_url($foto).'" />';
+                                                  $this->speakerLightbox .= '</li>';
+                                             }
+                                             $this->speakerLightbox .= '</ul></div>';
+                                        $this->speakerLightbox .= '</div>';
+                                        $this->speakerLightbox .= '</div>';
+                                    }
 
                               }
 
