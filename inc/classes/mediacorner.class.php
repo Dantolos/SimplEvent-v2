@@ -44,7 +44,10 @@ class Mediacorner {
      }
 
      public function cast_mediacorner_nav( $pageID ){
-          $mediacornerNav = '<div class="mediacorner-nav-container" pageid="'.$pageID.'">';
+
+          $mediacornerNav = '<div class="mediacorner-nav-mobile"><span class="dashicons dashicons-ellipsis"></span></div>';
+
+          $mediacornerNav .= '<div class="mediacorner-nav-container" pageid="'.$pageID.'">';
 
           $menuItems = get_field('menu', $pageID);
           if(is_array($menuItems) ){
