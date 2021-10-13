@@ -96,7 +96,7 @@ class Review {
                     
                     if( count($speakerIDs) > 0 ){
                         $single .= '<div class="review-single-speaker">';
-                            $single .= '<h3>Speakers</h3>';
+                        $single .= '<h3>'.__('Speakers', 'SimplEvent').'</h3>';
 
                             $single .= '<div id="lineup-container" year="'.$review['infos']['jahr']->name.'" carousel="3">';
                                 
@@ -120,13 +120,14 @@ class Review {
                     }
 
                     //FOTOS
-                    if( is_array($review['content']['fotos'])){
+                    if( is_array($review['content']['fotos'])) {
                         $single .= '<div class="gallery-splide">';
+                        $single .= '<h3>'.__('Fotos', 'SimplEvent').'</h3>';
                         $single .= '<div class="gallery-splide-main splide" >';
                             $single .= '<div class="splide__track"><ul class="splide__list">';
                             foreach ($review['content']['fotos'] as $key => $foto) {
                                 $single .= '<li class="splide__slide">';
-                                $single .= '<img src="'.esc_url($foto).'"  title="-'.$review['infos']['jahr']->name.'-'.$key.'" />';
+                                $single .= '<div style="background-image: url('.esc_url($foto).')"></div>';
                                 $single .= '</li>';
                             }
                             $single .= '</ul></div>';
@@ -142,7 +143,6 @@ class Review {
                             $single .= '</ul></div>';
                         $single .= '</div>';
                         $single .= '</div>';
-
                     }
 
                 $single .= '</div>';

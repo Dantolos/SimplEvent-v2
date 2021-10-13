@@ -186,18 +186,34 @@
           flex-direction: row;
           align-items: baseline;
           flex-wrap:wrap;
+          position: relative;
+
           .speaker-lb-image {
                width:25%;
                height:20vh;
                min-width:220px;
                min-height:250px;
+               position: relative;
                @include imageSettings;
+
+               .speaker_socialmedia {
+                    width:50px;
+                    height: 50px;
+                    position: absolute;
+                    width: 50px;
+                    bottom: -60px;
+                    right: 0;
+               }
           }
+
+          
+
           .speaker-lb-headinfo {
                width:75%;
-               padding:20px 20px 0 20px;
+               padding: 20px 10% 0 3%;
                max-height: 80vh;
                overflow: scroll;
+               
                @include hideScrollbar;
                @include breakpoint( 's' ){
                     width: 100%;
@@ -216,6 +232,9 @@
                iframe {
                     min-height:20vw;
                }
+
+               
+
           }
 
           .speaker-lb-review-gallery {

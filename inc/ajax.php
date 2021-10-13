@@ -24,6 +24,7 @@ require_once('classes/award.class.php');
 require_once('supports/date.php');
 require_once('supports/forms.php');
 require_once('supports/files.php');
+require_once('supports/social-media.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
