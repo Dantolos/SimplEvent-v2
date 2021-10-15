@@ -12,10 +12,15 @@ get_header();
 
 the_content();
 
-//$Schedule = new se2_Schedule(get_the_ID());
+$pageID = get_the_ID();
 
-//echo '<div class=" se2-schedule-container">' . $Schedule->cast_Schedule() . '</div>';
+$Session = new Sessions();
+
+echo '<div class="container">';
+    echo '<h1>SESSIONS</h1>';
+    echo $Session->cast_session_grid($pageID);
+echo '</div>';
 
 get_footer();
 
-?>
+?> 

@@ -11,7 +11,12 @@ wp_enqueue_script( 'JS-mediacorner', get_template_directory_uri() . '/scripts/sp
 $mediaCorner = new Mediacorner;
 $pageID = get_the_ID();
 
+http://simplevent-v2.local/mediacorner/?m=fotos
 
+$startpage = 'info';
+if( isset( $_GET["m"] ) ){
+     $startpage = $_GET["m"];
+}
 
 echo '<div class="se2-mediacorner" >';
 
@@ -20,10 +25,27 @@ echo '<div class="se2-mediacorner" >';
      echo '</div>';
 
      echo '<div class="mediacorner-content">';
-          //echo $mediaCorner->cast_logo_downlaods($pageID);
-          echo $mediaCorner->cast_media_info($pageID);
-          //echo $mediaCorner->cast_photo_archive($pageID);
-          //echo $mediaCorner->cast_audio_archive($pageID);
+     switch ($startpage) {
+          case 'info':
+               echo $mediaCorner->cast_media_info($pageID);
+               break;
+          case 'mm':
+               echo $mediaCorner->cast_press_realese($pageID);
+               break;
+          case 'logo':
+               echo $mediaCorner->cast_logo_downlaods($pageID);
+               break;
+          case 'fotos':
+               echo $mediaCorner->cast_photo_archive($pageID);
+               break;
+          case 'audio':
+               echo $mediaCorner->cast_audio_archive($pageID);
+               break;
+          default:
+               echo $mediaCorner->cast_media_info($pageID);
+               break;
+     }
+          
      echo '</div>';     
 echo '</div>';
 

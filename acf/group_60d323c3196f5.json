@@ -7,7 +7,7 @@
             "label": "Menu",
             "name": "menu",
             "type": "checkbox",
-            "instructions": "",
+            "instructions": "Direkte Verknüpfung können über den URL-Parameter \"m\" erstellt werden: www.webseite.ch\/mediacorner\/?m=*****\r\n( info,  mm, logo, fotos, audio )",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -824,5 +824,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1633360022
+    "modified": 1634199240
 }
