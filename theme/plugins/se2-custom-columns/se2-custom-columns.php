@@ -121,7 +121,7 @@ function sessions_custom_column ( $column, $post_id ) {
         case 'slot':
             if(get_field( 'slot', $post_id )){
                 foreach(get_field( 'slot', $post_id ) as $slot){
-                    echo '<p><b>'. $slot .'</b></p>';
+                    echo '<p><b>'. $slot['label'] .'</b></p>';
                 }
             }
             break;

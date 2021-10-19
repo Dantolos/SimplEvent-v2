@@ -1033,7 +1033,7 @@ function simplevent_sessions_active(){
 
 function simplevent_sessions_slots(){
 
-     $sessions_slots = get_option('sessions_slots');
+     $sessions_slots = get_option('sessions_slots'); 
 
      $sessionSlotBase = [
                'label' => '',

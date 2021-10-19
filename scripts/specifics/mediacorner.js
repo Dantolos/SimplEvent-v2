@@ -6,8 +6,15 @@ const MEDIACORNERPAGEID = NAVCONTAINER.getAttribute('pageid');
 const NAVELEMENTS = document.querySelectorAll('.mediacorner-nav-element');
 
 if( NAVCONTAINER.querySelectorAll('.active-nav').length === 0 ){
-     console.log( 'no active ')
-     NAVELEMENTS[0].classList.add('active-nav')
+     const queryString = window.location.search;
+     const urlParams = new URLSearchParams(queryString); 
+     if(urlParams.has('m')){
+          const startpage = urlParams.get('m')
+          const startnav = document.querySelector('[type="'+startpage+'"]')
+          startnav.classList.add('active-nav')
+     } else {
+          NAVELEMENTS[0].classList.add('active-nav')
+     }
 }
 
 if (NAVELEMENTS && NAVELEMENTS.length > 0) {
