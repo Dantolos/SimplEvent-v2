@@ -26,7 +26,7 @@ the_content();
 
 //LINE UP OVERVIEW
 
-echo $LineUp->cast_line_up_filter_section();
+echo $LineUp->cast_line_up_filter_section( get_the_ID() );
 
 $year = get_field( 'jahr', get_the_ID() );
 if( isset( $_GET["j"] ) ){

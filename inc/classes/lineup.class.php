@@ -86,49 +86,59 @@ class LineUp {
           return $this->speakerIDs;
 
      }
+ 
 
 
-
-     public function cast_line_up_filter_section() {
+     public function cast_line_up_filter_section( $pageID ) {
 
           $this->output = '<div  class="se2-lineup-filter-section container">';
 
-
-          //filter categorie
-
-          $this->output .= '<div class="se2-lineup-filter-categories">';
-
-          //search for possible categoriese to choice
-
-          $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
-
-          $speechCategorie = [];
-
-          foreach($checkSpeakerIDs as $speakid) {
-               foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
-                    if(!in_array( $categorie, $speechCategorie )){
-                         array_push( $speechCategorie, $categorie ); 
-                    }
-               }
-          }
-
-          //cast dropdown
-          $this->output .= $this->forms->castDropdown( 'speechcat', $speechCategorie, true );
-          $this->output .= '</div>';
-
+          $filters = get_field('filters', $pageID );
 
           //sort direction
-          $this->output .= '<div class="se2-lineup-filter-sort">';
-          $this->output .= file_get_contents( get_template_directory_uri() . '/images/icons/sort-alpha-down.svg' ) . '<p>' . __( 'sortieren', 'SimplEvent' ) .'<p>';
-          $this->output .= '</div>';
+          if( in_array( 'jahr', $filters ) ){
+               $this->output .= '<div class="se2-lineup-filter-categories">';
+               $this->output .= $this->forms->castDropdown( 'speechcat', ['2021','2020'], true );
+               $this->output .= '</div>';
+          }
 
+          //filter categorie
+          if( in_array( 'cat', $filters ) ){
+               $this->output .= '<div class="se2-lineup-filter-categories">';
+
+               //search for possible categoriese to choice
+
+               $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
+
+               $speechCategorie = [];
+
+               foreach($checkSpeakerIDs as $speakid) {
+                    foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
+                         if(!in_array( $categorie, $speechCategorie )){
+                              array_push( $speechCategorie, $categorie ); 
+                         }
+                    }
+               }
+
+               //cast dropdown
+               $this->output .= $this->forms->castDropdown( 'speechcat', $speechCategorie, true );
+               $this->output .= '</div>';
+          }
+
+          //sort direction
+          if( in_array( 'sort', $filters ) ){
+               $this->output .= '<div class="se2-lineup-filter-sort">';
+               $this->output .= file_get_contents( get_template_directory_uri() . '/images/icons/sort-alpha-down.svg' ) . '<p>' . __( 'sortieren', 'SimplEvent' ) .'<p>';
+               $this->output .= '</div>';
+          }
 
           //view options
+        
           $this->output .= '<div class="se2-lineup-filter-view">';
           $this->output .= '<div class="viewbutton active-icon" view="grid">' . file_get_contents( get_template_directory_uri() . '/images/icons/grid.svg' ) . '</div>';
           $this->output .= '<div class="viewbutton" view="list">' . file_get_contents( get_template_directory_uri() . '/images/icons/view-list.svg' ) . '</div>';
           $this->output .= '</div>';
-
+          
 
           $this->output .= '</div>';
 

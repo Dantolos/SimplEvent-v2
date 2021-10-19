@@ -4,15 +4,17 @@ class Sessions {
 
      public $sessionLightbox;
      public $speakerFunctions;
+     public $dateFormat;
 
      public function __construct() {
+          $this->dateFormat = new Date_Format;
           $this->speakerFunctions = new LineUp;
           
      }
 
      public function cast_session_grid($pageID){
           $sessionGrid = '';
-          
+         
           $sessionSlots = get_field( 'slots', $pageID );
           $sessionJahr = get_field( 'jahr', $pageID );
           $sessionsPerSlot = [];
@@ -50,9 +52,27 @@ class Sessions {
                $sessionGrid .= '<div class="session-slot-container">';
                foreach( $sessionsPerSlot as $key => $Slot ){
                     if( $Slot['sessions'] > 0 ){
-                         $sessionGrid .= '<h3>'.$Slot['slot'].'</h3>';
+                         $sessionGrid .= '<h3 class="session-slot-title ">'.$Slot['slot'].'</h3>';
 
-                         $sessionGrid .= '<div class="session-blocks-container">';
+                         if(get_option('sessions_slots')){
+                              foreach (get_option('sessions_slots') as $key => $slotInfo ) {
+                                   $sessionGrid .= '<div class="session-slot-facts">';
+                                   
+                                   if( $Slot['slot'] === $slotInfo['value'] ){
+                                        $sessionGrid .= '<h6><b style="text-transform:uppercase;">' . $slotInfo['label'] . '</b> | ' ;
+                                        $sessionGrid .= $this->dateFormat->formating_Date_Language( $slotInfo['date'], 'date' );
+                                        $sessionGrid .= ' | ';
+                                        $sessionGrid .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $slotInfo['start'], 'time' ) );
+                                        $sessionGrid .= ' ' . __( 'bis', 'SimplEvent') . ' ';
+                                        $sessionGrid .= $this->dateFormat->formating_Date_Language( $slotInfo['ende'], 'time' );
+                                        $sessionGrid .= '</h6>';
+                                   }
+                                   $sessionGrid .= '</div>';
+                              }
+                         }
+
+                         $sessionGrid .= '<div class="session-blocks-container">';   
+                         
                          foreach( $Slot['sessions'] as $session ){
                               $sessionGrid .= $this->cast_session_block( $session->ID );
                          }
@@ -68,7 +88,7 @@ class Sessions {
 
      public function cast_session_block($sessionID){
           $sessionBlock = '';
-          $sessionBlock .= '<section class="session-block">';
+          $sessionBlock .= '<section class="session-block schedule-session" sessionid="'.$sessionID.'">';
                //HEADER
                $sessionBlock .= '<div class="session-block-header">';
                $sessionBlock .= '<div class="session-block-header-image"><div style="background-image:url('.get_field('session_bild', $sessionID).');"></div></div>';
@@ -83,7 +103,7 @@ class Sessions {
                               switch ($sponsor['type']) {
                                    case 'Partner':
                                         $partnerID = $sponsor['partner'];
-                                        $sessionBlock .= '<img src="'.get_field('partner-logo', $partnerID).'" title="'.the_title($partnerID).'" />';
+                                        $sessionBlock .= '<img src="'.get_field('partner-logo', $partnerID).'" title="'.get_the_title($partnerID).'" />';
                                         break;
                                    case 'Specific':
                                         $sessionBlock .= '<img src="'.$sponsor['logo'].'" title="'.$sponsor['sponsor_name'].'" />';
@@ -101,7 +121,9 @@ class Sessions {
 
                //CONTENT
                $sessionBlock .= '<div class="session-block-content">';
-               
+              
+
+
                $sessionBlock .= '<h4>'.get_field('titel', $sessionID).'</h4>';
 
                $sessionText = get_field('session_text', $sessionID);
@@ -112,7 +134,34 @@ class Sessions {
                $tagEliminations = array("<p>", "</p>", '<div>', '</div>');
                $sessionEx = str_replace( $tagEliminations, '', $sessionEx ); 
                $sessionEx_length = strpos( $sessionEx , '.', 150 ) + 1;
-               $sessionBlock .= '<p>'.substr( $sessionEx, 0, $sessionEx_length ).'</p>';
+               $sessionBlock .= '<p>'.substr( $sessionEx, 0, $sessionEx_length ).' <span class="primary-txt"> ...more</span></p>';
+
+               //SPEAKERS
+               if(get_field('referenten', $sessionID)){
+                    $sessionBlock .= '<div class="session-block-speakers">';
+                    $sessionBlock .= '<p style="width:100%;">'.__('mit:', 'SimplEvent').'</p>';
+                    foreach(get_field('referenten', $sessionID) as $sessionSpeaker){
+                         if($sessionSpeaker['type'] === 'Speaker'){
+                              $sessionSpeakerID = $sessionSpeaker['speaker'];
+                              $name = ( get_field('speaker_vorname', $sessionSpeakerID) ) 
+                                        ? 
+                                             get_field('speaker_degree', $sessionSpeakerID) 
+                                             . ' ' . get_field('speaker_vorname', $sessionSpeakerID) 
+                                             . ' <b>' . get_field('speaker_nachname', $sessionSpeakerID) . '</b>'
+                                        : 
+                                             get_the_title( $sessionSpeakerID );
+                              $sessionBlock .= '<div class="session-block-speaker relativ-speaker">';
+                              $sessionBlock .= '<h5>'.$name.'</h5>';
+                              $sessionBlock .= '</div>';
+                         } elseif ($sessionSpeaker['type'] === 'Specific'){
+                              $sessionBlock .= '<div class="session-block-speaker specific-speaker">';
+                              $sessionBlock .= '<h5>'.$sessionSpeaker['vorname'].$sessionSpeaker['nachname'].'</h5>';
+                              $sessionBlock .= '</div>';
+                         }
+                    }
+                    $sessionBlock .= '</div>';
+               }
+               
 
                $sessionBlock .= '</div>';
 

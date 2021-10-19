@@ -2124,6 +2124,14 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
   max-height: 100%;
 }
 
+.session-grid-container .session-slot-container .session-slot-title {
+  margin: 20px 0;
+}
+
+.session-grid-container .session-slot-container .session-slot-facts {
+  margin: 5px 0;
+}
+
 .session-grid-container .session-slot-container .session-blocks-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2133,15 +2141,21 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
 }
 
 .session-block {
-  width: 30%;
+  width: 47%;
   margin: 40px 1.5%;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .session-block {
+    width: 100%;
+    margin: 40px 0;
+  }
 }
 
 .session-block:hover {
   -webkit-box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
   box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
 }
 
 .session-block:hover .session-block-content {
@@ -2186,8 +2200,8 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
 
 .session-block .session-block-header .session-block-sponsors {
   position: absolute;
-  bottom: -10px;
-  right: 10px;
+  bottom: -15px;
+  right: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2229,13 +2243,37 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
   max-height: 80%;
 }
 
-.session-block .session-block-header .session-block-sponsors .session-block-sponsor:hover img {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
 .session-block .session-block-content {
   padding: 20px 0;
+}
+
+.session-block .session-block-content p {
+  line-height: 1.6em;
+  margin: 10px 0;
+}
+
+.session-block .session-block-content .session-block-speakers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.session-block .session-block-content .session-block-speakers .session-block-speaker {
+  border: 1px solid var(--shadeColor);
+  background: var(--shadeColor);
+  margin: 4px;
+  padding: 6px 20px 4px;
+  border-radius: 10px;
+}
+
+.session-block .session-block-content .session-block-speakers .session-block-speaker:hover {
+  background-color: var(--primary);
+}
+
+.session-block .session-block-content .session-block-speakers .relativ-speaker {
+  cursor: pointer;
 }
 
 .session-lb-container {
