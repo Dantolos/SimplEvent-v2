@@ -18,17 +18,21 @@ var args = {
 
 const LINEUPCONTAINER = document.getElementById('lineup-container')
 
+//jahr
+const YEARFORM = document.getElementById('speakeryear')
+if(YEARFORM){
+     YEARFORM.addEventListener('change', (e) => {
+          args.year = YEARFORM.value
+          CALL_AJAX_LINEUP(args)
+     })
+}
 
 //categories
 const CATFORM = document.getElementById('speechcat')
-
 if(CATFORM){
      CATFORM.addEventListener('change', (e) => {
-
           args.cat = CATFORM.value
-
           CALL_AJAX_LINEUP(args)
-
      })
 }
 
@@ -141,7 +145,7 @@ function CALL_ANIMATION(S) {
 
 //LIGHTBOX
 
-//REVIEW GALLERY
+//REVIEW GALLERY 
 var REVIEWGALLERY = [];
 jQuery(document).ajaxComplete(function () {
     
