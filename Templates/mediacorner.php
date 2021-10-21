@@ -41,6 +41,9 @@ echo '<div class="se2-mediacorner" >';
           case 'audio':
                echo $mediaCorner->cast_audio_archive($pageID);
                break;
+          case 'video':
+               echo $mediaCorner->cast_video_archive($pageID);
+               break;
           default:
                echo $mediaCorner->cast_media_info($pageID);
                break;

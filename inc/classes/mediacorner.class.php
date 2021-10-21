@@ -128,7 +128,7 @@ class Mediacorner {
                foreach( $logos as $logo ){
                     $logo = $logo['logo'];
                     $logoDownloads .= '<div class="se2-logo">';
-
+ 
                     $logoDownloads .= '<div class="se2-logo-preview">';
                          
                          //var_dump($logo['preview']['negativ']);
@@ -294,6 +294,29 @@ class Mediacorner {
           $audioCondent .= '</div>';
 
           return $audioCondent;
+     }
+
+     public function cast_video_archive($pageID){
+          $videoContent = '';
+          $videoContent .= '<div class="video-content-container">';
+          $videoContent .= '<h2>VIDEOS</h2>';
+          if( count(get_field('videos', $pageID)) > 0  ){
+               foreach (get_field('videos', $pageID) as $key => $video) {
+                    switch ($video['type']) {
+                         case 'value':
+                              # code...
+                              break;
+                         
+                         default:
+                              # code...
+                              break;
+                    }
+                    $videoContent .= '';
+               }
+               
+          }
+          $videoContent .= '</div>';
+          return $videoContent;
      }
      
 }
