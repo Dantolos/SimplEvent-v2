@@ -168,3 +168,4 @@ function peoples_custom_column ( $column, $post_id ) {
 }
 add_action ( 'manage_peoples_posts_custom_column', 'peoples_custom_column', 10, 2 );
 
+

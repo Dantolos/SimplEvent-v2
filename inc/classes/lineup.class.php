@@ -10,12 +10,14 @@ class LineUp {
      public $dateFormat;
      public $files;
      public $socialMedia;
+     public $MediaCorner;
 
      public function __construct() {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;
           $this->files = new se2_Files;
           $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'primary_color_picker' ) ) );
+          $this->MediaCorner = new Mediacorner();
      }
 
 
@@ -326,11 +328,36 @@ class LineUp {
                                    $this->speakerLightbox .= '<h6>REVIEW <b>'. $review['jahr']->slug .'</b></h6>';
                                    $this->speakerLightbox .= '<h3><b>'.$review['review_titel'].'</b></h3>';
 
+                                   $this->speakerLightbox .= '<div class="review-videos">';
                                    if( $review['review_video'] ){
                                         $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
                                    }
-                                   $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
 
+                                   $videoArgs = array(
+                                        'numberposts'	=> -1,
+                                        'post_type'	=> 'video',
+                                        'meta_query'	=> array(
+                                       
+                                             array(
+                                                  'key'	 	=> 'corr-speakers',
+                                                  'value'	  	=> $speakerID,
+                                                  'compare' 	=> 'LIKE',
+                                             ), 
+                                             
+                                        )
+                                   );
+                                   $videos = new WP_Query( $videoArgs );
+                                   if($videos->posts){
+                                        foreach( $videos->posts as $video ){
+                                             $this->speakerLightbox .= $this->MediaCorner->se2_video( $video->ID );
+                                        }
+                                   }
+                                   
+                                   
+                                   $this->speakerLightbox .= '</div>';
+
+                                   $this->speakerLightbox .= '<p>' . $review['review_text'] . '</p>';
+                                   
                                 
                                    if( is_array($review['review_galerie'])) {
                                         $this->speakerLightbox .= '<div class="gallery-splide">';
