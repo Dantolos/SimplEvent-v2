@@ -2,7 +2,7 @@
 
 class Date_Format {
 
-
+     
 
      public function formating_Date_Language( $value, $type ){
 
@@ -37,16 +37,19 @@ class Date_Format {
                switch (ICL_LANGUAGE_CODE) {
 
                     case 'de':
-                         $date = date( 'j. n. y', $value );
+                         setlocale(LC_ALL, "de_DE");
+                         $date = strftime( '%e. %B %G', $value );
                          break;
                     case 'en':
-                         $date = date( 'j M Y', $value );
+                         $date = strftime( '%e. %B %G', $value );
                          break;
                     case 'fr':
-                         $date = date( 'j m Y', $value );
+                         setlocale(LC_ALL, "fr_FR");
+                         $date = strftime( '%e. %B %G', $value );
                          break;
                     default:
-                         $date = date( 'j M Y', $value );
+                         setlocale(LC_ALL, "de_DE");
+                         $date = strftime( '%e. %B %G', $value );
                          break;
                }   
                return $date;

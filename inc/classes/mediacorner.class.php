@@ -7,11 +7,12 @@ class Mediacorner {
      public $fileSize;
      public $fileDownload;
      public $folderIcon;
+     public $lineup;
 
      public function __construct(){
           $this->dateFormat = new Date_Format;
           $this->fileSize = new se2_Files;
-
+          
           $this->fileDownload = [
                                    'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
                                                   <path class="fileicon-hide" d="M2.7,3.1c1.4,0,2.2,0.9,2.2,2.4v0.3H3.5V5.4c0-0.7-0.3-0.9-0.7-0.9S2,4.7,2,5.4c0,1.9,2.9,2.3,2.9,5c0,1.5-0.7,2.4-2.2,2.4 s-2.2-0.9-2.2-2.4V9.7h1.4v0.7c0,0.7,0.3,0.9,0.8,0.9s0.8-0.2,0.8-0.9c0-1.9-2.9-2.3-2.9-5C0.5,3.9,1.3,3.1,2.7,3.1z"/>
@@ -342,27 +343,14 @@ class Mediacorner {
                          $videoContent .= $this->se2_video( $videoID );
                          $videoContent .= '<div class="video-section-info">';
                          $videoContent .= '<h4>'.get_the_title( $videoID ).'</h4>';
-                         $videoContent .= '<p>'.get_field( 'beschriftung', $videoID ).'</p>';
+                         $videoContent .= '<h6 style="margin-top:5px;">'. $this->dateFormat->formating_Date_Language( get_the_date( 'Ymd', $videoID ), 'date' ).'</h6>';
+                         $videoContent .= '<p style="margin-top:10px;">'.get_field( 'beschriftung', $videoID ).'</p>';
                          
 
                          if( get_field( 'corr-speakers', $videoID ) ){
-                              $videoContent .= '<div class="video-section-info-speaker">';
-                              $videoContent .= '<h6 style="width:100%;">'.__('Mit:', 'SimplEvent').'</h6>';
-                              foreach( get_field( 'corr-speakers', $videoID ) as $speakerID ){
-                                   $name = ( get_field('speaker_vorname', $speakerID) ) 
-                                   ? 
-                                        get_field('speaker_degree', $speakerID) 
-                                        . ' ' . get_field('speaker_vorname', $speakerID) 
-                                        . '<b>' . get_field('speaker_nachname', $speakerID) . '</b>'
-                                   : 
-                                        the_title();
-                                   $videoContent .= '<div class="video-corr-speaker">';
-                                   $videoContent .= '<h6>';
-                                   $videoContent .= $name;
-                                   $videoContent .= '</h6>';
-                                   $videoContent .= '</div>';
-                              }
-                              $videoContent .= '</div>';
+                              $this->lineup = new LineUp;
+                              $speakers = get_field( 'corr-speakers', $videoID );
+                              $videoContent .= $this->lineup->cast_speaker_tag_cloud( $speakers );
                          }
 
                          $videoContent .= '<div class="video-tag-nodes">';

@@ -25,16 +25,10 @@ class se2_LB_Speaker {
                gsap.fromTo(document.querySelector('.speaker-lb-container'), .2, { x: '-100%', ease: Power1.easeOut }, { x: '0' })
                TweenMax.staggerFromTo('.speaker-stagger', .2, { opacity: 0, x: '-100%', delay: 0.1 }, { opacity: 1, x: '0' }, 0.05)
 
-               let reviewVideo = document.querySelector('.review-video')
+               let reviewVideos = document.querySelector('.review-videos')
 
-               try {
-                    let newHeight = reviewVideo.offsetWidth / 16 * 9
-                    reviewVideo.style.height = newHeight + 'px'
-               } catch (error) {
-                    console.warn('LB SPEAKER: NO VIDEO ', error)
-               }
-
-
+               
+              
           })
      }
 

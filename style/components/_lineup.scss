@@ -224,9 +224,20 @@
                     width:50px;
                     height: 50px;
                     position: absolute;
-                    width: 50px;
+                    display: flex;
+                    justify-content: flex-end;
+                    width: 100%;
                     bottom: -60px;
                     right: 0;
+                    .speaker_socialmedia-icon {
+                         height: 50px;
+                         width: 50px;
+                         opacity: .5;
+                         &:hover {
+                              opacity: 1;
+                              transform: scale(1.05);
+                         }
+                    }
                }
           }
 
@@ -253,18 +264,29 @@
                h3 {
                     margin:15px 0 10px;
                }
-               iframe {
-                    min-height:20vw;
-               }
-
+               
                
 
+          }
+
+          .review-videos {
+               display:flex;
+               flex-wrap: wrap;
+               .review-video {
+                    margin: 20px;
+
+                    .video-wrapper {
+                         width:400px;
+                         height:225px;
+                         margin-bottom:10px;
+                    }
+               }
           }
 
           .speaker-lb-review-gallery {
                display: flex;
                flex-wrap: wrap;
-               margin-bottom:50px;
+               margin-bottom:100px;
                .se-review-img {
                     width:50%;
                     img {
@@ -288,4 +310,77 @@
           
      }
 
+}
+
+.speaker-tag-cloud {
+     display: flex;
+     flex-wrap: wrap;
+     margin: 10px 0;
+     padding:10px 0;
+     
+     .speaker-tag {
+    
+          padding: 3px 5px;
+          border-radius: 20px;
+          margin: 5px 5px 0 0;
+          position: relative;
+
+          h5 {
+               display: flex;
+               align-items: center;
+               &::before {
+                    font-family: "dashicons";
+                    display: inline-block;
+                    vertical-align: middle;
+                    content: "\f110";
+                    opacity: .5;
+                    font-size:1.2em;
+                    margin: 0 5px 0 0;
+               }
+          }
+
+          .speaker-tag-tooltips {
+               position: absolute;
+               visibility: hidden;
+               opacity: 0;
+               min-width:200px;
+               width:20vw;
+              
+               height: fit-content;
+               bottom:-50%;
+               padding: 40px 20px 40px 40px;
+               background-color:$light;
+             
+
+               @include dropShadow;
+
+               .speaker-tag-tooltips-image {
+                    @include imageSettings;
+                    position: absolute;
+                    left:-40px;
+                    top:20px;
+                    
+                    height:70px;
+                    width:70px;
+                    border-radius: 50%;
+               }
+          }
+
+          &:hover {
+               
+               background-color: var(--secondColor);
+               cursor: help;
+               .speaker-tag-tooltips {
+                    transition-delay:.5s; 
+                    visibility: visible;
+                    opacity: 1;
+                    bottom: 100%;
+                    z-index: 100000;
+               }
+               
+          }
+          
+
+          
+     }
 }
