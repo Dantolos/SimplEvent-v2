@@ -11,7 +11,9 @@ if( NAVCONTAINER.querySelectorAll('.active-nav').length === 0 ){
      if(urlParams.has('m')){
           const startpage = urlParams.get('m')
           const startnav = document.querySelector('[type="'+startpage+'"]')
-          startnav.classList.add('active-nav')
+          if(startnav){
+               startnav.classList.add('active-nav')
+          }
      } else {
           NAVELEMENTS[0].classList.add('active-nav')
      }
