@@ -459,4 +459,93 @@
           }
      }
 }
+$videoWidth: 400px;
+$videoHeight: 225px;
+.video-content-container {
 
+     
+
+     .video-tag-cloud {
+          width: 100%;
+          display:flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          margin: 50px 0;
+          .video-tag-label {
+               display: flex;
+               flex-wrap: nowrap;
+               width:fit-content;
+               align-items: center;
+               padding:5px 0 5px 20px;
+               margin: 5px;
+               border-radius: 20px;
+               background-color: var(--shadeColor);
+               
+               .video-tag-label-count { 
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: var(--secondColor);
+                    width:20px;
+                    height:20px;
+                    margin: 0 5px 0 10px;
+                    border-radius: 10px;
+                 
+               }
+               &:hover {
+                    @include dropShadow;
+                    background-color: var(--secondColor);
+                    cursor: pointer;
+               }
+               
+          }
+     }
+     .video-content-wrapper {
+          display:flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+         
+          .video-section {
+               margin:5px;
+               width:$videoWidth;
+               .video-wrapper{
+                    width: $videoWidth;
+                    height: $videoHeight;
+               }
+          }
+
+          .video-section-info {
+               margin:20px 0;
+               width:100%;
+
+               
+
+               .video-tag-nodes{
+                    width: 100%;
+                    display:flex;
+                    flex-wrap: wrap;
+                    margin: 10px 0;
+                    padding:10px 0;
+                    border-top: 2px solid var(--shadeColor);
+                    .video-tag {
+                         display: flex;
+                         flex-wrap: nowrap;
+                         width:fit-content;
+                         align-items: center;
+                         padding: 3px 10px;
+                         font-size: .8em;
+                         margin: 2px 2px 0 0;
+                         border-radius: 20px;
+                         background-color: var(--shadeColor);
+                         &:hover {
+                              @include dropShadow;
+                              background-color: var(--secondColor);
+                              cursor: pointer;
+                         }
+                         
+                    }
+               }
+               
+          }
+     }
+}

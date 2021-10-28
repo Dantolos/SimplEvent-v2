@@ -7,11 +7,12 @@ class Mediacorner {
      public $fileSize;
      public $fileDownload;
      public $folderIcon;
+     public $lineup;
 
      public function __construct(){
           $this->dateFormat = new Date_Format;
           $this->fileSize = new se2_Files;
-
+          
           $this->fileDownload = [
                                    'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
                                                   <path class="fileicon-hide" d="M2.7,3.1c1.4,0,2.2,0.9,2.2,2.4v0.3H3.5V5.4c0-0.7-0.3-0.9-0.7-0.9S2,4.7,2,5.4c0,1.9,2.9,2.3,2.9,5c0,1.5-0.7,2.4-2.2,2.4 s-2.2-0.9-2.2-2.4V9.7h1.4v0.7c0,0.7,0.3,0.9,0.8,0.9s0.8-0.2,0.8-0.9c0-1.9-2.9-2.3-2.9-5C0.5,3.9,1.3,3.1,2.7,3.1z"/>
@@ -128,7 +129,7 @@ class Mediacorner {
                foreach( $logos as $logo ){
                     $logo = $logo['logo'];
                     $logoDownloads .= '<div class="se2-logo">';
-
+ 
                     $logoDownloads .= '<div class="se2-logo-preview">';
                          
                          //var_dump($logo['preview']['negativ']);
@@ -294,6 +295,135 @@ class Mediacorner {
           $audioCondent .= '</div>';
 
           return $audioCondent;
+     }
+
+     public function cast_video_archive( $pageID, $filter = false ){
+
+          $video_args = array(
+               'post_status' => array( 'publish' ),
+               'post_type'   => 'video', 
+          );
+
+          $videoRows = new WP_Query( $video_args ); 
+
+          $videoContent = '';
+          $videoContent .= '<div class="video-content-container">';
+          $videoContent .= '<h2>VIDEOS</h2>';
+
+          // TAG-CLOUD
+          $videoContent .= '<div class="video-tag-cloud">';
+          $tags = get_terms( ['taxonomy' => 'tags', 'hide_empty' => false] );
+          if( count($tags) > 0 ){
+               foreach( $tags as $key => $tag ){
+                    $videoCount = 0;
+                    foreach( $videoRows->posts as $videotags ){
+                         if (is_array($videotags) || is_object($videotags)){
+                              foreach((array) get_field('tags', $videotags->ID ) as $videotag ){
+                                   if( $videotag->term_id === $tag->term_id ){
+                                        $videoCount++;
+                                   }
+                              }
+                         }
+                    }
+          
+                    $videoContent .= '<div class="video-tag-label" tagid="' . $tag->term_id . '">';
+                    $videoContent .= $tag->name . '<div class="video-tag-label-count">' . $videoCount . '</div>';
+                    $videoContent .= '</div>';
+               }
+          }
+          $videoContent .= '</div>'; 
+
+          //VIDEOS
+          $videoContent .= '<div class="video-content-wrapper">';
+          if( count( $videoRows->posts ) > 0  ){
+               
+               foreach ( $videoRows->posts as $key => $video ) {
+                    $videoID = $video->ID;
+                    $videoContent .= '<section class="video-section ">';
+                         $videoContent .= $this->se2_video( $videoID );
+                         $videoContent .= '<div class="video-section-info">';
+                         $videoContent .= '<h4>'.get_the_title( $videoID ).'</h4>';
+                         $videoContent .= '<h6 style="margin-top:5px;">'. $this->dateFormat->formating_Date_Language( get_the_date( 'Ymd', $videoID ), 'date' ).'</h6>';
+                         $videoContent .= '<p style="margin-top:10px;">'.get_field( 'beschriftung', $videoID ).'</p>';
+                         
+
+                         if( get_field( 'corr-speakers', $videoID ) ){
+                              $this->lineup = new LineUp;
+                              $speakers = get_field( 'corr-speakers', $videoID );
+                              $videoContent .= $this->lineup->cast_speaker_tag_cloud( $speakers );
+                         }
+
+                         $videoContent .= '<div class="video-tag-nodes">';
+                         if( count( get_field( 'tags', $videoID) ) > 0 ){
+                              foreach( get_field( 'tags', $videoID) as $tag ){
+                                   $videoContent .= '<div class="video-tag">';
+                                   $videoContent .= $tag->name;
+                                   $videoContent .= '</div>';
+                              }
+                         }
+                         $videoContent .= '</div>';
+
+                         $videoContent .= '</div>';
+                    $videoContent .= '</section>';
+                   
+               }
+               
+          }
+
+         
+          
+          $videoContent .= '</div>';
+
+          $videoContent .= '</div>';
+
+          return $videoContent;
+     }
+
+
+
+     public function se2_video( $videoID ){
+          $video = '';
+          switch (get_field( 'type', $videoID)) {
+               case 'youtube':
+                    $video .= '<div class="video-wrapper video-section-'.get_field( 'type', $videoID).'">' . $this->se2_v_youtube( get_field( 'link', $videoID) ) . '</div>';
+                    break;
+               case 'vimeo':
+                    $video .= '<div class="video-wrapper">' . $this->se2_v_vimeo( get_field( 'link', $videoID) ) . '</div>';
+                    break;
+               case 'html':
+                    $video .= '<div class="video-wrapper">' . $this->se2_v_html( get_field( 'file', $videoID) ) . '</div>';
+                    break;
+               case 'simplex':
+                    $video .= '<div class="video-wrapper">' . $this->se2_v_simplex( get_field( 'simplexid', $videoID) ) . '</div>';
+                    break;
+                    
+               default:
+                    $video .= var_dump($video['type']);
+                    break;
+          }
+          return $video;
+     }
+
+     public function se2_v_youtube( $link ){
+          $videoYT = '<iframe width="100%" height="100%" src="'.$link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+          return $videoYT;
+     }
+
+     public function se2_v_vimeo( $link ){
+          $vimeoYT = '<iframe title="vimeo-player" width="100%" height="100%"  src="'.$link.'" frameborder="0" allowfullscreen></iframe>';
+          return $vimeoYT;
+     }
+
+     public function se2_v_html( $file ){
+          $htmlYT = '<video width="100%" height="100%" controls>';
+          $htmlYT .= '<source src="'.$file['url'].'" type="'.$file['mime_type'].'">';
+          $htmlYT .= 'Your browser does not support the video tag.';
+          $htmlYT .= '</video>';
+          return $htmlYT;
+     }
+     public function se2_v_simplex( $simplexid ){
+          $vimeoYT = '<iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $simplexid .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>';
+          return $vimeoYT;
      }
      
 }

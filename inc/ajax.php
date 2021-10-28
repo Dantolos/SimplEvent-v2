@@ -197,7 +197,9 @@ function mediacorner()
           case 'audio':
                wp_send_json( $mediaCorner->cast_audio_archive( $mediacornerID ) ); 
                break;
-               
+          case 'video':
+               wp_send_json( $mediaCorner->cast_video_archive( $mediacornerID ) ); 
+               break;    
           default:
                wp_send_json( $mediaCorner->cast_media_info( $mediacornerID ) );
                break;

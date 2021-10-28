@@ -52,18 +52,35 @@ add_action('wp_before_admin_bar_render', 'wpb_custom_logo');
 
 
 //MENU ORDER
+
+
+/* 
+'index.php', // Dashboard
+'edit.php?post_type=page', // Pages
+'edit.php', // Posts
+'upload.php', // Media
+'themes.php', // Appearance
+'separator1', // --Space--
+'edit-comments.php', // Comments
+'users.php', // Users
+'separator2', // --Space--
+'plugins.php', // Plugins
+'tools.php', // Tools
+'options-general.php', // Settings 
+*/
+
 add_filter('custom_menu_order', function() { return true; });
 add_filter('menu_order', 'my_new_admin_menu_order');
-
 
 function my_new_admin_menu_order( $menu_order ) {
 
      // define your new desired menu positions here
      // for example, move 'upload.php' to position #9 and built-in pages to position #1
      $new_positions = array(
-
-       'edit.php?post_type=page' => 3,  // Pages
-
+          'upload.php' => 12, // Media
+          'edit.php?post_type=page' => 3,  // Pages
+          'plugins.php' => 17,
+          'options-general.php' => 15,
      );
 
      function move_element(&$array, $a, $b) {
@@ -87,9 +104,12 @@ function my_new_admin_menu_order( $menu_order ) {
    
 
 function se2_add_separators() {
-     //Add a separator after the "Pages" menu.
-     add_admin_menu_separator(2);
-     add_admin_menu_separator(5);
+     
+     add_admin_menu_separator(2); // after SimplEvent
+     add_admin_menu_separator(5); // after Pages
+     add_admin_menu_separator(60); // after Media
+     add_admin_menu_separator(90); // after Plugins
+     add_admin_menu_separator(120); // after ACF
 }
 
 add_action('admin_menu', 'se2_add_separators');

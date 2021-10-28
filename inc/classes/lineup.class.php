@@ -10,12 +10,15 @@ class LineUp {
      public $dateFormat;
      public $files;
      public $socialMedia;
+     public $MediaCorner;
+     public $speakerCloud;
 
      public function __construct() {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;
           $this->files = new se2_Files;
-          $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'primary_color_picker' ) ) );
+          $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'dark_mode_picker' )[1] ) );
+          $this->MediaCorner = new Mediacorner();
      }
 
 
@@ -96,44 +99,56 @@ class LineUp {
           $filters = get_field('filters', $pageID );
 
           //sort direction
-          if( in_array( 'jahr', $filters ) ){
-               $this->output .= '<div class="se2-lineup-filter-categories">';
-               $this->output .= $this->forms->castDropdown( 'speechcat', ['2021','2020'], true );
-               $this->output .= '</div>';
-          }
-
-          //filter categorie
-          if( in_array( 'cat', $filters ) ){
-               $this->output .= '<div class="se2-lineup-filter-categories">';
-
-               //search for possible categoriese to choice
-
-               $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
-
-               $speechCategorie = [];
-
-               foreach($checkSpeakerIDs as $speakid) {
-                    foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
-                         if(!in_array( $categorie, $speechCategorie )){
-                              array_push( $speechCategorie, $categorie ); 
+          if( is_array($filters) ){
+               if( in_array( 'jahr', $filters ) ){
+                    $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
+               
+                    $yearOptions = [];
+                    foreach($checkSpeakerIDs as $speakid) {
+                         $yearTaxs = get_the_terms( $speakid, 'jahr' );
+                         foreach( $yearTaxs as $year ){                        
+                              if( !in_array( $year->term_id, array_column( $yearOptions, 'key' ) )  ){
+                                   $yearARRAY = [ 'key' => $year->term_id, 'name' => $year->name];
+                                   array_push( $yearOptions, $yearARRAY ); 
+                              }
                          }
                     }
+                    asort($yearOptions);
+                    $this->output .= '<div class="se2-lineup-filter-jahr filter-option">';
+                    $this->output .= $this->forms->castDropdown( 'speakeryear', $yearOptions, false );
+                    $this->output .= '</div>';
+               }
+          
+               //filter categorie
+               if( in_array( 'cat', $filters ) ){
+                    $this->output .= '<div class="se2-lineup-filter-categories filter-option">';
+
+                    //search for possible categoriese to choice
+                    $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
+                    $speechCategorie = [];
+
+                    foreach($checkSpeakerIDs as $speakid) {
+                         foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
+                              if(!in_array( $categorie, $speechCategorie )){
+                                   array_push( $speechCategorie, $categorie ); 
+                              }
+                         }
+                    }
+
+                    //cast dropdown
+                    $this->output .= $this->forms->castDropdown( 'speechcat', $speechCategorie, true );
+                    $this->output .= '</div>';
                }
 
-               //cast dropdown
-               $this->output .= $this->forms->castDropdown( 'speechcat', $speechCategorie, true );
-               $this->output .= '</div>';
-          }
-
-          //sort direction
-          if( in_array( 'sort', $filters ) ){
-               $this->output .= '<div class="se2-lineup-filter-sort">';
-               $this->output .= file_get_contents( get_template_directory_uri() . '/images/icons/sort-alpha-down.svg' ) . '<p>' . __( 'sortieren', 'SimplEvent' ) .'<p>';
-               $this->output .= '</div>';
+               //sort direction
+               if( in_array( 'sort', $filters ) ){
+                    $this->output .= '<div class="se2-lineup-filter-sort filter-option">';
+                    $this->output .= file_get_contents( get_template_directory_uri() . '/images/icons/sort-alpha-down.svg' ) . '<p>' . __( 'sortieren', 'SimplEvent' ) .'<p>';
+                    $this->output .= '</div>';
+               }
           }
 
           //view options
-        
           $this->output .= '<div class="se2-lineup-filter-view">';
           $this->output .= '<div class="viewbutton active-icon" view="grid">' . file_get_contents( get_template_directory_uri() . '/images/icons/grid.svg' ) . '</div>';
           $this->output .= '<div class="viewbutton" view="list">' . file_get_contents( get_template_directory_uri() . '/images/icons/view-list.svg' ) . '</div>';
@@ -279,13 +294,16 @@ class LineUp {
                     
                
                $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';
-               /* if(is_array(get_field('speaker_social_media', $speakerID))){
+               if(is_array(get_field('speaker_social_media', $speakerID)['social_media'])){
                     $this->speakerLightbox .= '<div class="speaker_socialmedia">';
-                    foreach( get_field('speaker_social_media', $speakerID) as $key => $smIcon ){
-                         $this->speakerLightbox .= $this->socialMedia->cast_icon( $smIcon[0]['acf_fc_layout'], $smIcon[0][$smIcon[0]['acf_fc_layout']] );
+                   
+                    $socialMEdias = get_field('speaker_social_media', $speakerID)['social_media'];
+                    //$this->speakerLightbox .= var_dump($socialMEdias);
+                    foreach( $socialMEdias  as $key => $smIcon ){
+                         $this->speakerLightbox .= '<div class="speaker_socialmedia-icon">'.$this->socialMedia->cast_icon( $smIcon['acf_fc_layout'], $smIcon[$smIcon['acf_fc_layout']] ).'</div>';
                     }
                     $this->speakerLightbox .= '</div>';
-               } */
+               } 
                $this->speakerLightbox .= '</div>';
 
                $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
@@ -304,6 +322,34 @@ class LineUp {
                     $speakerCV = get_field( 'speaker_cv', $speakerID );
                     $this->speakerLightbox .=  $speakerCV;
                     
+                    $this->speakerLightbox .= '<div class="review-videos">';
+                  
+                    $videoArgs = array(
+                         'numberposts'	=> -1,
+                         'post_type'	=> 'video',
+                         'meta_query'	=> array(
+                        
+                              array(
+                                   'key'	 	=> 'corr-speakers',
+                                   'value'	  	=> $speakerID,
+                                   'compare' 	=> 'LIKE',
+                              ), 
+                              
+                         )
+                    );
+                    $videos = new WP_Query( $videoArgs );
+
+                    if($videos->posts){
+                         foreach( $videos->posts as $video ){
+                              $this->speakerLightbox .= '<div class="review-video">';
+                              
+                              $this->speakerLightbox .= $this->MediaCorner->se2_video( $video->ID );
+                              $this->speakerLightbox .= '<h5>'.get_the_title( $video->ID).'</h5>';
+                              $this->speakerLightbox .= '</div>';
+                         }
+                    }
+                    
+                    $this->speakerLightbox .= '</div>';
 
                     if( have_rows('review_jahr',  $speakerID ) ){
                          foreach( get_field( 'review_jahr', $speakerID ) as $review ){
@@ -312,11 +358,18 @@ class LineUp {
                                    $this->speakerLightbox .= '<h6>REVIEW <b>'. $review['jahr']->slug .'</b></h6>';
                                    $this->speakerLightbox .= '<h3><b>'.$review['review_titel'].'</b></h3>';
 
+                                   $this->speakerLightbox .= '<div class="review-videos">';
                                    if( $review['review_video'] ){
-                                        $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
+                                        $this->speakerLightbox .= '<div class="review-video">';
+                                        $this->speakerLightbox .= '<div class="video-wrapper"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
+                                        $this->speakerLightbox .= '<h5>'.__('Auftritt', 'SimplEvent').'</h5>';
+                                        $this->speakerLightbox .= '</div>';
+                                        
                                    }
-                                   $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
-
+                                   $this->speakerLightbox .= '</div>';
+                                   
+                                   $this->speakerLightbox .= '<p>' . $review['review_text'] . '</p>';
+                                   
                                 
                                    if( is_array($review['review_galerie'])) {
                                         $this->speakerLightbox .= '<div class="gallery-splide">';
@@ -422,6 +475,7 @@ class LineUp {
                                    if( $review['review_video'] ){
                                         $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
                                    }
+
                                    $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
 
                                    if( $review['review_galerie'] ){
@@ -448,6 +502,55 @@ class LineUp {
 
           return $this->speakerLightbox;
           
+     }
+
+     public function cast_speaker_tag_cloud( $speakers ){
+          
+          $this->speakerCloud = '<div class="speaker-tag-cloud">';
+
+          $this->speakerCloud .= '<h6 style="width:100%;">'.__('Mit:', 'SimplEvent').'</h6>';
+      
+          foreach( (array)$speakers as $speaker ){
+               $speakerData = [
+                    'image' => '',
+                    'name' => '',
+                    'firma' => '',
+                    'cv' => '',
+               ];
+               if( $speaker['type'] === 'Speaker' || !isset($speaker['type']) ){
+                    
+                    $speakerID = isset($speaker['type']) ? $speaker['speaker'] : $speaker;
+                    $speakerData['name'] = ( get_field('speaker_vorname', $speakerID) ) 
+                    ? 
+                         get_field('speaker_degree', $speakerID) 
+                         . ' ' . get_field('speaker_vorname', $speakerID) . ' '
+                         . '' . get_field('speaker_nachname', $speakerID) . ''
+                    : 
+                         the_title();
+                          
+                    $speakerData['image'] = get_field('speaker_bild', $speakerID);
+                    $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+                    $speakerData['firma'] = get_field( 'speaker_funktion', $speakerID ).$speakerFirma;
+                    $speakerData['cv'] = get_field( 'speaker_cv', $speakerID );
+               } elseif ( $speaker['type'] === 'Specific' ){
+                    $speakerData['name'] = $speaker['vorname']. ' ' .$speaker['nachname'];
+               }
+               $this->speakerCloud .= '<div class="speaker-tag">';
+               $this->speakerCloud .= '<h5>';
+               $this->speakerCloud .= $speakerData['name'];
+               $this->speakerCloud .= '</h5>';
+                    //tooltips
+                    $this->speakerCloud .= '<div class="speaker-tag-tooltips">';
+                    $this->speakerCloud .= '<div class="speaker-tag-tooltips-image" style="background-image:url('.$speakerData['image'].');"></div>';
+                    $this->speakerCloud .= '<h4>' . $speakerData['name'] . '</h4>';
+                    $this->speakerCloud .= '<h6>' . $speakerData['firma'] . '</h6>';
+                    //$this->speakerCloud .= $speakerData['cv'];
+                    $this->speakerCloud .= '</div>';
+
+               $this->speakerCloud .= '</div>';
+          }
+          $this->speakerCloud .= '</div>';
+          return $this->speakerCloud;
      }
 
 } 

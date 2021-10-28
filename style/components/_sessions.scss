@@ -102,25 +102,7 @@
 
 
          
-         .session-block-speakers {
-              display:flex;
-              flex-wrap: wrap;
-
-              .session-block-speaker {
-                    border: 1px solid var(--shadeColor);
-                    background:var(--shadeColor);
-                    margin: 4px;
-                    padding: 6px 20px 4px;
-                    border-radius: 10px;
-                    
-                    &:hover {
-                         background-color:$primary;
-                    }
-              }
-              .relativ-speaker {
-                   cursor: pointer;
-              }
-         }
+        
      }
 }
 

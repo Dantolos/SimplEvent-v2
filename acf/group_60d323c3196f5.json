@@ -21,7 +21,8 @@
                 "mm": "Medienmitteilungen",
                 "logo": "Logos",
                 "fotos": "Fotos",
-                "audio": "Audio"
+                "audio": "Audio",
+                "video": "Videos"
             },
             "allow_custom": 0,
             "default_value": [],
@@ -793,6 +794,303 @@
                     "wpml_cf_preferences": 1
                 }
             ]
+        },
+        {
+            "key": "field_61716b944d548",
+            "label": "Videos",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_6171646dbd459",
+            "label": "Videos",
+            "name": "videos",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_61716490bd45a",
+                    "label": "Type",
+                    "name": "type",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "100",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "choices": {
+                        "youtube": "Youtube",
+                        "vimeo": "Vimeo",
+                        "simplex": "Simplex",
+                        "html": "HTML5 (local)"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_61716acfbd45d",
+                    "label": "Infos",
+                    "name": "Infos",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "wpml_cf_preferences": 3,
+                    "sub_fields": [
+                        {
+                            "key": "field_61716be55c6e5",
+                            "label": "Titel",
+                            "name": "titel",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_61716bed5c6e6",
+                            "label": "Description",
+                            "name": "desc",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 3,
+                            "new_lines": "",
+                            "wpml_cf_preferences": 1
+                        },
+                        {
+                            "key": "field_61716c015c6e7",
+                            "label": "Veröffentlichung",
+                            "name": "veroffentlichung",
+                            "type": "date_time_picker",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "display_format": "d\/m\/Y H:i",
+                            "return_format": "d\/m\/Y H:i",
+                            "first_day": 1,
+                            "wpml_cf_preferences": 1
+                        }
+                    ]
+                },
+                {
+                    "key": "field_6177da81ec141",
+                    "label": "Content",
+                    "name": "content",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "wpml_cf_preferences": 1,
+                    "sub_fields": [
+                        {
+                            "key": "field_61716af2bd45e",
+                            "label": "Simpley ID",
+                            "name": "simplexid",
+                            "type": "text",
+                            "instructions": "xx\/xxxx\/xxxxxx",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_61716490bd45a",
+                                        "operator": "==",
+                                        "value": "simplex"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_61716a12bd45b",
+                            "label": "Link",
+                            "name": "link",
+                            "type": "url",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_61716490bd45a",
+                                        "operator": "==",
+                                        "value": "youtube"
+                                    }
+                                ],
+                                [
+                                    {
+                                        "field": "field_61716490bd45a",
+                                        "operator": "==",
+                                        "value": "vimeo"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "default_value": "",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_61716b19bd45f",
+                            "label": "File",
+                            "name": "file",
+                            "type": "file",
+                            "instructions": "Bitte .webm priorisieren.",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_61716490bd45a",
+                                        "operator": "==",
+                                        "value": "html"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "100",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_6177dab0ec142",
+                            "label": "Thumbnail",
+                            "name": "thumbnail",
+                            "type": "image",
+                            "instructions": "Ideal im 16:9 Verhältnis",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "url",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "wpml_cf_preferences": 1
+                        },
+                        {
+                            "key": "field_6177dac8ec143",
+                            "label": "Tags",
+                            "name": "tags",
+                            "type": "taxonomy",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "taxonomy": "tags",
+                            "field_type": "multi_select",
+                            "allow_null": 0,
+                            "add_term": 1,
+                            "save_terms": 0,
+                            "load_terms": 0,
+                            "return_format": "id",
+                            "multiple": 0
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "location": [
@@ -824,5 +1122,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1634199240
+    "modified": 1635245130
 }

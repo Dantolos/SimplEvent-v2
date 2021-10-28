@@ -5,6 +5,7 @@ class Sessions {
      public $sessionLightbox;
      public $speakerFunctions;
      public $dateFormat;
+     public $lineup;
 
      public function __construct() {
           $this->dateFormat = new Date_Format;
@@ -138,28 +139,11 @@ class Sessions {
 
                //SPEAKERS
                if(get_field('referenten', $sessionID)){
-                    $sessionBlock .= '<div class="session-block-speakers">';
-                    $sessionBlock .= '<p style="width:100%;">'.__('mit:', 'SimplEvent').'</p>';
-                    foreach(get_field('referenten', $sessionID) as $sessionSpeaker){
-                         if($sessionSpeaker['type'] === 'Speaker'){
-                              $sessionSpeakerID = $sessionSpeaker['speaker'];
-                              $name = ( get_field('speaker_vorname', $sessionSpeakerID) ) 
-                                        ? 
-                                             get_field('speaker_degree', $sessionSpeakerID) 
-                                             . ' ' . get_field('speaker_vorname', $sessionSpeakerID) 
-                                             . ' <b>' . get_field('speaker_nachname', $sessionSpeakerID) . '</b>'
-                                        : 
-                                             get_the_title( $sessionSpeakerID );
-                              $sessionBlock .= '<div class="session-block-speaker relativ-speaker">';
-                              $sessionBlock .= '<h5>'.$name.'</h5>';
-                              $sessionBlock .= '</div>';
-                         } elseif ($sessionSpeaker['type'] === 'Specific'){
-                              $sessionBlock .= '<div class="session-block-speaker specific-speaker">';
-                              $sessionBlock .= '<h5>'.$sessionSpeaker['vorname'].$sessionSpeaker['nachname'].'</h5>';
-                              $sessionBlock .= '</div>';
-                         }
-                    }
-                    $sessionBlock .= '</div>';
+
+                    $this->lineup = new LineUp;
+                    $speakers = get_field('referenten', $sessionID);
+                    $sessionBlock .= $this->lineup->cast_speaker_tag_cloud( $speakers );
+
                }
                
 
