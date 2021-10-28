@@ -109,7 +109,7 @@ function se2_add_separators() {
      add_admin_menu_separator(5); // after Pages
      add_admin_menu_separator(60); // after Media
      add_admin_menu_separator(90); // after Plugins
-     add_admin_menu_separator(100); // after ACF
+     add_admin_menu_separator(120); // after ACF
 }
 
 add_action('admin_menu', 'se2_add_separators');
