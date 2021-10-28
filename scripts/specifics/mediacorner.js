@@ -17,7 +17,7 @@ if( NAVCONTAINER.querySelectorAll('.active-nav').length === 0 ){
      }
 }
 
-if (NAVELEMENTS && NAVELEMENTS.length > 0) {
+if (NAVELEMENTS && NAVELEMENTS.length > 0) { 
      for (let navEle of NAVELEMENTS) {
 
           navEle.addEventListener('click', () => {
@@ -121,12 +121,91 @@ function galleryMatrix() {
 
 }
 
+var VIDEOFILTER = {
+     tags : []
+};
+
+function callVideos(PAGEID, TAG) {
+     VIDEOFILTER.tags = []
+     
+     var current;
+
+     if ( TAG.classList.contains('aktive-tag') ) {
+          console.log('active')
+          TAG.classList.remove('aktive-tag') 
+          current = document.getElementsByClassName("aktive-tag");
+     } else {
+          TAG.classList.add('aktive-tag') 
+          current = document.getElementsByClassName("aktive-tag");
+     }
+
+     if (current.length > 0) {
+          for (let index = 0; index < current.length; index++) {
+               const currenttag = current[index];
+               const currenttagID = currenttag.getAttribute('tagid');
+            
+               
+               VIDEOFILTER.tags.push(currenttag.getAttribute('tagid'))
+               
+          }
+          
+     }
+
+     
+     console.log(VIDEOFILTER.tags)
+
+     var callData = {
+          pageid: PAGEID,
+          filter: VIDEOFILTER.tags,
+          action: 'videos'
+     }
+     AJAX.call_Ajax(callData, 'video-content-wrapper', true);
+
+
+
+}
+
+
+function videoMatrix() {
+
+     var TAGS = document.getElementsByClassName('video-tag-label');
+
+     if (TAGS && TAGS.length > 0) {
+          countVideoPerTag(TAGS);
+          var PAGEID = document.querySelector('.video-content-wrapper').getAttribute('pageid')
+          for (let TAG of TAGS) {
+               if (TAG.getAttribute('listener') !== 'true') {
+                    console.log(TAG.getAttribute('listener'))
+                    TAG.setAttribute("listener", "true");
+                    TAG.addEventListener('click', () => {
+                         console.log(TAG)
+                         callVideos(PAGEID, TAG)
+                    })
+               }
+          }
+
+     }
+
+
+}
+
+function countVideoPerTag(TAGS){
+     var VideoContainer = document.querySelector('.video-content-wrapper');
+     for (let TAG of TAGS) {
+          var TAGID = TAG.getAttribute('tagid')
+          var videoTags = VideoContainer.querySelectorAll('[tagid="'+TAGID+'"]' );
+          TAG.querySelector('.video-tag-label-count').innerHTML = videoTags.length;
+     }
+}
+
 pressrealeses()
 galleryMatrix()
+videoMatrix()
 
 jQuery(document).ajaxStop(function () {
      pressrealeses()
      galleryMatrix()
+     videoMatrix()
 })
 
 

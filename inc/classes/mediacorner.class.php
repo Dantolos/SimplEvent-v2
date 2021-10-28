@@ -299,14 +299,11 @@ class Mediacorner {
 
      public function cast_video_archive( $pageID, $filter = false ){
 
-          $video_args = array(
-               'post_status' => array( 'publish' ),
-               'post_type'   => 'video', 
-          );
-
-          $videoRows = new WP_Query( $video_args ); 
-
           $videoContent = '';
+
+           
+
+          
           $videoContent .= '<div class="video-content-container">';
           $videoContent .= '<h2>VIDEOS</h2>';
 
@@ -315,64 +312,15 @@ class Mediacorner {
           $tags = get_terms( ['taxonomy' => 'tags', 'hide_empty' => false] );
           if( count($tags) > 0 ){
                foreach( $tags as $key => $tag ){
-                    $videoCount = 0;
-                    foreach( $videoRows->posts as $videotags ){
-                         if (is_array($videotags) || is_object($videotags)){
-                              foreach((array) get_field('tags', $videotags->ID ) as $videotag ){
-                                   if( $videotag->term_id === $tag->term_id ){
-                                        $videoCount++;
-                                   }
-                              }
-                         }
-                    }
-          
-                    $videoContent .= '<div class="video-tag-label" tagid="' . $tag->term_id . '">';
-                    $videoContent .= $tag->name . '<div class="video-tag-label-count">' . $videoCount . '</div>';
+                    $videoContent .= '<div class="video-tag-label" tagid="' . $tag->term_id . '" listener="false">';
+                    $videoContent .= '<span>' . $tag->name . '</span><div class="video-tag-label-count">0</div>';
                     $videoContent .= '</div>';
                }
           }
           $videoContent .= '</div>'; 
 
           //VIDEOS
-          $videoContent .= '<div class="video-content-wrapper">';
-          if( count( $videoRows->posts ) > 0  ){
-               
-               foreach ( $videoRows->posts as $key => $video ) {
-                    $videoID = $video->ID;
-                    $videoContent .= '<section class="video-section ">';
-                         $videoContent .= $this->se2_video( $videoID );
-                         $videoContent .= '<div class="video-section-info">';
-                         $videoContent .= '<h4>'.get_the_title( $videoID ).'</h4>';
-                         $videoContent .= '<h6 style="margin-top:5px;">'. $this->dateFormat->formating_Date_Language( get_the_date( 'Ymd', $videoID ), 'date' ).'</h6>';
-                         $videoContent .= '<p style="margin-top:10px;">'.get_field( 'beschriftung', $videoID ).'</p>';
-                         
-
-                         if( get_field( 'corr-speakers', $videoID ) ){
-                              $this->lineup = new LineUp;
-                              $speakers = get_field( 'corr-speakers', $videoID );
-                              $videoContent .= $this->lineup->cast_speaker_tag_cloud( $speakers );
-                         }
-
-                         $videoContent .= '<div class="video-tag-nodes">';
-                         if( count( get_field( 'tags', $videoID) ) > 0 ){
-                              foreach( get_field( 'tags', $videoID) as $tag ){
-                                   $videoContent .= '<div class="video-tag">';
-                                   $videoContent .= $tag->name;
-                                   $videoContent .= '</div>';
-                              }
-                         }
-                         $videoContent .= '</div>';
-
-                         $videoContent .= '</div>';
-                    $videoContent .= '</section>';
-                   
-               }
-               
-          }
-
-         
-          
-          $videoContent .= '</div>';
+          $videoContent .= $this->se2_cast_video_matrix( $pageID, $filter );
 
           $videoContent .= '</div>';
 
@@ -380,6 +328,98 @@ class Mediacorner {
      }
 
 
+     public function se2_cast_video_matrix( $pageID, $filter = false ){
+          $videoMatrix = '';
+          $video_args = array(
+               'numberposts'	=> -1,
+               'post_status' => array( 'publish' ),
+               'post_type'   => 'video', 
+          );
+
+          //FILTERS
+          if($filter ){
+               $filterArgs = [];
+               
+
+               if( isset($filter['jahr']) && !empty($filter['jahr']) ){
+                    $video_args['tax_query'] = ['relation' => 'OR', array( 'taxonomy' => 'jahr', 'field' => 'slug', 'terms' => $filter['jahr'], 'operator' => 'IN', )];
+               }
+               
+          }
+          
+          //$videoMatrix .= var_dump( $video_args );
+
+          $videoRows = get_posts( $video_args );
+          $videoMatrix .= '<div class="video-content-wrapper" pageid="'.$pageID.'">';
+          if( count( $videoRows ) > 0  ){
+               
+               foreach ( $videoRows as $key => $video ) {
+
+                    
+                    $videoID = $video->ID;
+                    
+
+                    //$videoMatrix .= var_dump( get_field('tags', $videoID) );
+                    $videoTags = get_field('tags', $videoID );
+                    $tagIDs = array_map( function ($tags) { return $tags->term_id; }, $videoTags );
+                    
+                    if( $filter ){
+                         if( isset($filter['tags']) && count($filter['tags']) > 0){
+                              $videoSkip = true;
+                              $tempSet = true;
+                              foreach( $filter['tags'] as $key => $tag ){
+                                   if( in_array( $tag, $tagIDs ) && $tempSet ){
+                                        $videoSkip = false;
+                                   } else {
+                                        $tempSet = false; 
+                                        $videoSkip = true;
+                                   }
+                              }
+
+                              if($videoSkip){
+                                   continue;
+                              }
+                         }
+                    }
+
+                    $videoMatrix .= '<section class="video-section ">';
+                         $videoMatrix .= $this->se2_video( $videoID );
+                         $videoMatrix .= '<div class="video-section-info">';
+                         $videoMatrix .= '<h4>'.get_the_title( $videoID ).'</h4>';
+                         $videoMatrix .= '<h6 style="margin-top:5px;">'. $this->dateFormat->formating_Date_Language( get_the_date( 'Ymd', $videoID ), 'date' ).'</h6>';
+                         $videoMatrix .= '<p style="margin-top:10px;">'.get_field( 'beschriftung', $videoID ).'</p>';
+                          
+
+                         if( get_field( 'corr-speakers', $videoID ) ){
+                              $this->lineup = new LineUp;
+                              $speakers = get_field( 'corr-speakers', $videoID );
+                              $videoMatrix .= $this->lineup->cast_speaker_tag_cloud( $speakers );
+                         }
+
+                         $videoMatrix .= '<div class="video-tag-nodes">';
+                         if( count( $videoTags ) > 0 ){
+                              foreach( $videoTags as $tag ){
+                                   $videoMatrix .= '<div class="video-tag" tagid="' . $tag->term_id . '">';
+                                   $videoMatrix .= $tag->name;
+                                   $videoMatrix .= '</div>';
+                              }
+                         }
+                         $videoMatrix .= '</div>';
+
+                         $videoMatrix .= '</div>';
+                    $videoMatrix .= '</section>';
+                   
+               }
+               
+          }
+
+         
+          
+          $videoMatrix .= '</div>';
+
+
+          return $videoMatrix;
+     }
 
      public function se2_video( $videoID ){
           $video = '';
