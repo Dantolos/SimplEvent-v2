@@ -3934,6 +3934,7 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
   height: 20px;
   margin: 0 5px 0 10px;
   border-radius: 10px;
+  color: var(--primeColor);
 }
 
 .video-content-container .video-tag-cloud .video-tag-label:hover {
@@ -3941,6 +3942,31 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
   box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
   background-color: var(--secondColor);
   cursor: pointer;
+}
+
+.video-content-container .video-tag-cloud .aktive-tag {
+  background-color: var(--primary);
+  color: var(--secondColor);
+}
+
+.video-content-container .video-tag-cloud .aktive-tag span::before {
+  font-family: "dashicons";
+  color: var(--secondColor);
+  display: inline-block;
+  vertical-align: middle;
+  content: "\f158";
+  font-size: 1.2em;
+  margin: 0 5px 0 -10px;
+}
+
+.video-content-container .video-tag-cloud .aktive-tag:hover {
+  -webkit-box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
+  background-color: var(--secondColor);
+}
+
+.video-content-container .video-tag-cloud .aktive-tag:hover span {
+  color: var(--primeColor);
 }
 
 .video-content-container .video-content-wrapper {

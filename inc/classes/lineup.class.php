@@ -517,7 +517,7 @@ class LineUp {
                     'firma' => '',
                     'cv' => '',
                ];
-               if( $speaker['type'] === 'Speaker' || !isset($speaker['type']) ){
+               if( $speaker['type'] === 'Speaker' || !exist($speaker['type']) ){
                     
                     $speakerID = isset($speaker['type']) ? $speaker['speaker'] : $speaker;
                     $speakerData['name'] = ( get_field('speaker_vorname', $speakerID) ) 

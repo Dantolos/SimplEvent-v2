@@ -176,7 +176,7 @@ function candidate_lightbox()
 add_action('wp_ajax_nopriv_mediacorner', 'mediacorner');
 add_action('wp_ajax_mediacorner', 'mediacorner'); //nur für angemeldete (admins)
 
-function mediacorner() 
+function mediacorner()  
 {
      $mediacornerID = $_POST['id'];
      $mediacornerType = $_POST['type'];
@@ -222,6 +222,26 @@ function photo_folder()
      $MediaCorner = new Mediacorner;
      
      wp_send_json( $MediaCorner->cast_folder_content( $pageID, $folder ) ); 
+     
+     die();
+}
+
+/*------------- VIDEOS ---------------*/
+//photo-gallerie
+add_action('wp_ajax_nopriv_videos', 'videos');
+add_action('wp_ajax_videos', 'videos'); //nur für angemeldete (admins)
+
+function videos() 
+{
+     $pageID = $_POST['pageid'];
+     if(isset($_POST['filter'])){
+          $filter = ['tags' => $_POST['filter']];
+     } else {
+          $filter = ['tags' => []];
+     }
+     $MediaCorner = new Mediacorner;
+     
+     wp_send_json( $MediaCorner->se2_cast_video_matrix( $pageID, $filter ) ); 
      
      die();
 }
