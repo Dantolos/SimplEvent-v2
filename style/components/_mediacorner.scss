@@ -508,8 +508,8 @@ $videoHeight: 225px;
                     font-family: "dashicons";
                     color: var(--secondColor);
                     display: inline-block;
+                    content: "\f147";
                     vertical-align: middle;
-                    content: "\f158";
                     font-size:1.2em;
                     margin: 0 5px 0 -10px;
                     }
@@ -519,6 +519,10 @@ $videoHeight: 225px;
                     background-color: var(--secondColor);
                     span {
                          color: var(--primeColor);
+                         &::before {
+                              content: "\f158";
+                              color:var(--primeColor);
+                          }
                     }
                    
                }

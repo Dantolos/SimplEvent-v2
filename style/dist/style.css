@@ -3953,8 +3953,8 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
   font-family: "dashicons";
   color: var(--secondColor);
   display: inline-block;
+  content: "\f147";
   vertical-align: middle;
-  content: "\f158";
   font-size: 1.2em;
   margin: 0 5px 0 -10px;
 }
@@ -3966,6 +3966,11 @@ footer .footer-menu-container #footer_socialmedia a svg:hover .st1 {
 }
 
 .video-content-container .video-tag-cloud .aktive-tag:hover span {
+  color: var(--primeColor);
+}
+
+.video-content-container .video-tag-cloud .aktive-tag:hover span::before {
+  content: "\f158";
   color: var(--primeColor);
 }
 
