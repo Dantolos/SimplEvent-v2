@@ -1,4 +1,12 @@
 <?php 
+
+
+add_action('enqueue_block_editor_assets','add_block_editor_assets',10,0);
+function add_block_editor_assets(){
+     wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '' );
+}
+
+
 function se2_block_category( $categories, $block_editor_context ) {
 
      if ( ! ( $block_editor_context instanceof WP_Block_Editor_Context ) ) {
@@ -59,6 +67,30 @@ function register_acf_block_types() {
         'editor_script'     => 'block-testimonial-script',
         'keywords'          => array( 'testimonial', 'quote' ),
     ));
+
+     // quotes
+     acf_register_block_type(array(
+          'name'              => 'quotes',
+          'title'             => __('Quotes'),
+          'description'       => __('Create a Quote-Slider.'),
+          'render_template'   => 'blocks/templates/quotes/quotes.php',
+          'category'          => 'se2',
+          'icon'              => 'admin-comments',
+          'editor_script'     => 'block-quotes-script',
+          'keywords'          => array( 'quotes', 'quote', 'slider' ),
+     ));
+
+     // quotes
+     acf_register_block_type(array(
+          'name'              => 'lineup',
+          'title'             => __('LineUp Slider'),
+          'description'       => __('Create a LineUp-Slider.'),
+          'render_template'   => 'blocks/templates/lineup/lineup.php',
+          'category'          => 'se2',
+          'icon'              => 'dashicons-groups',
+          'editor_script'     => 'block-quotes-script',
+          'keywords'          => array( 'spekaer', 'lineup', 'slider' ),
+     ));
 
     // infobox
     acf_register_block_type(array(

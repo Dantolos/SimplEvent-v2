@@ -101,7 +101,7 @@ class LineUp {
           //sort direction
           if( is_array($filters) ){
                if( in_array( 'jahr', $filters ) ){
-                    $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
+                    $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'id'] );
                
                     $yearOptions = [];
                     foreach($checkSpeakerIDs as $speakid) {

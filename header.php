@@ -125,8 +125,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.68'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.31' );
+     $scriptversion = '1.0.69'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.32' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -160,6 +160,7 @@ require_once('inc/supports/forms.php');
 require_once('inc/supports/schedule.php');
 require_once('inc/supports/files.php');
 require_once('inc/supports/social-media.php');
+require_once('inc/supports/slider.php');
 
 //including assets
 require_once('inc/assets/button.php');

@@ -536,9 +536,11 @@ $videoHeight: 225px;
           .video-section {
                margin:5px;
                width:$videoWidth;
+               max-width: 100%;
                .video-wrapper{
                     width: $videoWidth;
                     height: $videoHeight;
+                    max-width: 100%;
                }
           }
 

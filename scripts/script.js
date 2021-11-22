@@ -245,9 +245,10 @@ var speakerSplide = document.getElementsByClassName( 'speaker-splide' );
 
 
      for ( var i = 0; i < speakerSplide.length; i++ ) {
+          var perPageCount = speakerSplide[ i ].getAttribute('perpage') ? speakerSplide[ i ].getAttribute('perpage') : 3;
           new Splide( speakerSplide[ i ], {
                type   : 'loop',
-               perPage:3,
+               perPage:perPageCount,
                perMove:2,
                pagination: false,
                breakpoints: {
