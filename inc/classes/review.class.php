@@ -6,11 +6,13 @@ class Review {
     public $mediacorner;
     public $LineUpPage;
     public $LineUp;
+    public $Slider;
 
     public function __construct(){
         $this->dateFormat = new Date_Format;
         $this->LineUp = new LineUp;
         $this->fileSize = new se2_Files;
+        $this->Slider = new se2_Slider;
 
         $MediaCornerArgs = [
             'post_type' => 'page',
@@ -55,24 +57,8 @@ class Review {
                     $single .= '<p>'.$review['infos']['desc'].'</p>';
 
                     //QUOTES
-                    
-                    if( is_array( $review['infos']['quotes'] ) ){
-                        $single .= '<div class="review-signle-page-quotes quote-splide splide" style="width:100%;">';
-                        $single .= '<div class="splide__track"><ul class="splide__list">';
-                        $quotes = $review['infos']['quotes'];
-                        foreach ( $quotes as $quote ) {
-                            $single .= '<li class="splide__slide">';
-                                $single .= '<div class="review-signle-page-quote">';
-                                $single .= '<h3>'.$quote['quote'].'</h3>';
-                                $single .= '<p><b>'.$quote['author']['name'].'</b><br />'.$quote['author']['desc'].'</p>';
-                                $single .= '</div>';
-                            $single .= '</li>';
-                        }
-
-                        $single .= '</ul></div>';
-                        $single .= '</div>';
-                    }
-
+                    $single .= $this->Slider->QuoteSlider( $review['infos']['quotes'] );
+                   
                     //SPEAKER
                     $speakerIDs = []; 
                     if( get_field($review['content']['speaker selection']) ){
@@ -98,19 +84,10 @@ class Review {
                         $single .= '<div class="review-single-speaker">';
                         $single .= '<h3>'.__('Speakers', 'SimplEvent').'</h3>';
 
-                            $single .= '<div id="lineup-container" year="'.$review['infos']['jahr']->name.'" carousel="3">';
-                                
-                                $single .= '<div class="speaker-splide splide" style="width:100%;" >';
-                                    $single .= '<div class="splide__track"><ul class="splide__list">';
-                                    foreach ($speakerIDs as $speakerID) {
-                                        $single .= '<li class="splide__slide">';
-                                        $single .= $this->LineUp->cast_speaker_grid( $speakerID );
-                                        $single .= '</li>';
-                                    }
-                                    $single .= '</ul></div>';
-                                $single .= '</div>';
+                            $single .= '<div id="lineup-container" year="'.$review['infos']['jahr']->name.'" >';
+                            $single .= $this->Slider->LineUpSlider($speakerIDs, 3);
                             $single .= '</div>';
-                            
+
                             $single .= '<a href="'.get_permalink($this->LineUpPage).'/?j='.$review['infos']['jahr']->name.'">';
                             $single .= '<div class="review-single-speaker-allspeaker">';
                             $single .= '<p>'.__( 'Alle Speaker', 'SimplEvent' ).'</p>';

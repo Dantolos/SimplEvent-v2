@@ -10,7 +10,7 @@ class Partner {
           $partner_args = array(
                'post_type' => 'partners', 'orderby' => 'title', 'order' => 'ASC', 'tax_query' => array(
                     array(
-                         'taxonomy' => 'partner_categories', 'field' => 'term_id', 'terms' => $catID,
+                         'taxonomy' => 'partner_categories', 'field' => 'term_id', 'terms' => $catID, 
                     ),
                ),
           );
