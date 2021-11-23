@@ -38,10 +38,37 @@ class Review {
     }
 
     public function cast_overview_review( $pageID ){
-        $overview = '<div>';
-        $overview .= 'OVERVIEW';
+        $overview = '<div class="review-overview container">';
+        $overview .= '<h2>REVIEWS</h2>';
+        $reviews = get_field( 'review_sites', $pageID );
+        if( $reviews ){
+            $overview .= '<div class="review-overview-grid">';
+            foreach($reviews as $review ){
+                $overview .= $this->cast_overview_box( $review );
+            }
+            $overview .= '</div>';
+        }
         $overview .= '</div>';
         return $overview;
+    }
+
+    public function cast_overview_box( $review ){
+        $overviewBox = '';
+        $overviewBox .= '<div class="review-overview-box">';
+            $overviewBox .= '<div class="review-overview-box-image" style="background-image:url('.$review['content']['visual'].');"></div>';
+            $overviewBox .= '<div class="review-overview-box-content">';
+            $overviewBox .= '<h3>'.$review['infos']['motto'].'</h3>'; 
+            global $wp;
+            $current_url = home_url( add_query_arg( array(), $wp->request ) ); 
+            $reviewYear = $review['infos']['jahr']->name;
+            $overviewBox .= '<a href="'.$current_url.'/?j='.$reviewYear.'">';
+            $overviewBox .=  __('mehr', 'SimplEvent');
+            $overviewBox .= '</a>';
+            
+            $overviewBox .= '</div>';
+        $overviewBox .= '</div>';
+        
+        return $overviewBox;
     }
 
     public function cast_single_review( $pageID, $index ){
