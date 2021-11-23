@@ -16,8 +16,20 @@ $reviewClass = new Review;
 $pageID = get_the_ID();
 $reviews = get_field( 'review_sites', $pageID );
 
+
 if( is_array( $reviews ) ){
-    if( count( $reviews ) > 1 ){
+    if( isset( $_GET["j"] ) ){
+        
+        $reviews = get_field( 'review_sites', $pageID );
+        if (is_array($reviews) || is_object($reviews)) {
+            foreach($reviews as $key => $review){
+                if( $_GET["j"] === $review['infos']['jahr']->name ){
+                    echo $reviewClass->cast_single_review( $pageID, $key );
+                }
+            }
+        }
+    }
+    else if( count( $reviews ) > 1 ){
         echo $reviewClass->cast_overview_review( $pageID );
     } else {
         echo $reviewClass->cast_single_review( $pageID, 0 );
