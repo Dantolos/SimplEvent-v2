@@ -8,7 +8,7 @@ class LineUp {
      public $speakerIDs = array();
      public $forms;
      public $dateFormat;
-     public $files;
+     public $files; 
      public $socialMedia;
      public $MediaCorner;
      public $speakerCloud;
@@ -101,7 +101,7 @@ class LineUp {
           //sort direction
           if( is_array($filters) ){
                if( in_array( 'jahr', $filters ) ){
-                    $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'id'] );
+                    $checkSpeakerIDs = get_posts( ['numberposts' => -1, 'post_type' => 'speakers', 'fields' => 'id'] );
                
                     $yearOptions = [];
                     foreach($checkSpeakerIDs as $speakid) {
@@ -114,6 +114,7 @@ class LineUp {
                          }
                     }
                     asort($yearOptions);
+                    
                     $this->output .= '<div class="se2-lineup-filter-jahr filter-option">';
                     $this->output .= $this->forms->castDropdown( 'speakeryear', $yearOptions, false );
                     $this->output .= '</div>';
@@ -124,7 +125,7 @@ class LineUp {
                     $this->output .= '<div class="se2-lineup-filter-categories filter-option">';
 
                     //search for possible categoriese to choice
-                    $checkSpeakerIDs = get_posts( ['post_type' => 'speakers', 'fields' => 'ids'] );
+                    $checkSpeakerIDs = get_posts( ['numberposts' => -1, 'post_type' => 'speakers', 'fields' => 'ids'] );
                     $speechCategorie = [];
 
                     foreach($checkSpeakerIDs as $speakid) {

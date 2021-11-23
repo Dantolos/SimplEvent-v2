@@ -103,7 +103,7 @@ function CALL_AJAX_LINEUP(a) {
 
 }
 
-
+ 
 
 
 //listelemennts, animations
