@@ -18,5 +18,5 @@
      position:absolute;
 }
 .strip-inner-blocks {
-     position:absolute;
+     position:sticky;
 }
