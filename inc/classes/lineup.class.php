@@ -104,12 +104,15 @@ class LineUp {
                     $checkSpeakerIDs = get_posts( ['numberposts' => -1, 'post_type' => 'speakers', 'fields' => 'id'] );
                
                     $yearOptions = [];
+                    
                     foreach($checkSpeakerIDs as $speakid) {
                          $yearTaxs = get_the_terms( $speakid, 'jahr' );
-                         foreach( $yearTaxs as $year ){                        
-                              if( !in_array( $year->term_id, array_column( $yearOptions, 'key' ) )  ){
-                                   $yearARRAY = [ 'key' => $year->term_id, 'name' => $year->name];
-                                   array_push( $yearOptions, $yearARRAY ); 
+                         if (is_array($yearTaxs) || is_object($yearTaxs)) {
+                              foreach( $yearTaxs as $year ){                        
+                                   if( !in_array( $year->term_id, array_column( $yearOptions, 'key' ) )  ){
+                                        $yearARRAY = [ 'key' => $year->term_id, 'name' => $year->name];
+                                        array_push( $yearOptions, $yearARRAY ); 
+                                   }
                               }
                          }
                     }
@@ -127,11 +130,12 @@ class LineUp {
                     //search for possible categoriese to choice
                     $checkSpeakerIDs = get_posts( ['numberposts' => -1, 'post_type' => 'speakers', 'fields' => 'ids'] );
                     $speechCategorie = [];
-
-                    foreach($checkSpeakerIDs as $speakid) {
-                         foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
-                              if(!in_array( $categorie, $speechCategorie )){
-                                   array_push( $speechCategorie, $categorie ); 
+                    if (is_array($checkSpeakerIDs) || is_object($checkSpeakerIDs)) {
+                         foreach($checkSpeakerIDs as $speakid) {
+                              foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
+                                   if(!in_array( $categorie, $speechCategorie )){
+                                        array_push( $speechCategorie, $categorie ); 
+                                   }
                               }
                          }
                     }
