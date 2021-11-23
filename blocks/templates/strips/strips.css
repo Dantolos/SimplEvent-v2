@@ -1,8 +1,22 @@
-#content-container {
-     scroll-snap-type: y mandatory;
-}
-
-.fullpage {
-     height: calc(100vh - 80px);
-     scroll-snap-align: center;
-}
+#content-container {
+
+     scroll-snap-type: y mandatory;
+
+}
+
+
+
+.fullpage {
+ 
+     height: calc(100vh - 80px);
+
+     scroll-snap-align: center;
+
+}
+
+.background-video {
+     position:absolute;
+}
+.strip-inner-blocks {
+     position:absolute;
+}
