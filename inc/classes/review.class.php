@@ -53,20 +53,26 @@ class Review {
     }
 
     public function cast_overview_box( $review ){
+        global $wp;
+        $current_url = home_url( add_query_arg( array(), $wp->request ) ); 
+        $reviewYear = $review['infos']['jahr']->name;
+
         $overviewBox = '';
+        
         $overviewBox .= '<div class="review-overview-box">';
-            $overviewBox .= '<div class="review-overview-box-image" style="background-image:url('.$review['content']['visual'].');"></div>';
+        $overviewBox .= '<a href="'.$current_url.'/?j='.$reviewYear.'">';
+            $overviewBox .= '<div class="review-overview-box-image" style="background-image:url('.$review['content']['visual'].');">';
+            $overviewBox .= '<h3>'.$reviewYear.'</h3>';
+            $overviewBox .= '</div>';
             $overviewBox .= '<div class="review-overview-box-content">';
+            $overviewBox .= '<p>'.$review['infos']['date'].'</p>';
             $overviewBox .= '<h3>'.$review['infos']['motto'].'</h3>'; 
-            global $wp;
-            $current_url = home_url( add_query_arg( array(), $wp->request ) ); 
-            $reviewYear = $review['infos']['jahr']->name;
-            $overviewBox .= '<a href="'.$current_url.'/?j='.$reviewYear.'">';
-            $overviewBox .=  __('mehr', 'SimplEvent');
-            $overviewBox .= '</a>';
+                        
             
             $overviewBox .= '</div>';
+            $overviewBox .= '</a>';
         $overviewBox .= '</div>';
+       
         
         return $overviewBox;
     }

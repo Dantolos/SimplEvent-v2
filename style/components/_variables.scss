@@ -81,3 +81,9 @@ body {
     &::-webkit-scrollbar { display:none; }
 }
 .hideScrollbar { @include hideScrollbar }
+
+@mixin bluredBackground {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+.bluredBackground { @include bluredBackground }
