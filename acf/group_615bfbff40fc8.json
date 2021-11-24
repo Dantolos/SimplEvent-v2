@@ -287,7 +287,7 @@
                         {
                             "key": "field_615c00b25d4b4",
                             "label": "Speaker Selection",
-                            "name": "speaker selection",
+                            "name": "speaker_selection",
                             "type": "post_object",
                             "instructions": "Sollte kein Speaker ausgewählt sein, werden automatisch alle Speaker dieses Jahres verwendet.",
                             "required": 0,
@@ -309,8 +309,8 @@
                                 "speakers"
                             ],
                             "taxonomy": "",
-                            "allow_null": 0,
-                            "multiple": 0,
+                            "allow_null": 1,
+                            "multiple": 1,
                             "return_format": "id",
                             "ui": 1
                         },
@@ -430,5 +430,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1633615600
+    "modified": 1637712735
 }
