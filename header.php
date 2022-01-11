@@ -179,8 +179,6 @@ require_once('inc/classes/mediacorner.class.php');
 require_once('inc/classes/review.class.php');
 require_once('inc/classes/award.class.php');
 
-
-
 wp_head();
 ?>
 </head>
@@ -190,29 +188,41 @@ wp_head();
     <!----------------
     -----MAIN MENU----
     ------------------>
-    <header class="clearfix">
+     <?php
+     $videoHeaderClass = '';
+     if( isset( get_option('se_header_video')['activ'] ) && is_front_page() ){
+          $videoHeaderClass = 'video-header';
+     } 
+     $negativeHeaderContent = '';
+     if( isset(get_option('se_header_video')['negativ']) && is_front_page() ){
+          $negativeHeaderContent = 'se-header-negative';
+     }
+     ?>
+     
+
+    <header class="clearfix <?php echo $videoHeaderClass . ' ' . $negativeHeaderContent; ?>">
 
           <div class="header-logo">
                <a href="<?php $url = home_url(); echo esc_url( $url ); ?>">
                     <?php $logo = ( isset(get_option( 'se_header_mode' )[0]) ) ? get_option( 'event_logo' ) : get_option( 'event_logo_neg' ); 
+                    if($negativeHeaderContent === 'se-header-negative' ){
+                         $logo = get_option( 'event_logo_neg' );
+                    }
                     ?>
                     
                     <img src="<?php echo $logo; ?>" 
-                         alt="SEF.Growth" 
+                         alt="<?php echo bloginfo('name'); ?> Logo" 
                          title="<?php echo bloginfo('name'); ?>">
                </a>
           </div>
 
           <?php
-     
-        
-         
                
                $menuArgs = array(
                     'menu'              => "Hauptmenu", 
                     'menu_class'        => "menu",
                     'container'         => "nav", 
-                    'container_class'   => "se2-navigation menu-content", 
+                    'container_class'   => "se2-navigation menu-content ", 
                     'walker'            => new Walker_Nav_Primary()
                );
                wp_nav_menu( $menuArgs );
@@ -296,7 +306,7 @@ wp_head();
      ?>
 
 
-    <div id="master-container">
+    <div id="master-container <?php echo $videoHeaderClass; ?>">
           <div id="content-container">
            
                

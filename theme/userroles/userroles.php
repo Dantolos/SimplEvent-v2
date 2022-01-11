@@ -114,6 +114,7 @@ function se3_custom_user_role_capabilities() {
           $admin->add_cap('delete_'.$tax);
           $admin->add_cap('assign_'.$tax);
      }
+
      $admin->add_cap('upload_files');
 
 
@@ -145,9 +146,8 @@ function se3_custom_user_role_capabilities() {
 
 
      filter_visible_posttypes( $grafik, $allItems, $PostTypesSettings['grafik']);
+   
 
-
-     $grafik->add_cap('manage_categories' );
      $grafik->add_cap('manage_links' );
 
      $grafik->add_cap('unfiltered_html');
@@ -180,12 +180,6 @@ function se3_custom_user_role_capabilities() {
      $grafik->add_cap('se2_options_live');
      $grafik->add_cap('se2_options_settings');
 
-     foreach($allTaxonomies as $tax){
-          $admin->add_cap('manage_'.$tax);
-          $admin->add_cap('edit_'.$tax);
-          $admin->add_cap('delete_'.$tax);
-          $admin->add_cap('assign_'.$tax);
-     }
 
      
 
@@ -207,8 +201,8 @@ function se3_custom_user_role_capabilities() {
      $komm->add_cap('upload_files');
 
 
-      //POST TYPE CAPABILITIES
-      filter_visible_posttypes( $komm, $allItems, $PostTypesSettings['kommunikation']);
+     //POST TYPE CAPABILITIES
+     filter_visible_posttypes( $komm, $allItems, $PostTypesSettings['kommunikation']);
 
      $komm->add_cap('manage_categories' );
      $komm->add_cap('manage_links' );
@@ -286,9 +280,7 @@ function se3_custom_user_role_capabilities() {
      $pl->add_cap('se2_options');
      $pl->add_cap('se2_options_header');
 
-     foreach($allTaxonomies as $tax){
-          $admin->add_cap('assign_'.$tax);
-     }
+
 
      //---PL-END---------------------------------------------
 
@@ -362,27 +354,16 @@ function se3_custom_user_role_capabilities() {
 
 
 
-                    //add needed taxonomies
-
-                    if($posttype['terms']){
-
-                         foreach($posttype['terms'] as $posttax){
-                              $role->add_cap('manage_'.$posttax);
-                              $role->add_cap('edit_'.$posttax);
-                              $role->add_cap('delete_'.$posttax);
-                              $role->add_cap('assign_'.$posttax);
-                         }
-
-                    }
+                    
 
                     // exclude roles from delete capability
 
                     if(  current_user_can('kommunikation') 
                          || current_user_can('projektleiter') 
-                         ){ 
+                         )
+                         { 
                               continue;
                          }
-
 
                          $role->add_cap('delete_others_'.$posttype['plural']);
                          $role->add_cap('delete_'.$posttype['plural']);
@@ -391,7 +372,16 @@ function se3_custom_user_role_capabilities() {
                          $role->add_cap('delete_private_'.$posttype['plural']);
                }
 
+               //add needed taxonomies
 
+               foreach( $wholeCollection['taxonomies'] as $tax ){
+                    $role->add_cap('assign_'.$tax);
+                    $role->add_cap('manage_'.$tax);
+                    $role->add_cap('edit_'.$tax);
+                    $role->add_cap('delete_'.$tax);
+                    
+     
+               }
 
                
 
