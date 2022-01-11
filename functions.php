@@ -86,7 +86,7 @@ function my_acf_json_save_point( $path ) {
     return $path;
 }
 
-apply_filter('acf/settings/load_json', 'my_acf_json_load_point');
+add_filter('acf/settings/load_json', 'my_acf_json_load_point');
 
 function my_acf_json_load_point( $paths ) {
     unset($paths[0]);
