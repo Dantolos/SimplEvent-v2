@@ -61,6 +61,26 @@
                     "mime_types": "mp3, wav"
                 }
             ]
+        },
+        {
+            "key": "field_61dd8f2ff2330",
+            "label": "Test",
+            "name": "test",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -80,5 +100,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1630595560
+    "show_in_rest": 0,
+    "modified": 1641910067
 }
