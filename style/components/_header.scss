@@ -358,3 +358,20 @@ header {
        
     }
 }
+
+.video-header {
+     background-color: unset;
+     
+     .header-logo { left:5vw; }
+
+     .se2-navigation {
+          height:unset;
+          margin-right:2.5vw;
+     }
+}
+
+.se-header-negative {
+     .se2-navigation {
+          color: #ffff;
+     }
+}
