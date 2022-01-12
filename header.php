@@ -306,7 +306,7 @@ wp_head();
      ?>
 
 
-    <div id="master-container <?php echo $videoHeaderClass; ?>">
+    <div id="master-container" class=" <?php echo $videoHeaderClass; ?>">
           <div id="content-container">
            
                
