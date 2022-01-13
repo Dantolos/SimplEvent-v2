@@ -31,7 +31,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/speaker-card"
+                "value": "all"
             }
         ]
     ],
@@ -43,5 +43,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1620393601
+    "show_in_rest": 0,
+    "modified": 1642083341
 }

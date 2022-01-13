@@ -81,7 +81,9 @@
                 "id": ""
             },
             "default_value": "",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "enable_opacity": false,
+            "return_format": "string"
         }
     ],
     "location": [
@@ -101,5 +103,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1621603783
+    "show_in_rest": 0,
+    "modified": 1642083329
 }

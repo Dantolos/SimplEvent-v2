@@ -103,7 +103,9 @@
                 "id": ""
             },
             "default_value": "#FFFFFF",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "enable_opacity": false,
+            "return_format": "string"
         },
         {
             "key": "field_5fd0af78485b8",
@@ -119,7 +121,9 @@
                 "id": ""
             },
             "default_value": "#000000",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "enable_opacity": false,
+            "return_format": "string"
         },
         {
             "key": "field_5fd0b088485ba",
@@ -135,7 +139,9 @@
                 "id": ""
             },
             "default_value": "#000000",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "enable_opacity": false,
+            "return_format": "string"
         },
         {
             "key": "field_5fd0b05d485b9",
@@ -151,7 +157,9 @@
                 "id": ""
             },
             "default_value": "#000000",
-            "wpml_cf_preferences": 1
+            "wpml_cf_preferences": 1,
+            "enable_opacity": false,
+            "return_format": "string"
         },
         {
             "key": "field_5fd1f74e14ae4",
@@ -187,5 +195,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1621603783
+    "show_in_rest": 0,
+    "modified": 1642083330
 }

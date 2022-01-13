@@ -710,9 +710,11 @@
                     },
                     "wpml_cf_preferences": 1,
                     "choices": {
-                        "cat1": "Dienstleistung",
-                        "cat2": "Produktion",
-                        "cat3": "Hightech\/Biotech"
+                        "trend": "Trendradar",
+                        "": "",
+                        "dienstl": "Dienstleistung",
+                        "prod": "Produktion",
+                        "tech": "Hightech\/Biotech"
                     },
                     "default_value": false,
                     "allow_null": 0,
@@ -1000,5 +1002,6 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1634200765
+    "show_in_rest": 0,
+    "modified": 1642083348
 }
