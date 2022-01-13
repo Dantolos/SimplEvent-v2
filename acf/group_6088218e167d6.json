@@ -102,7 +102,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 2,
+                    "wpml_cf_preferences": 3,
                     "layouts": {
                         "layout_6088238bd4b52": {
                             "key": "layout_6088238bd4b52",
@@ -645,5 +645,6 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1631025879
+    "show_in_rest": 0,
+    "modified": 1642083461
 }
