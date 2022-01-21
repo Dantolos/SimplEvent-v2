@@ -166,7 +166,12 @@ function se2_register_custom_blocks(){
      register_block_type( 'se2block/speaker-card', array(
           'editor_script' => 'se2block-speaker-card-js',
      ) );
+
+     wp_register_script( 'se2block-book-js', get_template_directory_uri(  ) . '/blocks/build/dynamic_blocks/section/section-reg.js', array( 'wp-blocks', 'wp-editor' ) );
+    
 }
 add_action( 'init', 'se2_register_custom_blocks'); 
 
 
+//Dynamic Blocks
+require_once('src/dynamic_blocks/section/section.php');

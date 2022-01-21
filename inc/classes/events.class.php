@@ -28,8 +28,10 @@ class Events extends Posts {
                }
 
                $this->output .= '<div class="se2-post" postid="' . $event->ID . '" lb="event_lightbox">';
-               if(get_field('media', $event->ID)['gallery']){
-                    $this->output .= '<div class="se2-post-image"><div style="background-image:url(' . esc_url(get_field('media', $event->ID)['gallery'][0] ) . ')"></div></div>';
+               if(get_field('keyvisual', $event->ID)){
+                    $this->output .= '<div class="se2-post-image"><div style="background-image:url(' . esc_url( get_field('keyvisual', $event->ID) ) . ')"></div></div>';
+               } else {
+                    $this->output .= '<div class="se2-post-image"><div style="background-image:url(' . esc_url( get_field('media', $event->ID)['gallery'][0] ) . ')"></div></div>';
                }
                $this->output .= '<div class="se2-post-content">';
                $this->output .= '<h3>' . esc_attr( get_field( 'titel', $event->ID ) ) . '</h3>';
@@ -43,7 +45,6 @@ class Events extends Posts {
 
                }
                
-
 
                $introtext = get_field( 'content', $event->ID );
                
@@ -69,28 +70,108 @@ class Events extends Posts {
           intval($ID);
           $this->output = '<div class="se2-post-lightbox">'; 
           
+
+          //HEADER
+          if(get_field('keyvisual', $ID )){
+               $this->output .= '<div class="se2-post-lb-header" style="background-image:url('. esc_url( get_field('keyvisual', $ID ) ) .');"></div>';
+          } else {
+               $this->output .= '<div class="se2-post-lb-header" style="background-image:url('. esc_url( get_field('media', $ID)['gallery'][0] ) .');"></div>';
+          }
+          
+
           //GALLERY
-          if( count(get_field('media', $ID)['gallery']) > 0 ) {
+          /* if( count(get_field('media', $ID)['gallery']) > 0 ) {
                $this->output .= '<div class="se2-post-lb-gallery">';
                foreach( get_field('media', $ID)['gallery'] as $key => $galleryIMG ) {
                     $this->output .= '<img src="' . esc_url($galleryIMG) . '" alt="' . esc_attr( get_field( 'titel', $ID ) ) . '_' . $key . '">';
                }
                $this->output .= '</div>';
-          }
+          } */
           
           $this->output .= '<div class="se2-post-lb-content">';
-          $this->output .= '<h2>'.esc_attr(get_field('titel', $ID)).'</h2>';
 
-          $date = strtotime( get_field('eckdaten', $ID )['date'] );
-          $time = strtotime( get_field('eckdaten', $ID )['time'] );
-          if( $date || $time ){
-               $date = ($date) ? $this->dateFormat->formating_Date_Language( get_field('eckdaten', $ID )['date'], 'date' ) : '';
-               $time = ($time) ? ' | ' .  $this->dateFormat->formating_Date_Language( get_field('eckdaten', $ID )['time'], 'time' ) : '';
-               $this->output .= '<p class="secondary-txt">' . esc_attr( $date ) . esc_attr( $time ) . '</p>';
+          $this->output .= '<div class="se2-post-lb-info">';
+
+               $this->output .= '<div class="se2-post-lb-info-left">';
+                    $this->output .= '<h2>'.esc_attr(get_field('titel', $ID)).'</h2>';
+
+                   
+                    $this->output .= get_field('content', $ID);
+               $this->output .= '</div>';
+
+               $this->output .= '<div class="se2-post-lb-info-right">';
+                    $this->output .= '<table class="se2-post-lb-fact-table">';
+                    $facts = get_field('eckdaten', $ID);
+                    if($facts['date']){ 
+                         $this->output .= '<tr>';
+                         $this->output .= '<td>' . __( 'Datum', 'SimplEvent' ) . '</td>';
+                         $this->output .= '<td>';
+                         $this->output .=  $this->dateFormat->formating_Date_Language( $facts['date'], 'date' ) ; 
+                         $this->output .= '</td>';
+                         $this->output .= '</tr>';
+                    }
+                    if($facts['time']){ 
+                         $this->output .= '<tr>';
+                         $this->output .= '<td>' . __( 'Zeit', 'SimplEvent' ) . '</td>';
+                         $this->output .= '<td>';
+                         $this->output .=  $this->dateFormat->formating_Date_Language( $facts['time'], 'time' ) ; 
+                         $this->output .= '</td>';
+                         $this->output .= '</tr>';
+                    }
+                    if($facts['location']){ 
+                         $this->output .= '<tr>';
+                         $this->output .= '<td>' . __( 'Ort', 'SimplEvent' ) . '</td>';
+                         $this->output .= '<td>';
+                         $this->output .= esc_html__( $facts['location'] ); 
+                         $this->output .= '</td>';
+                         $this->output .= '</tr>';
+                    }
+                    if($facts['price']){ 
+                         $this->output .= '<tr>';
+                         $this->output .= '<td>' . __( 'Preis', 'SimplEvent' ) . '</td>';
+                         $this->output .= '<td>';
+                         $this->output .= esc_html__( $facts['price'] ); 
+                         $this->output .= '</td>';
+                         $this->output .= '</tr>';
+                    }
+                    if($facts['anmeldelink']){ 
+                         $this->output .= '<tr>';
+                         $this->output .= '<td>' . __( 'Anmeldung', 'SimplEvent' ) . '</td>';
+                         $this->output .= '<td>';
+                         $this->output .= '<a href="'.esc_url( $facts['anmeldelink']['url'] ).'" target="_blank"><div>'.esc_attr( $facts['anmeldelink']['title'] ).'</div></a>'; 
+                         $this->output .= '</td>';
+                         $this->output .= '</tr>';
+                    }
+                    $this->output .= '</table>';
+               $this->output .= '</div>';
+
+          $this->output .= '</div>';
+
+          if( is_array( get_field('media', $ID)['gallery'] ) ) {
+               $this->output .= '<div class="gallery-splide">';
+               $this->output .= '<h3>'.__('Fotos', 'SimplEvent').'</h3>';
+               $this->output .= '<div class="gallery-splide-main splide" >';
+               $this->output .= '<div class="splide__track"><ul class="splide__list">';
+                    foreach (get_field('media', $ID)['gallery'] as $key => $foto) {
+                         $this->output .= '<li class="splide__slide">';
+                         $this->output .= '<div style="background-image: url('.esc_url($foto).')"></div>';
+                         $this->output .= '</li>';
+                    }
+               $this->output .= '</ul></div>';
+               $this->output .= '</div>';
+
+               $this->output .= '<div class="gallery-splide-thumb splide" >';
+               $this->output .= '<div class="splide__track"><ul class="splide__list">';
+                    foreach (get_field('media', $ID)['gallery'] as $key => $foto) {
+                         $this->output .= '<li class="splide__slide">';
+                         $this->output .= '<img src="'.esc_url($foto).'" />';
+                         $this->output .= '</li>';
+                    }
+                    $this->output .= '</ul></div>';
+               $this->output .= '</div>';
+               $this->output .= '</div>';
           }
-          
 
-          $this->output .= get_field('content', $ID);
           $this->output .= '</div>';
           
           $this->output .= '</div>';
