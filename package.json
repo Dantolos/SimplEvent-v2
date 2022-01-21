@@ -40,6 +40,8 @@
     "start:section": "wp-scripts start blocks/src/section/section.js --output-path=blocks/build/section",
     "build:speakercard": "wp-scripts build blocks/src/speaker-card/speaker-card.js --output-path=blocks/build/speaker-card",
     "start:speakercard": "wp-scripts start blocks/src/speaker-card/speaker-card.js --output-path=blocks/build/speaker-card",
+    "build:dynsection": "wp-scripts build blocks/src/dynamic_blocks/section/section-reg.js --output-path=blocks/build/dynamic_blocks/section",
+    "start:dynsection": "wp-scripts start blocks/src/dynamic_blocks/section/section-reg.js --output-path=blocks/build/dynamic_blocks/section",
     "start": "wp-scripts start"
   },
   "dependencies": {

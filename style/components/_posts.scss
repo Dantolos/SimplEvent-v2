@@ -71,7 +71,7 @@
     width: 80vw;
     min-height:40vw;
  
-    height:80vh;
+    height:95vh;
     overflow: hidden;
     color: $dark;
     h2, h3, p {color: $dark;}
@@ -81,16 +81,42 @@
         width: 90vw;
     }
 
-    
+    .se2-post-lb-header {
+        height:25vh;
+        width:100%;
+        @include imageSettings;
+    }
 
     .se2-post-lb-content {
         position: relative;
         overflow-y: scroll; 
-        height: 50vh;
+        height: 70vh;
         padding:3% 6%;
         
-        h2 {margin: 20px 0 10px 0; }
+        .se2-post-lb-info {
+            display: flex;
+            .se2-post-lb-info-left {
+                width:60%;
+                margin-right:3%;
+            }
+            .se2-post-lb-info-right {
+                width:37%;
+                .se2-post-lb-fact-table {
+                    td {
+                        border: 2px solid $light;
+                        background-color: var(--shadeColor);
+                        padding:5px 20px;
+                        margin:2px;
+                    }
+                }
+            }
+
+            h2 {margin: 20px 0 10px 0; }
+        }
+        
     }
+
+    
 
     .se2-post-lb-gallery {
         height:30vh;
