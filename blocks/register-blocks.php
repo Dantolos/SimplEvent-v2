@@ -174,4 +174,4 @@ add_action( 'init', 'se2_register_custom_blocks');
 
 
 //Dynamic Blocks
-require_once('src/dynamic_blocks/section/section.php');
+require_once('section.php');
