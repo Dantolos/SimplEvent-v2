@@ -202,7 +202,7 @@ var SE2_container = /*#__PURE__*/function (_Component) {
 
       var borderWidth = '0px';
 
-      if (this.state.borderWidth.top) {
+      if (this.state.borderWidth.top && this.state.clipPath === 'none') {
         borderWidth = this.state.borderWidth.top + ' ' + this.state.borderWidth.right + ' ' + this.state.borderWidth.bottom + ' ' + this.state.borderWidth.left;
       }
 
@@ -219,12 +219,19 @@ var SE2_container = /*#__PURE__*/function (_Component) {
       }
 
       var clipPath = 'unset';
+      var filter;
 
       if (this.state.clipPath !== 'none') {
         clipPath = "polygon(".concat(this.state.clipPath, ")");
+
+        if (this.state.borderRadius.top) {
+          filter = "drop-shadow(".concat(this.state.borderWidth.top, " 0px 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(-").concat(this.state.borderWidth.top, " 0px 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(0px ").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(0px -").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(").concat(this.state.borderWidth.top, " ").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(-").concat(this.state.borderWidth.top, " -").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(").concat(this.state.borderWidth.top, " -").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(-").concat(this.state.borderWidth.top, " ").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")");
+        }
       }
 
+      var video = this.state.video ? this.state.video : 'false';
       this.props.SE2containerStyle = {
+        position: 'relative',
         height: 'auto',
         width: this.state.width,
         minHeight: this.state.minHeight,
@@ -240,7 +247,9 @@ var SE2_container = /*#__PURE__*/function (_Component) {
         borderStyle: this.state.borderStyle,
         borderColor: this.state.borderColor,
         borderRadius: borderRadius,
-        clipPath: clipPath
+        clipPath: clipPath,
+        filter: filter,
+        video: this.state.video
       };
       return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(InspectorControls, {
         style: {
@@ -370,6 +379,38 @@ var SE2_container = /*#__PURE__*/function (_Component) {
           value: 'local',
           label: 'Local'
         }]
+      })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("p", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("strong", null, "Background Video")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("p", null, "webm bevorziehnd"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(MediaUploadCheck, {
+        style: {
+          margin: '40px 0'
+        }
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(MediaUpload, {
+        onSelect: function onSelect(media) {
+          return _this3.changeSettings(media, 'video');
+        },
+        value: this.state.video !== 'false' ? this.state.video : 'false',
+        render: function render(_ref2) {
+          var open = _ref2.open;
+          return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", null, _this3.state.video !== 'false' ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
+            style: {
+              margin: '20px 0',
+              height: '100px',
+              width: '100%',
+              backgroundColor: 'lightgrey'
+            }
+          }, "Link: this.state.video.url ") : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
+            style: {
+              margin: '20px 0',
+              color: 'grey',
+              backgroundColor: 'lightgrey',
+              width: '100%',
+              textAlign: 'center',
+              padding: '10px'
+            }
+          }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("strong", null, "No Video")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(Button, {
+            isPrimary: true,
+            onClick: open
+          }, "Select a Video"));
+        }
       }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(PanelBody, {
         title: 'Spacing',
         initialOpen: false
@@ -465,7 +506,23 @@ var SE2_container = /*#__PURE__*/function (_Component) {
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("b", null, "presets"))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
         className: "se2-container",
         style: this.props.SE2containerStyle
-      }, this.props.children))];
+      }, this.props.SE2containerStyle.video ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("video", {
+        class: "background-video",
+        style: {
+          position: 'absolute',
+          right: '0',
+          bottom: '0',
+          minWidth: '100%',
+          minHeight: '100%'
+        },
+        autoplay: true,
+        loop: true,
+        muted: true,
+        playsinline: true
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("source", {
+        src: this.props.SE2containerStyle.video.url,
+        type: this.props.SE2containerStyle.video.mime
+      })) : '', this.props.children))];
     }
   }]);
 
