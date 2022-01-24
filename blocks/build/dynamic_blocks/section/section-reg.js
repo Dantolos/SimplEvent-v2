@@ -231,6 +231,7 @@ var SE2_container = /*#__PURE__*/function (_Component) {
 
       var video = this.state.video ? this.state.video : 'false';
       this.props.SE2containerStyle = {
+        overflow: 'hidden',
         position: 'relative',
         height: 'auto',
         width: this.state.width,

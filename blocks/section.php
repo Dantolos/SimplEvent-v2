@@ -9,6 +9,7 @@ add_action('init', function() {
                'containerstyle' => [ 
                     'type' => 'object',
                     'default' => [
+                         'overflow'               => 'hidden',
                          'position'               => 'relative',
                          'height'                 => 'auto',
                          'width'                  => 'auto', 
