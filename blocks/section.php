@@ -9,9 +9,10 @@ add_action('init', function() {
                'containerstyle' => [ 
                     'type' => 'object',
                     'default' => [
+                         'position'               => 'relative',
                          'height'                 => 'auto',
                          'width'                  => 'auto', 
-                         'minHeight'             => 'auto',                        
+                         'minHeight'              => 'auto',                        
                          'margin'                 => '0',
                          'padding'                => '0',
                          'backgroundColor'        => '#f1f1f1',
@@ -24,28 +25,40 @@ add_action('init', function() {
                          'borderStyle'            => 'solid',
                          'borderColor'            => '#ffffff',
                          'borderRadius'           => 'unset',
-                         'clipPath'               => 'unset'
+                         'clipPath'               => 'unset',
+                         'video'                  => 'false'
                     ]
                ],
                'style' => [
                     'type' => 'object',
                     'default' => []
-               ]
-             
+               ],
+           
               
           ],
 	]);
 });
  
 function se2_section_render($attr, $content) {
-     $style = '';
+     $style;
+     $video = '';
 
      if( is_array( $attr['style'])  ){
+          $style = '';
           foreach( $attr['style'] as $tagKey => $styleTag ){
                $tagKey = preg_replace('/([A-Z])/', '-$1', $tagKey);
-               $style .= strtolower($tagKey) . ':' . $styleTag . '; ';   
+               if( $tagKey !== 'video'){
+                    
+                    $style .= strtolower($tagKey) . ':' . $styleTag . '; ';   
+               } else {
+                     if($attr['style']['video'] !== 'false'){
+                         $videoStyle = 'position: absolute; right: 0; bottom: 0; min-width: 100%; min-height: 100%;';
+                         $video = '<video class="background-video" style="'.$videoStyle.'" autoplay loop muted playsinline><source src="' . $attr['style']['video']['url']. '" type="'.$attr['style']['video']['mime'].'" ></video>';
+                    } 
+               }
           }
      }
-
-	return '<div style="' . $style . '">'.$content.'</div>';
+     
+   
+	return '<div style="position:relative; ' . $style . '">'.$video.$content.'</div>';
 }
