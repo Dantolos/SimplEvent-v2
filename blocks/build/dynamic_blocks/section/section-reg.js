@@ -510,10 +510,13 @@ var SE2_container = /*#__PURE__*/function (_Component) {
         class: "background-video",
         style: {
           position: 'absolute',
-          right: '0',
-          bottom: '0',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          height: '100%',
+          width: '177.77777778vh',
           minWidth: '100%',
-          minHeight: '100%'
+          minHeight: '56.25vw'
         },
         autoplay: true,
         loop: true,

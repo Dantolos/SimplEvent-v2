@@ -52,7 +52,7 @@ function se2_section_render($attr, $content) {
                     $style .= strtolower($tagKey) . ':' . $styleTag . '; ';   
                } else {
                      if($attr['style']['video'] !== 'false'){
-                         $videoStyle = 'position: absolute; right: 0; bottom: 0; min-width: 100%; min-height: 100%;';
+                         $videoStyle = 'position: absolute; top: 50%; transform:translate(-50%, -50%); left: 50%; height:100%; width:177.77777778vh; min-width: 100%; min-height: 56.25vw; ';
                          $video = '<video class="background-video" style="'.$videoStyle.'" autoplay loop muted playsinline><source src="' . $attr['style']['video']['url']. '" type="'.$attr['style']['video']['mime'].'" ></video>';
                     } 
                }
