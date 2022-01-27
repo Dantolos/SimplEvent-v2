@@ -26,6 +26,35 @@
             "multiple": 0
         },
         {
+            "key": "field_61f2d8c682ebf",
+            "label": "Kategorie",
+            "name": "kategorie",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_601befe72fd77"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0,
+            "wpml_cf_preferences": 3,
+            "choices": {
+                "trend": "Trendradar",
+                "": "",
+                "dienstl": "Dienstleistung",
+                "prod": "Produktion",
+                "tech": "Hightech\/Biotech"
+            }
+        },
+        {
             "key": "field_616ece2fa9274",
             "label": "Filters",
             "name": "filters",
@@ -34,10 +63,11 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "70",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "choices": {
                 "jahr": "Jahr",
                 "sort": "Alphabetisch Sortieren",
@@ -48,7 +78,6 @@
             "layout": "vertical",
             "toggle": 0,
             "return_format": "value",
-            "wpml_cf_preferences": 1,
             "save_custom": 0
         }
     ],
@@ -70,5 +99,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1642083359
+    "modified": 1643305265
 }

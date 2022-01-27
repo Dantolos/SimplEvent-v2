@@ -212,7 +212,9 @@
                 "interview": "Interview",
                 "entertainment": "Entertainment",
                 "music": "Music",
-                "session": "Session"
+                "session": "Session",
+                "sideevent": "Side Event",
+                "community": "Community"
             },
             "allow_custom": 0,
             "default_value": [],
@@ -324,7 +326,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -334,6 +336,37 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_61f2d7795b8bf",
+            "label": "Side Event",
+            "name": "side_event",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_601befe72fd77",
+                        "operator": "==",
+                        "value": "sideevent"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "event"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "wpml_cf_preferences": 3,
+            "ui": 1
         },
         {
             "key": "field_601bf7182fd7c",
@@ -524,5 +557,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1642083448
+    "modified": 1643305043
 }
