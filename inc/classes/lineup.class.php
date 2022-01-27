@@ -27,13 +27,25 @@ class LineUp {
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
           );
-
+ 
           $speakerData = new WP_Query( $speaker_args ); 
 
           foreach( $speakerData->posts as $speaker ){
 
-               if( $cat != 'all' && !in_array( $cat, get_field('speaker_kategorie', $speaker->ID) ) ){
-                    continue;
+               if( $cat != 'all' ){
+                    $isInCat = false;
+                    if( !is_array($cat) ){
+                         if( !in_array( $cat, get_field('speaker_kategorie', $speaker->ID) ) ){
+                              continue;
+                         }
+                    } else {                  
+                         foreach( $cat as $c ){
+                              if( in_array( $c, get_field('speaker_kategorie', $speaker->ID) ) ){
+                                   $isInCat = true;
+                              }
+                         }
+                         if( !$isInCat ){ continue; }
+                    }
                }
                
                $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
@@ -266,7 +278,7 @@ class LineUp {
           }
 
           $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'">';
-
+          
           //query IDs
           $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'] );
 

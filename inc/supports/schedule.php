@@ -1,6 +1,6 @@
 <?php
 
-
+ 
 
 class se2_Schedule {
 
@@ -31,13 +31,18 @@ class se2_Schedule {
 
           $this->dateFormat = new Date_Format;
           
-
+          $this->dateArray = array();
           //set Date-Menu to change programm date
-          $this->dateArray = $this->dateFormat->date_range(get_option( 'facts_date' )['from'], get_option( 'facts_date' )['to'], "+1 day" );
-          $this->activeDay = $this->dateArray[0];
-          
+          if( !get_field('side_programm', $pageID)){
+               $this->dateArray = $this->dateFormat->date_range(get_option( 'facts_date' )['from'], get_option( 'facts_date' )['to'], "+1 day" );
+               $this->activeDay = $this->dateArray[0];
+          } else {
+               foreach( get_field( 'event_tag', $pageID ) as $key => $programmday )
+               $this->dateArray[$key] = strtotime(str_replace( '/', '-', $programmday['datum'] ));
+          }
 
           if(count($this->dateArray) > 1){
+               
                $this->scheduleGrid .= '<div id="daytabs" class="schedule-days-tabs">';
                foreach($this->dateArray as $day){
 
@@ -45,7 +50,6 @@ class se2_Schedule {
                     if( $day === strtotime(date('Y/m/d')) ){
                          $this->activeDay = $day;
                     }
-
                     $beautyDay = date( 'l | j. F. Y', $day  );      
                     $checkclass = ( $this->activeDay === $day ) ? 'day-tab-activ' : 'day-tab-passiv';
                     $this->scheduleGrid .= '<button class="'.$checkclass.'" value="'.$day.'" day="'.$day.'">'.$beautyDay.'</button>';
@@ -63,8 +67,8 @@ class se2_Schedule {
 
           foreach($this->dateArray as $day){
                $checkclass = ($this->activeDay === $day ) ? 'day-schedule-activ' : 'day-schedule-passiv';
-               
                $this->scheduleGrid .= '<div class="schedule-program-day '.$checkclass.'" day="'.$day.'">';
+              
                $this->scheduleGrid .= $this->get_speaker($day);
                $this->scheduleGrid .= $this->get_sessions($day);
                $this->scheduleGrid .= $this->get_separators( $pageID, $day);

@@ -33,11 +33,15 @@ if( isset( $_GET["j"] ) ){
      $yearTax = get_term_by( 'name', htmlspecialchars( $_GET["j"] ), 'jahr' );
      $year = $yearTax->term_id;
 }
+$cat = 'all';
+if(get_field( 'speaker_kategorie', get_the_ID() )) {
+     $cat = get_field( 'speaker_kategorie', get_the_ID() );
+}
 
 $args = array(
      'view' => 'grid',
      'sort' => 'ASC', 
-     'cat' => 'all',
+     'cat' => $cat,
      'year' => $year
 );
 
