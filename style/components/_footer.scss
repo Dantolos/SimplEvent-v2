@@ -30,7 +30,7 @@ footer {
                .footer-logo-negativ {
                     max-width:120px;
                     max-height:80px;
-                    margin: 10px 0;
+                    
                     @include breakpoint( 's' ){
                          max-width: 360px; 
                          max-height:160px;  
@@ -89,6 +89,7 @@ footer {
                     }
                     a {
                          height:fit-content;
+                         margin-right:30px;
                     }
                     img {
                          margin-top:5px;
@@ -96,6 +97,7 @@ footer {
                          margin-bottom:20px;
                          max-width:110px;
                          max-height:45px;
+                         height:100%;
                          @include breakpoint( 's' ){
                               margin-right:20px;
                               margin-left:15px;

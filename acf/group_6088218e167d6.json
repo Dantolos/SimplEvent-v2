@@ -11,7 +11,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "80",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -27,6 +27,29 @@
             "return_format": "value",
             "ajax": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_61f41ae7b192d",
+            "label": "Moderation",
+            "name": "moderation",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "speakers"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 1,
+            "return_format": "id",
+            "wpml_cf_preferences": 3,
+            "ui": 1
         },
         {
             "key": "field_61f2d01e9f414",
@@ -666,5 +689,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643305214
+    "modified": 1643387725
 }
