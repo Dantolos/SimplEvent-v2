@@ -330,7 +330,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -557,5 +557,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643305043
+    "modified": 1643361655
 }

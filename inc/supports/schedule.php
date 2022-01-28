@@ -37,8 +37,9 @@ class se2_Schedule {
                $this->dateArray = $this->dateFormat->date_range(get_option( 'facts_date' )['from'], get_option( 'facts_date' )['to'], "+1 day" );
                $this->activeDay = $this->dateArray[0];
           } else {
-               foreach( get_field( 'event_tag', $pageID ) as $key => $programmday )
-               $this->dateArray[$key] = strtotime(str_replace( '/', '-', $programmday['datum'] ));
+               foreach( get_field( 'event_tag', $pageID ) as $key => $programmday ){
+                    $this->dateArray[$key] = strtotime(str_replace( '/', '-', $programmday['datum'] ));
+               }
           }
 
           if(count($this->dateArray) > 1){

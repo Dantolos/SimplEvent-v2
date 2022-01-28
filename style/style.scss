@@ -15,10 +15,12 @@
 
 html {  
      scroll-behavior: smooth; 
-     
-     -webkit-hyphens: auto;
-     -ms-hyphens: auto;
-     hyphens: auto;
+   
+     p, h6, h5, h4, h3{
+          -webkit-hyphens: auto;
+          -ms-hyphens: auto;
+          hyphens: auto;
+     } 
 }
 
 #master-container {

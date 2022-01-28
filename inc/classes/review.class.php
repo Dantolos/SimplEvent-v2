@@ -94,7 +94,7 @@ class Review {
                    
                     //SPEAKER
                     $speakerIDs = []; 
-                    if( get_field($review['content']['speaker selection']) ){
+                    if( isset($review['content']['speaker selection']) ){
                         foreach ($review['content']['speaker selection'] as $speaker ) {
                             array_push($speakerIDs, $speaker );
                         }
