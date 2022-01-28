@@ -228,6 +228,9 @@ LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(SPEAKERSLOTS)
 const PANELSPEAKERSLOTS = document.querySelectorAll('.schedule-slot-panel-speaker')
 LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(PANELSPEAKERSLOTS)
 
+const HOSTSLOTS = document.querySelectorAll('.speaker-profile')
+LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(HOSTSLOTS)
+
 //SESSION SLOTS
 const SESSIONSLOTS = document.querySelectorAll('.schedule-session')
 LB_SESSION.CALL_SESSION_LIGHTBOX(SESSIONSLOTS)
