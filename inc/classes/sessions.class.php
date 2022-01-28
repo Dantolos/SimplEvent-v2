@@ -134,7 +134,7 @@ class Sessions {
                $sessionEx = str_replace( '</i>', '', $sessionEx ); 
                $tagEliminations = array("<p>", "</p>", '<div>', '</div>');
                $sessionEx = str_replace( $tagEliminations, '', $sessionEx ); 
-               $sessionEx_length = strpos( $sessionEx , '.', 150 ) + 1;
+               $sessionEx_length = (str_contains( $sessionEx , '.' )) ? strpos( $sessionEx , '.', 150 ) + 1 : 1;
                $sessionBlock .= '<p>'.substr( $sessionEx, 0, $sessionEx_length ).' <span class="primary-txt"> ...more</span></p>';
 
                //SPEAKERS
