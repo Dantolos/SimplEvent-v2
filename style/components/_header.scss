@@ -158,6 +158,12 @@ header {
                          right: 0 !important;
 
                     }}
+                    a{
+                         &:active, &:visited, &:link  {
+                              color:unset !important;
+                              text-decoration: none !important;
+                         }
+                    }
                
                }
 
@@ -300,6 +306,10 @@ header {
                               padding:0 30px;
                          }
                          
+                    }
+                    &:active, &:visited, &:link  {
+                         color:unset !important;
+                         text-decoration: none !important;
                     }
                }
               
