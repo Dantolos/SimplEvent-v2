@@ -121,6 +121,8 @@ header {
                     height:35px;
                     padding: 0 20px;
 
+                    
+
                     @include breakpoint( 'm' ){
                          width:100%;
                          display: block;
@@ -134,7 +136,10 @@ header {
                          }
                     }
                     /* border-left:1px solid var(--midColor); */
-                    &:hover {  border-bottom: 0px solid $primary; }
+                    &:hover {  
+                         //border-bottom: 2px solid $primary; 
+                         backdrop-filter: brightness(.95) blur(20px);
+                    }
 
                     &:hover {
                          .se2-sub-menu {
@@ -144,10 +149,7 @@ header {
                     li {
                          &:hover {
                               transform: scale(1.07);
-                             
-                         
                               @include dropShadow;
-                              
                          }
                     }
 
@@ -165,7 +167,7 @@ header {
                     display: none;
                     visibility: hidden; 
                     position: absolute;
-                    top:75px;
+                    top:35px;
                     z-index:5;
                     min-width:fit-content;
                     margin-left:-20px;
