@@ -25,15 +25,12 @@ function add_custom_admin_themes() {
           get_stylesheet_directory_uri() . '/style/dist/colors.min.css',
 
           array(
-
                esc_attr( get_option( 'dark_mode_picker' )[1]), 
-
                esc_attr( get_option( 'dark_mode_picker' )[0]), 
-
+               esc_attr( get_option( 'light_mode_picker' )[1]), 
+               esc_attr( get_option( 'light_mode_picker' )[0]), 
                esc_attr( get_option( 'primary_color_picker' ) ), 
-
                esc_attr( get_option( 'secondary_color_picker' ) )
-
           ),
 
           array( 'base' => '#e5f8ff', 'focus' => '#fff', 'current' => '#fff' )

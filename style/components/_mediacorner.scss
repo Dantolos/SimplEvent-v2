@@ -6,7 +6,7 @@
 
      @include breakpoint( 'm' ){
           height:calc( 100vh - 50px );
-     }
+     } 
 
 
      .mediacorner-nav {
@@ -35,15 +35,28 @@
                          font-weight: bold;
                          color:$primary;
                          cursor: pointer;
-                         background-color:var(--shadeColor);
+                           -webkit-box-shadow: 12px 0px 8px -5px  rgba(0,0,0,0.1); 
+                         box-shadow: 12px 0px 8px -5px rgba(0,0,0,0.1);
+                         
+                         width:101%;
                     }
                     
                }
                .active-nav {
                     color:$primary;
-                    @include dropShadow;
+                    -webkit-box-shadow: 28px 1px 26px -2px rgba(0,0,0,0.08); 
+                    box-shadow: 28px 1px 26px -2px rgba(0,0,0,0.08);
                     width:103%;
                     overflow: overlay;
+                    &:hover {
+                         font-weight: normal;
+                         color:$primary;
+                         background-color:var(--secondColor);
+                         -webkit-box-shadow: 28px 1px 26px -2px rgba(0,0,0,0.08); 
+                         box-shadow: 28px 1px 26px -2px rgba(0,0,0,0.08);
+                         width:103%;
+                         overflow: overlay;
+                    }
                }
 
                @include breakpoint( 'm' ){

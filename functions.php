@@ -61,6 +61,12 @@ if(is_user_logged_in()){
     require get_template_directory() . '/theme/plugins/se2-custom-columns/se2-custom-columns.php';
 
 
+    /*-------------------------------------------------------------*/
+    /*---------------------CUSTOM DASHBOARD------------------------*/
+    /*-------------------------------------------------------------*/
+    require get_template_directory() . '/theme/plugins/se2-custom-dashboard/se2-custom-dashboard.php';
+
+
 }
 /*-------------------------------------------------------------*/
 /*------------------------ENABLE AJAX--------------------------*/
