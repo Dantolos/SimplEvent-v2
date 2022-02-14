@@ -81,6 +81,7 @@ function my_new_admin_menu_order( $menu_order ) {
           'edit.php?post_type=page' => 3,  // Pages
           'plugins.php' => 17,
           'options-general.php' => 15,
+          'complianz-gpdr' => 80
      );
 
      function move_element(&$array, $a, $b) {
@@ -149,3 +150,4 @@ function add_admin_menu_separator($position) {
      ksort($menu);
 
 }
+
