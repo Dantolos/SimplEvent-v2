@@ -496,8 +496,12 @@ ul#adminmenu > li.current > a.current:after {
 #wp-admin-bar-wp-logo {
 	border-radius: 50%;
 	margin-right:20px !important;
+	transform: scale(1.5);
 	background-color: var(--dark) !important;
-	&:hover { background-color: var(--darkshade) !important; }
+	&:hover { 
+		background-color: var(--darkshade) !important; 
+		border-radius:50%;
+	}
 }
 
 #wpadminbar .ab-item,
