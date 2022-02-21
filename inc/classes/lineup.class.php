@@ -301,6 +301,15 @@ class LineUp {
      //SPEAKER LIGHTBOX 
 
      public function cast_speaker_lightbox( $speakerID ){
+
+          $speakername = ( get_field('speaker_vorname', $speakerID) ) 
+          ? 
+               get_field('speaker_degree', $speakerID) 
+               . ' ' . get_field('speaker_vorname', $speakerID) 
+               . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
+          : 
+               get_the_title( $speakerID );
+
           $this->speakerLightbox = '<div class="speaker-lb-container">';
 
           $this->speakerLightbox .= '<div class="speaker-lb-body">';
@@ -328,6 +337,19 @@ class LineUp {
                          $this->speakerLightbox .= '</div>';
 
                          //SOZIALMEDIA
+
+                         //SHARE BUTTONS
+                         $shareurl = get_permalink( $speakerID );
+                         $sharecontent = array(
+                              'url' => $shareurl,
+                              'title' => $speakername,
+                              'image' => get_field('speaker_bild', $speakerID ),
+                         );
+                         $this->speakerLightbox .= '<div class="speaker-lb-share">';
+                         $this->speakerLightbox .= $this->socialMedia->shareButton( $sharecontent  );
+                         $this->speakerLightbox .= '</div>';
+
+                         //SOCIAL LINKS
                          if(is_array(get_field('speaker_social_media', $speakerID)['social_media'])){
                               $this->speakerLightbox .= '<div class="speaker_socialmedia">';
                          
@@ -347,14 +369,7 @@ class LineUp {
                          //SPEAKER
                          $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
                     
-                              $speakername = ( get_field('speaker_vorname', $speakerID) ) 
-                              ? 
-                                   get_field('speaker_degree', $speakerID) 
-                                   . ' ' . get_field('speaker_vorname', $speakerID) 
-                                   . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
-                              : 
-                                   get_the_title( $speakerID );
-
+                              
                               $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.'</h2>';
                               $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
                               $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
