@@ -102,7 +102,7 @@
           }
           &:hover {
                p:first-of-type { 
-                    color:$secondary;
+                    color: var(--shadeColor);
                } 
           }
      }
@@ -205,52 +205,85 @@
      height:100vh;
      background-color:var(--secondColor);
 
-     .speaker-lb-head {
-          display:flex;
-          flex-direction: row;
-          align-items: baseline;
-          flex-wrap:wrap;
+     .speaker-lb-body {
+          height: 100vh;
+          width:100%;
           position: relative;
+          overflow-y: scroll;
+          @include hideScrollbar;
+
+          @include breakpoint( 'm' ){
+               justify-content: center;
+               flex-direction: column;
+          }
 
           .speaker-lb-image {
-               width:25%;
-               height:20vh;
-               min-width:220px;
-               min-height:250px;
+               
+               width: clamp(25%,100%,242px);
+               height:30vh;
+               
                position: relative;
                @include imageSettings;
 
+               
+          }
+
+          .speaker-lb-informations {
+               position:fixed;
+               width:100%;
+               bottom:0;
+               background-color: var(--shadeColor);
+               border-top: 1px solid var(--primeColor);
+               z-index: 5;
+               display:flex;
+               align-items: center;
+                    justify-content: space-between;
+                    padding: 0 2.5%;
+               @include breakpoint( 'm' ){
+                   
+               }
+               @include breakpoint( 's' ){
+                 
+               }
                .speaker_socialmedia {
-                    width:50px;
-                    height: 50px;
-                    position: absolute;
-                    display: flex;
-                    justify-content: flex-end;
-                    width: 100%;
-                    bottom: -60px;
-                    right: 0;
+                    display:flex;
+                    height: 40px; 
+                    align-items: center;
+                    justify-content: space-between;
                     .speaker_socialmedia-icon {
-                         height: 50px;
-                         width: 50px;
-                         opacity: .5;
+                         
+                         height: 40px;
+                         width: 40px;
+                      
                          &:hover {
                               opacity: 1;
                               transform: scale(1.05);
                          }
+                         @include breakpoint( 's' ){
+                              height: 40px;
+                              width: 40px; 
+                         }
                     }
+               }
+               .speaker-lb-informations-gig {
+                    background-color: var(--shadeColor);
+                    border: 1px solid var(--shadeColor);
+                    border-radius: 5px;
+                    text-align: left;
+                    padding:10px 0px;
+                    h6 { margin-bottom: 0;  }
+                 
                }
           }
 
           
 
           .speaker-lb-headinfo {
-               width:75%;
-               padding: 20px 10% 0 3%;
-               max-height: 80vh;
-               overflow: scroll;
+               margin: 20px 0 50px 0;
+               padding: 20px 2.5%;
                
                @include hideScrollbar;
-               @include breakpoint( 's' ){
+               @include breakpoint( 'm' ){
                     width: 100%;
                }
                h2 {
@@ -273,10 +306,13 @@
                display:flex;
                flex-wrap: wrap;
                .review-video {
-                    margin: 20px;
-
+                    margin: 20px 20px 0 0;
+                    @include breakpoint( 'm' ){
+                         max-width:100%;
+                    }
                     .video-wrapper {
                          width:400px;
+                         max-width:100%;
                          height:225px;
                          margin-bottom:10px;
                     }
@@ -305,7 +341,7 @@
                          max-height:100%;
                     }
                }
-          
+               margin-bottom:100px;
           }
           
      }
