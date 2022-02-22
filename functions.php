@@ -114,6 +114,7 @@ function theme_add_scripts()
         array('lightbox-js', 'lightbox.js'),     
         array('cookies-js', 'cookies.js'),
         array('galery-js', 'galery.js' ),
+        array('socialshare-js', 'social-share.js' ),
         array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),
         array('lightbox-session-js', 'lightbox/lb-session.js' ),
         array('lightbox-candidate-js', 'lightbox/lb-candidate.js' )

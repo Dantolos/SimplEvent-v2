@@ -88,7 +88,18 @@ class se2_SocialMedia {
                                    </g>
                               </g>
                          </svg>',
-               ];
+               'whatsapp' => '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                   viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                                   <style type="text/css">' . $iconStyle . '</style>
+                                   <path d="M20.4,3.5C18.2,1.2,15.2,0,12,0C5.4,0,0.1,5.3,0.1,11.9c0,2.1,0.5,4.1,1.6,5.9L0,24l6.3-1.7C8,23.3,10,23.8,12,23.8h0
+                                        c6.6,0,12-5.3,12-11.9C24,8.7,22.6,5.7,20.4,3.5z M12,21.8c-1.8,0-3.5-0.5-5-1.4l-0.4-0.2l-3.7,1l1-3.6l-0.2-0.4
+                                        c-1-1.6-1.5-3.4-1.5-5.3C2.1,6.4,6.5,2,12,2c2.6,0,5.1,1,7,2.9s3,4.4,3,7C22,17.4,17.4,21.8,12,21.8z M17.4,14.4
+                                        c-0.3-0.1-1.8-0.9-2-1c-0.3-0.1-0.5-0.1-0.7,0.1c-0.2,0.3-0.8,1-0.9,1.2c-0.2,0.2-0.3,0.2-0.6,0.1c-1.7-0.9-2.9-1.6-4-3.5
+                                        c-0.3-0.5,0.3-0.5,0.9-1.6c0.1-0.2,0-0.4,0-0.5C9.9,9,9.3,7.5,9,6.9C8.8,6.3,8.5,6.4,8.3,6.4c-0.2,0-0.4,0-0.6,0
+                                        C7.6,6.4,7.3,6.5,7,6.8c-0.3,0.3-1,1-1,2.5s1.1,2.9,1.2,3.1c0.2,0.2,2.1,3.2,5.1,4.5c1.9,0.8,2.6,0.9,3.6,0.7c0.6-0.1,1.8-0.7,2-1.4
+                                        c0.2-0.7,0.2-1.3,0.2-1.4C17.9,14.6,17.7,14.5,17.4,14.4z"/>
+                              </svg>',
+          ];
      }
 
      public function cast_icon_row( $iconArray ){
@@ -108,5 +119,29 @@ class se2_SocialMedia {
                $icon .= '</a>';
           }
           return $icon;
+     }
+
+     public function shareButton( $sharecontent ){
+          $shareButton = '<div>';
+          $shareButton .= '<a href="https://www.facebook.com/sharer.php?u='.$sharecontent['url'].'">';
+          $shareButton .= ' fb ';
+          $shareButton .= '</a>';
+          $shareButton .= '<a href="https://api.whatsapp.com/send?text='.$sharecontent['title'].' '.$sharecontent['url'].'">';
+          $shareButton .= ' whatsapp ';
+          $shareButton .= '</a>';
+          $shareButton .= '<a href="https://twitter.com/share?url='.$sharecontent['url'].'&text='.$sharecontent['title'].'">';
+          $shareButton .= ' twitter ';
+          $shareButton .= '</a>';
+          $shareButton .= '<a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url='.$sharecontent['url'].'&title='.$sharecontent['title'].'&submitted-image-url='.$sharecontent['image'].'">';
+          $shareButton .= ' linkedin ';
+          $shareButton .= '</a>';
+          $shareButton .= '</div>';
+
+          $shareButton .= '<script type="text/JavaScript">
+                              var metaInfos = '.json_encode($sharecontent).'
+                              shareItem(metaInfos);
+                         </script>';
+          return $shareButton;
+
      }
 }
