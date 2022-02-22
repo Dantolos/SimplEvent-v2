@@ -22,10 +22,10 @@ add_action('init', function() {
                          'backgroundRepeat'       => 'no-repeat',
                          'backgroundAttachment'   => 'scroll',
                          'backgroundPosition'     => 'center',
-                         'borderWidth'            =>  'unset',
+                         'borderWidth'            => '0',
                          'borderStyle'            => 'solid',
                          'borderColor'            => '#ffffff',
-                         'borderRadius'           => 'unset',
+                         'borderRadius'           => '0',
                          'clipPath'               => 'unset',
                          'video'                  => 'false'
                     ]
