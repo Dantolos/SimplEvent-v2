@@ -345,9 +345,9 @@ class LineUp {
                               'title' => $speakername,
                               'image' => get_field('speaker_bild', $speakerID ),
                          );
-                         $this->speakerLightbox .= '<div class="speaker-lb-share">';
+                        /*  $this->speakerLightbox .= '<div class="speaker-lb-share">';
                          $this->speakerLightbox .= $this->socialMedia->shareButton( $sharecontent  );
-                         $this->speakerLightbox .= '</div>';
+                         $this->speakerLightbox .= '</div>'; */
 
                          //SOCIAL LINKS
                          if(is_array(get_field('speaker_social_media', $speakerID)['social_media'])){

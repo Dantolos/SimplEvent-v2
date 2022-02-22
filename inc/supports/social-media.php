@@ -124,10 +124,16 @@ class se2_SocialMedia {
      public function shareButton( $sharecontent ){
           $shareButton = '<div>';
           $shareButton .= '<a href="https://www.facebook.com/sharer.php?u='.$sharecontent['url'].'">';
-          $shareButton .= 'share';
+          $shareButton .= ' fb ';
+          $shareButton .= '</a>';
+          $shareButton .= '<a href="https://api.whatsapp.com/send?text='.$sharecontent['title'].' '.$sharecontent['url'].'">';
+          $shareButton .= ' whatsapp ';
+          $shareButton .= '</a>';
+          $shareButton .= '<a href="https://twitter.com/share?url='.$sharecontent['url'].'&text='.$sharecontent['title'].'">';
+          $shareButton .= ' twitter ';
           $shareButton .= '</a>';
           $shareButton .= '<a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url='.$sharecontent['url'].'&title='.$sharecontent['title'].'&submitted-image-url='.$sharecontent['image'].'">';
-          $shareButton .= 'linkedin';
+          $shareButton .= ' linkedin ';
           $shareButton .= '</a>';
           $shareButton .= '</div>';
 

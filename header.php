@@ -14,12 +14,13 @@
      <meta property="og:description" content="<?php echo get_option('meta_tags')['SocialMedia']['Description']; ?>">
      <meta property="og:image" content="<?php echo get_option('meta_tags')['SocialMedia']['Image']; ?>">
      <meta property="og:url" content="<?php echo get_permalink(); ?>">
+     <meta property="og:site_name" content="<?php bloginfo('name'); ?>">
 
      <meta property="twitter:title" content="<?php echo get_option('meta_tags')['SocialMedia']['Title']; ?>">
      <meta property="twitter:description" content="<?php echo get_option('meta_tags')['SocialMedia']['Description']; ?>">
      <meta property="twitter:image" content="<?php echo get_option('meta_tags')['SocialMedia']['Image']; ?>">
-     <meta property="twitter:card" content="<?php echo get_option('meta_tags')['SocialMedia']['Image']; ?>">
-     <meta property="twitter:alt" content="<?php echo get_option('meta_tags')['SocialMedia']['Title']; ?>">
+     <meta name="twitter:card" content="<?php echo get_option('meta_tags')['SocialMedia']['Image']; ?>">
+     <meta name="twitter:image:alt" content="<?php echo get_option('meta_tags')['SocialMedia']['Title']; ?>">
 
      <?php 
      //Google Analytics
