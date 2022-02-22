@@ -202,7 +202,8 @@ var SE2_container = /*#__PURE__*/function (_Component) {
 
       var borderWidth = '0px';
 
-      if (this.state.borderWidth.top && this.state.clipPath === 'none') {
+      if (this.state.borderWidth.top) {
+        /* && this.state.clipPath === 'none'*/
         borderWidth = this.state.borderWidth.top + ' ' + this.state.borderWidth.right + ' ' + this.state.borderWidth.bottom + ' ' + this.state.borderWidth.left;
       }
 
@@ -223,10 +224,16 @@ var SE2_container = /*#__PURE__*/function (_Component) {
 
       if (this.state.clipPath !== 'none') {
         clipPath = "polygon(".concat(this.state.clipPath, ")");
-
-        if (this.state.borderRadius.top) {
-          filter = "drop-shadow(".concat(this.state.borderWidth.top, " 0px 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(-").concat(this.state.borderWidth.top, " 0px 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(0px ").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(0px -").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(").concat(this.state.borderWidth.top, " ").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(-").concat(this.state.borderWidth.top, " -").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(").concat(this.state.borderWidth.top, " -").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")\n                              drop-shadow(-").concat(this.state.borderWidth.top, " ").concat(this.state.borderWidth.top, " 0px ").concat(this.state.borderColor, ")");
-        }
+        /* if (this.state.borderRadius.top) {
+             filter = `drop-shadow(${this.state.borderWidth.top} 0px 0px ${this.state.borderColor})
+                       drop-shadow(-${this.state.borderWidth.top} 0px 0px ${this.state.borderColor})
+                       drop-shadow(0px ${this.state.borderWidth.top} 0px ${this.state.borderColor})
+                       drop-shadow(0px -${this.state.borderWidth.top} 0px ${this.state.borderColor})
+                       drop-shadow(${this.state.borderWidth.top} ${this.state.borderWidth.top} 0px ${this.state.borderColor})
+                       drop-shadow(-${this.state.borderWidth.top} -${this.state.borderWidth.top} 0px ${this.state.borderColor})
+                       drop-shadow(${this.state.borderWidth.top} -${this.state.borderWidth.top} 0px ${this.state.borderColor})
+                       drop-shadow(-${this.state.borderWidth.top} ${this.state.borderWidth.top} 0px ${this.state.borderColor})`
+        } */
       }
 
       var video = this.state.video ? this.state.video : 'false';
