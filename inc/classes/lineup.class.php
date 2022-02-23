@@ -324,30 +324,36 @@ class LineUp {
                     $this->speakerLightbox .= '<div class="speaker-lb-informations">';
 
                          //Auftritt infos
-                         $this->speakerLightbox .= '<div class="speaker-lb-informations-gig">';
-
                          $speakerDate = strtotime( str_replace( '/', '-',  get_field('speaker_zeit', $speakerID)['datum'] ) );
                          $start = date( 'Hi', strtotime(get_field('speaker_zeit', $speakerID)['start']));
                          $ende = date( 'Hi', strtotime(get_field('speaker_zeit', $speakerID)['ende']));
 
-                         $this->speakerLightbox .= '<h6>';
-                         $this->speakerLightbox .= '<b>' . $this->dateFormat->formating_Date_Language( get_field('speaker_zeit', $speakerID)['datum'], 'date' ) . '</b><br />';
-                         $this->speakerLightbox .= $this->dateFormat->formating_Date_Language( $start, 'time' ) .' - '. $this->dateFormat->formating_Date_Language( $ende, 'time' );
-                         $this->speakerLightbox .= '</h6>';
-                         $this->speakerLightbox .= '</div>';
+                         if($speakerDate){
+                              $this->speakerLightbox .= '<div class="speaker-lb-informations-gig">';
+                              $this->speakerLightbox .= '<h6>';
+                              $this->speakerLightbox .= '<b>' . $this->dateFormat->formating_Date_Language( get_field('speaker_zeit', $speakerID)['datum'], 'date' ) . '</b><br />';
+                              if( $start && $ende ){
+                                   $this->speakerLightbox .= $this->dateFormat->formating_Date_Language( $start, 'time' ) .' - '. $this->dateFormat->formating_Date_Language( $ende, 'time' );
+                              }
+                              $this->speakerLightbox .= '</h6>';
+                              $this->speakerLightbox .= '</div>';
+                         }
 
                          //SOZIALMEDIA
 
-                         //SHARE BUTTONS
+                         //SHARE BUTTONS // TODO <----------------------------------------------------------------
                          $shareurl = get_permalink( $speakerID );
                          $sharecontent = array(
                               'url' => $shareurl,
                               'title' => $speakername,
                               'image' => get_field('speaker_bild', $speakerID ),
                          );
-                        /*  $this->speakerLightbox .= '<div class="speaker-lb-share">';
+                         /*  
+                         $this->speakerLightbox .= '<div class="speaker-lb-share">';
                          $this->speakerLightbox .= $this->socialMedia->shareButton( $sharecontent  );
-                         $this->speakerLightbox .= '</div>'; */
+                         $this->speakerLightbox .= '</div>'; 
+                         */
+
 
                          //SOCIAL LINKS
                          if(is_array(get_field('speaker_social_media', $speakerID)['social_media'])){
