@@ -348,11 +348,11 @@ class LineUp {
                               'title' => $speakername,
                               'image' => get_field('speaker_bild', $speakerID ),
                          );
-                         /*  
+                           
                          $this->speakerLightbox .= '<div class="speaker-lb-share">';
                          $this->speakerLightbox .= $this->socialMedia->shareButton( $sharecontent  );
                          $this->speakerLightbox .= '</div>'; 
-                         */
+                         
 
 
                          //SOCIAL LINKS
