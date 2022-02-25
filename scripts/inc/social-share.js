@@ -30,6 +30,7 @@ function shareItem(metaInfos) {
                console.log('Sharing...')
                fetch(metaInfos.image)
                     .then(function (response) {
+                         console.log(response)
                          return response.blob()
                     })
                     .then(function (blob) {
@@ -43,8 +44,14 @@ function shareItem(metaInfos) {
                               // Adding title afterwards as navigator.canShare just
                               // takes files as input
                               shareData.title = "Name"
-
-                              navigator.share(shareData)
+                              console.log(shareData)
+                              navigator.share({
+                                   title: metaInfos.title,
+                                   url: metaInfos.url,
+                                   files: shareData,
+                                   text: metaInfos.description,
+                                   files: [file]
+                              })
                                    .then(() => console.log('Share was successful.'))
                                    .catch((error) => console.log('Sharing failed', error));
 
