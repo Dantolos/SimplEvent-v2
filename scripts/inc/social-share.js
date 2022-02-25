@@ -13,6 +13,10 @@ function shareItem(metaInfos) {
      console.log()
      //change meta tags
      if (metaInfos) {
+          var title = metaInfos.title
+          var description = metaInfos.description
+          var url = metaInfos.url
+
           document.querySelector('meta[property="og:title"]').content = metaInfos.title
           document.querySelector('meta[property="og:description"]').content = metaInfos.description
           document.querySelector('meta[property="og:url"]').content = metaInfos.url
@@ -59,9 +63,9 @@ function shareItem(metaInfos) {
                               if (navigator.share) {
                                    navigator
                                         .share({
-                                             title: metaInfos.title,
-                                             url: metaInfos.url,
-                                             text: metaInfos.description,
+                                             title: title,
+                                             url: url,
+                                             text: description,
                                              files: [file]
                                         })
                                         .then(() => {
