@@ -34,7 +34,7 @@ function shareItem(metaInfos) {
                     })
                     .then(function (blob) {
 
-                         var file = new File([blob], "Name-image-whith-extension", { type: 'image/jpeg' });
+                         var file = new File([blob], { type: 'image/jpeg' });
                          var filesArray = [file];
                          var shareData = { files: filesArray };
 
