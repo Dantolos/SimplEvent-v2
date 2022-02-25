@@ -302,7 +302,7 @@ class LineUp {
 
      public function cast_speaker_lightbox( $speakerID ){
 
-          $speakername = ( get_field('speaker_vorname', $speakerID) ) 
+          $speakername = ( get_field('speaker_vorname', $speakerID)  ) 
           ? 
                get_field('speaker_degree', $speakerID) 
                . ' ' . get_field('speaker_vorname', $speakerID) 
@@ -343,9 +343,10 @@ class LineUp {
 
                          //SHARE BUTTONS // TODO <----------------------------------------------------------------
                          $shareurl = get_permalink( $speakerID );
+                         $sharetitle = (get_field('speaker_vorname', $speakerID)) ? get_field('speaker_vorname', $speakerID) . ' ' . get_field('speaker_nachname', $speakerID) : get_the_title( $speakerID );
                          $sharecontent = array(
                               'url' => $shareurl,
-                              'title' => $speakername,
+                              'title' => $sharetitle,
                               'image' => get_field('speaker_bild', $speakerID ),
                          );
                            
