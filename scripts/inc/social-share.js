@@ -50,7 +50,7 @@ function shareItem(metaInfos) {
                                    url: metaInfos.url,
                                    files: filesArray,
                                    text: metaInfos.description,
-                                   files: [file]
+
                               })
                                    .then(() => console.log('Share was successful.'))
                                    .catch((error) => console.log('Sharing failed', error));
