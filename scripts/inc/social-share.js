@@ -35,20 +35,20 @@ function shareItem(metaInfos) {
                     })
                     .then(function (blob) {
 
-                         var file = new File([blob], { type: 'image/jpeg' });
+                         var file = new File([blob], "picture.jpg", { type: 'image/jpeg' });
                          var filesArray = [file];
-                         var shareData = { files: filesArray };
 
-                         if (navigator.canShare && navigator.canShare(shareData)) {
+
+                         if (navigator.canShare && navigator.canShare({ files: filesArray })) {
 
                               // Adding title afterwards as navigator.canShare just
                               // takes files as input
-                              shareData.title = "Name"
-                              console.log(shareData)
+
+                              console.log(filesArray)
                               navigator.share({
                                    title: metaInfos.title,
                                    url: metaInfos.url,
-                                   files: shareData,
+                                   files: filesArray,
                                    text: metaInfos.description,
                                    files: [file]
                               })
