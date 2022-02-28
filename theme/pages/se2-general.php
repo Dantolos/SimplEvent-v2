@@ -126,28 +126,28 @@ class se2_page_General extends se2_page_builder {
           // SOCIAL MEDIA
           function simplevent_social_media() {
                $socialMediaSTD = [
-                    'twitter'  => '',
-                    'youtube'  => '',
-                    'facebook' => '',
                     'linkedin' => '',
-                    'insta'    => ''
+                    'insta'    => '',
+                    'twitter'  => '',
+                    'facebook' => '',
+                    'youtube'  => '',
                ];
                $socialMedia = (get_option( 'social_media' ) ) ? get_option( 'social_media' ) : $socialMediaSTD;
-          
-               echo '<p style="margin-top:20px;"><b>Twitter</b></p>';
-               echo '<input type="text" name="social_media[twitter]" value="' .$socialMedia['twitter']. '" placeholder="Channel URL" />';
-          
-               echo '<p style="margin-top:20px;"><b>Youtube</b></p>';
-               echo '<input type="text" name="social_media[youtube]" value="' .$socialMedia['youtube']. '" placeholder="Channel URL" />';
-          
-               echo '<p style="margin-top:20px;"><b>Facebook</b></p>';
-               echo '<input type="text" name="social_media[facebook]" value="' .$socialMedia['facebook']. '" placeholder="Channel URL" />';
           
                echo '<p style="margin-top:20px;"><b>Linked In</b></p>';
                echo '<input type="text" name="social_media[linkedin]" value="' .$socialMedia['linkedin']. '" placeholder="Channel URL" />';
                
                echo '<p style="margin-top:20px;"><b>Instagramm</b></p>';
                echo '<input type="text" name="social_media[insta]" value="' .$socialMedia['insta']. '" placeholder="Channel URL" />';
+
+               echo '<p style="margin-top:20px;"><b>Twitter</b></p>';
+               echo '<input type="text" name="social_media[twitter]" value="' .$socialMedia['twitter']. '" placeholder="Channel URL" />';
+          
+               echo '<p style="margin-top:20px;"><b>Facebook</b></p>';
+               echo '<input type="text" name="social_media[facebook]" value="' .$socialMedia['facebook']. '" placeholder="Channel URL" />';
+
+               echo '<p style="margin-top:20px;"><b>Youtube</b></p>';
+               echo '<input type="text" name="social_media[youtube]" value="' .$socialMedia['youtube']. '" placeholder="Channel URL" />';
           }
           
           
