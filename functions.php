@@ -522,7 +522,7 @@ add_action('init', function () {
 
 
 
-function kb_template_redirect() {
+/* function kb_template_redirect() {
     global $post;
     $post_slug = $post->ID;
     if(is_singular('speakers')) {
@@ -538,7 +538,7 @@ function kb_template_redirect() {
         exit();
     }
 }
-add_action('template_redirect', 'kb_template_redirect');
+add_action('template_redirect', 'kb_template_redirect'); */
 
 
 

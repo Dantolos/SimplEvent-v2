@@ -228,6 +228,13 @@ if(searchParams.has("type")){
                }
                LIGHTBOX.openLightbox('AX', callData);
                break;
+          case 'speakers':
+               var callData = {
+                    speakerid: searchParams.get('id'),
+                    action: 'speaker_lightbox'
+               }
+               LIGHTBOX.openLightbox('AX', callData);
+               break;
 
           default:
                console.warn('unknown type')

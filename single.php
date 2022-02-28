@@ -23,6 +23,16 @@ switch ($post_type) {
 
         $url = get_permalink($page_details[0]->ID).'?type='.$post_type.'&id='.$post->ID;
         break;
+    case 'speakers':
+        $page_details = get_pages( array(
+            'post_type' => 'page',
+            'meta_key' => '_wp_page_template',
+            'hierarchical' => 0,
+            'meta_value' => 'Templates/lineup.php'
+        ));
+
+        $url = get_permalink($page_details[0]->ID).'?type='.$post_type.'&id='.$post->ID;
+        break;
     default:
         $url = home_url();
         break;
