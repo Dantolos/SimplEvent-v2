@@ -81,7 +81,7 @@ class se2_Schedule {
      }
 
 
-     //************************************************ */
+     //*************************************************/
      //***********GRID********** */
      public function schedule_Grid(){
           $ScheduleGrid = '<div class="schedule-grid" id="schedule-timeline">';

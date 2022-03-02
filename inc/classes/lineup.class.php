@@ -178,8 +178,6 @@ class LineUp {
 
      }
 
-
-
      public function cast_speaker_list( $speakerID, $showCV = false  ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
@@ -227,13 +225,10 @@ class LineUp {
 
      }
 
-     
-
      public function cast_speaker_grid( $speakerID ){
 
           $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
-/*                $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
- */
+               /*$portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');*/
                $portraitImage = esc_url( get_field('speaker_bild', $speakerID ));
          
                
@@ -257,6 +252,34 @@ class LineUp {
           return $this->speakerCard;
      }
 
+     public function cast_host( $speakerID  ){
+  
+          $this->speakerCard = '<div class="se2-speaker-host speaker-profile" speakerid="'.$speakerID.'" style="">'; 
+              /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
+               $this->speakerCard .= '<div class="se2-host-profil-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+   
+               $this->speakerCard .= '<div class="se2-host-profil-info">';
+
+                         $name = ( get_field('speaker_vorname', $speakerID) ) 
+                              ? 
+                                   get_field('speaker_degree', $speakerID) 
+                                   . ' ' . get_field('speaker_vorname', $speakerID) 
+                                   . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
+                              : 
+                                   the_title();
+
+                         $this->speakerCard .= '<h5>'.$name.'</h5>';
+                         $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+
+                         $this->speakerCard .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</h6>';
+
+               $this->speakerCard .= '</div>';
+
+          $this->speakerCard .= '</div>';
+
+          return $this->speakerCard;
+
+     }
 
 
      public function cast_line_up_overview( $args = array() ) {

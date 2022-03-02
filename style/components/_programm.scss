@@ -60,12 +60,41 @@
 
      // HOSTS
      .se2-schedule-hosts {
-          padding: 0 10%;
-          h4 { margin-bottom: 40px;}
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          padding: 30px 20px 10px;
+          background-color: var(--lightshade);
+          
+          h5 { margin-bottom: 0; 
+               @include breakpoint( 's' ){
+                    width: 100%;
+                    text-align: center;
+               }
+           }
           .se2-schedule-host {
                display: flex;
                flex-direction: row;
-               width:50%;
+               justify-content: space-around;
+               margin-left: 20px;
+               min-width:80%;
+               @include breakpoint( 's' ){
+                    justify-content: center;
+                    width:100%;
+               }
+               .se2-speaker-host {
+                    width: clamp(fit-content,50%,100%);
+                    @include breakpoint( 'm' ){
+                         .se2-host-profil-image { width:35px; height:35px; }
+                         background-color: $light;
+                         padding-right:30px;
+                         border-radius:15px;
+                         @include dropShadow;
+                    }
+                    @include breakpoint( 's' ){
+                         margin-top:10px;
+                    }
+               }
           }
      }
 
@@ -440,7 +469,7 @@
 // LISTE
 // ***************************************
 .schedule-program-liste {
-     margin-top:75px;
+     /* margin-top:75px; */
      height: fit-content;
      position: unset;
      overflow-x: hidden;
@@ -482,11 +511,10 @@
           position: relative;
 
           h5 {
-               font-size: 1.8em;
+               margin-bottom: 0;
+               font-size: 1.5em;
                @include breakpoint( 's' ){
                     text-align: center;
-                    margin-bottom:20px;
-
                }
           }
 
@@ -510,7 +538,7 @@
                     text-align: center;
                     font-size:30px !important;
                     line-height: 10px !important;
-                    
+                    margin-bottom: .5em;
                     font-optical-sizing: none;
                }
                .hour{ font-weight: bold;}
@@ -520,7 +548,7 @@
                     text-align: center;
                     line-height:0 !important;
                     font-size:14px !important;
-                    padding-top:8px;
+                    padding-top:10px;
                     margin-top:-5px;
                     margin-bottom: 0;
                }
@@ -544,6 +572,10 @@
                }
                h4 {
                     font-size: 1.8em;
+                    margin-bottom:.25em;
+               }
+               h6 {
+                    margin-bottom: 0;
                }
                .schedule-slot-speaker-image {
                     width: 100px;
@@ -551,6 +583,7 @@
                     border-radius: 50%;
                     margin-right:20px;
                }
+
                @include breakpoint( 'm' ){
                     flex-wrap: wrap;
                     justify-content:  center;
@@ -627,7 +660,7 @@
                display: flex;
                flex-direction: row;
                align-items: center;
-               margin-top:10px;
+               margin-top:20px;
                .schedule-slot-panel-speaker-image {
                     width: 60px;
                     height: 60px;
@@ -636,7 +669,7 @@
                     @include imageSettings;
                     
                }
-               h6 { color:$primary; }
+               h6 { color:$primary; margin-bottom: 0;}
                @include breakpoint( 'm' ){
                     flex-wrap: wrap;
                     justify-content: center;

@@ -20,10 +20,10 @@ echo '<div class=" se2-schedule-container">';
 
 if( get_field('moderation', get_the_ID()) ){
      echo '<div class="se2-schedule-hosts">';
-     echo '<h4>'.__('Moderation', 'SimplEvent').'</h4>';
+     echo '<h5>'.__('Moderation', 'SimplEvent').'</h5>';
      foreach( get_field('moderation', get_the_ID()) as $host ){
           echo '<div class="se2-schedule-host">';
-          echo $speakerClass->cast_speaker_list( $host  );
+          echo $speakerClass->cast_host( $host );
           echo '</div>';
      }
      echo '</div>';
