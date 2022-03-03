@@ -48,8 +48,11 @@
 
      &:hover {
           transform:scale(.97);
+          border-radius: 5px;
+          
           @include dropShadow;
           .se2-speaker-grid-image { transform: scale(1.2);}
+          
      }
 
      @include breakpoint( 'm' ){

@@ -271,7 +271,7 @@ class LineUp {
                          $this->speakerCard .= '<h5>'.$name.'</h5>';
                          $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
 
-                         $this->speakerCard .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</h6>';
+                         //$this->speakerCard .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</h6>';
 
                $this->speakerCard .= '</div>';
 
