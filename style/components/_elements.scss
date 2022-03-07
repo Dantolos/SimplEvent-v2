@@ -62,6 +62,16 @@ button {
     }
 }
 
+.se-lightbox-IMG {
+    position: absolute;
+    top:0; left:0; bottom:0; right:0;
+    margin:auto;
+    width: clamp( 30%, auto, 80%);
+    max-width: 80%;
+    max-height:80%;
+    height: clamp( 30%, auto, 80%);
+
+}
 
 //------------------------------
 //DROPDOWNS
