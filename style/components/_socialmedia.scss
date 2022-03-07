@@ -12,4 +12,17 @@
           }
      }
 
+     
+
 }
+
+.share-button {
+     width: 100%;
+     height: 100%;
+     cursor: pointer;
+     transition: all() .2s ease-in;
+     &:hover {
+          fill: $secondary;
+          transform: scale(1.05);
+     }
+}    

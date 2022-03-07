@@ -72,23 +72,23 @@ class se2_SocialMedia {
                          </svg>',
                'linkedin' => '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
                               <style type="text/css">' . $iconStyle . '</style>
-                              <g>
                                    <g>
-                                        <path id="XMLID_23_" class="st0" d="M25,49L25,49C11.7,49,1,38.3,1,25l0,0C1,11.7,11.7,1,25,1l0,0c13.3,0,24,10.7,24,24l0,0
-                                             C49,38.3,38.3,49,25,49z"/>
-                                   </g>
-                                   <g id="XMLID_18_">
-                                        <g id="XMLID_20_">
-                                             <rect id="XMLID_22_" x="14.8" y="20.2" class="st1" width="4.4" height="14.2"/>
-                                             <path id="XMLID_21_" class="st1" d="M16.9,18.4c1.4,0,2.6-1.2,2.6-2.6s-1.2-2.6-2.6-2.6c-1.4,0-2.6,1.2-2.6,2.6
-                                                  S15.5,18.4,16.9,18.4z"/>
+                                        <g>
+                                             <path id="XMLID_23_" class="st0" d="M25,49L25,49C11.7,49,1,38.3,1,25l0,0C1,11.7,11.7,1,25,1l0,0c13.3,0,24,10.7,24,24l0,0
+                                                  C49,38.3,38.3,49,25,49z"/>
                                         </g>
-                                        <path id="XMLID_19_" class="st1" d="M26.2,27c0-2,0.9-3.2,2.7-3.2c1.6,0,2.4,1.1,2.4,3.2c0,2,0,7.5,0,7.5h4.4c0,0,0-5.2,0-9
-                                             c0-3.8-2.2-5.7-5.2-5.7c-3,0-4.3,2.4-4.3,2.4v-1.9H22v14.2h4.2C26.2,34.5,26.2,29.2,26.2,27z"/>
+                                        <g id="XMLID_18_">
+                                             <g id="XMLID_20_">
+                                                  <rect id="XMLID_22_" x="14.8" y="20.2" class="st1" width="4.4" height="14.2"/>
+                                                  <path id="XMLID_21_" class="st1" d="M16.9,18.4c1.4,0,2.6-1.2,2.6-2.6s-1.2-2.6-2.6-2.6c-1.4,0-2.6,1.2-2.6,2.6
+                                                       S15.5,18.4,16.9,18.4z"/>
+                                             </g>
+                                             <path id="XMLID_19_" class="st1" d="M26.2,27c0-2,0.9-3.2,2.7-3.2c1.6,0,2.4,1.1,2.4,3.2c0,2,0,7.5,0,7.5h4.4c0,0,0-5.2,0-9
+                                                  c0-3.8-2.2-5.7-5.2-5.7c-3,0-4.3,2.4-4.3,2.4v-1.9H22v14.2h4.2C26.2,34.5,26.2,29.2,26.2,27z"/>
+                                        </g>
                                    </g>
-                              </g>
-                         </svg>',
-               'whatsapp' => '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                              </svg>',
+               'whatsapp' =>  '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                    viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
                                    <style type="text/css">' . $iconStyle . '</style>
                                    <path d="M20.4,3.5C18.2,1.2,15.2,0,12,0C5.4,0,0.1,5.3,0.1,11.9c0,2.1,0.5,4.1,1.6,5.9L0,24l6.3-1.7C8,23.3,10,23.8,12,23.8h0
@@ -98,6 +98,16 @@ class se2_SocialMedia {
                                         c-0.3-0.5,0.3-0.5,0.9-1.6c0.1-0.2,0-0.4,0-0.5C9.9,9,9.3,7.5,9,6.9C8.8,6.3,8.5,6.4,8.3,6.4c-0.2,0-0.4,0-0.6,0
                                         C7.6,6.4,7.3,6.5,7,6.8c-0.3,0.3-1,1-1,2.5s1.1,2.9,1.2,3.1c0.2,0.2,2.1,3.2,5.1,4.5c1.9,0.8,2.6,0.9,3.6,0.7c0.6-0.1,1.8-0.7,2-1.4
                                         c0.2-0.7,0.2-1.3,0.2-1.4C17.9,14.6,17.7,14.5,17.4,14.4z"/>
+                              </svg>',
+               'share' =>     '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                              viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                                   <style type="text/css">' . $iconStyle . '</style>     
+                                   <path d="M18.9,13.7c-1.6,0-3,0.7-3.9,1.8l-4.9-2.5c0.1-0.3,0.1-0.7,0.1-1.1c0-0.4-0.1-0.8-0.1-1.2l4.8-2.5c0.9,1.2,2.4,1.9,4,1.9
+                                        c2.8,0,5.1-2.3,5.1-5.1S21.7,0,18.9,0s-5.1,2.3-5.1,5.1c0,0.3,0,0.6,0.1,0.9L8.9,8.6C8,7.5,6.6,6.9,5.1,6.9C2.3,6.9,0,9.2,0,12
+                                        s2.3,5.1,5.1,5.1c1.6,0,2.9-0.7,3.9-1.8l4.9,2.5c-0.1,0.3-0.1,0.7-0.1,1c0,2.8,2.3,5.1,5.1,5.1s5.1-2.3,5.1-5.1S21.7,13.7,18.9,13.7
+                                        z M18.9,2.5c1.4,0,2.6,1.2,2.6,2.6s-1.2,2.6-2.6,2.6c-1.4,0-2.6-1.2-2.6-2.6S17.4,2.5,18.9,2.5z M5.1,14.6c-1.4,0-2.6-1.2-2.6-2.6
+                                        c0-1.4,1.2-2.6,2.6-2.6c1.4,0,2.6,1.2,2.6,2.6C7.7,13.4,6.5,14.6,5.1,14.6z M18.9,21.5c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6
+                                        c1.4,0,2.6,1.2,2.6,2.6S20.3,21.5,18.9,21.5z"/>
                               </svg>',
           ];
      }
@@ -110,7 +120,7 @@ class se2_SocialMedia {
           $iconRow .= '</div>';
      }
 
-     public function cast_icon(  $type, $link ){
+     public function cast_icon( $type, $link ){
           $icon = '';
                     
           if(strlen($link) > 2){         
@@ -122,19 +132,24 @@ class se2_SocialMedia {
      }
 
      public function shareButton( $sharecontent ){
-          $shareButton = '<div>';
-          $shareButton .= '<a href="https://www.facebook.com/sharer.php?u='.$sharecontent['url'].'">';
-          $shareButton .= ' fb ';
-          $shareButton .= '</a>';
-          $shareButton .= '<a href="https://api.whatsapp.com/send?text='.$sharecontent['title'].' '.$sharecontent['url'].'">';
-          $shareButton .= ' whatsapp ';
-          $shareButton .= '</a>';
-          $shareButton .= '<a href="https://twitter.com/share?url='.$sharecontent['url'].'&text='.$sharecontent['title'].'">';
-          $shareButton .= ' twitter ';
-          $shareButton .= '</a>';
-          $shareButton .= '<a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url='.$sharecontent['url'].'&title='.$sharecontent['title'].'&submitted-image-url='.$sharecontent['image'].'">';
-          $shareButton .= ' linkedin ';
-          $shareButton .= '</a>';
+          $shareButton = '';
+          $shareButton .= '<div class="share-button">';
+          $shareButton .= $this->icons['share'];
+          $shareButton .= '</div>';
+
+          $shareButton .= '<div class="share-fallback" style="display:none;">';
+               $shareButton .= '<a href="https://www.facebook.com/sharer.php?u='.$sharecontent['url'].'">';
+               $shareButton .= ' fb ';
+               $shareButton .= '</a>';
+               $shareButton .= '<a href="https://api.whatsapp.com/send?text='.$sharecontent['title'].' '.$sharecontent['url'].'">';
+               $shareButton .= ' whatsapp ';
+               $shareButton .= '</a>';
+               $shareButton .= '<a href="https://twitter.com/share?url='.$sharecontent['url'].'&text='.$sharecontent['title'].'">';
+               $shareButton .= ' twitter ';
+               $shareButton .= '</a>';
+               $shareButton .= '<a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url='.$sharecontent['url'].'&title='.$sharecontent['title'].'&submitted-image-url='.$sharecontent['image'].'">';
+               $shareButton .= ' linkedin ';
+               $shareButton .= '</a>';
           $shareButton .= '</div>';
 
           $shareButton .= '<script type="text/JavaScript">

@@ -126,7 +126,7 @@ function theme_add_scripts()
 
     foreach ($JsIncList as $JsInc) 
     {
-        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.31', true );
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.35', true );
     }
      
     /*------------------------------Send Global Variables---------------------------*/
@@ -522,7 +522,7 @@ add_action('init', function () {
 
 
 
-function kb_template_redirect() {
+/* function kb_template_redirect() {
     global $post;
     $post_slug = $post->ID;
     if(is_singular('speakers')) {
@@ -538,7 +538,7 @@ function kb_template_redirect() {
         exit();
     }
 }
-add_action('template_redirect', 'kb_template_redirect');
+add_action('template_redirect', 'kb_template_redirect'); */
 
 
 

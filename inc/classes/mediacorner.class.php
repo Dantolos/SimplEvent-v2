@@ -2,12 +2,13 @@
 
 class Mediacorner {
 
-
      public $dateFormat;
      public $fileSize;
      public $fileDownload;
      public $folderIcon;
      public $lineup;
+     public $addIcon;
+     public $fullscreenIcon;
 
      public function __construct(){
           $this->dateFormat = new Date_Format;
@@ -42,12 +43,23 @@ class Mediacorner {
           $this->folderIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-folder-fill" viewBox="0 0 16 16">
                                    <path d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.825a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z"/>
                               </svg>';
+          $this->addIcon =    '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                   viewBox="0 0 448 512" style="enable-background:new 0 0 448 512;" xml:space="preserve">
+                                   <path d="M432,256c0,17.7-14.3,32-32,32H256v144c0,17.7-14.3,32-32,32s-32-14.3-32-32V288H48c-17.7,0-32-14.3-32-32s14.3-32,32-32
+                                        h144V80c0-17.7,14.3-32,32-32s32,14.3,32,32v144h144C417.7,224,432,238.3,432,256z"/>
+                              </svg>';
+          $this->fullscreenIcon = '<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                   viewBox="0 0 448 512" style="enable-background:new 0 0 448 512;" xml:space="preserve">
+                                   <path d="M128,32H32C14.3,32,0,46.3,0,64v96c0,17.7,14.3,32,32,32s32-14.3,32-32V96h64c17.7,0,32-14.3,32-32S145.7,32,128,32z
+                                             M416,32h-96c-17.7,0-32,14.3-32,32s14.3,32,32,32h64v64c0,17.7,14.3,32,32,32s32-14.3,32-32V64C448,46.3,433.7,32,416,32z M128,416
+                                        H64v-64c0-17.7-14.3-32-32-32S0,334.3,0,352v96c0,17.7,14.3,32,32,32h96c17.7,0,32-14.3,32-32S145.7,416,128,416z M416,320
+                                        c-17.7,0-32,14.3-32,32v64h-64c-17.7,0-32,14.3-32,32s14.3,32,32,32h96c17.7,0,32-14.3,32-32v-96C448,334.3,433.7,320,416,320z"/>
+                              </svg>';
      }
 
      public function cast_mediacorner_nav( $pageID ){
 
           $mediacornerNav = '<div class="mediacorner-nav-mobile"><span class="dashicons dashicons-ellipsis"></span></div>';
-
           $mediacornerNav .= '<div class="mediacorner-nav-container" pageid="'.$pageID.'">';
 
           $menuItems = get_field('menu', $pageID);
@@ -78,7 +90,7 @@ class Mediacorner {
           if( is_array($realeses) ){
                if( count($realeses) > 0 ){
                     foreach( $realeses as $realese ){
-
+ 
                          date_default_timezone_set("Europe/Zurich");
                          if( date( 'YmdHi', strtotime( str_replace( '/', '-',  $realese['public']) )) > date( 'YmdHi' ) ){
                               continue;
@@ -253,8 +265,17 @@ class Mediacorner {
                     //$folderContent .= '<a href="'.$photo['url'].'" download>';
                     $folderContent .= '<div class="se2-galleries-photo thumb" imageurl="'.$photo['url'].'">';
                          $folderContent .= '<div class="se2-galleries-photo-thumbnail" imageurl="'.$photo['url'].'">';
+
+                              //HOVER OPTIONS
+                              $folderContent .= '<div class="se2-galleries-photo-hoveroptions">';
+                                   $folderContent .= '<div class="se2-galleries-photo-fullscreen">'.$this->fullscreenIcon.'</div>';
+                                   $folderContent .= '<div class="se2-galleries-photo-add photo-notadded">'.$this->addIcon.'</div>';
+                              $folderContent .= '</div>';
+
                               $folderContent .= '<div class="dashicons dashicons-saved se2-galleries-photo-selected"></div>';
+
                               $folderContent .= '<img src="'.$photo['sizes']['medium'].'"/>';
+                              
                          $folderContent .= '</div>';
                          $folderContent .= '<div class="se2-galleries-photo-desc" >';
                               $folderContent .= '<h6><b>'.$photo['title'].'</b></h6>';

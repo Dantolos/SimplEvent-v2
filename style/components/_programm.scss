@@ -10,38 +10,49 @@
      justify-content: flex-end;
      position: fixed;
      top: 0;
-     width: 90vw;
+     width: 100vw;
      height: 150px;
      z-index: 2000;
-     background-color:var(--secondColor);
+     background-color:var(--shadeColor);
      align-items: flex-end;
-     border-bottom:4px solid var(--shadeColor);
+     padding:0 20px;
+     
 
      @include breakpoint( 'm' ){
           width: 100vw;
      }
 
+     display: none;
+     @include breakpoint( 'xl' ){
+          display: flex;
+     } 
 
      button {
           height:50px;
           padding:1% 15px ;
           border-radius:8px 8px 0 0;
-          border:var(--secondColor) solid 2px;
-          border-width: 2px 2px 0 2px;
+          border:var(--secondColor) solid 1px;
+          border-width: 1px 1px 0 1px;
           background-color:var(--shadeColor);
           color: var(--primeColor);
           font-weight: bold;
+          filter: brightness(95%);
+          margin-right: 4px;
+          
+          
           &:hover {
-               border-color: var(--shadeColor);
-               border-width: 2px 2px 0 2px;
-               background-color:var(--secondColor);
+               border-color: $primary;
+              
+               filter: brightness(90%);
           }
           
      }
 
      .day-tab-activ {
-          border-color:$primary;
+          filter: brightness(100%);
+          border-color:var(--secondColor);
           background-color:var(--secondColor);
+          
 
      }
      
@@ -49,8 +60,8 @@
 
 .se2-schedule-container {
 
-     width:90vw;
-     margin:50px 5vw;
+     width:100vw;
+     margin: 0 0 50px 0;
      position: relative;
      @include breakpoint( 'm' ){
           width: 100vw;
@@ -58,16 +69,11 @@
           
      }
 
-     // HOSTS
-     .se2-schedule-hosts {
-          padding: 0 10%;
-          h4 { margin-bottom: 40px;}
-          .se2-schedule-host {
-               display: flex;
-               flex-direction: row;
-               width:50%;
-          }
+     @include breakpoint( 'xl' ){
+          margin:50px 0;
+          
      }
+     
 
      // SCHEDULE GRID
      .schedule-grid {
@@ -420,6 +426,58 @@
      }
 }
 
+// HOSTS
+.schedule-hosts {
+     display: flex;
+     align-items: center;
+     flex-wrap: wrap;
+     padding: 30px 20px 10px;
+     /* background-color: var(--lightshade); */
+     border-bottom: 1px solid var(--lightshade);
+     
+     > h5 { 
+          margin-bottom: 0; 
+          padding: 5px 10px;
+          background-color: var(--lightshade);
+          border-radius: 20px;
+          @include breakpoint( 's' ){
+               width: 100%;
+               text-align: center;
+          }
+      }
+     .schedule-host {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          margin-left: 20px;
+
+          
+        
+          @include breakpoint( 's' ){
+               justify-content: center;
+               width:100%;
+          }
+          .se2-speaker-host {
+               width: clamp(fit-content,50%,100%);
+               &:hover {
+                    .se2-host-profil-image {
+                         transform: scale(1.1);
+                    }
+               }
+               @include breakpoint( 'm' ){
+                    .se2-host-profil-image { width:35px; height:35px; }
+                    background-color: $light;
+                    padding-right:30px;
+                    border-radius:15px;
+                    
+               }
+               @include breakpoint( 's' ){
+                    margin-top:10px;
+               }
+          }
+     }
+}
+
 //not needet (temporary)
 .schedule-slot-overflow {
      color:$primary;
@@ -440,12 +498,13 @@
 // LISTE
 // ***************************************
 .schedule-program-liste {
-     margin-top:75px;
+     /* margin-top:75px; */
      height: fit-content;
      position: unset;
      overflow-x: hidden;
      display: flex;
      flex-direction: row;
+     padding-top: 20px;
 
      .schedule-separator-standard,
      .schedule-separator-placeholder,
@@ -464,10 +523,14 @@
 }
 
 .schedule-program-day {
-     width:100%;
+     width:50%;
      height: inherit;
      position: relative;
      flex-shrink: 0;
+     
+     @include breakpoint( 'xl' ){
+          width:100%;
+     }
 }
 .schedule-slot-liste {
      margin:20px;
@@ -482,11 +545,10 @@
           position: relative;
 
           h5 {
-               font-size: 1.8em;
+               margin-bottom: 0;
+               font-size: 1.5em;
                @include breakpoint( 's' ){
                     text-align: center;
-                    margin-bottom:20px;
-
                }
           }
 
@@ -510,7 +572,7 @@
                     text-align: center;
                     font-size:30px !important;
                     line-height: 10px !important;
-                    
+                    margin-bottom: .5em;
                     font-optical-sizing: none;
                }
                .hour{ font-weight: bold;}
@@ -520,7 +582,7 @@
                     text-align: center;
                     line-height:0 !important;
                     font-size:14px !important;
-                    padding-top:8px;
+                    padding-top:10px;
                     margin-top:-5px;
                     margin-bottom: 0;
                }
@@ -544,6 +606,10 @@
                }
                h4 {
                     font-size: 1.8em;
+                    margin-bottom:.25em;
+               }
+               h6 {
+                    margin-bottom: 0;
                }
                .schedule-slot-speaker-image {
                     width: 100px;
@@ -551,6 +617,7 @@
                     border-radius: 50%;
                     margin-right:20px;
                }
+
                @include breakpoint( 'm' ){
                     flex-wrap: wrap;
                     justify-content:  center;
@@ -627,7 +694,7 @@
                display: flex;
                flex-direction: row;
                align-items: center;
-               margin-top:10px;
+               margin-top:20px;
                .schedule-slot-panel-speaker-image {
                     width: 60px;
                     height: 60px;
@@ -636,7 +703,7 @@
                     @include imageSettings;
                     
                }
-               h6 { color:$primary; }
+               h6 { color:$primary; margin-bottom: 0;}
                @include breakpoint( 'm' ){
                     flex-wrap: wrap;
                     justify-content: center;

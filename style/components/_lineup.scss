@@ -48,8 +48,11 @@
 
      &:hover {
           transform:scale(.97);
+          border-radius: 5px;
+          
           @include dropShadow;
           .se2-speaker-grid-image { transform: scale(1.2);}
+          
      }
 
      @include breakpoint( 'm' ){
@@ -95,8 +98,8 @@
 
 
           padding: 10px 0;
-
-          h4 { margin-bottom:5px;}
+          h6 { margin-bottom:2px; }
+          h4 { margin-bottom:2px;}
           p:first-of-type { 
                color:$primary; margin-bottom:0; line-height: 1em; 
           }
@@ -274,6 +277,12 @@
                     h6 { margin-bottom: 0;  }
                  
                }
+
+               .speaker-lb-share {
+                    width: 20px;
+                    height:20px;
+                    
+               }
           }
 
           
@@ -419,4 +428,21 @@
 
           
      }
+}
+
+/*HOST*/
+.se2-speaker-host {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: row;
+     flex-wrap: wrap;
+     .se2-host-profil-image {
+          height:50px; width:50px;
+          margin-right:10px;
+          border-radius:50%;
+          @include imageSettings;
+     }
+     h5, h6 { margin-bottom:0; line-height: 1.1em; }
+     h5 {  }
 }

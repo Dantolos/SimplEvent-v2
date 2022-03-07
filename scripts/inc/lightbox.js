@@ -17,7 +17,7 @@ class Lightbox {
 
         //check
         if (!type || !data) {
-            console.warn('type or data missed!')
+            console.warn('type or data missed! -> ' + data)
             return;
         }
         if (document.querySelector('.se-lightbox-container') && !layered) {
@@ -118,7 +118,7 @@ class Lightbox {
 
         //create api LB
         if (type == 'api') {
-            new seREST().callREST( data, 'lightbox' )
+            new seREST().callREST(data, 'lightbox')
         }
 
         //-------------LB Types--------------

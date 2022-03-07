@@ -24,6 +24,7 @@
           .mediacorner-nav-container{
                width:100%;
                h5 {
+                    margin-bottom: 0 !important;
                     color: var(--midColor);
                     background-color:var(--secondColor);
                     width:100%;
@@ -321,6 +322,7 @@
                }
                h6{
                     margin-left:3px;
+                    margin-bottom:0 !important;
                }
 
           }
@@ -353,7 +355,7 @@
                min-height:50vh;
                position: relative;
 
-               .se2-galleries-photo{
+               .se2-galleries-photo {
                     margin:5px;
                     $thumbWidth: 180px;
                     width: $thumbWidth;
@@ -383,6 +385,46 @@
                                    color:white;
                               }
                          }
+
+                         /* HOVER OPToINS */
+                         .se2-galleries-photo-hoveroptions {
+                              position: absolute;
+                              width:100%;
+                              height:180px;
+                              display: flex;
+                              background-color: rgba(0,0,0,0.2);
+                              opacity: 0;
+                              visibility: hidden;
+                              align-items: center;
+                              justify-content: space-evenly;
+                              > div {
+                                   width:50px;
+                                   height:50px;
+                                   display: flex;
+                                   align-items: center;
+                                   justify-content: center;
+                                   background-color:$primary;
+                                   border-radius: 50%;
+                                   @include dropShadow;
+                                   svg{ 
+                                        width:60%;
+                                        height:60%;
+                                        path {
+                                             fill: var(--lightshade);
+                                        }
+                                   }
+                                   &:hover{
+                                        background-color:var(--lightshade);
+                                        transform: scale(1.05);
+                                        svg { width:65%; height:65%; path { fill: $secondary; }}
+                                   }
+                              }
+                              .photo-added {
+                                   transform: rotate(45deg) !important;
+                                   background-color:$secondary !important;
+                                   &:hover{ svg path { fill: var(--lightshade); } }
+                              }
+                         }
                          
                          
                     }
@@ -394,9 +436,10 @@
                     &:hover {
                          .se2-galleries-photo-thumbnail {
                               border-radius: 5px;
-                              img{
-                                   transform:scale(1.05);
-                              }
+                         }
+                         .se2-galleries-photo-hoveroptions { 
+                              visibility: visible;
+                              opacity: 1;
                          }
                     }
                }

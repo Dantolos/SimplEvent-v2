@@ -178,8 +178,6 @@ class LineUp {
 
      }
 
-
-
      public function cast_speaker_list( $speakerID, $showCV = false  ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
@@ -227,13 +225,10 @@ class LineUp {
 
      }
 
-     
-
      public function cast_speaker_grid( $speakerID ){
 
           $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
-/*                $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');
- */
+               /*$portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');*/
                $portraitImage = esc_url( get_field('speaker_bild', $speakerID ));
          
                
@@ -257,6 +252,34 @@ class LineUp {
           return $this->speakerCard;
      }
 
+     public function cast_host( $speakerID  ){
+  
+          $this->speakerCard = '<div class="se2-speaker-host speaker-profile" speakerid="'.$speakerID.'" style="">'; 
+              /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
+               $this->speakerCard .= '<div class="se2-host-profil-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
+   
+               $this->speakerCard .= '<div class="se2-host-profil-info">';
+
+                         $name = ( get_field('speaker_vorname', $speakerID) ) 
+                              ? 
+                                   get_field('speaker_degree', $speakerID) 
+                                   . ' ' . get_field('speaker_vorname', $speakerID) 
+                                   . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
+                              : 
+                                   the_title();
+
+                         $this->speakerCard .= '<h5>'.$name.'</h5>';
+                         $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+
+                         //$this->speakerCard .= '<h6>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</h6>';
+
+               $this->speakerCard .= '</div>';
+
+          $this->speakerCard .= '</div>';
+
+          return $this->speakerCard;
+
+     }
 
 
      public function cast_line_up_overview( $args = array() ) {
@@ -302,13 +325,15 @@ class LineUp {
 
      public function cast_speaker_lightbox( $speakerID ){
 
-          $speakername = ( get_field('speaker_vorname', $speakerID) ) 
+          $speakername = ( get_field('speaker_vorname', $speakerID)  ) 
           ? 
                get_field('speaker_degree', $speakerID) 
                . ' ' . get_field('speaker_vorname', $speakerID) 
                . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
           : 
                get_the_title( $speakerID );
+
+          $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
 
           $this->speakerLightbox = '<div class="speaker-lb-container">';
 
@@ -328,6 +353,7 @@ class LineUp {
                          $start = date( 'Hi', strtotime(get_field('speaker_zeit', $speakerID)['start']));
                          $ende = date( 'Hi', strtotime(get_field('speaker_zeit', $speakerID)['ende']));
 
+
                          if($speakerDate){
                               $this->speakerLightbox .= '<div class="speaker-lb-informations-gig">';
                               $this->speakerLightbox .= '<h6>';
@@ -343,16 +369,20 @@ class LineUp {
 
                          //SHARE BUTTONS // TODO <----------------------------------------------------------------
                          $shareurl = get_permalink( $speakerID );
+                         $sharetitle = (get_field('speaker_vorname', $speakerID)) ? get_field('speaker_vorname', $speakerID) . ' ' . get_field('speaker_nachname', $speakerID) : get_the_title( $speakerID );
+                         $sharedescription = (get_field('programm_titel', $speakerID)) ? get_field('programm_titel', $speakerID) : get_field('speaker_funktion', $speakerID) . $speakerFirma;
+                         
                          $sharecontent = array(
                               'url' => $shareurl,
-                              'title' => $speakername,
+                              'title' => $sharetitle,
+                              'description' => $sharedescription,
                               'image' => get_field('speaker_bild', $speakerID ),
                          );
-                         /*  
+                           
                          $this->speakerLightbox .= '<div class="speaker-lb-share">';
                          $this->speakerLightbox .= $this->socialMedia->shareButton( $sharecontent  );
                          $this->speakerLightbox .= '</div>'; 
-                         */
+                         
 
 
                          //SOCIAL LINKS
@@ -377,7 +407,7 @@ class LineUp {
                     
                               
                               $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.'</h2>';
-                              $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+                              
                               $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
                               $speakerCV = get_field( 'speaker_cv', $speakerID );
                               $this->speakerLightbox .=  $speakerCV;
