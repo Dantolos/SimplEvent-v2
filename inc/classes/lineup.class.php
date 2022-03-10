@@ -178,7 +178,7 @@ class LineUp {
 
      }
 
-     public function cast_speaker_list( $speakerID, $showCV = false  ){
+     public function cast_speaker_list( $speakerID, $showCV = false ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
