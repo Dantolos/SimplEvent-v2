@@ -240,6 +240,40 @@ add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features' );
 /*-------------------------------------------------------------*/
 /*----------------------ACF ADD CHOICES------------------------*/
 /*-------------------------------------------------------------*/
+add_filter('acf/load_field/name=event', 'acf_load_sideevent_field_choices');
+function acf_load_sideevent_field_choices( $field ) {
+     $field['choices'] = array();
+
+     if(get_option( 'main_event' )){
+        $value = get_option( 'main_event' );
+        $label = 'main';
+        $field['choices'][ $label ] = $value;
+     } else {
+        $value = get_bloginfo('name');
+        $label = 'main';
+        $field['choices'][ $label ] = $value;
+     }
+     
+     if( is_array(get_option('side_events')) ) {
+          
+          // while has rows
+          foreach( get_option('side_events') as $sideevent ) {
+              
+              // vars
+              $value = $sideevent['value'];
+              $label = $sideevent['label'];
+  
+              
+              // append to choices
+              $field['choices'][ $label ] = $value;
+              
+          }
+          
+     }
+
+     return $field;
+}
+
 add_filter('acf/load_field/name=slot', 'acf_load_slot_field_choices');
 function acf_load_slot_field_choices( $field ) {
      $field['choices'] = array();

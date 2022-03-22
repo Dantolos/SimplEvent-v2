@@ -15,6 +15,9 @@ class se2_page_Event extends se2_page_builder {
           register_setting( 'simplevent-event-group', 'facts_languages' );
           register_setting( 'simplevent-event-group', 'facts_pricing' );
 
+          register_setting( 'simplevent-event-group', 'main_event' );
+          register_setting( 'simplevent-event-group', 'side_events' );
+
           register_setting( 'simplevent-event-group', 'sessions_active' );
           register_setting( 'simplevent-event-group', 'sessions_slots' );
 
@@ -25,6 +28,9 @@ class se2_page_Event extends se2_page_builder {
 
           //****Section
           add_settings_section( 'simplevent-event-facts', 'Facts', 'simplevent_event_facts', 'simplevent_event');
+
+          add_settings_section( 'simplevent-event-sideevents', 'Side Events', 'simplevent_event_sideevents', 'simplevent_event');
+
           add_settings_section( 'simplevent-event-sessions', 'Sessions', 'simplevent_event_sessions', 'simplevent_event');
           add_settings_section( 'simplevent-event-award', 'Award', 'simplevent_event_award', 'simplevent_event');
 
@@ -36,6 +42,9 @@ class se2_page_Event extends se2_page_builder {
           add_settings_field( 'facts-participants', 'Participants', 'simplevent_facts_participants', 'simplevent_event', 'simplevent-event-facts' );
           add_settings_field( 'facts-languages', 'Languages', 'simplevent_facts_languages', 'simplevent_event', 'simplevent-event-facts' );
           add_settings_field( 'facts-pricing', 'Pricing', 'simplevent_facts_pricing', 'simplevent_event', 'simplevent-event-facts' );
+
+          add_settings_field( 'main-event', 'Side Events', 'simplevent_main_event', 'simplevent_event', 'simplevent-event-sideevents' );
+          add_settings_field( 'side-events', 'Side Events', 'simplevent_side_events', 'simplevent_event', 'simplevent-event-sideevents' );
 
           add_settings_field( 'sessions-active', 'Sessions', 'simplevent_sessions_active', 'simplevent_event', 'simplevent-event-sessions' );
           add_settings_field( 'sessions-slots', 'Slots', 'simplevent_sessions_slots', 'simplevent_event', 'simplevent-event-sessions' );
@@ -49,6 +58,10 @@ class se2_page_Event extends se2_page_builder {
                echo 'Facts De/aktivieren';
           }
             
+          function simplevent_event_sideevents(){     
+               echo 'Side Events';
+          }
+
           function simplevent_event_sessions(){     
                echo 'Session Settings';
           }
@@ -158,6 +171,40 @@ class se2_page_Event extends se2_page_builder {
                }   
           }
 
+          // SIDEEVENTS
+          function simplevent_main_event(){
+               $main_event = get_option( 'main_event' );
+               echo '<input type="text" name="main_event" value="' .$main_event. '" placeholder="'.get_bloginfo('name').'"/>';
+          }
+
+          function simplevent_side_events(){
+               $side_events = get_option('side_events'); 
+               $ide_eventsSlotBase = [
+                         'label' => '',
+                         'value' => '',
+                         'date'  => false,
+                         'start' => '',
+                         'ende'  => ''
+                    ];
+               $side_events = ( !is_array( $side_events ) ) ? $ide_eventsSlotBase : $side_events;
+
+               echo '<div class="Session_Slots">';
+                    for ($i=0; $i < 4; $i++) { 
+                         $side_events[$i] = ( !is_array( $side_events ) ) ? $ide_eventsSlotBase : $side_events[$i]; 
+
+                         echo '<div style="margin-bottom:20px; border-top:3px lightgrey solid;"><p style="width:100%;">Side Event '.($i+1).'</p>';
+                         echo '<input style="width:20%;" type="text" name="side_events['.$i.'][label]" value="' .$side_events[$i]['label']. '" placeholder="label"/>';
+                         echo '<input style="width:70%;" type="text" name="side_events['.$i.'][value]" value="' .$side_events[$i]['value']. '" placeholder="value"/>';
+                         
+                         echo '<input style="width:40%;" class="se-datepicker " type="text" name="side_events['.$i.'][date]" value="' .$side_events[$i]['date']. '"  />';
+                         echo '<input style="width:20%;" type="number" name="side_events['.$i.'][start]" value="' .$side_events[$i]['start']. '" placeholder="1430" />';
+                         echo ' -';
+                         echo '<input style="width:20%;" type="number" name="side_events['.$i.'][ende]" value="' .$side_events[$i]['ende']. '" placeholder="1530" />';
+
+                         echo '</div>';
+                    }    
+               echo '</div>';
+          }
           
           // SESSIONS
           function simplevent_sessions_active(){
@@ -180,7 +227,7 @@ class se2_page_Event extends se2_page_builder {
                $sessions_slots = ( !is_array( $sessions_slots ) ) ? $sessionSlotBase : $sessions_slots;
 
                echo '<div class="Session_Slots">';
-                    for ($i=0; $i < 4; $i++) { 
+                    for ($i=0; $i < 8; $i++) { 
                          $sessions_slots[$i] = ( !is_array( $sessions_slots ) ) ? $sessionSlotBase : $sessions_slots[$i]; 
 
                          echo '<div style="margin-bottom:20px; border-top:3px lightgrey solid;"><p style="width:100%;">Session Slot '.($i+1).'</p>';

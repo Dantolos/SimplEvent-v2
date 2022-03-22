@@ -22,7 +22,7 @@ class LineUp {
      }
 
 
-     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all' ) {
+     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = 'all' ) {
           $speaker_args = array(
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
@@ -48,6 +48,24 @@ class LineUp {
                     }
                }
                
+              
+               if($event != 'all'){
+                    $isInEvent = false;
+                    if( !is_array($event) || !is_array(get_field('event', $speaker->ID)) ){
+                              continue;
+                    } else {                  
+                         foreach( $event as $eValue => $e ){
+                              foreach( get_field('event', $speaker->ID) as $sE ){
+                                  
+                                   if( $eValue === $sE['value']  ){
+                                        $isInEvent = true;
+                                   }
+                              }
+                         }
+                         if( !$isInEvent ){ continue; }
+                    }
+               }
+
                $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
                if($year != 'all'){
                     $isInYear = false;
@@ -59,7 +77,6 @@ class LineUp {
                     }
                     if( !$isInYear ){ continue; }
                }
-
                array_push( $this->speakerIDs, $speaker->ID );
 
           }
@@ -144,9 +161,11 @@ class LineUp {
                     $speechCategorie = [];
                     if (is_array($checkSpeakerIDs) || is_object($checkSpeakerIDs)) {
                          foreach($checkSpeakerIDs as $speakid) {
-                              foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
-                                   if(!in_array( $categorie, $speechCategorie )){
-                                        array_push( $speechCategorie, $categorie ); 
+                              if(get_field('speaker_kategorie', $speakid )){
+                                   foreach( get_field('speaker_kategorie', $speakid ) as $categorie ){
+                                        if(!in_array( $categorie, $speechCategorie )){
+                                             array_push( $speechCategorie, $categorie ); 
+                                        }
                                    }
                               }
                          }
@@ -178,7 +197,7 @@ class LineUp {
 
      }
 
-     public function cast_speaker_list( $speakerID, $showCV = false  ){
+     public function cast_speaker_list( $speakerID, $showCV = false ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
@@ -243,7 +262,7 @@ class LineUp {
                     : 
                          the_title();
 
-               $this->speakerCard .= '<h4>'.$name.'</h4>';
+               $this->speakerCard .= '<h5>'.$name.'</h5>';
                $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
                $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
                $this->speakerCard .= '</div>';
@@ -303,7 +322,7 @@ class LineUp {
           $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'">';
           
           //query IDs
-          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'] );
+          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'],  $args['event'] );
 
           //cast view        
           foreach( $speakerIDs as $speakerID ){

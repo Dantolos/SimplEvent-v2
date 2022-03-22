@@ -466,12 +466,12 @@ class Mediacorner {
      }
 
      public function se2_v_youtube( $link ){
-          $videoYT = '<iframe width="100%" height="100%" src="'.$link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+          $videoYT = '<iframe loading="lazy" width="100%" height="100%" src="'.$link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
           return $videoYT;
      }
 
      public function se2_v_vimeo( $link ){
-          $vimeoYT = '<iframe title="vimeo-player" width="100%" height="100%"  src="'.$link.'" frameborder="0" allowfullscreen></iframe>';
+          $vimeoYT = '<iframe loading="lazy" title="vimeo-player" width="100%" height="100%"  src="'.$link.'" frameborder="0" allowfullscreen></iframe>';
           return $vimeoYT;
      }
 
@@ -483,7 +483,7 @@ class Mediacorner {
           return $htmlYT;
      }
      public function se2_v_simplex( $simplexid ){
-          $vimeoYT = '<iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $simplexid .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>';
+          $vimeoYT = '<iframe loading="lazy" width="100%" height="100%" src="https://media10.simplex.tv/content/'. $simplexid .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe>';
           return $vimeoYT;
      }
      
