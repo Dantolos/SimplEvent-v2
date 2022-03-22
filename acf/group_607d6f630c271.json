@@ -65,7 +65,8 @@
                 "bs1": "Breakout Session 1",
                 "bs2": "Breakout Session 2",
                 "bs3": "Breakout Session 3",
-                "dd": "Digital Detox"
+                "dd": "Digital Detox",
+                "": ""
             },
             "allow_custom": 0,
             "default_value": [],
@@ -73,6 +74,35 @@
             "toggle": 0,
             "return_format": "array",
             "save_custom": 0
+        },
+        {
+            "key": "field_6239e5394003d",
+            "label": "Event",
+            "name": "event",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "field_6239e1a65a55c"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0,
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "main": "SimplEvent v2",
+                "conf": "Conference",
+                "lab-1": "Lab 1",
+                "lab-2": "Lab 2",
+                "leaders": "Leader's Summit"
+            }
         },
         {
             "key": "field_607da14df52ab",
@@ -539,5 +569,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1642083446
+    "modified": 1647961612
 }

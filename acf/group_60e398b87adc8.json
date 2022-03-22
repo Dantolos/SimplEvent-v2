@@ -3,67 +3,15 @@
     "title": "Page | Line Up",
     "fields": [
         {
-            "key": "field_60e398cbc66ad",
-            "label": "Jahr",
-            "name": "jahr",
-            "type": "taxonomy",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "taxonomy": "jahr",
-            "field_type": "select",
-            "allow_null": 0,
-            "add_term": 1,
-            "save_terms": 0,
-            "load_terms": 0,
-            "return_format": "id",
-            "multiple": 0
-        },
-        {
-            "key": "field_61f2d8c682ebf",
-            "label": "Kategorie",
-            "name": "kategorie",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_601befe72fd77"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0,
-            "wpml_cf_preferences": 3,
-            "choices": {
-                "trend": "Trendradar",
-                "": "",
-                "dienstl": "Dienstleistung",
-                "prod": "Produktion",
-                "tech": "Hightech\/Biotech"
-            }
-        },
-        {
             "key": "field_616ece2fa9274",
             "label": "Filters",
             "name": "filters",
             "type": "checkbox",
-            "instructions": "",
+            "instructions": "Welche Filter-Optionen sollen auf der Seite zur Verfügung gestellt werden?",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "30",
+                "width": "70",
                 "class": "",
                 "id": ""
             },
@@ -78,7 +26,101 @@
             "layout": "vertical",
             "toggle": 0,
             "return_format": "value",
+            "show_column": 0,
+            "show_column_weight": 1000,
+            "allow_quickedit": 0,
+            "allow_bulkedit": 0,
             "save_custom": 0
+        },
+        {
+            "key": "field_6239e707c8c51",
+            "label": "Visibility",
+            "name": "visibility",
+            "type": "group",
+            "instructions": "Selektion setzen, um nur bestimmte Kategorien oder Jahre anzeigen zu lassen. \r\nSollte keine Option ausgewählt sein, werden alle angezeigt.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_60e398cbc66ad",
+                    "label": "Jahr",
+                    "name": "jahr",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "16",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "taxonomy": "jahr",
+                    "field_type": "select",
+                    "allow_null": 0,
+                    "add_term": 1,
+                    "save_terms": 0,
+                    "load_terms": 0,
+                    "return_format": "id",
+                    "show_column": 0,
+                    "show_column_weight": 1000,
+                    "allow_quickedit": 0,
+                    "allow_bulkedit": 0,
+                    "multiple": 0
+                },
+                {
+                    "key": "field_6239e7c1c8c52",
+                    "label": "Events",
+                    "name": "events",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_6239e1a65a55c"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0,
+                    "wpml_cf_preferences": 1
+                },
+                {
+                    "key": "field_6239e857025fc",
+                    "label": "Kategorie",
+                    "name": "kategorie",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "field_601befe72fd77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0,
+                    "wpml_cf_preferences": 1,
+                    "choices": []
+                }
+            ]
         }
     ],
     "location": [
@@ -99,5 +141,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643305265
+    "modified": 1647962434
 }

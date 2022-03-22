@@ -30,7 +30,7 @@ footer {
                .footer-logo-negativ {
                     max-width:120px;
                     max-height:80px;
-                    
+                    margin-bottom:10px;
                     @include breakpoint( 's' ){
                          max-width: 360px; 
                          max-height:160px;  
