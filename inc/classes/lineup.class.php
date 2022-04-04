@@ -57,7 +57,7 @@ class LineUp {
                          foreach( $event as $eValue => $e ){
                               foreach( get_field('event', $speaker->ID) as $sE ){
                                   
-                                   if( $eValue === $sE['value']  ){
+                                   if( intval($eValue) === $sE['value']  ){
                                         $isInEvent = true;
                                    }
                               }
@@ -319,7 +319,7 @@ class LineUp {
                }
           }
 
-          $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'">';
+          $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'" >';
           
           //query IDs
           $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'],  $args['event'] );

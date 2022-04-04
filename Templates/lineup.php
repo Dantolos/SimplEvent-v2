@@ -18,7 +18,7 @@ $LineUp = new LineUp;
 
 
 
-//CONTENT OUTPUT
+//CONTENT OUTPUT 
 
 the_content();
 
