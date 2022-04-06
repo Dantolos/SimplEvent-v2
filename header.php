@@ -172,6 +172,7 @@ require_once('inc/supports/slider.php');
 //including assets
 require_once('inc/assets/button.php');
 require_once('inc/assets/socialmedia.php');
+require_once('inc/assets/tags.php');
 
 //including classes
 require_once('inc/classes/post.class.php');
@@ -232,7 +233,9 @@ wp_head();
                     'container_class'   => "se2-navigation menu-content ", 
                     'walker'            => new Walker_Nav_Primary()
                );
-               wp_nav_menu( $menuArgs );
+               
+                    wp_nav_menu( $menuArgs );
+               
                ?>
 
                <div id="extramenu" class="menu-content">
@@ -313,7 +316,6 @@ wp_head();
      ?>
 
 
-    <div id="master-container" class=" <?php echo $videoHeaderClass; ?>">
+     <div id="master-container" class=" <?php echo $videoHeaderClass; ?>">
           <div id="content-container">
-           
-               
+         

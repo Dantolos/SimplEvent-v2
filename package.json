@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@wordpress/components": "^15.0.0",
+    "browser-sync": "^2.27.9",
     "uuid": "^3.4.0"
   }
 }

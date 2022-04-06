@@ -15,7 +15,6 @@
 
 .se2-speaker-grid-image {
      @include imageSettings;
-
 }
 
 //grid
@@ -43,7 +42,7 @@
           opacity: 1;
           h5 { margin-bottom:5px;text-align: center; width:100%;}
           p { margin-bottom:0; line-height: 1em; text-align: center;}
-
+          .se2-tag-cloud { margin-top:5px; }
      }
 
      &:hover {

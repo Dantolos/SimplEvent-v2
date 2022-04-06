@@ -6,6 +6,8 @@
 @import 'components/socialmedia';
 @import 'components/slider';
 
+@import 'components/assets/tags';
+
 @import 'components/loader';
 * {
     transform: all();
@@ -49,7 +51,7 @@ html {
      min-height:40vh;
      width:100%;
 }
- 
+
 
 @import 'components/header';
 @import 'components/footer'; 

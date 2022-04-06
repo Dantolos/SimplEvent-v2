@@ -136,9 +136,13 @@ function theme_add_scripts()
     }
     $currpageVar = (is_front_page()) ? 'home' : 'n';
     //$quickInfoAktiv = ($_GET['info']) ? $_GET['info'] : 'aa';
+    $language =  '';
+    if( null !== ICL_LANGUAGE_CODE ){
+        $language =  ICL_LANGUAGE_CODE;
+    }
     $wnm_custom = array( 
         'templateUrl' => get_template_directory_uri(), 
-        'lang' => ICL_LANGUAGE_CODE,
+        'lang' => $language,
         'ajaxurl' => admin_url('admin-ajax.php'),
         'cookieAcc' =>  $cookieAccepted,
         'page' => $currpageVar,

@@ -1,5 +1,6 @@
 <?php
 
+
 class LineUp {
 
 
@@ -10,6 +11,7 @@ class LineUp {
      public $dateFormat;
      public $files; 
      public $socialMedia;
+     public $tags;
      public $MediaCorner;
      public $speakerCloud;
 
@@ -17,6 +19,7 @@ class LineUp {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;
           $this->files = new se2_Files;
+          $this->tags = new Tags;
           $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'dark_mode_picker' )[1] ) );
           $this->MediaCorner = new Mediacorner();
      }
@@ -265,6 +268,8 @@ class LineUp {
                $this->speakerCard .= '<h5>'.$name.'</h5>';
                $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
                $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
+
+               $this->speakerCard .= $this->tags->tag_cloud( get_field( 'speaker_kategorie', $speakerID ) );
                $this->speakerCard .= '</div>';
 
           $this->speakerCard .= '</div>';
