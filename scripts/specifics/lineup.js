@@ -14,7 +14,7 @@ var args = {
      cat: 'all',
      sort: '',
      year: currenYear,
-     event: 'all'
+     event: currentEvent
 };
 
 
@@ -38,6 +38,14 @@ if (CATFORM) {
      })
 }
 
+//events
+const EVENTFORM = document.getElementById('speechevent')
+if (EVENTFORM) {
+     EVENTFORM.addEventListener('change', (e) => {
+          args.event = EVENTFORM.value
+          CALL_AJAX_LINEUP(args)
+     })
+}
 
 //order
 const ORDERBUTTON = document.querySelector('.se2-lineup-filter-sort')

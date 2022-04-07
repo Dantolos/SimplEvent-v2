@@ -25,6 +25,7 @@ require_once('supports/date.php');
 require_once('supports/forms.php');
 require_once('supports/files.php');
 require_once('supports/social-media.php');
+require_once('assets/tags.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -111,6 +112,7 @@ function lineup()
           'cat' => $ARGS->cat,
           'sort' => $ARGS->sort,
           'year' => $ARGS->year,
+          'event' => $ARGS->event,
      );
      
     $LineUp = new LineUp;
@@ -127,7 +129,7 @@ add_action('wp_ajax_nopriv_speaker_lightbox', 'speaker_lightbox');
 add_action('wp_ajax_speaker_lightbox', 'speaker_lightbox'); //nur für angemeldete (admins)
 
 function speaker_lightbox() 
-{
+{ 
      $speakerID = $_POST['speakerid'];
      $LineUp = new LineUp;
      
