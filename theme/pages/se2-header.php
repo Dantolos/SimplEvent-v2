@@ -183,7 +183,9 @@ class se2_page_Header extends se2_page_builder {
                     'icon'         => '',
                     'buttontext'   => '',
                     'buttoncolor'  => '#ffffff',
-                    'api'          => ''
+                    'type'         => 'link',
+                    'api'          => '',
+                    
                ];
                $se_cta_content = (get_option( 'se_cta' )) ? get_option('se_cta') : $se_cta_std;
 
@@ -197,8 +199,26 @@ class se2_page_Header extends se2_page_builder {
                echo '<p style="margin-top:20px;"><b>Button-Color</b></p>';
                echo '<input class="se-color-picker" type="text" name="se_cta[buttoncolor]" value="' .$se_cta_content['buttoncolor']. '" data-default-color="'.$se_cta_std['buttoncolor'].'" />';
 
+               $cta_types = array(
+                    'link'    => 'Link',
+                    'api'     => 'API',
+                    'post'    => 'Post',
+               );
+               
+               echo '<select name="se_cta[type]" style="width:100%;">';
+               foreach( $cta_types as $cta_type_value => $cta_type ){
+                    $selected ='';
+                    if( isset(get_option( 'se_cta' )['type']) ){
+                         $selected = (get_option( 'se_cta' )['type'] === $cta_type ) ? 'selected' : '';
+                    }
+                    echo '<option value="'.$cta_type_value.'" '.$selected.'>'.$cta_type.'</option>';
+               }
+               echo '</select>';
+
                echo '<p style="margin-top:20px;"><b>API URL</b></p>';
                echo '<input type="text" name="se_cta[api]" value="' .$se_cta_content['api']. '" placeholder="API URL"/>';
+
+               
           }
           
      }
