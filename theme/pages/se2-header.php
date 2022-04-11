@@ -186,7 +186,7 @@ class se2_page_Header extends se2_page_builder {
                     'type'         => 'link',
                     'api'          => '',
                     
-               ];
+               ]; 
                $se_cta_content = (get_option( 'se_cta' )) ? get_option('se_cta') : $se_cta_std;
 
                echo '<p><b>Icon</b></p>';
@@ -205,11 +205,15 @@ class se2_page_Header extends se2_page_builder {
                     'post'    => 'Post',
                );
                
-               echo '<select name="se_cta[type]" style="width:100%;">';
+               echo '<p style="margin-top:20px;"><b>Type</b></p>';
+               
+               echo '<select name="se_cta[type]" style="width:100%;" id="se_cta">';
                foreach( $cta_types as $cta_type_value => $cta_type ){
                     $selected ='';
+                    ;
+                    
                     if( isset(get_option( 'se_cta' )['type']) ){
-                         $selected = (get_option( 'se_cta' )['type'] === $cta_type ) ? 'selected' : '';
+                         $selected = (get_option( 'se_cta' )['type'] == $cta_type_value ) ? 'selected' : '';
                     }
                     echo '<option value="'.$cta_type_value.'" '.$selected.'>'.$cta_type.'</option>';
                }
