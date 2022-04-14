@@ -31,9 +31,6 @@ class se2_Ajax {
                         console.warn(err.message);
                     }
 
-                    
-                    
-
                     if (document.querySelector('.se2-post-lb-gallery')) {
                         let galery = new se2_Gallery();
                         galery.std_gallery(document.querySelector('.se2-post-lb-gallery'))

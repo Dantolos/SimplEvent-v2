@@ -36,7 +36,7 @@ require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app
 /*-------------------------------------------------------------*/
 /*----------------------------CTA------------------------------*/
 /*-------------------------------------------------------------*/
-require get_template_directory() . '/theme/plugins/se2-cta/se2-cta.php';
+require get_template_directory() . '/inc/classes/features/features-cta.class.php';
 
 /*-------------------------------------------------------------*/
 if(is_user_logged_in()){
@@ -66,6 +66,8 @@ if(is_user_logged_in()){
     /*-------------------------------------------------------------*/
     require get_template_directory() . '/theme/plugins/se2-custom-dashboard/se2-custom-dashboard.php';
 
+    add_post_type_support( 'features', 'post-attributes' );
+ 
 
 }
 /*-------------------------------------------------------------*/
@@ -136,9 +138,13 @@ function theme_add_scripts()
     }
     $currpageVar = (is_front_page()) ? 'home' : 'n';
     //$quickInfoAktiv = ($_GET['info']) ? $_GET['info'] : 'aa';
+    $language =  '';
+    if( null !== ICL_LANGUAGE_CODE ){
+        $language =  ICL_LANGUAGE_CODE;
+    }
     $wnm_custom = array( 
         'templateUrl' => get_template_directory_uri(), 
-        'lang' => ICL_LANGUAGE_CODE,
+        'lang' => $language,
         'ajaxurl' => admin_url('admin-ajax.php'),
         'cookieAcc' =>  $cookieAccepted,
         'page' => $currpageVar,

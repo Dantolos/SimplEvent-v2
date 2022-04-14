@@ -6,7 +6,6 @@ gsap.config({
 
 
 
-
 var DETECT = new Detect();
 
 var LOADER = new se2_Loader();
@@ -47,7 +46,7 @@ function LOADMOBILESCRIPTS() {
      if (window.innerWidth < mBREAKPOINT && !mobileLoaded) {
           jQuery('header').append(BURGERRMENU);
           jQuery('.menu-content').wrapAll('<div id="mobile-menu-wrapper" style="opacity:0;"/>');
-          
+
           let myScript = document.createElement("script");
           myScript.setAttribute("src", globalURL.templateUrl + "/scripts/mobile-script.js");
           document.body.appendChild(myScript);
@@ -62,7 +61,7 @@ function LOADMOBILESCRIPTS() {
           gsap.set(MOBILEMENU, { y: '0', scale: 1, opacity: 1 })
           gsap.set(StaggerItems, { y: '0', scale: 1, opacity: 1 })
           mobileLoaded = false;
-          
+
      }
 
 }
@@ -80,25 +79,25 @@ if (LANGUEGEBUTTONCONTAINER) {
 }
 
 var NAVLVL1 = document.querySelectorAll('.se2-lvl-1-item');
-function OpenSubMenu(){
-     for(let NAV of NAVLVL1){
+function OpenSubMenu() {
+     for (let NAV of NAVLVL1) {
           console.log('MENU')
-          if(NAV.querySelector('.se2-sub-menu')){
+          if (NAV.querySelector('.se2-sub-menu')) {
                let SUB = NAV.querySelector('.se2-sub-menu');
-               gsap.set(SUB, {opacity: 0, y: '-10px' })
+               gsap.set(SUB, { opacity: 0, y: '-10px' })
                NAV.addEventListener('mouseover', () => {
                     SUB.style.visibility = 'visible';
                     gsap.to(SUB, .1, { opacity: 1, y: 0 })
                })
                NAV.addEventListener('mouseleave', () => {
-                    gsap.to(SUB, .3, {opacity: 0, y: '-10px'})
+                    gsap.to(SUB, .3, { opacity: 0, y: '-10px' })
                     SUB.style.visibility = 'hidden';
                })
           }
 
      }
 }
-if(window.innerWidth > mBREAKPOINT){
+if (window.innerWidth > mBREAKPOINT) {
      window.addEventListener('resize', () => {
           OpenSubMenu();
      });
@@ -175,12 +174,12 @@ jQuery(document).ajaxComplete(function () {
 });
 
 function call_post_lightbox(POST) {
-          console.log(POST.getAttribute('postid'))
-          var callData = {
-               lbid: POST.getAttribute('postid'),
-               action: POST.getAttribute('lb')
-          }
-          LIGHTBOX.openLightbox('AX', callData);
+     console.log(POST.getAttribute('postid'))
+     var callData = {
+          lbid: POST.getAttribute('postid'),
+          action: POST.getAttribute('lb')
+     }
+     LIGHTBOX.openLightbox('AX', callData);
 
 }
 
@@ -212,7 +211,7 @@ if (CATEGORIECONTAINER.length > 0) {
 const queryString = window.location.search;
 var searchParams = new URLSearchParams(queryString);
 
-if(searchParams.has("type")){
+if (searchParams.has("type")) {
      switch (searchParams.get('type')) {
           case 'event':
                var callData = {
@@ -248,96 +247,96 @@ if(searchParams.has("type")){
 //SPLIDER
 //---------------------------------
 
-var speakerSplide = document.getElementsByClassName( 'speaker-splide' );
+var speakerSplide = document.getElementsByClassName('speaker-splide');
 
 
-     for ( var i = 0; i < speakerSplide.length; i++ ) {
-          var perPageCount = speakerSplide[ i ].getAttribute('perpage') ? speakerSplide[ i ].getAttribute('perpage') : 3;
-          new Splide( speakerSplide[ i ], {
-               type   : 'loop',
-               perPage:perPageCount,
-               perMove:2,
-               pagination: false,
-               breakpoints: {
-                    1024: {
-                         perPage:2,
-                         perMove:1
-                    },
-                    667:{
-                         perPage:1,
-                         perMove:1
-                    }
+for (var i = 0; i < speakerSplide.length; i++) {
+     var perPageCount = speakerSplide[i].getAttribute('perpage') ? speakerSplide[i].getAttribute('perpage') : 3;
+     new Splide(speakerSplide[i], {
+          type: 'loop',
+          perPage: perPageCount,
+          perMove: 2,
+          pagination: false,
+          breakpoints: {
+               1024: {
+                    perPage: 2,
+                    perMove: 1
                },
-               classes: {
-                    // Add classes for arrows.
-                    arrows: 'splide__arrows se2-class-arrows',
-                    arrow : 'splide__arrow se2-class-arrow',
-                    prev  : 'splide__arrow--prev se2-class-prev',
-                    next  : 'splide__arrow--next se2-class-next',
-
-                    pagination: 'splide__pagination se2-class-pagination',
-                    page      : 'splide__pagination__page se2-class-page', 
+               667: {
+                    perPage: 1,
+                    perMove: 1
                }
+          },
+          classes: {
+               // Add classes for arrows.
+               arrows: 'splide__arrows se2-class-arrows',
+               arrow: 'splide__arrow se2-class-arrow',
+               prev: 'splide__arrow--prev se2-class-prev',
+               next: 'splide__arrow--next se2-class-next',
+
+               pagination: 'splide__pagination se2-class-pagination',
+               page: 'splide__pagination__page se2-class-page',
           }
-          ).mount();
      }
+     ).mount();
+}
 
 
-var quoteSplide = document.getElementsByClassName( 'quote-splide' );
+var quoteSplide = document.getElementsByClassName('quote-splide');
 
-for ( var i = 0; i < quoteSplide.length; i++ ) {
-     new Splide( quoteSplide[ i ], {
-          type   : 'loop',
-          perPage:1,
+for (var i = 0; i < quoteSplide.length; i++) {
+     new Splide(quoteSplide[i], {
+          type: 'loop',
+          perPage: 1,
           arrows: false,
           autoplay: true,
           lazyLoad: 'nearby',
           classes: {
                pagination: 'splide__pagination se2-class-pagination',
-               page      : 'splide__pagination__page se2-class-page', 
+               page: 'splide__pagination__page se2-class-page',
           }
      }
      ).mount();
 }
- 
 
-function init_gallery_splider(){
-     var quoteSplide = document.querySelectorAll( '.gallery-splide' );
+
+function init_gallery_splider() {
+     var quoteSplide = document.querySelectorAll('.gallery-splide');
      console.log(quoteSplide)
-     for ( var i = 0; i < quoteSplide.length; i++ ) {
-          let container = quoteSplide[ i ]
+     for (var i = 0; i < quoteSplide.length; i++) {
+          let container = quoteSplide[i]
           let mainContainer = container.querySelector('.gallery-splide-main')
-          var main = new Splide( mainContainer, {
-               type  : 'fade',
-               fixedHeight : 500,
+          var main = new Splide(mainContainer, {
+               type: 'fade',
+               fixedHeight: 500,
                rewind: true,
                arrows: false,
                autoplay: true,
                lazyLoad: 'nearby',
                classes: {
                     pagination: 'splide__pagination se2-class-pagination',
-                    page      : 'splide__pagination__page se2-class-page', 
+                    page: 'splide__pagination__page se2-class-page',
                }
           })
 
           let thumbContainer = container.querySelector('.gallery-splide-thumb')
-          var thumb = new Splide( thumbContainer, {
-               fixedWidth  : 100,
-               fixedHeight : 60,
-               gap         : 10,
-               rewind      : true,
-               pagination  : false,
-               cover       : true,
+          var thumb = new Splide(thumbContainer, {
+               fixedWidth: 100,
+               fixedHeight: 60,
+               gap: 10,
+               rewind: true,
+               pagination: false,
+               cover: true,
                isNavigation: true,
-               breakpoints : {
-               600: {
-               fixedWidth : 60,
-               fixedHeight: 44,
-               },
+               breakpoints: {
+                    600: {
+                         fixedWidth: 60,
+                         fixedHeight: 44,
+                    },
                },
           })
 
-          main.sync( thumb );
+          main.sync(thumb);
           main.mount();
           thumb.mount();
      }

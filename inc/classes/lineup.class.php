@@ -1,5 +1,6 @@
 <?php
 
+
 class LineUp {
 
 
@@ -10,6 +11,7 @@ class LineUp {
      public $dateFormat;
      public $files; 
      public $socialMedia;
+     public $tags;
      public $MediaCorner;
      public $speakerCloud;
 
@@ -17,26 +19,31 @@ class LineUp {
           $this->forms = new se2_Forms;
           $this->dateFormat = new Date_Format;
           $this->files = new se2_Files;
+          $this->tags = new Tags;
           $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'dark_mode_picker' )[1] ) );
           $this->MediaCorner = new Mediacorner();
      }
 
 
-     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = 'all' ) {
+     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = 'main' ) {
           $speaker_args = array(
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
           );
- 
+          
           $speakerData = new WP_Query( $speaker_args ); 
-
+          
           foreach( $speakerData->posts as $speaker ){
-
+               
                if( $cat != 'all' ){
                     $isInCat = false;
                     if( !is_array($cat) ){
                          if( !in_array( $cat, get_field('speaker_kategorie', $speaker->ID) ) ){
+                           
                               continue;
+                         } else {
+                              
+                              $isInCat = true;
                          }
                     } else {                  
                          foreach( $cat as $c ){
@@ -49,14 +56,13 @@ class LineUp {
                }
                
               
-               if($event != 'all'){
+               if($event != 'main'){
                     $isInEvent = false;
                     if( !is_array($event) || !is_array(get_field('event', $speaker->ID)) ){
                               continue;
                     } else {                  
-                         foreach( $event as $eValue => $e ){
-                              foreach( get_field('event', $speaker->ID) as $sE ){
-                                  
+                         foreach( $event as $eValue => $e ){      
+                              foreach( get_field('event', $speaker->ID) as $sE ){    
                                    if( $eValue === $sE['value']  ){
                                         $isInEvent = true;
                                    }
@@ -66,21 +72,34 @@ class LineUp {
                     }
                }
 
+             
+
                $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
                if($year != 'all'){
                     $isInYear = false;
                     
-                    foreach ( $speakeryears as $speakeryear ) {
-                         if( $speakeryear->term_id == $year) { 
-                              $isInYear = true;
+                    foreach ( $speakeryears as $speakeryear ) {           
+                         if( !is_array($year) && $speakeryear->term_id == $year) { 
+                              $isInYear = true;      
+                         } elseif ( is_array($year) ) {               
+                              foreach( $year as $y ){
+                                   if( intval($y) === $speakeryear->term_id ){
+                                        $isInYear = true;
+                                   }
+                              }
+                         } else {
+                              continue;
                          }
                     }
                     if( !$isInYear ){ continue; }
                }
+             
+               
+
                array_push( $this->speakerIDs, $speaker->ID );
 
           }
-
+          
 
           if( $order === 'asc' ){
 
@@ -114,14 +133,14 @@ class LineUp {
                uasort($this->speakerIDs, 'sortDSC');
 
           }
-
+          
           return $this->speakerIDs;
 
      }
  
 
 
-     public function cast_line_up_filter_section( $pageID ) {
+     public function cast_line_up_filter_section( $pageID, $args ) {
 
           $this->output = '<div  class="se2-lineup-filter-section container">';
 
@@ -151,6 +170,31 @@ class LineUp {
                     $this->output .= $this->forms->castDropdown( 'speakeryear', $yearOptions, false );
                     $this->output .= '</div>';
                }
+
+               //filter event
+               if( in_array( 'event', $filters ) ){
+                    $this->output .= '<div class="se2-lineup-filter-events filter-option">';
+
+                    //search for possible events to choice
+                    $checkSpeakerIDs = get_posts( ['numberposts' => -1, 'post_type' => 'speakers', 'fields' => 'ids'] );
+                    $speechEvents = [];
+                    if (is_array($checkSpeakerIDs) || is_object($checkSpeakerIDs)) {
+                         foreach($checkSpeakerIDs as $speakid) {
+                              if(get_field('event', $speakid )){
+                                   foreach( get_field('event', $speakid ) as $event ){
+                                        if(!in_array( $event['label'], $speechEvents )){
+                                             array_push( $speechEvents, $event['label'] ); 
+                                        }
+                                   }
+                              }
+                         }
+                    }
+
+                    //cast dropdown
+                   
+                    $this->output .= $this->forms->castDropdown( 'speechevent', $speechEvents, false, $args['event'] );
+                    $this->output .= '</div>';
+               }
           
                //filter categorie
                if( in_array( 'cat', $filters ) ){
@@ -172,7 +216,7 @@ class LineUp {
                     }
 
                     //cast dropdown
-                    $this->output .= $this->forms->castDropdown( 'speechcat', $speechCategorie, true );
+                    $this->output .= $this->forms->castDropdown( 'speechcat', $speechCategorie, true, $args['cat'] );
                     $this->output .= '</div>';
                }
 
@@ -265,6 +309,8 @@ class LineUp {
                $this->speakerCard .= '<h5>'.$name.'</h5>';
                $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
                $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
+
+               $this->speakerCard .= $this->tags->tag_cloud( get_field( 'speaker_kategorie', $speakerID ) );
                $this->speakerCard .= '</div>';
 
           $this->speakerCard .= '</div>';
@@ -319,18 +365,27 @@ class LineUp {
                }
           }
 
-          $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'">';
+          //event
+          $currEvent = 'main';
+        
+
+          $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'" data-event="'.$currEvent.'">';
           
           //query IDs
           $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'],  $args['event'] );
 
-          //cast view        
-          foreach( $speakerIDs as $speakerID ){
-               if( empty($args) || $args['view'] === 'grid' ){
-                    $this->output .= $this->cast_speaker_grid($speakerID);
-               }else if( $args['view'] === 'list' ){
-                    $this->output .= $this->cast_speaker_list($speakerID);
+          //cast view       
+          if( $speakerIDs ){
+               foreach( $speakerIDs as $speakerID ){
+                    
+                    if( empty($args) || $args['view'] === 'grid' ){
+                         $this->output .= $this->cast_speaker_grid($speakerID);
+                    }else if( $args['view'] === 'list' ){
+                         $this->output .= $this->cast_speaker_list($speakerID);
+                    }
                }
+          } else {
+               $this->output .= '<h4>'.__('No speakers found!', 'SimplEvent').'</h4>'; 
           }
 
           $this->output .= '</div>';

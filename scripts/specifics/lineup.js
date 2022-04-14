@@ -8,11 +8,13 @@ var SPEAKERS = document.querySelectorAll('.speaker-profile')
 
 //stadard-ansicht
 var currenYear = document.getElementById('lineup-container').getAttribute('year')
+var currentEvent = document.getElementById('lineup-container').dataset.event
 var args = {
      view: 'grid',
      cat: 'all',
      sort: '',
-     year: currenYear
+     year: currenYear,
+     event: currentEvent
 };
 
 
@@ -20,7 +22,7 @@ const LINEUPCONTAINER = document.getElementById('lineup-container')
 
 //jahr
 const YEARFORM = document.getElementById('speakeryear')
-if(YEARFORM){
+if (YEARFORM) {
      YEARFORM.addEventListener('change', (e) => {
           args.year = YEARFORM.value
           CALL_AJAX_LINEUP(args)
@@ -29,13 +31,21 @@ if(YEARFORM){
 
 //categories
 const CATFORM = document.getElementById('speechcat')
-if(CATFORM){
+if (CATFORM) {
      CATFORM.addEventListener('change', (e) => {
           args.cat = CATFORM.value
           CALL_AJAX_LINEUP(args)
      })
 }
 
+//events
+const EVENTFORM = document.getElementById('speechevent')
+if (EVENTFORM) {
+     EVENTFORM.addEventListener('change', (e) => {
+          args.event = EVENTFORM.value
+          CALL_AJAX_LINEUP(args)
+     })
+}
 
 //order
 const ORDERBUTTON = document.querySelector('.se2-lineup-filter-sort')
@@ -44,21 +54,21 @@ var sortTL = gsap.timeline({ defaults: { duration: .5 } })
 var SORTICON = document.getElementById('dsc');
 sortTL.to(SORTICON, { morphSVG: "#asc" });
 
-if(ORDERBUTTON){
-ORDERBUTTON.addEventListener('click', () => {
+if (ORDERBUTTON) {
+     ORDERBUTTON.addEventListener('click', () => {
 
-     args.sort = (args.sort == 'asc') ? 'dsc' : 'asc';
-     sortTL.play()
-
-     if (args.sort == 'dsc') {
+          args.sort = (args.sort == 'asc') ? 'dsc' : 'asc';
           sortTL.play()
-     } else {
-          sortTL.reverse()
-     }
 
-     CALL_AJAX_LINEUP(args)
+          if (args.sort == 'dsc') {
+               sortTL.play()
+          } else {
+               sortTL.reverse()
+          }
 
-})
+          CALL_AJAX_LINEUP(args)
+
+     })
 }
 
 
@@ -103,7 +113,7 @@ function CALL_AJAX_LINEUP(a) {
 
 }
 
- 
+
 
 
 //listelemennts, animations
@@ -148,26 +158,26 @@ function CALL_ANIMATION(S) {
 //REVIEW GALLERY 
 var REVIEWGALLERY = [];
 jQuery(document).ajaxComplete(function () {
-    
+
      REVIEWGALLERY = document.querySelectorAll('.se-review-img');
      if (REVIEWGALLERY) {
-         for (let index = 0; index < REVIEWGALLERY.length; index++) {
-               REVIEWGALLERY[index].addEventListener('click', (e)=>{
+          for (let index = 0; index < REVIEWGALLERY.length; index++) {
+               REVIEWGALLERY[index].addEventListener('click', (e) => {
                     console.log(REVIEWGALLERY[index].querySelector('img').getAttribute('src'))
-                    REVIEWGALLERY.forEach(function(el) { el.classList.remove('se-review-img-active') })
-                    if(REVIEWGALLERY[index].getAttribute('open', '0')){
+                    REVIEWGALLERY.forEach(function (el) { el.classList.remove('se-review-img-active') })
+                    if (REVIEWGALLERY[index].getAttribute('open', '0')) {
                          REVIEWGALLERY[index].setAttribute('open', '1')
                          REVIEWGALLERY[index].classList.add('se-review-img-active')
-                    }else {
+                    } else {
                          REVIEWGALLERY[index].classList.remove('se-review-img-active')
                          REVIEWGALLERY[index].setAttribute('open', '0')
-                         
+
                     }
-                    
-                  
+
+
                })
-              
-         }
+
+          }
 
      }
 
