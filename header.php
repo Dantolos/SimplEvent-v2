@@ -132,8 +132,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.81'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.44' );
+     $scriptversion = '1.0.82'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.0.45' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -175,7 +175,6 @@ require_once('inc/assets/socialmedia.php');
 require_once('inc/assets/tags.php');
 
 //including classes
-require_once('inc/classes/post.class.php');
 
 require_once('inc/classes/company.class.php');
 require_once('inc/classes/events.class.php');
@@ -309,8 +308,12 @@ wp_head();
      <?php 
      // ------CTA------
      $cta = new se2_CTA;
-     if(get_option( 'se_cta_activ' ) === 'on'){
-          echo $cta->cast_cta_button();
+     if(get_option( 'se_cta_activ' ) === 'on' && get_option( 'se_cta' )){
+          echo '<div class="cta-container">';
+          foreach( get_option( 'se_cta' ) as $ctaID ){
+               echo $cta->cast_cta_button( $ctaID );
+          }
+          echo '</div>';
      }
      
      ?>

@@ -36,7 +36,7 @@ require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app
 /*-------------------------------------------------------------*/
 /*----------------------------CTA------------------------------*/
 /*-------------------------------------------------------------*/
-require get_template_directory() . '/theme/plugins/se2-cta/se2-cta.php';
+require get_template_directory() . '/inc/classes/features/features-cta.class.php';
 
 /*-------------------------------------------------------------*/
 if(is_user_logged_in()){
@@ -68,31 +68,6 @@ if(is_user_logged_in()){
 
     add_post_type_support( 'features', 'post-attributes' );
  
-/**
-* Filter the single_template with our custom function
-*/
-add_filter('single_template', 'my_single_template');
- 
-/**
-* Single template function which will choose our template
-*/
-function my_single_template($single) {
-    global $wp_query, $post;
-    
-    /**
-    * Checks for single template by category
-    * Check by category slug and ID
-    */
-    foreach((array)get_the_category() as $cat) :
-    
-        if(file_exists('/Templates/posts/features/' . $cat->slug . '-single-post.php'))
-            return '/Templates/posts/features/' . $cat->slug . '-single-post.php';
-        
-        elseif(file_exists('/Templates/posts/features/' . $cat->term_id  . '-single-post.php'))
-            return '/Templates/posts/features/' . $cat->term_id  . '-single-post.php';
-    
-    endforeach;
-}
 
 }
 /*-------------------------------------------------------------*/

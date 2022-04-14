@@ -19,6 +19,7 @@ require_once('classes/sessions.class.php');
 require_once('classes/mediacorner.class.php');
 require_once('classes/award.class.php');
 
+require_once('classes/features/features-cta.class.php');
 
 //including supports
 require_once('supports/date.php');
@@ -246,4 +247,19 @@ function videos()
      wp_send_json( $MediaCorner->se2_cast_video_matrix( $pageID, $filter ) ); 
      
      die();
+}
+
+/*------------- CTA ---------------*/
+add_action('wp_ajax_nopriv_cta', 'cta');
+add_action('wp_ajax_cta', 'cta'); //nur für angemeldete (admins)
+
+function cta() 
+{
+     $postID = $_POST['postid'];
+     $CTA = new se2_CTA;
+     
+     wp_send_json( $CTA->cast_cta_lightbox( $postID ) ); 
+     
+     die();
+ 
 }

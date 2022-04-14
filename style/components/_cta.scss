@@ -1,31 +1,40 @@
-
-#cta-button {
-    cursor:pointer;
+.cta-container {
     position:fixed;
-    right:20px;
+    right:0;
     bottom:20%;
     z-index:9000;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.cta-button {
+    cursor:pointer;
+   
+    
+    
+    display: flex;
+    //flex-direction: row-reverse;
     align-items: center;
+    justify-content: flex-start;
     width: fit-content;
+    border-radius: 27.5px 0 0 27.5px;
     .cta-butto-icon {
         width:55px;
         height:55px;
-        border-radius: 50%;
+        
         display: flex;
         justify-content: center;
         align-items: center;
         img {
-            width:35px;
-            height:35px;
+            width:26px;
+            height:26px;
         }
     }
     .cta-tooltip { 
-        right:20px;
-        bottom:20%;
-        background-color: black;
+       
         color: white;
+
         border-radius: 5px;
         padding: 5px 20px 5px 20px;
         height:fit-content;
@@ -35,6 +44,19 @@
 }
 
 //LIGHTBOX
+.cta-lightbox {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    height: fit-content;
+    max-height:80vh;
+    max-width:80vw;
+    overflow-y: scroll;
+    @include hideScrollbar;
+}
 
 .api-lightbox {
     position:fixed;

@@ -179,50 +179,28 @@ class se2_page_Header extends se2_page_builder {
           }
 
           function simplevent_se_cta() {
-               $se_cta_std = [
-                    'icon'         => '',
-                    'buttontext'   => '',
-                    'buttoncolor'  => '#ffffff',
-                    'type'         => 'link',
-                    'api'          => '',
-                    
-               ]; 
+               $se_cta_std = array();
                $se_cta_content = (get_option( 'se_cta' )) ? get_option('se_cta') : $se_cta_std;
 
-               echo '<p><b>Icon</b></p>';
-               echo '<div class="image-preview image-neg"><img src="'. $se_cta_content['icon'].'" /></div>';
-               echo '<input type="button" style="width:25%;" value="Icon" class="button button-secondary upload-button" data-target="cta-icon"/><input type="" style="width:73%;" id="cta-icon" name="se_cta[icon]" value="' .$se_cta_content['icon']. '"/>';
+         
+               // CTA Posts
+               // Generatet as Features posttype with Template "Call to Action" chooced
+               $cta_posts = get_posts( array(
+                    'post_type' => 'features',
+                    'meta_key' => '_wp_page_template',
+                    'hierarchical' => 0,
+                    'meta_value' => 'Templates/features-cta.php'
+               ));
+                  
+               echo '<p style="margin-top:20px;"><b>Posts</b><br>Generatet as Features-Post with "Call to Action" as Template selected.</p>';
                
-               echo '<p style="margin-top:20px;"><b>Button Text</b></p>';
-               echo '<input type="text" name="se_cta[buttontext]" value="' .$se_cta_content['buttontext']. '" placeholder="Button Text"/>';
-
-               echo '<p style="margin-top:20px;"><b>Button-Color</b></p>';
-               echo '<input class="se-color-picker" type="text" name="se_cta[buttoncolor]" value="' .$se_cta_content['buttoncolor']. '" data-default-color="'.$se_cta_std['buttoncolor'].'" />';
-
-               $cta_types = array(
-                    'link'    => 'Link',
-                    'api'     => 'API',
-                    'post'    => 'Post',
-               );
-               
-               echo '<p style="margin-top:20px;"><b>Type</b></p>';
-               
-               echo '<select name="se_cta[type]" style="width:100%;" id="se_cta">';
-               foreach( $cta_types as $cta_type_value => $cta_type ){
-                    $selected ='';
-                    ;
-                    
-                    if( isset(get_option( 'se_cta' )['type']) ){
-                         $selected = (get_option( 'se_cta' )['type'] == $cta_type_value ) ? 'selected' : '';
-                    }
-                    echo '<option value="'.$cta_type_value.'" '.$selected.'>'.$cta_type.'</option>';
+               if($cta_posts){
+                    foreach($cta_posts as $key => $cta_post){
+                         $check = ( isset($se_cta_content[$cta_post->ID]) ) ? 'checked' : '';
+                         echo '<input type="checkbox" id="'.$cta_post->ID.'" name="se_cta['.$cta_post->ID.']" value="'.$cta_post->ID.'" '.$check.'>';
+                         echo '<label for="'.$cta_post->ID.'">'.$cta_post->post_title.'</label><br>';
+                    }  
                }
-               echo '</select>';
-
-               echo '<p style="margin-top:20px;"><b>API URL</b></p>';
-               echo '<input type="text" name="se_cta[api]" value="' .$se_cta_content['api']. '" placeholder="API URL"/>';
-
-               
           }
           
      }
