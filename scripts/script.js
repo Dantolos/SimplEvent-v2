@@ -347,3 +347,11 @@ init_gallery_splider()
 jQuery(document).ajaxStop(function () {
      init_gallery_splider()
 });
+
+
+LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'))
+
+jQuery(document).ajaxComplete(function () {
+     //CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
+     LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'))
+})
