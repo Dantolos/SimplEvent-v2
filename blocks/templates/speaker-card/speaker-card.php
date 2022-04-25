@@ -8,6 +8,8 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
+//require_once( '../../../inc/classes/lineup.php' );
+
 $id = 'speaker-card-' . $block['id'];
 if( !empty($block['anchor']) ) {
    $id = $block['anchor'];
@@ -28,8 +30,9 @@ $speakerID = get_field('speaker');
 
 
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>" style="width:100%;height:300px;">
-     
+     <h1>HALLOO</h1>
      <?php
+
      echo $LineUp->cast_speaker_card_block( $speakerID );
      ?>
      

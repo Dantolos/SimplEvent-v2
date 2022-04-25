@@ -9,6 +9,7 @@ class Events extends Posts {
      //POST WALL
      public function __construct(){
           $this->dateFormat = new Date_Format;
+          $this->speakerFunctions = new LineUp;
      }
 
      public function call_Events_Wall( $year = false, $order = 'ASC', $orderby = 'date', $acfField = false, $subField = false, $dateFormat = false ) {
@@ -137,7 +138,7 @@ class Events extends Posts {
                     if($facts['anmeldelink']){ 
                          $this->output .= '<tr>';
                          $this->output .= '<td>' . __( 'Anmeldung', 'SimplEvent' ) . '</td>';
-                         $this->output .= '<td>';
+                         $this->output .= '<td class="se2-post-lb-register">';
                          $this->output .= '<a href="'.esc_url( $facts['anmeldelink']['url'] ).'" target="_blank"><div>'.esc_attr( $facts['anmeldelink']['title'] ).'</div></a>'; 
                          $this->output .= '</td>';
                          $this->output .= '</tr>';
@@ -146,6 +147,18 @@ class Events extends Posts {
                $this->output .= '</div>';
 
           $this->output .= '</div>';
+
+          if(get_field('speaker', $ID)){
+                  
+               $this->output .= '<div class="session-lb-speakers session-stagger">';
+
+               foreach(get_field('speaker', $ID) as $eventspeaker){
+                
+                         $this->output .= $this->speakerFunctions->cast_speaker_list($eventspeaker, true);
+                    
+               }
+               $this->output .= '</div>';
+          }
 
           if( is_array( get_field('media', $ID)['gallery'] ) ) {
                $this->output .= '<div class="gallery-splide">';

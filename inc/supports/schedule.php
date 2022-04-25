@@ -142,7 +142,7 @@ class se2_Schedule {
                $durationM = date( 'i', strtotime(get_field('speaker_zeit', $speakerID)['ende'])) - date( 'i', strtotime(get_field('speaker_zeit', $speakerID)['start']));
                $duration = ($durationH * 60) + $durationM;
 
-               $speaker_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-speaker" start="'.$start.'" dur="'.$duration.'" ende="'.$ende.'" date="'.$speakerDate.'" speakerid="'.$speakerID.'">';
+               $speaker_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-speaker" start="'.$start.'" dur="'.$duration.'" ende="'.$ende.'" date="'.$speakerDate.'" data-speakerid="'.$speakerID.'">';
 
                     $speaker_slots .= '<div class="schedule-container">';
                          //slot time
@@ -283,7 +283,7 @@ class se2_Schedule {
                               }
                               $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
-                         $separators_slots .= '</div>';
+                         $separators_slots .= '</div>'; 
                     }
 
                
@@ -350,7 +350,7 @@ class se2_Schedule {
                                    if($sep['speaker'] > 0){
                                         foreach( $sep['speaker'] as $panelSpeaker ){
                                         
-                                             $separators_slots .= '<div class="schedule-slot-panel-speaker" speakerid="'. $panelSpeaker .'">';
+                                             $separators_slots .= '<div class="schedule-slot-panel-speaker" data-speakerid="'. $panelSpeaker .'">';
                                                   $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
 
                                                   $name = ( get_field('speaker_vorname', $panelSpeaker) ) 

@@ -36,7 +36,7 @@
           @include dropShadow;
           
           .session-block-content {
-               padding:20px; 
+               padding:25px 20px; 
           }
           .session-block-header-image div {
                transform: scale(1.1);
@@ -94,15 +94,10 @@
      }
 
      .session-block-content {
-         padding: 20px 0;
-
-         
+         padding: 30px 0;
 
          p { line-height: 1.6em; margin:10px 0; }
-
-
          
-        
      }
 }
 

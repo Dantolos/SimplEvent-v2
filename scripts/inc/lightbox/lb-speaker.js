@@ -7,7 +7,7 @@ class se2_LB_Speaker {
                for (let SPEAKER of S) {
                     SPEAKER.addEventListener('click', e => {
 
-                         let speakerID = SPEAKER.getAttribute('speakerid')
+                         let speakerID = SPEAKER.dataset.speakerid
                          var callData = {
                               speakerid: speakerID,
                               action: 'speaker_lightbox'

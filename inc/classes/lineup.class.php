@@ -244,7 +244,7 @@ class LineUp {
      public function cast_speaker_list( $speakerID, $showCV = false ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
-          $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
+          $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" data-speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
               /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
                $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
    
@@ -290,7 +290,7 @@ class LineUp {
 
      public function cast_speaker_grid( $speakerID ){
 
-          $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" speakerid="'.$speakerID.'">'; 
+          $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" data-speakerid="'.$speakerID.'">'; 
                /*$portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');*/
                $portraitImage = esc_url( get_field('speaker_bild', $speakerID ));
          
@@ -319,7 +319,7 @@ class LineUp {
 
      public function cast_host( $speakerID  ){
   
-          $this->speakerCard = '<div class="se2-speaker-host speaker-profile" speakerid="'.$speakerID.'" style="">'; 
+          $this->speakerCard = '<div class="se2-speaker-host speaker-profile" data-speakerid="'.$speakerID.'" style="">'; 
               /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
                $this->speakerCard .= '<div class="se2-host-profil-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
    
@@ -683,6 +683,7 @@ class LineUp {
                     'firma' => '',
                     'cv' => '',
                ];
+               $speakerID = isset($speaker['type']) ? $speaker['speaker'] : $speaker;
                if( !isset($speaker['type']) || $speaker['type'] === 'Speaker' ){
                     
                     $speakerID = isset($speaker['type']) ? $speaker['speaker'] : $speaker;
@@ -702,7 +703,7 @@ class LineUp {
                     $speakerData['name'] = $speaker['vorname']. ' ' .$speaker['nachname'];
                }
                $this->speakerCloud .= '<div class="speaker-tag">';
-               $this->speakerCloud .= '<h5>';
+               $this->speakerCloud .= '<h5>'; 
                $this->speakerCloud .= $speakerData['name'];
                $this->speakerCloud .= '</h5>';
                     //tooltips
@@ -710,6 +711,7 @@ class LineUp {
                     $this->speakerCloud .= '<div class="speaker-tag-tooltips-image" style="background-image:url('.$speakerData['image'].');"></div>';
                     $this->speakerCloud .= '<h4>' . $speakerData['name'] . '</h4>';
                     $this->speakerCloud .= '<h6>' . $speakerData['firma'] . '</h6>';
+                    $this->speakerCloud .= '<div class="speaker-tag-tooltips-button speaker-lb-trigger" data-speakerid="'.$speakerID.'">'.__('more', 'SimplEvent').'</div>';
                     //$this->speakerCloud .= $speakerData['cv'];
                     $this->speakerCloud .= '</div>';
 

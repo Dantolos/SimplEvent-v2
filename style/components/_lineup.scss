@@ -31,8 +31,8 @@
      border-radius: 3px;
      
      .se2-speaker-grid-image {
-          width:120px;
-          height:120px;
+          width:140px;
+          height:140px;
           border-radius: 50%;
      }
      .se2-speaker-grid-content {
@@ -49,8 +49,8 @@
           transform:scale(.97);
           border-radius: 5px;
           
-          @include dropShadow;
-          .se2-speaker-grid-image { transform: scale(1.2);}
+          @include dropShadow; 
+          /* .se2-speaker-grid-image { transform: scale(1.2);} */
           
      }
 
@@ -148,7 +148,7 @@
       }
       @include breakpoint( 's' ){
           justify-content:center;
-          .filter-option { /* width:100%; */ }
+          
           .se2-lineup-filter-view {
                margin-top:5px; 
           }
@@ -359,9 +359,9 @@
 .speaker-tag-cloud {
      display: flex;
      flex-wrap: wrap;
-     margin: 10px 0;
+     margin: 3px 0;
      padding:10px 0;
-     
+     h6:first-of-type { margin-bottom:5px; }
      .speaker-tag {
     
           padding: 3px 5px;
@@ -372,14 +372,17 @@
           h5 {
                display: flex;
                align-items: center;
+               margin-bottom: 0;
+               opacity: .8;
+               font-weight:lighter;
                &::before {
                     font-family: "dashicons";
                     display: inline-block;
                     vertical-align: middle;
                     content: "\f110";
-                    opacity: .5;
                     font-size:1.2em;
                     margin: 0 5px 0 0;
+                    
                }
           }
 
@@ -392,14 +395,15 @@
               
                height: fit-content;
                bottom:-50%;
-               padding: 40px 20px 40px 40px;
+               padding: 30px 20px 30px 40px;
                background-color:$light;
-             
+               
 
                @include dropShadow;
 
                .speaker-tag-tooltips-image {
                     @include imageSettings;
+                    @include dropShadow;
                     position: absolute;
                     left:-40px;
                     top:20px;
@@ -408,18 +412,32 @@
                     width:70px;
                     border-radius: 50%;
                }
+               h4 { margin-bottom: 3px; }
+               h5, h6 { margin-bottom: 0; opacity: .8; font-weight:lighter;}
           }
 
-          &:hover {
-               
+          &:hover {              
                background-color: var(--secondColor);
                cursor: help;
+               h5 { opacity: 1; }
                .speaker-tag-tooltips {
                     transition-delay:.5s; 
                     visibility: visible;
                     opacity: 1;
                     bottom: 100%;
                     z-index: 100000;
+
+                    .speaker-tag-tooltips-button {
+                         margin-top:15px;
+                         background-color:$secondary;
+                         padding:5px 15px;
+                         width: fit-content;
+                         &:hover {
+                              transform: scale(.98);
+                              cursor: pointer;
+                              background-color:var(--shadeColor);
+                         }
+                    }
                }
                
           }
@@ -443,5 +461,5 @@
           @include imageSettings;
      }
      h5, h6 { margin-bottom:0; line-height: 1.1em; }
-     h5 {  }
+   
 }
