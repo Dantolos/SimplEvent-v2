@@ -108,6 +108,28 @@
                         padding:5px 20px;
                         margin:2px;
                     }
+                    .se2-post-lb-register {
+                        background-color: $secondary;
+                        color: $light;
+                        a {
+                            display: flex; 
+                            justify-content: center;
+                            align-items: center;
+                            &::before {
+                                font-family: "dashicons";
+                                content: "\f464";
+                                vertical-align: middle;  
+                                padding-right:10px;
+                                font-size: 120%;
+                            }
+                            
+                        }
+                        &:hover {
+                            background-color: var(--dark);
+                            transform: scale(1.05);
+                        }
+                        
+                    }
                 }
             }
 
