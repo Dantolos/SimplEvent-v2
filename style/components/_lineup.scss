@@ -70,21 +70,24 @@
      width:100%;
      margin-bottom: 20px;
      padding:10px;
-     border:1px solid var(--shadeColor);
-     border-radius: 3px;
-     &:hover {
-          background-color: $primary;
-          div p {
-               color:white;
-          }
-     }
+     border: 0 0 1px 0 solid var(--shadeColor);
+     
+    
 
      .se2-speaker-profile-image {
-          width: 80px;
-          height:80px;
-          margin-right:20px;
+          width: 100px;
+          height:100px;
+          margin-right:30px;
+          margin-bottom: 20px;
           border-radius: 50%;
+          
+          
           @include imageSettings;
+          @include breakpoint( 's' ){
+               justify-self: center;
+               align-self: center;
+               width:150px; height: 150px;
+          }
      }
 
      .se2-speaker-list-profil-info {
@@ -92,8 +95,8 @@
           flex-direction: column;
           justify-content: center;
           
-          width: calc(100% - 140px);
-          min-width: 220px;
+          width: calc(100% - 180px);
+          min-width: 350px;
 
 
           padding: 10px 0;
@@ -102,11 +105,7 @@
           p:first-of-type { 
                color:$primary; margin-bottom:0; line-height: 1em; 
           }
-          &:hover {
-               p:first-of-type { 
-                    color: var(--shadeColor);
-               } 
-          }
+         
      }
 
 }
