@@ -95,13 +95,24 @@
         
         .se2-post-lb-info {
             display: flex;
+            flex-wrap: wrap;
             .se2-post-lb-info-left {
                 width:60%;
                 margin-right:3%;
+                @include breakpoint( 'm' ){
+                    width: 100%;
+                }
             }
             .se2-post-lb-info-right {
                 width:37%;
+                @include breakpoint( 'm' ){
+                    width: 100%;
+                }
                 .se2-post-lb-fact-table {
+                    @include breakpoint( 'm' ){
+                        width: 100%;
+                        margin-bottom: 40px;
+                    }
                     td {
                         border: 2px solid $light;
                         background-color: var(--shadeColor);
