@@ -96,7 +96,6 @@ export default class SE2_container extends Component {
 
           var video = this.state.video ? this.state.video : 'false'
 
-
           this.props.SE2containerStyle = {
                overflow: 'hidden',
                position: 'relative',
@@ -124,7 +123,7 @@ export default class SE2_container extends Component {
 
                filter: filter,
 
-               video: this.state.video
+               video: video
           }
 
 

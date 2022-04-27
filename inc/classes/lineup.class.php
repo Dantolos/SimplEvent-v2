@@ -63,7 +63,7 @@ class LineUp {
                     } else {                  
                          foreach( $event as $eValue => $e ){      
                               foreach( get_field('event', $speaker->ID) as $sE ){    
-                                   if( $eValue === $sE['value']  ){
+                                   if( strval($eValue) === strval($sE['value']) ){
                                         $isInEvent = true;
                                    }
                               }

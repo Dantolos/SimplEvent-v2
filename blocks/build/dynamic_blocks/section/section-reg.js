@@ -257,7 +257,7 @@ var SE2_container = /*#__PURE__*/function (_Component) {
         borderRadius: borderRadius,
         clipPath: clipPath,
         filter: filter,
-        video: this.state.video
+        video: video
       };
       return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(InspectorControls, {
         style: {
