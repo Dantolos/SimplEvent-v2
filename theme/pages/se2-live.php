@@ -1,6 +1,6 @@
 <?php
 
-class se2_page_Live extends se2_page_builder {
+class se2_page_Live {
 
 
 

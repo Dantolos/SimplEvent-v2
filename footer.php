@@ -1,12 +1,16 @@
 <?php
 wp_footer(); 
 $Partner = new Partner;
+
+$footerColors = (get_option( 'se_footer_color' )) ? 
+     'background-color: '.esc_attr(get_option( 'se_footer_color' )[0]).'; color: '.esc_attr(get_option( 'se_footer_color' )[1]).' !important;' : '';
+
 ?>
      </div>
 
 
 
-          <footer>
+          <footer style="<?php echo $footerColors; ?>">
                <div class="footer-contact-container">
                     <a href="<?php $url = home_url(); echo esc_url( $url ); ?>">
                          <img class="footer-logo-negativ"

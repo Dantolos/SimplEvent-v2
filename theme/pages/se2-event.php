@@ -1,6 +1,6 @@
 <?php
 
-class se2_page_Event extends se2_page_builder {
+class se2_page_Event {
 
 
 
@@ -179,7 +179,7 @@ class se2_page_Event extends se2_page_builder {
 
           function simplevent_side_events(){
                $side_events = get_option('side_events'); 
-               $ide_eventsSlotBase = [
+               $ide_eventsSlotBase = [ 
                          'label' => '',
                          'value' => '',
                          'date'  => false,

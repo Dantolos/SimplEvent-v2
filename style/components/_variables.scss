@@ -28,6 +28,13 @@ $light_shade:var(--lightshade);
 .light-bg { background-color: $light; }
 .light-shade-bg { background-color: $light_shade; }
 
+.primary-fill { fill: $primary; }
+.secondary-fill { fill: $secondary; }
+.dark-fill {fill: $dark; }
+.dark-shade-fill {fill: $dark_shade; }
+.light-fill { fill: $light; }
+.light-shade-fill { fill: $light_shade; }
+
 body {
     background-color: var(--shadeColor);
     

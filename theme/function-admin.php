@@ -14,7 +14,6 @@ ini_set('display_errors', 'On');
 
 error_reporting(E_ALL);
 
-require_once('pages/page-builder.php');
 
 require_once('pages/se2-general.php');
 require_once('pages/se2-header.php');
