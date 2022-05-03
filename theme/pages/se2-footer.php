@@ -1,12 +1,14 @@
 <?php
 
-class se2_page_Footer extends se2_page_builder {
+class se2_page_Footer {
 
 
 
      public function build_settings(){
           
           //****Settings
+          register_setting( 'simplevent-footer-group', 'se_footer_color' );
+
           register_setting( 'simplevent-footer-group', 'se_c_text' );
 
           register_setting( 'simplevent-footer-group', 'se_contact_name' );
@@ -16,14 +18,19 @@ class se2_page_Footer extends se2_page_builder {
           register_setting( 'simplevent-footer-group', 'se_contact_email' );
 
           register_setting( 'simplevent-footer-group', 'se_footer_categories' );
-          
 
+          
+          
+          
           //****Section
+          add_settings_section( 'simplevent-footer-style', 'Style', 'simplevent_footer_style', 'simplevent_footer');
           add_settings_section( 'simplevent-footer-options', 'Footer', 'simplevent_footer_options', 'simplevent_footer');
           add_settings_section( 'simplevent-footer-contact', 'Contact', 'simplevent_footer_contact', 'simplevent_footer');
           add_settings_section( 'simplevent-footer-partner', 'Partner', 'simplevent_footer_partner', 'simplevent_footer');
 
           //****Fields
+          add_settings_field( 'footer-colors', 'Colors', 'simplevent_se_footer_color', 'simplevent_footer', 'simplevent-footer-style' );
+
           add_settings_field( 'ctext', 'Copyright Text', 'simplevent_se_c_text', 'simplevent_footer', 'simplevent-footer-options' );
 
           add_settings_field( 'contact-name', 'Name', 'simplevent_se_contact_name', 'simplevent_footer', 'simplevent-footer-contact' );
@@ -34,6 +41,10 @@ class se2_page_Footer extends se2_page_builder {
           add_settings_field( 'footer-categories', 'Kategorien', 'simplevent_se_footer_categories', 'simplevent_footer', 'simplevent-footer-partner' );
 
           // Section Functions
+          function simplevent_footer_style() {
+               echo '';
+          }
+
           function simplevent_footer_options() {
                echo '';
           }
@@ -96,7 +107,26 @@ class se2_page_Footer extends se2_page_builder {
                   }    
              }
              
-             
+             function simplevent_se_footer_color() {
+               $footerColors = get_option( 'se_footer_color' );
+
+               /*
+               * Standard-Colors passed from Theme-Colores out the general settings  
+               * background: get_option( 'dark_mode_picker' )[1]
+               * text: get_option( 'light_mode_picker' )[0]
+               */
+               echo 'Als Standard-Farben werden die in den General-Settings definierten Farben verwendet. <i>(bei Anpassungen, bitte lesbarkeit überprüfen!)</i>';
+               $stdfooterColors= array( get_option( 'dark_mode_picker' )[1], get_option( 'light_mode_picker' )[0]);
+
+               $footerColors = (!is_array($footerColors)) ? $stdfooterColors : $footerColors;
+               $fieldName = array('Background', 'Text');
+               $cKey = 0;
+               foreach($footerColors as $key => $color ){
+                    echo '<p>'.$fieldName[$cKey].'</p>';
+                    echo '<input class="se-color-picker" type="text" name="se_footer_color['.$cKey.']" value="' .$color. '" data-default-color="'.$stdfooterColors[$cKey].'" />';
+                    $cKey++;
+               }
+          }
 
      }
 

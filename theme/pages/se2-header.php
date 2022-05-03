@@ -1,6 +1,6 @@
 <?php
 
-class se2_page_Header extends se2_page_builder {
+class se2_page_Header  {
 
      public function build_settings(){
           

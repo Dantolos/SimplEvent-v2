@@ -1,6 +1,10 @@
 <?php
+require_once 'fields/images.php';
 
-class se2_page_General extends se2_page_builder {
+use function SE2\ThemeSettings\Fields\Images\input_images;
+
+
+class se2_page_General  {
 
      public function build_settings(){
           
@@ -104,22 +108,22 @@ class se2_page_General extends se2_page_builder {
           // LOGOS & ICONS (Favicon)
           function simplevent_event_logo() {
                $logo = esc_attr( get_option( 'event_logo' ) );
-               echo se2_page_builder::input_images( 'Logo', 'event-logo', 'event_logo', $logo );    
+               echo input_images( 'Logo', 'event-logo', 'event_logo', $logo );    
           }
           
           function simplevent_event_logo_neg() {
                $logoNeg = esc_attr( get_option( 'event_logo_neg' ) );
-               echo se2_page_builder::input_images( 'Logo Negativ', 'event-logo-neg', 'event_logo_neg', $logoNeg, true );
+               echo input_images( 'Logo Negativ', 'event-logo-neg', 'event_logo_neg', $logoNeg, true );
           }
           
           function simplevent_event_icon() {
                $icon = esc_attr( get_option( 'event_icon' ) );
-               echo se2_page_builder::input_images( 'Icon', 'event-icon', 'event_icon', $icon );
+               echo input_images( 'Icon', 'event-icon', 'event_icon', $icon );
           }
           
           function simplevent_event_icon_neg() {
                $iconNeg = esc_attr( get_option( 'event_icon_neg' ) );
-               echo se2_page_builder::input_images( 'Icon Negativ', 'event-icon-neg', 'event_icon_neg', $iconNeg );
+               echo input_images( 'Icon Negativ', 'event-icon-neg', 'event_icon_neg', $iconNeg );
           }
           
           

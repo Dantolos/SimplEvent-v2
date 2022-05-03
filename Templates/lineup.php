@@ -42,7 +42,7 @@ if(get_field( 'visibility', get_the_ID() )['speaker_kategorie'] ) {
 
 $args = array(
      'view' => 'grid',
-     'sort' => 'ASC', 
+     'sort' => 'ASC',  
      'cat' => $cat,
      'year' => $year,
      'event' => $event,
