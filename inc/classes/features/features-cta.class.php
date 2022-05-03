@@ -13,6 +13,7 @@ class se2_CTA{
     
      public function cast_cta_button( $postID ){
           $postID = intval($postID);
+          $postID = icl_object_id($postID , 'features', true, ICL_LANGUAGE_CODE);
           $cta_settings = get_field('cta_settings', $postID );
 
           $this->cta = '<div class="cta-button" data-postid="'.$postID.'" style="background-color:'.$cta_settings['button_color'].';" >';
