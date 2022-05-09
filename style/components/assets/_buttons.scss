@@ -1,0 +1,30 @@
+
+.se2-btn-l, 
+.se2-btn-m,
+.se2-btn-s {
+     width:fit-content;
+     margin: 0 5px 5px 0 ;
+     background-color: $primary;
+     &:hover {
+          filter: brightness(.95);
+          cursor: pointer;
+          transform: scale(.97);
+     }
+}
+
+.se2-btn-l {
+     padding: 12px 25px !important;
+}
+
+.se2-btn-m {
+     padding: 8px 20px;
+}
+
+.se2-btn-s {
+     padding: 3px 10px;
+}
+
+.secondary-btn {
+     background-color: var(--lightshade);
+     filter: brightness(.9);
+}

@@ -41,7 +41,7 @@ class Date_Format {
                          $date = strftime( '%e. %B %G', $value );
                          break;
                     case 'en':
-                         $date = strftime( '%e. %B %G', $value );
+                         $date = strftime( '%e %B %G', $value );
                          break;
                     case 'fr':
                          setlocale(LC_ALL, "fr_FR");
