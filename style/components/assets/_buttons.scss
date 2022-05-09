@@ -5,6 +5,8 @@
      width:fit-content;
      margin: 0 5px 5px 0 ;
      background-color: $primary;
+     color:$light !important;
+     font-weight: bold;
      &:hover {
           filter: brightness(.95);
           cursor: pointer;
@@ -25,6 +27,7 @@
 }
 
 .secondary-btn {
+     color:$dark !important;
      background-color: var(--lightshade);
      filter: brightness(.9);
 }
