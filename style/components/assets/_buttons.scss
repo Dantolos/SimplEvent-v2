@@ -5,6 +5,8 @@
      width:fit-content;
      margin: 0 5px 5px 0 ;
      background-color: $primary;
+     color:$light;
+     font-weight: bold;
      &:hover {
           filter: brightness(.95);
           cursor: pointer;
