@@ -8,4 +8,3 @@ webpack.config.js
 gulpfile.js
 
 #ignore jsx files for wp blocks
-blocks/src/
