@@ -14,6 +14,7 @@ class se2_page_General  {
           register_setting( 'simplevent-settings-group', 'event_logo_neg' );
           register_setting( 'simplevent-settings-group', 'event_icon' );
           register_setting( 'simplevent-settings-group', 'event_icon_neg' );
+          register_setting( 'simplevent-settings-group', 'event_logo_link' );
 
           register_setting( 'simplevent-settings-group', 'social_media' );
 
@@ -50,6 +51,8 @@ class se2_page_General  {
           add_settings_field( 'event_logo_neg', 'Logo Negativ', 'simplevent_event_logo_neg', 'aagi_simplevent', 'simplevent-general-options' );
           add_settings_field( 'event_icon', 'Icon', 'simplevent_event_icon', 'aagi_simplevent', 'simplevent-general-options' );
           add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
+          add_settings_field( 'event_logo_link', 'Logo Link', 'simplevent_event_logo_link', 'aagi_simplevent', 'simplevent-general-options' );
+
 
           add_settings_field( 'social-media', 'Social Media', 'simplevent_social_media', 'aagi_simplevent', 'simplevent-general-options' );
      
@@ -126,7 +129,13 @@ class se2_page_General  {
                echo input_images( 'Icon Negativ', 'event-icon-neg', 'event_icon_neg', $iconNeg );
           }
           
-          
+          function simplevent_event_logo_link() {
+               $logoLink = esc_attr( get_option( 'event_logo_link' ) );
+               echo '<p style="margin-top:20px;"><b>Logo Link</b></p>';
+               echo '<p style="margin-top:20px;"><i>If not set, default is frontpage of yout site.</i></p>';
+               echo '<input type="text" name="event_logo_link" value="' . $logoLink . '" placeholder="Logo URL" />';
+          }
+
           // SOCIAL MEDIA
           function simplevent_social_media() {
                $socialMediaSTD = [

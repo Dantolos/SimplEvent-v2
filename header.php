@@ -210,7 +210,11 @@ wp_head();
     <header class="clearfix <?php echo $videoHeaderClass . ' ' . $negativeHeaderContent; ?>">
 
           <div class="header-logo">
-               <a href="<?php $url = home_url(); echo esc_url( $url ); ?>">
+               <?php
+               $url = ( get_option('event_logo_link') ) ? get_option('event_logo_link') : home_url();
+               ?>
+               
+               <a href="<?php echo esc_url( $url ); ?>">
                     <?php $logo = ( isset(get_option( 'se_header_mode' )[0]) ) ? get_option( 'event_logo' ) : get_option( 'event_logo_neg' ); 
                     if($negativeHeaderContent === 'se-header-negative' ){
                          $logo = get_option( 'event_logo_neg' );
