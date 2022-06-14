@@ -16,13 +16,12 @@
                 "id": ""
             },
             "taxonomy": "group",
-            "field_type": "select",
+            "field_type": "multi_select",
             "allow_null": 0,
             "add_term": 1,
             "save_terms": 0,
             "load_terms": 0,
             "return_format": "id",
-            "wpml_cf_preferences": 1,
             "multiple": 0
         }
     ],
@@ -44,5 +43,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1642083362
+    "modified": 1655198454
 }
