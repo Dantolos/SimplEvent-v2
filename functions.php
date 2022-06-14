@@ -371,6 +371,7 @@ function my_svgs_disable_real_mime_check( $data, $file, $filename, $mimes ) {
 add_filter( 'upload_mimes', function ( $mime_types ) {
     $mime_types['svg'] = 'image/svg+xml';
     $mime_types[ 'eps' ] = 'application/postscript';
+    $mime_types['json'] = 'application/json'; 
     return $mime_types;
 } );
 

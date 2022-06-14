@@ -137,7 +137,7 @@ class Events extends Posts {
                     }
                     if($facts['anmeldelink']){ 
                          $this->output .= '<tr>';
-                         $this->output .= '<td>' . __( 'Anmeldung', 'SimplEvent' ) . '</td>';
+                         $this->output .= '<td></td>';
                          $this->output .= '<td class="se2-post-lb-register">';
                          $this->output .= '<a href="'.esc_url( $facts['anmeldelink']['url'] ).'" target="_blank"><div>'.esc_attr( $facts['anmeldelink']['title'] ).'</div></a>'; 
                          $this->output .= '</td>';

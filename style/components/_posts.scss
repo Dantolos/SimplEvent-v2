@@ -90,8 +90,10 @@
     .se2-post-lb-content {
         position: relative;
         overflow-y: scroll; 
+        @include scrollbars;
         height: 70vh;
         padding:3% 6%;
+        border-top:20px solid white;
         
         .se2-post-lb-info {
             display: flex;
@@ -109,15 +111,39 @@
                     width: 100%;
                 }
                 .se2-post-lb-fact-table {
+                    width: 100%;
                     @include breakpoint( 'm' ){
-                        width: 100%;
+                       
                         margin-bottom: 40px;
                     }
-                    td {
-                        border: 2px solid $light;
-                        background-color: var(--shadeColor);
-                        padding:5px 20px;
-                        margin:2px;
+                    tr{
+                        td {
+                            width: fit-content;
+                            border-block-start: 50px;
+                            padding:10px 20px;
+                            margin:2px;
+                            margin-bottom: 0;
+                            vertical-align: middle;
+                            &:first-of-type {
+                               text-align: right;
+                            }
+                            &:last-of-type {
+                                font-size: 1.4em;
+                                font-weight: 200;
+                                margin-bottom: 0;
+                                border: solid $dark;
+                                border-width: 0 0 1px  0;
+                                
+                            }
+                        }
+                        
+                        &:last-child {
+                            border-top: 15px white solid;
+                            td{
+                                border-width: 0 0 0 0;
+                            }
+                        }
+                        
                     }
                     .se2-post-lb-register {
                         background-color: $secondary;
@@ -133,12 +159,18 @@
                                 padding-right:10px;
                                 font-size: 120%;
                             }
-                            
+                            &:hover, &:active, &:visited, &:focus {
+                                text-decoration:none !important;
+                                color: $light;
+                                cursor: pointer !important;
+                            }
                         }
                         &:hover {
                             background-color: var(--dark);
                             transform: scale(1.05);
+                            cursor: pointer !important;
                         }
+                        
                         
                     }
                 }

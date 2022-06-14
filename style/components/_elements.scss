@@ -47,11 +47,22 @@ button {
         right:5vw; top:5vw;
         height:25px; width:25px;
         cursor: pointer;
+        z-index: 100000;
+        
+        &::before {
+            color: $dark;
+            font-family: "dashicons";
+            
+            content: "\f335";
+            vertical-align: middle;  
+            padding-right:25px;
+            font-size: 50px;
+        }
         svg {
             -webkit-filter: drop-shadow(0px 2px 4px var(--secondColor));
             filter: drop-shadow(0px 2px 4px var(--secondColor));
             line{
-                stroke:var(--primeColor);
+                stroke:var(--primeColor) !important;
                 
             }
         }

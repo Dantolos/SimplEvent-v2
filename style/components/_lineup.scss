@@ -211,11 +211,13 @@
           width:100%;
           position: relative;
           overflow-y: scroll;
+          
           @include hideScrollbar;
 
           @include breakpoint( 'm' ){
                justify-content: center;
                flex-direction: column;
+              
           }
 
           .speaker-lb-image {
