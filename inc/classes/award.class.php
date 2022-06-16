@@ -90,13 +90,16 @@ class Award {
      public function cast_candidate_lightbox( $candidateID ){
           $finalistMedia = get_field( 'media', $candidateID );
           $winnerClass = (get_field( 'award', $candidateID )['gewinner']) ? 'candidate-winner-class': '';
+          $moodimage = ($finalistMedia['mood_image']) ? 'has-mood' : '';
           
           $candidateLB = '<div class="candidate-lb-container">';
                $candidateLB .= '<div class="candidate-lb-head">';
-                    $candidateLB .= '<div class="candidate-lb-image candidate-stagger" style="background-image:url('.$finalistMedia['mood_image'].');"></div>';
-                    
+                    if($moodimage === 'has-mood'){
+                         $candidateLB .= '<div class="candidate-lb-image candidate-stagger" style="background-image:url('.$finalistMedia['mood_image'].');"></div>';
+                    }
+
                     if( $finalistMedia['logo_positiv'] ){
-                         $candidateLB .= '<div class="candidate-logo '.$winnerClass.'">';
+                         $candidateLB .= '<div class="candidate-logo '.$winnerClass.' '.$moodimage.'">';
                               $candidateLB .= '<img src="'. $finalistMedia['logo_positiv'] .'" alt="'.get_the_title( $candidateID ).'" title="'.get_the_title( $candidateID ).'" />';
                               if(get_field( 'award', $candidateID )['gewinner']){
                                    $candidateLB .= '<div class="candidate-winner-flag">';
@@ -108,6 +111,9 @@ class Award {
 
                     $candidateLB .= '<div class="candidate-lb-content candidate-stagger">';
                          $candidateLB .= '<h3>'.get_the_title( $candidateID ).'</h3>';
+                         if( get_field( 'award', $candidateID )['finalistenbild'] ){
+                              $candidateLB .= '<div class="candidate-finalist-image" style="background-image:url('.get_field( 'award', $candidateID )['finalistenbild'].');"></div>';
+                         }
                          $candidateLB .= '<p>'.get_field( 'description', $candidateID ).'</p>';
                     $candidateLB .= '</div>';
                $candidateLB .= '</div>';
