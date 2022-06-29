@@ -52,20 +52,26 @@ class Sessions {
           if( $sessionsPerSlot > 0 ){
                $sessionGrid .= '<div class="session-slot-container">';
                foreach( $sessionsPerSlot as $key => $Slot ){
-                    if( $Slot['sessions'] > 0 ){
+                    
+                    if( count($Slot['sessions']) > 0 ){
+
                          $sessionGrid .= '<h3 class="session-slot-title ">'.$Slot['slot'].'</h3>';
 
                          if(get_option('sessions_slots')){
                               foreach (get_option('sessions_slots') as $key => $slotInfo ) {
+
                                    $sessionGrid .= '<div class="session-slot-facts">';
                                    
                                    if( $Slot['slot'] === $slotInfo['value'] ){
                                         $sessionGrid .= '<h6><b style="text-transform:uppercase;">' . $slotInfo['label'] . '</b> | ' ;
                                         $sessionGrid .= $this->dateFormat->formating_Date_Language( $slotInfo['date'], 'date' );
-                                        $sessionGrid .= ' | ';
-                                        $sessionGrid .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $slotInfo['start'], 'time' ) );
-                                        $sessionGrid .= ' ' . __( 'bis', 'SimplEvent') . ' ';
-                                        $sessionGrid .= $this->dateFormat->formating_Date_Language( $slotInfo['ende'], 'time' );
+                                        
+                                        if( strlen( $this->dateFormat->formating_Date_Language( $slotInfo['start'], 'time' ) ) > 0 ){
+                                             $sessionGrid .= ' | ';
+                                             $sessionGrid .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $slotInfo['start'], 'time' ) );
+                                             $sessionGrid .= ' ' . __( 'bis', 'SimplEvent') . ' ';
+                                             $sessionGrid .= $this->dateFormat->formating_Date_Language( $slotInfo['ende'], 'time' );
+                                        }
                                         $sessionGrid .= '</h6>';
                                    }
                                    $sessionGrid .= '</div>';
@@ -75,6 +81,12 @@ class Sessions {
                          $sessionGrid .= '<div class="session-blocks-container">';   
                          
                          foreach( $Slot['sessions'] as $session ){
+
+                              //check year
+                              if( get_the_terms( $session->ID, 'jahr' )[0]->slug !== $sessionJahr->slug) { 
+                                   continue;   
+                              } 
+
                               $sessionGrid .= $this->cast_session_block( $session->ID );
                          }
                          $sessionGrid .= '</div>';
@@ -89,6 +101,9 @@ class Sessions {
 
      public function cast_session_block($sessionID){
           $sessionBlock = '';
+          
+         
+         
           $sessionBlock .= '<section class="session-block schedule-session" sessionid="'.$sessionID.'">';
                //HEADER
                $sessionBlock .= '<div class="session-block-header">';
@@ -185,6 +200,11 @@ class Sessions {
                                    if($sessionSponsor['type'] === 'Partner'){
                                         $this->sessionLightbox .= '<div class="session-lb-sponsor session-stagger">';
                                         $this->sessionLightbox .= '<img src="'. get_field('partner-logo', $sessionSponsor['partner'] ) .'" alt="">'; 
+                                        $this->sessionLightbox .= '</div>';             
+                                   }
+                                   if($sessionSponsor['type'] === 'Specific'){
+                                        $this->sessionLightbox .= '<div class="session-lb-sponsor session-stagger">';
+                                        $this->sessionLightbox .= '<img src="'. $sessionSponsor['logo'].'" alt="">'; 
                                         $this->sessionLightbox .= '</div>';             
                                    }
                               }

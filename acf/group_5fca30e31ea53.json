@@ -709,11 +709,7 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 1,
-                    "choices": {
-                        "services": "Services",
-                        "high": "Hightech\/Biotech",
-                        "production": "Production"
-                    },
+                    "choices": [],
                     "default_value": false,
                     "allow_null": 0,
                     "multiple": 0,
@@ -1026,5 +1022,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1655371165
+    "modified": 1656503289
 }
