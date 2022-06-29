@@ -18,7 +18,7 @@ class Partner {
           $partners = new WP_Query($partner_args);
 
           $this->output = '';
-
+ 
           //formatierte rückgabe
           if($formatet){
 

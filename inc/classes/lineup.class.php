@@ -254,10 +254,12 @@ class LineUp {
 
                     if( $timeDates ){
                          $this->speakerCard .= '<h6>'.$this->dateFormat->formating_Date_Language( $timeDates['datum'], 'date' );
-                         $this->speakerCard .= ' | ';
-                         $this->speakerCard .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) );
-                         $this->speakerCard .= ' ' . __( 'bis', 'SimplEvent') . ' ';
-                         $this->speakerCard .= $this->dateFormat->formating_Date_Language( $timeDates['ende'], 'time' );
+                         if( strlen( $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) ) > 0 ){
+                              $this->speakerCard .= ' | ';
+                              $this->speakerCard .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) );
+                              $this->speakerCard .= ' ' . __( 'bis', 'SimplEvent') . ' ';
+                              $this->speakerCard .= $this->dateFormat->formating_Date_Language( $timeDates['ende'], 'time' );
+                         }
                          $this->speakerCard .= '</h6>';
 
                          $name = ( get_field('speaker_vorname', $speakerID) ) 
@@ -430,12 +432,20 @@ class LineUp {
 
                          if($speakerDate){
                               $this->speakerLightbox .= '<div class="speaker-lb-informations-gig">';
-                              $this->speakerLightbox .= '<h6>';
-                              $this->speakerLightbox .= '<b>' . $this->dateFormat->formating_Date_Language( get_field('speaker_zeit', $speakerID)['datum'], 'date' ) . '</b><br />';
-                              if( $start && $ende ){
-                                   $this->speakerLightbox .= $this->dateFormat->formating_Date_Language( $start, 'time' ) .' - '. $this->dateFormat->formating_Date_Language( $ende, 'time' );
-                              }
-                              $this->speakerLightbox .= '</h6>';
+
+                                   $this->speakerLightbox .= '<h6>';
+                                   $this->speakerLightbox .= $this->dateFormat->formating_Date_Language( get_field('speaker_zeit', $speakerID)['datum'], 'date' ) . '<br />';
+                                   $this->speakerLightbox .= '</h6>';
+
+                                   if( $start !== '0000' && $ende !== '0000' ){
+                                   
+                                        $this->speakerLightbox .= '<h4>';
+                                        $this->speakerLightbox .= $this->dateFormat->formating_Date_Language( $start, 'time' );
+                                        //$this->speakerLightbox .= ' &ndash; ';
+                                        $this->speakerLightbox .= '<span> &ndash; ' . $this->dateFormat->formating_Date_Language( $ende, 'time' ) . '</span>';
+                                        $this->speakerLightbox .= '</h4>';
+                                   }
+                             
                               $this->speakerLightbox .= '</div>';
                          }
 

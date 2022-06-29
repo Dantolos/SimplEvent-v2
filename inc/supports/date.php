@@ -9,10 +9,18 @@ class Date_Format {
           if( $type == 'time' ){
 
                //TIME
+               //var_dump($value);
                $time = '';
-               $value = strtotime( str_replace( '/', '-',  $value) );
 
-               switch (ICL_LANGUAGE_CODE) {
+               
+               $value = strtotime( str_replace( '/', '-',  $value) );
+               $lang = (apply_filters( 'wpml_current_language', NULL ) ) ? apply_filters( 'wpml_current_language', NULL )  : 'de';
+             
+               if( date( 'H:i', $value )  === '00:00' ){
+                    return $time;
+               }
+               
+               switch ( $lang ) {
                     case 'de':
                          $time = date( 'H:i', $value ) . ' Uhr';
                          break;
@@ -31,10 +39,13 @@ class Date_Format {
           } else if( $type == 'date' ) {
 
                //DATE
+             
                $date = '';
                $value = strtotime( str_replace( '/', '-',  $value) );
+               
+               $lang = (apply_filters( 'wpml_current_language', NULL ) ) ? apply_filters( 'wpml_current_language', NULL )  : 'de';
 
-               switch (ICL_LANGUAGE_CODE) {
+               switch ( $lang ) {
 
                     case 'de':
                          setlocale(LC_ALL, "de_DE");
@@ -52,6 +63,7 @@ class Date_Format {
                          $date = strftime( '%e. %B %G', $value );
                          break;
                }   
+               
                return $date;
           }
 

@@ -64,8 +64,6 @@
             "choices": {
                 "bs1": "Breakout Session 1",
                 "bs2": "Breakout Session 2",
-                "bs3": "Breakout Session 3",
-                "dd": "Digital Detox",
                 "": ""
             },
             "allow_custom": 0,
@@ -98,10 +96,9 @@
             "wpml_cf_preferences": 1,
             "choices": {
                 "main": "SimplEvent v2",
-                "conf": "Conference",
-                "lab-1": "Lab 1",
-                "lab-2": "Lab 2",
-                "leaders": "Leader's Summit"
+                "lab": "Labs",
+                "dinner": "Special Dinnner",
+                "": ""
             }
         },
         {
@@ -569,5 +566,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647961612
+    "modified": 1656503290
 }
