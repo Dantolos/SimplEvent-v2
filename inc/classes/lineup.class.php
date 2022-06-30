@@ -241,7 +241,7 @@ class LineUp {
 
      }
 
-     public function cast_speaker_list( $speakerID, $showCV = false ){
+     public function cast_speaker_list( $speakerID, $showCV = false, $hideDate = false ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
 
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" data-speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
@@ -252,15 +252,18 @@ class LineUp {
  
                     $timeDates = get_field( 'speaker_zeit', $speakerID );
 
-                    if( $timeDates ){
-                         $this->speakerCard .= '<h6>'.$this->dateFormat->formating_Date_Language( $timeDates['datum'], 'date' );
-                         if( strlen( $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) ) > 0 ){
-                              $this->speakerCard .= ' | ';
-                              $this->speakerCard .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) );
-                              $this->speakerCard .= ' ' . __( 'bis', 'SimplEvent') . ' ';
-                              $this->speakerCard .= $this->dateFormat->formating_Date_Language( $timeDates['ende'], 'time' );
+                    if( $timeDates  ){
+                         if(!$hideDate){
+                              $this->speakerCard .= '<h6>'.$this->dateFormat->formating_Date_Language( $timeDates['datum'], 'date' );
+                              if( strlen( $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) ) > 0 ){
+                                   $this->speakerCard .= ' | ';
+                                   $this->speakerCard .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) );
+                                   $this->speakerCard .= ' ' . __( 'bis', 'SimplEvent') . ' ';
+                                   $this->speakerCard .= $this->dateFormat->formating_Date_Language( $timeDates['ende'], 'time' );
+                              }
+                              $this->speakerCard .= '</h6>';
                          }
-                         $this->speakerCard .= '</h6>';
+                         
 
                          $name = ( get_field('speaker_vorname', $speakerID) ) 
                               ? 

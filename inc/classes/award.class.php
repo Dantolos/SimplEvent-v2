@@ -23,7 +23,8 @@ class Award {
           }
           $this->output .= '</div>';
           return $this->output;
-     }
+     } 
+     
 
      // ******************************************
      // HALL OF FAME

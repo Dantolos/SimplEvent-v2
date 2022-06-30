@@ -23,7 +23,7 @@ echo '<div class="container se2-award-container">';
                echo '<h4 style="text-align:center;">bitte einen Pagetype auswählen.</h4>';
                break;
      }
-     
+      
     
 echo '</div>';
 
