@@ -1,14 +1,17 @@
 <?php 
+require_once(__DIR__.'/../supports/language.php');
 
 class Sessions {
 
      public $sessionLightbox;
      public $speakerFunctions;
      public $dateFormat;
+     public $langFormat;
      public $lineup;
 
      public function __construct() {
           $this->dateFormat = new Date_Format;
+          
           $this->speakerFunctions = new LineUp;
           
      }
@@ -176,6 +179,7 @@ class Sessions {
 
                     $this->sessionLightbox .= '<div class="session-lb-content session-stagger">';
                          $this->sessionLightbox .= '<h3>'.get_field('titel', $sessionID).'</h3>';
+                         $this->sessionLightbox .= '<div class="session-lb-language">' . \se2\support\LANGUAGE\formating_Language( get_field('sprache', $sessionID) ) . '</div>'; //------------------------------------------
                          $this->sessionLightbox .= '<p>'.get_field('session_text', $sessionID).'</p>';
 
                          //SPEAKERS
@@ -185,7 +189,7 @@ class Sessions {
 
                               foreach(get_field('referenten', $sessionID) as $sessionSpeaker){
                                    if($sessionSpeaker['type'] === 'Speaker'){
-                                        $this->sessionLightbox .= $this->speakerFunctions->cast_speaker_list($sessionSpeaker['speaker'], true);
+                                        $this->sessionLightbox .= $this->speakerFunctions->cast_speaker_list($sessionSpeaker['speaker'], true, true);
                                    }
                               }
                               $this->sessionLightbox .= '</div>';
