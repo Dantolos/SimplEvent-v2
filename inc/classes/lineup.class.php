@@ -374,7 +374,7 @@ class LineUp {
           $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'" data-event="'.$currEvent.'">';
           
           //query IDs
-          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'],  $args['year'],  $args['event'] );
+          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'], $args['year'], $args['event'] );
 
           //cast view       
           if( $speakerIDs ){
