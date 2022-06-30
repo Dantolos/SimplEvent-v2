@@ -205,7 +205,9 @@ class se2_Schedule {
                     )
                     
                );
-               $sessions = new WP_Query( $sessionsArgs );
+               $sessions = new WP_Query( $sessionsArgs ); 
+
+             
 
                
                if(isset($sessionSlot['date'])){
@@ -227,6 +229,11 @@ class se2_Schedule {
                          
                          $sessions_slots .= '<div class="schedule-sessions ">';
                          foreach($sessions->posts as $session){
+
+                              if( get_the_terms( $session->ID, 'jahr' )[0]->slug !== $this->year ) { 
+                                   continue;   
+                              } 
+
                               $sessionID = $session->ID;
                               $sessions_slots .= '<div class="schedule-session" sessionid="'.$sessionID.'">';
                               $sessions_slots .= '<div class="schedule-session-image" style="background-image:url('.get_field('session_bild', $sessionID ).');"></div>';

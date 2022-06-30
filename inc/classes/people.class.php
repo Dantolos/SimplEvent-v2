@@ -15,21 +15,28 @@ class People{
     }
 
     public function call_People_Wall( $taxonomy = false ) {
+        $this->output = '';
+            
         foreach($this->people->posts as $person){
 
-
+          
             $groups = wp_get_post_terms( $person->ID, 'group' );
+
+            
+
             if( $taxonomy ){
                 $isInGroup = false;
                 
                 foreach ( $groups as $group ) {
+                    
                         if( $group->term_id == $taxonomy) {
                             $isInGroup = true;
                         }
                 }
+         
                 if( !$isInGroup ){ continue; }
             }
-       
+          
             $this->output .= '<div class="se2-people-box">';
             $this->output .= '<div class="se2-people-portrait" style="background-image:url(' . esc_url( get_field('foto', $person->ID) ) . ')"></div>';
             $this->output .= '<div class="se2-people-content">';
