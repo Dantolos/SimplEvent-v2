@@ -163,6 +163,7 @@ add_action( 'wp_enqueue_scripts', 'theme_add_files' );
 
 //including supports
 require_once('inc/supports/date.php');
+require_once('inc/supports/language.php');
 require_once('inc/supports/forms.php');
 require_once('inc/supports/schedule.php');
 require_once('inc/supports/files.php');
