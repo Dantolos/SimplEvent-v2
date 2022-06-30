@@ -154,7 +154,7 @@ class Events extends Posts {
 
                foreach(get_field('speaker', $ID) as $eventspeaker){
                 
-                         $this->output .= $this->speakerFunctions->cast_speaker_list($eventspeaker, true);
+                         $this->output .= $this->speakerFunctions->cast_speaker_list($eventspeaker, true, true);
                     
                }
                $this->output .= '</div>';
