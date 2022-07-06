@@ -14,7 +14,7 @@ add_action( 'admin_head', 'favicon4admin' );
 
 //CUSTOM THEME
 function slate_files() {
-     wp_enqueue_style( 'admin-theme', get_stylesheet_directory_uri()  . '/theme/plugins/se2-custom-admin/se2-custom-admin.css', array(), '1.2.3' );
+     //wp_enqueue_style( 'admin-theme', get_stylesheet_directory_uri()  . '/theme/plugins/se2-custom-admin/se2-custom-admin.css', array(), '1.2.3' );
 }
 
 add_action( 'admin_enqueue_scripts', 'slate_files' );

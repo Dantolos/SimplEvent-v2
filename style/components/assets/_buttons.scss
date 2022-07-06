@@ -1,12 +1,12 @@
-
-.se2-btn-l, 
+.se2-btn-l,
 .se2-btn-m,
 .se2-btn-s {
-     width:fit-content;
-     margin: 0 5px 5px 0 ;
+     width: fit-content;
+     margin: 0 5px 5px 0;
      background-color: $primary;
-     color:$light !important;
-     font-weight: bold;
+     color: $light  !important;
+
+
      &:hover {
           filter: brightness(.95);
           cursor: pointer;
@@ -23,11 +23,41 @@
 }
 
 .se2-btn-s {
-     padding: 3px 10px;
+     padding: 3px 12px;
 }
 
 .secondary-btn {
-     color:$dark !important;
+     color: $dark  !important;
      background-color: var(--lightshade);
      filter: brightness(.9);
+}
+
+.se2-btn-primary {
+     background-color: $primary;
+}
+
+.se2-btn-secondary {
+     background-color: $secondary;
+}
+
+.se2-btn-light {
+     background-color: var(--lightshade);
+     color: var(--darkshade) !important;
+}
+
+.se2-btn-dark {
+     background-color: var(--darkshade);
+     color: var(--light) !important;
+}
+
+.se2-btn-rnd-5 {
+     border-radius: 5px;
+}
+
+.se2-btn-rnd-10 {
+     border-radius: 10px;
+}
+
+.se2-btn-rnd-20 {
+     border-radius: 20px;
 }

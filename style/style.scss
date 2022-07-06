@@ -9,56 +9,65 @@
 @import 'components/assets/tags';
 @import 'components/assets/buttons';
 @import 'components/assets/scrollbar';
+@import 'components/assets/app-promotion';
 
 @import 'components/loader';
 
 @import 'components/404';
+
 * {
-    transform: all();
-    transition-duration: 200ms;
+     transform: all();
+     transition-duration: 200ms;
 }
 
 
-html {  
-     scroll-behavior: smooth; 
-   
-     p, h6, h5, h4, h3{
+html {
+     scroll-behavior: smooth;
+
+     p,
+     h6,
+     h5,
+     h4,
+     h3 {
           -webkit-hyphens: auto;
           -ms-hyphens: auto;
           hyphens: auto;
-     } 
+     }
 }
 
 #master-container {
      width: 100vw;
      /* max-width:1848px; */
-     position: absolute; 
+     position: absolute;
      top: 80px;
      left: 0;
      right: 0;
      margin: auto;
-     background-color:var(--secondColor);
+     background-color: var(--secondColor);
      min-height: calc(100vh - 80px);
-     @include breakpoint( 's' ){
+
+     @include breakpoint('s') {
           overflow-x: hidden;
           top: 16vw;
      }
-     
+
      #content-container {
           min-height: calc(100vh - 280px);
      }
 }
 
-.video-header { top:0 !important;  }
+.video-header {
+     top: 0 !important;
+}
 
 .se-loader {
-     min-height:40vh;
-     width:100%;
+     min-height: 40vh;
+     width: 100%;
 }
 
 
 @import 'components/header';
-@import 'components/footer'; 
+@import 'components/footer';
 
 @import 'components/posts';
 @import 'components/people';
@@ -74,5 +83,3 @@ html {
 @import 'components/cta';
 @import 'components/blocks/testimonial';
 @import 'components/blocks/add-block-style';
-
-

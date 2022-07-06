@@ -132,8 +132,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.84'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.51' );
+     $scriptversion = '1.0.85'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.52' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -174,6 +174,7 @@ require_once('inc/supports/slider.php');
 require_once('inc/assets/button.php');
 require_once('inc/assets/socialmedia.php');
 require_once('inc/assets/tags.php');
+require_once('inc/assets/app-promotion.php');
 
 //including classes
 
@@ -227,7 +228,7 @@ wp_head();
                          title="<?php echo bloginfo('name'); ?>">
                </a>
           </div>
-
+                  
           <?php
                
                $menuArgs = array(
@@ -261,6 +262,12 @@ wp_head();
                                    echo join( $langs );
                               }
                          echo '</div>'; 
+                    }
+
+                     //-----APP-----
+                    $appPromotion = new se2_APP_PROMOTION;
+                    if( get_option( 'app_promotion' ) === 'on' ){
+                         echo $appPromotion->cast_header_promo();
                     }
 
                     //ANMELDEBUTTON
@@ -313,14 +320,16 @@ wp_head();
      <?php 
      // ------CTA------
      $cta = new se2_CTA;
-     if(get_option( 'se_cta_activ' ) === 'on' && get_option( 'se_cta' )){
+     if( get_option( 'se_cta_activ' ) === 'on' && get_option( 'se_cta' )){
           echo '<div class="cta-container">';
           foreach( get_option( 'se_cta' ) as $ctaID ){
                echo $cta->cast_cta_button( $ctaID );
           }
           echo '</div>';
      }
-     
+
+
+          
      ?>
 
 

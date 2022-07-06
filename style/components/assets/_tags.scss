@@ -1,21 +1,33 @@
-.se2-tag-cloud{
+.se2-tag-cloud {
      display: flex;
      flex-wrap: wrap;
      align-items: center;
      justify-content: center;
      max-width: 100%;
+
      .se2-tag-element {
-          background-color:var(--shadeColor);
-          border-radius: 15px;    
+          background-color: var(--shadeColor);
+          border-radius: 15px;
           padding: 2px 10px;
           font-size: .8rem;
           margin: 2px;
-          
+
      }
-     a .se2-tag-element{
+
+     a .se2-tag-element {
           &:hover {
-               background-color:$primary;
+               background-color: $primary;
                font-weight: bold;
           }
      }
-} 
+}
+
+.se2-tag-element {
+     background-color: var(--shadeColor);
+     border-radius: 15px;
+     padding: 2px 10px;
+     font-size: .8rem;
+     margin: 2px;
+     width: fit-content;
+     margin-bottom: 10px;
+}
