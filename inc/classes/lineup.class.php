@@ -1,5 +1,5 @@
 <?php
-
+require_once(__DIR__.'/../supports/language.php');
 
 class LineUp {
 
@@ -14,6 +14,7 @@ class LineUp {
      public $tags;
      public $MediaCorner;
      public $speakerCloud;
+     
 
      public function __construct() {
           $this->forms = new se2_Forms;
@@ -491,14 +492,17 @@ class LineUp {
                          
                          //SPEAKER
                          $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
-                    
-                              
+
+                              $this->speakerLightbox .= '<div class="se2-tag-element">' . \se2\support\LANGUAGE\formating_Language( get_field('speaker_sprache', $speakerID) ) . '</div>'; //------------------------------------------
+                         
                               $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.'</h2>';
                               
                               $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
+
+                             
                               $speakerCV = get_field( 'speaker_cv', $speakerID );
                               $this->speakerLightbox .=  $speakerCV;
-                              
+
                               $this->speakerLightbox .= '<div class="review-videos">';
                          
                               $videoArgs = array(
@@ -537,6 +541,15 @@ class LineUp {
                                         $this->speakerLightbox .= '<h6>REVIEW <b>'. $review['jahr']->slug .'</b></h6>';
                                         $this->speakerLightbox .= '<h4><b>'.$review['review_titel'].'</b></h4>';
 
+                                        //PRESENTATION
+                                        if( $review['presentation'] ){ 
+                                             $this->speakerLightbox .= '<a href="'.$review['presentation']['url'].'" target="_blank">';
+                                             $this->speakerLightbox .= '<div class="speaker-presi-btn se2-btn-s se2-btn-light se2-btn-rnd-20">';
+                                             $this->speakerLightbox .= '<span>'.__('Präsentation', 'SimplEvent').' <i>'.$this->files->getRemoteFilesize( $review['presentation']['url'] ).'</i></span>';
+                                             $this->speakerLightbox .= '</div>';
+                                             $this->speakerLightbox .= '</a>';
+                                        }
+     
                                         $this->speakerLightbox .= '<div class="review-videos">';
                                         if( $review['review_video'] ){
                                              $this->speakerLightbox .= '<div class="review-video">';
@@ -642,15 +655,17 @@ class LineUp {
 
                     $speakerCV = get_field( 'speaker_cv', $speakerID );
                     $this->speakerLightbox .=  $speakerCV;
-                    
+               
 
                     if( have_rows('review_jahr',  $speakerID ) ){
                          foreach( get_field( 'review_jahr', $speakerID ) as $review ){
                               if( $review['review_public'] ){
                           
-                                   $this->speakerLightbox .= '<h6>REVIEW <b>'. $review['jahr']->slug .'</b></h6>';
+                                   $this->speakerLightbox .= '<h6>REVIEW asdfasdf <b>'. $review['jahr']->slug .'</b></h6>';
                                    $this->speakerLightbox .= '<h3><b>'.$review['review_titel'].'</b></h3>';
+                                   $this->speakerLightbox .= '<h3>FASFASF</h3>';
 
+                                  
                                    if( $review['review_video'] ){
                                         $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
                                    }

@@ -48,6 +48,8 @@ $args = array(
      'event' => $event,
 );
 
+?> <h1>SPEAKER</h1> <?php
+
 // FILTER MENU
 echo $LineUp->cast_line_up_filter_section( get_the_ID(), $args );
 

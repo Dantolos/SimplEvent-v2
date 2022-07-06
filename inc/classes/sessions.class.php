@@ -24,8 +24,7 @@ class Sessions {
           $sessionsPerSlot = [];
           
           foreach($sessionSlots['slot'] as $sessionSlot ){
-               
-               
+                    
                $sessionsArgs = array(
                     'numberposts'	=> -1,
                     'post_type'	=> 'sessions',
@@ -86,9 +85,13 @@ class Sessions {
                          foreach( $Slot['sessions'] as $session ){
 
                               //check year
-                              if( get_the_terms( $session->ID, 'jahr' )[0]->slug !== $sessionJahr->slug) { 
-                                   continue;   
-                              } 
+                              $yearCheck = true;
+                              foreach( get_the_terms( $session->ID, 'jahr' ) as $y ){
+                                   if( $y->slug !== $sessionJahr->slug) { 
+                                        $yearCheck = false;   
+                                   } 
+                              }
+                              if(!$yearCheck){continue;}
 
                               $sessionGrid .= $this->cast_session_block( $session->ID );
                          }
@@ -153,6 +156,9 @@ class Sessions {
                $tagEliminations = array("<p>", "</p>", '<div>', '</div>');
                $sessionEx = str_replace( $tagEliminations, '', $sessionEx ); 
                $sessionEx_length = (str_contains( $sessionEx , '.' )) ? strpos( $sessionEx , '.', 150 ) + 1 : 1;
+               if( $sessionEx_length < 20 ){
+                    $sessionEx_length = (str_contains( $sessionEx , '?' )) ? strpos( $sessionEx , '?', 150 ) + 1 : 1;
+               }
                $sessionBlock .= '<p>'.substr( $sessionEx, 0, $sessionEx_length ).' <span class="primary-txt"> ...more</span></p>';
 
                //SPEAKERS

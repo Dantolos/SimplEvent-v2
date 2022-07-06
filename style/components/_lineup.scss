@@ -393,6 +393,16 @@
                }
           }
 
+          .speaker-presi-btn {
+               span::before {
+                    font-family: "dashicons";
+                    content: "\f105";
+                    vertical-align: middle;
+                    padding-right: 5px;
+                    font-size: 120%;
+               }
+          }
+
           .speaker-lb-review-gallery {
                display: flex;
                flex-wrap: wrap;

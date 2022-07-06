@@ -37,6 +37,8 @@ class se2_page_General  {
 
           register_setting( 'simplevent-settings-group', 'meta_tags' );
 
+          register_setting( 'simplevent-settings-group', 'app_promotion' );
+
 
           //****SECTIONS
           add_settings_section( 'simplevent-general-options', 'General Options', 'simplevent_general_options', 'aagi_simplevent');
@@ -44,6 +46,7 @@ class se2_page_General  {
           add_settings_section( 'simplevent-fonts', 'Fonts', 'simplevent_fonts', 'aagi_simplevent');
           add_settings_section( 'simplevent-analytics', 'Analytics', 'simplevent_analytics', 'aagi_simplevent');
           add_settings_section( 'simplevent-meta', 'Meta', 'simplevent_meta', 'aagi_simplevent');
+          add_settings_section( 'simplevent-app', 'App', 'simplevent_app', 'aagi_simplevent');
 
 
           //****fields
@@ -76,6 +79,8 @@ class se2_page_General  {
 
           add_settings_field( 'meta_tags', 'Meta Tags', 'simplevent_meta_tags', 'aagi_simplevent', 'simplevent-meta' );
 
+          add_settings_field( 'app_promotion', 'App Promotion', 'simplevent_app_promotion', 'aagi_simplevent', 'simplevent-app' );
+
           // Section Functions
           function simplevent_general_options() {
                echo 'Allgemeine Anpassungen | Logo – Social Media';
@@ -97,6 +102,9 @@ class se2_page_General  {
                echo 'HTML Header - Meta Tags';
           }
           
+          function simplevent_app() {
+               echo 'Promotion für NZZ Connect App. </br>Basisinhalte aus connect.nzz.ch -> Posts -> NZZ Connect App (809).';
+          }
           // Call Template File
           function simplevent_theme_create_page() {
                require_once( get_template_directory() . '/theme/templates/simplevent-admin.php' );
@@ -252,6 +260,10 @@ class se2_page_General  {
                echo 'Snippets got placed directly over closing <b>body</b>-tag';
                $footer_snippets = get_option('footer_snippets');
                $fillerSnippets = array(
+                    'NZZ' => [
+                         'snippet' => '', 
+                         'active' => ''
+                    ], 
                     'LinkedIn' => [
                          'snippet' => '', 
                          'active' => ''
@@ -317,6 +329,17 @@ class se2_page_General  {
                echo '<textarea type="textarea" rows="4" name="meta_tags[SocialMedia][Description]"  style="width: 100%;">' . $meta_tags['SocialMedia']['Description'] . '</textarea>';
           
           }
+
+          // APP
+          function simplevent_app_promotion(){
+               $app_promotion = esc_attr( get_option( 'app_promotion' ) );
+               if($app_promotion == 'on'){
+                    $app_promotion = 'checked';
+               }
+               echo '<input type="checkbox" name="app_promotion" ' .$app_promotion. '/>';
+              
+          }
+
      }
 
 }
