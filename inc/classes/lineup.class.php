@@ -419,9 +419,7 @@ class LineUp {
 
           $this->speakerLightbox .= '<div class="speaker-lb-body">';
 
-               //FOTO
-               $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';    
-               $this->speakerLightbox .= '</div>';
+              
 
                
 
@@ -487,9 +485,13 @@ class LineUp {
 
                     $this->speakerLightbox .= '</div>';
 
+                          
                     //CONTENT
                     $this->speakerLightbox .= '<div class="speaker-lb-content">';
-                         
+                    //FOTO
+                    $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';    
+                    $this->speakerLightbox .= '</div>';
+
                          //SPEAKER
                          $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
 

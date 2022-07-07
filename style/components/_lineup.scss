@@ -259,6 +259,14 @@
 
           }
 
+          .speaker-lb-content {
+               display: flex;
+               flex-direction: column;
+               flex-wrap: wrap;
+               align-items: flex-start;
+               align-content: center;
+          }
+
           .speaker-lb-image {
 
                width: clamp(25%, 100%, 242px);
