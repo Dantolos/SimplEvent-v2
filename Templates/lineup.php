@@ -44,11 +44,10 @@ $args = array(
      'view' => 'grid',
      'sort' => 'ASC',  
      'cat' => $cat,
-     'year' => $year,
+     'year' => $year, 
      'event' => $event,
 );
 
-?> <h1>SPEAKER</h1> <?php
 
 // FILTER MENU
 echo $LineUp->cast_line_up_filter_section( get_the_ID(), $args );
