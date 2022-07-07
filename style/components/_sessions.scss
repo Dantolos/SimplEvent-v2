@@ -135,8 +135,7 @@
                padding: 5% 15%;
                width: 100%;
                overflow-y: scroll;
-               @include hideScrollbar;
-
+               @include scrollbars(6px, var(--lightshade));
                .session-lb-language {
                     background-color: var(--shadeColor);
                     border-radius: 15px;

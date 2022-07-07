@@ -76,7 +76,45 @@ class Mediacorner {
      public function cast_media_info( $pageID ){ 
           $mediaInfo = '<div class="media-info-container">';
           $mediaInfo .= get_field('info_content', $pageID);
-          //$mediaInfo .= the_content( $pageID );
+          $menuItems = get_field('menu', $pageID);
+          if(is_array($menuItems) ){
+               $mediaInfo .= '<div class="mediacorner-quicknav">';
+               foreach( $menuItems as $item ){
+                    $iconURL = get_template_directory_uri() . '/images/icons/mediacorner/';
+                    $quicknavicon = '';
+                    switch ($item['value']) {
+                         case 'info':
+                              $quicknavicon = $iconURL . 'file.svg';
+                              break;
+                         case 'mm':
+                              $quicknavicon = $iconURL . 'file.svg';
+                              break;
+                         case 'logo':
+                              $quicknavicon = $iconURL . 'starburst-four-point.svg';
+                              break;
+                         case 'fotos':
+                              $quicknavicon = $iconURL . 'camera.svg';
+                              break;
+                         case 'audio':
+                              $quicknavicon = $iconURL . 'mic-microphone.svg';
+                              break;
+                         case 'video':
+                              $quicknavicon = $iconURL . 'video-camera.svg';
+                              break;
+                         default:
+                         $quicknavicon = $iconURL . 'file.svg';
+                              break;
+                    }
+                    if($item['value'] === 'info'){continue;}
+                    $mediaInfo .= '<div class="mediacorner-quicknav-element" type="'.$item['value'].'">';
+                    $mediaInfo .= '<img src="'.$quicknavicon.'" alt="'.__($item['label'], 'SimplEvent').'" />';
+                    $mediaInfo .= '<h5 class="" >'.__($item['label'], 'SimplEvent').'</h5>';
+                    $mediaInfo .= '</div>';
+         
+               }
+               $mediaInfo .= '</div>';
+          }
+          
           $mediaInfo .= '</div>';
           return $mediaInfo;
      }

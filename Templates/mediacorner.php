@@ -4,7 +4,7 @@
  */
 get_header();
 
-wp_enqueue_script( 'JS-mediacorner', get_template_directory_uri() . '/scripts/specifics/mediacorner.js', array('jquery'), '1.0.07', true );
+wp_enqueue_script( 'JS-mediacorner', get_template_directory_uri() . '/scripts/specifics/mediacorner.js', array('jquery'), '1.0.08', true );
 
 //the_content();
 
