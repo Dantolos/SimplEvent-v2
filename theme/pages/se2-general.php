@@ -18,6 +18,8 @@ class se2_page_General  {
 
           register_setting( 'simplevent-settings-group', 'social_media' );
 
+          register_setting( 'simplevent-settings-group', 'page_loader' );
+
           register_setting( 'simplevent-settings-group', 'primary_color_picker' );
           register_setting( 'simplevent-settings-group', 'secondary_color_picker' );
           register_setting( 'simplevent-settings-group', 'light_mode_picker' );
@@ -56,8 +58,9 @@ class se2_page_General  {
           add_settings_field( 'event_icon_neg', 'Icon Negativ', 'simplevent_event_icon_neg', 'aagi_simplevent', 'simplevent-general-options' );
           add_settings_field( 'event_logo_link', 'Logo Link', 'simplevent_event_logo_link', 'aagi_simplevent', 'simplevent-general-options' );
 
-
           add_settings_field( 'social-media', 'Social Media', 'simplevent_social_media', 'aagi_simplevent', 'simplevent-general-options' );
+
+          add_settings_field( 'page_loader', 'Page Loader', 'simplevent_page_loader', 'aagi_simplevent', 'simplevent-general-options' );
      
           add_settings_field( 'primary-color-picker', 'Primary Color', 'simplevent_primary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
           add_settings_field( 'secondary-color-picker', 'Secondary Color', 'simplevent_secondary_color_picker', 'aagi_simplevent', 'simplevent-color-options' );
@@ -169,6 +172,15 @@ class se2_page_General  {
 
                echo '<p style="margin-top:20px;"><b>Youtube</b></p>';
                echo '<input type="text" name="social_media[youtube]" value="' .$socialMedia['youtube']. '" placeholder="Channel URL" />';
+          }
+
+          //PAGELOADER
+          function simplevent_page_loader(){
+               $page_loader = esc_attr( get_option( 'page_loader' ) );
+               if($page_loader == 'on'){ 
+                    $page_loader = 'checked';
+               }
+               echo '<input type="checkbox" name="page_loader" ' .$page_loader. '/>';
           }
           
           

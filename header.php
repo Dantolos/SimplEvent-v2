@@ -132,8 +132,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.88'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.54' );
+     $scriptversion = '1.0.89'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.55' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -327,9 +327,13 @@ wp_head();
           }
           echo '</div>';
      }
+         
 
+     // ------PAGELOADER------
+     if( get_option( 'page_loader' ) === 'on'){
+          echo '<div id="page-loader"><img src="' . esc_url(get_option( 'event_icon_neg' )) . '"></div>';
+     }
 
-          
      ?>
 
 
