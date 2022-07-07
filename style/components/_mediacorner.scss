@@ -3,7 +3,7 @@
      flex-direction: row;
      flex-wrap: wrap;
      position: relative;
-
+     
      @include breakpoint( 'm' ){
           height:calc( 100vh - 50px );
      } 
@@ -106,7 +106,7 @@
           padding:10% 5%;
           overflow-y: scroll;
           position: relative;
-          @include hideScrollbar;
+          @include scrollbars(8px, var(--shadeColor));
 
           @include breakpoint( 'm' ){
                width:calc(100vw - 50px);
@@ -118,8 +118,39 @@
      }
 }
 
+//INFOPAGE
+.media-info-container {
+     .mediacorner-quicknav {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          width:100%;
+          .mediacorner-quicknav-element {
+               display: flex;
+               flex-direction: column;
+               justify-content: space-around;
+               align-items: center;
+               width:200px;
+               height:200px;  
+               margin: 20px;
+               padding: 20px;
+               
+               @include dropShadow;
+               &:hover{
+                    transform: scale(.95);
+                    cursor: pointer;
+                    
+                    img { transform: scale(1.2); }
+               }
+               img { max-width:40%; max-height: 40%; opacity: .4;}
+               h5 { text-align: center;  text-transform: uppercase; margin-bottom: 0 !important;}
+          }
+     }
+     
+}
 
-
+//LOGOPAGE
 .se2-logos {
 
      display: flex;
@@ -344,7 +375,7 @@
           padding:5%;
           height:100%;
           overflow-y: scroll;
-          @include hideScrollbar;
+          @include scrollbars(8px, var(--shadeColor));
 
           .se2-galleries-content {
                display:flex;

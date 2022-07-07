@@ -45,7 +45,7 @@ html {
      margin: auto;
      background-color: var(--secondColor);
      min-height: calc(100vh - 80px);
-
+     
      @include breakpoint('s') {
           overflow-x: hidden;
           top: 16vw;
@@ -53,6 +53,7 @@ html {
 
      #content-container {
           min-height: calc(100vh - 280px);
+         
      }
 }
 
