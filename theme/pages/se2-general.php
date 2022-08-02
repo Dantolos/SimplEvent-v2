@@ -40,6 +40,8 @@ class se2_page_General  {
           register_setting( 'simplevent-settings-group', 'meta_tags' );
 
           register_setting( 'simplevent-settings-group', 'app_promotion' );
+          register_setting( 'simplevent-settings-group', 'app_promotion_id' );
+          register_setting( 'simplevent-settings-group', 'app_promotion_display' );
 
 
           //****SECTIONS
@@ -83,6 +85,10 @@ class se2_page_General  {
           add_settings_field( 'meta_tags', 'Meta Tags', 'simplevent_meta_tags', 'aagi_simplevent', 'simplevent-meta' );
 
           add_settings_field( 'app_promotion', 'App Promotion', 'simplevent_app_promotion', 'aagi_simplevent', 'simplevent-app' );
+          add_settings_field( 'app_promotion_id', 'Post ID', 'simplevent_app_promotion_id', 'aagi_simplevent', 'simplevent-app' );
+          add_settings_field( 'app_promotion_display', 'Display Position', 'simplevent_app_promotion_display', 'aagi_simplevent', 'simplevent-app' );
+
+
 
           // Section Functions
           function simplevent_general_options() {
@@ -106,7 +112,7 @@ class se2_page_General  {
           }
           
           function simplevent_app() {
-               echo 'Promotion für NZZ Connect App. </br>Basisinhalte aus connect.nzz.ch -> Posts -> NZZ Connect App (809).';
+               echo 'Promotion für NZZ Connect App. </br>Basisinhalte aus connect.nzz.ch -> Posts -> NZZ Connect App (ID: 809).';
           }
           // Call Template File
           function simplevent_theme_create_page() {
@@ -350,6 +356,29 @@ class se2_page_General  {
                }
                echo '<input type="checkbox" name="app_promotion" ' .$app_promotion. '/>';
               
+          }
+
+          function simplevent_app_promotion_id(){
+               $app_promotion_id = esc_attr( get_option( 'app_promotion_id' ) );
+               if(!$app_promotion_id){
+                    $app_promotion_id = '';
+               }
+               echo '<p style="margin-top:20px;">Add the ID of the accordingly post to https://connect.nzz.ch/wp-json/wp/v2/posts/<b>postID</b></p>';
+               echo '<input type="text" name="app_promotion_id" value="'.$app_promotion_id.'" placeholder="Post ID"/>';
+          
+              
+          }
+
+          function simplevent_app_promotion_display(){
+               
+               $app_promotion_display = get_option( 'app_promotion_display' );
+               $std_app_promotion_display = array('Header', 'Footer');
+               foreach($std_app_promotion_display as $key => $position){
+                    $check = ( isset($app_promotion_display[$key]) ) ? 'checked' : '';
+                    echo '<input type="checkbox" id="'.$position.'" name="app_promotion_display['.$key.']" value="'.$position.'" '.$check.'>';
+                    echo '<label for="'.$position.'">'.$position.'</label><br>';
+               }
+           
           }
 
      }

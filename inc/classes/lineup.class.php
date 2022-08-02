@@ -244,7 +244,7 @@ class LineUp {
 
      public function cast_speaker_list( $speakerID, $showCV = false, $hideDate = false ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
-
+          $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" data-speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
               /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
                $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
@@ -404,7 +404,7 @@ class LineUp {
      //SPEAKER LIGHTBOX 
 
      public function cast_speaker_lightbox( $speakerID ){
-
+          $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
           $speakername = ( get_field('speaker_vorname', $speakerID)  ) 
           ? 
                get_field('speaker_degree', $speakerID) 
@@ -619,6 +619,7 @@ class LineUp {
      }
 
      public function gg_cast_speaker_lightbox($speakerID){
+          $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
           $this->speakerLightbox = '<div class="speaker-lb-container">';
 
           $this->speakerLightbox .= '<div class="speaker-lb-head">';

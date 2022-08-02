@@ -26,7 +26,9 @@ require_once('supports/date.php');
 require_once('supports/forms.php');
 require_once('supports/files.php');
 require_once('supports/social-media.php');
+
 require_once('assets/tags.php');
+require_once('assets/app-promotion.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -259,6 +261,21 @@ function cta()
      $CTA = new se2_CTA;
      
      wp_send_json( $CTA->cast_cta_lightbox( $postID ) ); 
+     
+     die();
+ 
+}
+
+/*------------- APP Promotion ---------------*/
+add_action('wp_ajax_nopriv_app_promotion', 'app_promotion');
+add_action('wp_ajax_app_promotion', 'app_promotion'); //nur für angemeldete (admins)
+
+function app_promotion() 
+{
+     $restdata = $_POST['restdata'];
+     $APP_LIGHTBOX = new se2_APP_PROMOTION;
+     
+     wp_send_json( $APP_LIGHTBOX->cast_app_lightbox( $restdata ) ); 
      
      die();
  
