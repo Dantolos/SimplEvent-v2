@@ -98,7 +98,11 @@
           }
           
           ?>
-
+          :root {
+               --apple-icon: url(<?php echo get_template_directory_uri() . '/images/icons/apple-brands.svg' ?>);
+               --playstore-icon: url(<?php echo get_template_directory_uri() . '/images/icons/google-play-brands.svg' ?>);
+          }
+        
           body {
                /*COLORS*/
                --primary: <?php echo esc_attr( get_option( 'primary_color_picker' ) ); ?>;
@@ -132,8 +136,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.88'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.54' );
+     $scriptversion = '1.0.90'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.56' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
@@ -264,10 +268,13 @@ wp_head();
                          echo '</div>'; 
                     }
 
-                     //-----APP-----
+                    //-----APP-----
                     $appPromotion = new se2_APP_PROMOTION;
-                    if( get_option( 'app_promotion' ) === 'on' ){
-                         echo $appPromotion->cast_header_promo();
+                    if( null !== get_option( 'app_promotion' ) ){
+                         if( get_option( 'app_promotion' ) === 'on' && isset( get_option( 'app_promotion_display' )[0] ) ){                              
+                              $restURL = 'https://connect.nzz.ch/wp-json/wp/v2/posts/'.esc_attr( get_option( 'app_promotion_id' ) );
+                              echo $appPromotion->cast_header_promo($restURL);
+                         }
                     }
 
                     //ANMELDEBUTTON
@@ -287,7 +294,6 @@ wp_head();
                     if( get_option( 'se_header_mode_menu' ) == 'on' ){
                          echo '<button id="modebutton">Darkmode</button>';
                     }
-
 
                     //SOCIAL MEDIA
                     $socialMedias = get_option( 'social_media' );
@@ -327,9 +333,13 @@ wp_head();
           }
           echo '</div>';
      }
+         
 
+     // ------PAGELOADER------
+     if( get_option( 'page_loader' ) === 'on'){
+          echo '<div id="page-loader"><img src="' . esc_url(get_option( 'event_icon_neg' )) . '"></div>';
+     }
 
-          
      ?>
 
 

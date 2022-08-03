@@ -1,5 +1,5 @@
 <?php 
-require_once(__DIR__.'/../supports/language.php');
+require_once(__DIR__.'/../supports/language.php'); 
 
 class Sessions {
 

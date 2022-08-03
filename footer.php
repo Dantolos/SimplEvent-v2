@@ -7,8 +7,7 @@ $footerColors = (get_option( 'se_footer_color' )) ?
 
 ?>
      </div>
-
-
+        
 
           <footer style="<?php echo $footerColors; ?>">
                <div class="footer-contact-container">
@@ -22,9 +21,9 @@ $footerColors = (get_option( 'se_footer_color' )) ?
                     
                     <p><?php echo __('Tel. ', 'SimplEvent') . get_option( 'se_contact_phone' ); ?></p>
 
-                                       
                     <a class="secondary-txt" href="<?php echo 'mailto:' . get_option( 'se_contact_email' ); ?>"><?php echo str_replace( '@', '(at)', get_option( 'se_contact_email' )); ?></a>
                     <p class="copyright"><?php echo esc_attr( get_option( 'se_c_text' ) ); ?></p>
+
                </div>
                
                <div class="footer-partner-container">   
@@ -71,12 +70,24 @@ $footerColors = (get_option( 'se_footer_color' )) ?
                     {
                         $cf = 1;
                         echo '<div class="footer-menu">';
-                        foreach ($array_footermenu as $footermenu) 
-                        {
-                            $trenner = ($cf >= count($array_footermenu)) ? '' : '  |  ';
-                            echo '<a href="' . $footermenu->url . '"><p>' . $footermenu->title . '</p></a><p>' . $trenner . '</p>';
-                            $cf++;
-                        }
+                     
+                        //APP
+                         if( null !== get_option( 'app_promotion' ) ){
+                              if( get_option( 'app_promotion' ) === 'on' && isset( get_option( 'app_promotion_display' )[1] ) ){
+                                   $trenner = '  |  ';
+                                   $restURL = 'https://connect.nzz.ch/wp-json/wp/v2/posts/'.esc_attr( get_option( 'app_promotion_id' ) );
+                                   echo '<div class="se2-app-promo-footer app-promo-button" data-resturl="'.$restURL.'">NZZ Connect App</div>';
+                              }
+                         }
+                              
+                      
+                         foreach ($array_footermenu as $footermenu) 
+                         {
+                              $trenner = ($cf >= count($array_footermenu)) ? '' : '  |  ';
+                              echo '<a href="' . $footermenu->url . '"><p>' . $footermenu->title . '</p></a><p>' . $trenner . '</p>';
+                              $cf++;
+                         }
+
                         echo '</div>';
                     }
                     ?>

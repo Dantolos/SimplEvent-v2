@@ -1,3 +1,4 @@
+//header button
 .se2-app-promo-header {
      background-color: $primary;
      color: var(--dark);
@@ -9,5 +10,169 @@
      text-transform: uppercase;
      justify-content: center;
      overflow: hidden;
+     cursor: pointer;
+
+     @include breakpoint('m') {
+          padding: 20px 40px;
+          position: absolute;
+          left: 0;
+
+
+          span {
+               margin-top: 3px;
+               font-size: 1.4em;
+
+               &::before {
+                    display: block;
+                    float: left;
+                    margin-left: -20px;
+                    margin-right: 15px;
+                    content: ' ';
+                    background-size: 25px 25px;
+                    width: 25px;
+                    height: 25px;
+                    background-image: var(--apple-icon);
+               }
+
+               &::after {
+                    display: block;
+                    float: left;
+                    margin-top: 3px;
+                    margin-right: 15px;
+                    content: ' ';
+                    background-size: 20px 20px;
+                    width: 20px;
+                    height: 20px;
+                    background-image: var(--playstore-icon);
+               }
+          }
+     }
+
+}
+
+//footer button
+.se2-app-promo-footer {
+     background-color: $primary;
+     color: var(--dark);
+     padding: 4px 20px;
+     text-transform: uppercase;
+     font-weight: bold;
+     cursor: pointer;
+
+     &:hover {
+          transform: scale(1.1);
+     }
+
+
+}
+
+.se2-app-lightbox-container {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     backdrop-filter: grayscale(.3) contrast(.8) brightness(5) blur(50px);
+
+     @include breakpoint('m') {
+          justify-content: flex-start;
+     }
+
+     .se2-app-lightbox-info {
+          position: absolute;
+          left: 5%;
+          max-width: 40vw;
+
+          img {
+               border-radius: 12px;
+               position: fixed;
+               top: 5vw;
+               left: 5vw;
+          }
+
+          .se2-app-lightbox-buttons {
+               display: flex;
+               width: 100%;
+               margin-top: 50px;
+               flex-wrap: wrap;
+
+               .se2-app-button {
+                    margin-right: 20px;
+                    margin-bottom: 20px;
+                    border: solid 2px $dark;
+                    width: fit-content;
+                    border-radius: 8px;
+                    padding: 10px 50px;
+                    font-size: 1.3em;
+                    background-color: white;
+
+                    &:hover {
+                         filter: invert(100%);
+
+
+                    }
+               }
+
+               .apple,
+               .android {
+                    &::before {
+                         display: block;
+                         float: left;
+                         margin-left: -20px;
+                         margin-right: 15px;
+                         content: ' ';
+                         background-size: 25px 25px;
+                         width: 25px;
+                         height: 25px;
+                    }
+               }
+
+               .apple::before {
+                    background-image: var(--apple-icon);
+
+               }
+
+               .android::before {
+                    background-image: var(--playstore-icon);
+               }
+          }
+
+          @include breakpoint('m') {
+               max-width: 80vw;
+               justify-self: flex-start;
+               align-self: flex-start;
+               margin-top: 5%;
+
+               img {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    margin-bottom: 10px;
+               }
+          }
+     }
+
+     .se2-app-lightbox-mockup {
+          position: fixed;
+          bottom: 0;
+          right: 5%;
+          height: 80vh;
+          width: 40vw;
+
+          @include breakpoint('m') {
+               max-width: 80vw;
+          }
+
+
+          img {
+               position: absolute;
+               bottom: 0;
+               max-width: 100%;
+               max-height: 100%;
+          }
+     }
 
 }

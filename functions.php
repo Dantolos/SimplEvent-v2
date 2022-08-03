@@ -125,10 +125,17 @@ function theme_add_scripts()
         array_push( $JsIncList, array( 'mode-js', 'mode.js' ) );
     }
 
+    //ADD APP PROMOTION SCRIPT
+    if( get_option( 'app_promotion' ) == 'on' ){
+        array_push( $JsIncList, array( 'app-promo-js', 'assets/app-promotion.js' ) );
+    }
+
     foreach ($JsIncList as $JsInc) 
     {
-        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.35', true );
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.37', true );
     }
+
+
      
     /*------------------------------Send Global Variables---------------------------*/
     $cookieAccepted = 'N';

@@ -37,6 +37,33 @@ let LB_CANDIDATE = new se2_LB_Candidate();
 //HEADER
 //---------------------------------
 
+
+
+//---------------------------------
+//PAGELOADER
+//---------------------------------
+var LOADER = new se2_Loader();
+const PAGE_LOADER = document.getElementById('page-loader')
+
+if(PAGE_LOADER){
+     const PAGE_LOADER_LOGO = PAGE_LOADER.querySelector('img');
+     //LOADER.cast_Loader(PAGE_LOADER);
+
+     window.onload = function(){
+          gsap.fromTo(PAGE_LOADER, .1, {y: '0'}, {top: '100vh', delay: .1} )
+          gsap.fromTo(PAGE_LOADER_LOGO,.1, {scale: 1}, {scale: 3})
+          setTimeout(()=>{PAGE_LOADER.style.visibility = 'hidden'}, 200)
+          
+     }
+     window.addEventListener('beforeunload', ()=>{
+          PAGE_LOADER.style.visibility = 'visible'
+          gsap.set(PAGE_LOADER, { top: '0' })
+          gsap.fromTo(PAGE_LOADER, .1, {top:'-100vh' }, {top: '0vh',  ease: Power1.easeOut })
+          gsap.fromTo(PAGE_LOADER_LOGO,.1,{scale: 2}, {scale: 1, delay: .1})
+          
+     })
+}
+
 //MOBILE MODE BY **mBREAKPOINT** PIXELS
 const mBREAKPOINT = 1024;
 document.querySelector('body').classList.add('light');
