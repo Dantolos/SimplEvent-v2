@@ -30,12 +30,14 @@ class LineUp {
           $speaker_args = array(
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
+               'posts_per_page' => -1
+
           );
           
           $speakerData = new WP_Query( $speaker_args ); 
-          
+           
           foreach( $speakerData->posts as $speaker ){
-               
+              
                if( $cat != 'all' ){
                     $isInCat = false;
                     if( !is_array($cat) ){
@@ -73,16 +75,21 @@ class LineUp {
                     }
                }
 
-             
+               
 
                $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
                if($year != 'all'){
                     $isInYear = false;
                     
-                    foreach ( $speakeryears as $speakeryear ) {           
+                    foreach ( $speakeryears as $speakeryear ) {        
+                        
+                               
                          if( !is_array($year) && $speakeryear->term_id == $year) { 
+                              
                               $isInYear = true;      
-                         } elseif ( is_array($year) ) {               
+                              
+                         } elseif ( is_array($year) ) {         
+                              
                               foreach( $year as $y ){
                                    if( intval($y) === $speakeryear->term_id ){
                                         $isInYear = true;
@@ -103,36 +110,26 @@ class LineUp {
           
 
           if( $order === 'asc' ){
-
                function sortASC($a, $b) {
                     if ( get_field('speaker_nachname', $a) == get_field('speaker_nachname', $b) ) {
                         return 0;
                     }
-
                     return ( get_field('speaker_nachname', $a) < get_field('speaker_nachname', $b) ) ? -1 : 1;
 
                 }
-
                uasort($this->speakerIDs, 'sortASC');
-
           }
 
 
 
           if( $order === 'dsc' ){
-
                function sortDSC($a, $b) {
-
                     if ( get_field('speaker_nachname', $a) == get_field('speaker_nachname', $b) ) {
                         return 0;
                     }
-
                     return ( get_field('speaker_nachname', $a) < get_field('speaker_nachname', $b) ) ? 1 : -1;
-
                }
-
                uasort($this->speakerIDs, 'sortDSC');
-
           }
           
           return $this->speakerIDs;
@@ -146,6 +143,7 @@ class LineUp {
           $this->output = '<div  class="se2-lineup-filter-section container">';
 
           $filters = get_field('filters', $pageID );
+          $visibility = get_field('visibility', $pageID);
 
           //sort direction
           if( is_array($filters) ){
@@ -159,13 +157,18 @@ class LineUp {
                          if (is_array($yearTaxs) || is_object($yearTaxs)) {
                               foreach( $yearTaxs as $year ){                        
                                    if( !in_array( $year->term_id, array_column( $yearOptions, 'key' ) )  ){
-                                        $yearARRAY = [ 'key' => $year->term_id, 'name' => $year->name];
-                                        array_push( $yearOptions, $yearARRAY ); 
+                                        foreach( $visibility['jahr-visibility'] as $key => $visibleYear) {
+                                             if( $year->term_id === $visibleYear->term_id){
+                                                  $yearARRAY = [ 'key' => $year->term_id, 'name' => $year->name];
+                                                  array_push( $yearOptions, $yearARRAY ); 
+                                             }
+                                        } 
                                    }
                               }
                          }
                     }
-                    arsort($yearOptions);
+           
+                    asort($yearOptions);
                     
                     $this->output .= '<div class="se2-lineup-filter-jahr filter-option">';
                     $this->output .= $this->forms->castDropdown( 'speakeryear', $yearOptions, false );
@@ -356,7 +359,7 @@ class LineUp {
      public function cast_line_up_overview( $args = array() ) {
 
           //std year
-          $currYear = false;
+          $currYear = '';
           $cY = date('Y');
           if( get_term_by('slug', $cY , 'jahr') ){
                $currYear = get_term_by('slug', $cY, 'jahr')->term_id;
@@ -373,8 +376,7 @@ class LineUp {
 
           //event
           $currEvent = 'main';
-        
-
+         
           $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'" data-event="'.$currEvent.'">';
           
           //query IDs
@@ -383,7 +385,6 @@ class LineUp {
           //cast view       
           if( $speakerIDs ){
                foreach( $speakerIDs as $speakerID ){
-                    
                     if( empty($args) || $args['view'] === 'grid' ){
                          $this->output .= $this->cast_speaker_grid($speakerID);
                     }else if( $args['view'] === 'list' ){

@@ -19,7 +19,7 @@ the_content();
 
 
 //LINE UP OVERVIEW
-$year = get_field( 'visibility', get_the_ID() )['jahr'];
+$year = get_field( 'visibility', get_the_ID() )['jahr-visibility'][0]->term_id;
 if( isset( $_GET["j"] ) ){
      $yearTax = get_term_by( 'name', htmlspecialchars( $_GET["j"] ), 'jahr' );
      $year = $yearTax->term_id;
