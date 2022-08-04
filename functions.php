@@ -87,7 +87,13 @@ add_action( 'admin_enqueue_scripts', 'hook_ajax_script' );
 /*-------------------------------------------------------------*/
 /*-------------------SAVE & LOAD ACF JSON----------------------*/
 /*-------------------------------------------------------------*/
-add_filter('acf/settings/save_json', 'my_acf_json_save_point');
+
+// via PHP
+require get_template_directory() . '/theme/acf/acf-field-groups.php';
+
+// via JSON
+
+/* add_filter('acf/settings/save_json', 'my_acf_json_save_point');
  
 function my_acf_json_save_point( $path ) {
     $path = get_stylesheet_directory_uri() . '/acf';
@@ -100,7 +106,7 @@ function my_acf_json_load_point( $paths ) {
     unset($paths[0]);
     $paths[] = get_stylesheet_directory_uri() . '/acf';
     return $paths;
-}
+} */
 
 /*-------------------------------------------------------------*/
 /*------------------------LOAD SCRIPTS-------------------------*/
