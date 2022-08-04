@@ -4641,7 +4641,7 @@ Sollte keine Option ausgewählt sein, werden alle angezeigt.',
 				array(
 					'key' => 'field_60e398cbc66ad',
 					'label' => 'Jahr',
-					'name' => 'jahr',
+					'name' => 'jahr-visibility',
 					'type' => 'taxonomy',
 					'instructions' => '',
 					'required' => 1,
