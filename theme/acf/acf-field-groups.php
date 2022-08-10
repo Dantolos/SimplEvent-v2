@@ -6007,7 +6007,7 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'wpml_cf_preferences' => 1,
+			'wpml_cf_preferences' => 3,
 			'return_format' => 'url',
 			'preview_size' => 'medium_large',
 			'library' => 'all',
@@ -6032,7 +6032,7 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'wpml_cf_preferences' => 1,
+			'wpml_cf_preferences' => 3,
 			'return_format' => 'url',
 			'preview_size' => 'medium_large',
 			'library' => 'all',
@@ -7082,7 +7082,7 @@ acf_add_local_field_group(array(
 				'interview' => 'Interview',
 				'entertainment' => 'Entertainment',
 				'music' => 'Music',
-				'session' => 'Session',
+				'session' => 'Session'
 			),
 			'allow_custom' => 0,
 			'default_value' => array(
