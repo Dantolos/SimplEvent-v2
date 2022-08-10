@@ -85,28 +85,16 @@ add_action( 'admin_enqueue_scripts', 'hook_ajax_script' );
 
 
 /*-------------------------------------------------------------*/
-/*-------------------SAVE & LOAD ACF JSON----------------------*/
+/*--------------------------- ACF -----------------------------*/
 /*-------------------------------------------------------------*/
 
-// via PHP
+/*-------------------LOAD FIELDS VIA PHP-----------------------*/
+
 require get_template_directory() . '/theme/acf/acf-field-groups.php';
 
-// via JSON
 
-/* add_filter('acf/settings/save_json', 'my_acf_json_save_point');
- 
-function my_acf_json_save_point( $path ) {
-    $path = get_stylesheet_directory_uri() . '/acf';
-    return $path;
-}
-
-add_filter('acf/settings/load_json', 'my_acf_json_load_point');
-
-function my_acf_json_load_point( $paths ) {
-    unset($paths[0]);
-    $paths[] = get_stylesheet_directory_uri() . '/acf';
-    return $paths;
-} */
+/*----------------------ACF ADD CHOICES------------------------*/
+require get_template_directory() . '/theme/acf/acf-field-choice-settings.php';
 
 /*-------------------------------------------------------------*/
 /*------------------------LOAD SCRIPTS-------------------------*/
@@ -254,118 +242,7 @@ function mytheme_setup_theme_supported_features() {
  
 add_action( 'after_setup_theme', 'mytheme_setup_theme_supported_features' );
 
- 
-/*-------------------------------------------------------------*/
-/*----------------------ACF ADD CHOICES------------------------*/
-/*-------------------------------------------------------------*/
-add_filter('acf/load_field/name=event', 'acf_load_sideevent_field_choices');
-function acf_load_sideevent_field_choices( $field ) {
-     $field['choices'] = array();
 
-     if(get_option( 'main_event' )){
-        $value = get_option( 'main_event' );
-        $label = 'main';
-        $field['choices'][ $label ] = $value;
-     } else {
-        $value = get_bloginfo('name');
-        $label = 'main';
-        $field['choices'][ $label ] = $value;
-     }
-     
-     if( is_array(get_option('side_events')) ) {
-          
-          // while has rows
-          foreach( get_option('side_events') as $sideevent ) {
-              
-              // vars
-              $value = $sideevent['value'];
-              $label = $sideevent['label'];
-  
-              
-              // append to choices
-              $field['choices'][ $label ] = $value;
-              
-          }
-          
-     }
-
-     return $field;
-}
-
-add_filter('acf/load_field/name=slot', 'acf_load_slot_field_choices');
-function acf_load_slot_field_choices( $field ) {
-     $field['choices'] = array();
-     
-     if( is_array(get_option('sessions_slots')) ) {
-          
-          // while has rows
-          foreach( get_option('sessions_slots') as $slot ) {
-              
-              // vars
-              $value = $slot['value'];
-              $label = $slot['label'];
-  
-              
-              // append to choices
-              $field['choices'][ $label ] = $value;
-              
-          }
-          
-     }
-
-     return $field;
-}
-
-add_filter('acf/load_field/name=awardtype', 'acf_load_awards_choices');
-
-function acf_load_awards_choices( $field ) {
-    $field['choices'] = array();
-    
-    if( is_array(get_option('awards')) ) {
-         
-         // while has rows
-         foreach( get_option('awards') as $award ) {
-             
-             // vars
-             $value = $award['value'];
-             $label = $award['label'];
- 
-             
-             // append to choices
-             $field['choices'][ $label ] = $value;
-             
-         }
-         
-    }
-
-    return $field;
-}
-
-add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
-
-function acf_load_award_categorie_choices( $field ) {
-     $field['choices'] = array();
-     
-     if( is_array(get_option('award_categories')) ) {
-          
-          // while has rows
-          foreach( get_option('award_categories') as $slot ) {
-              
-              // vars
-              $value = $slot['value'];
-              $label = $slot['label'];
-              
-              // append to choices
-              $field['choices'][ $label ] = $value;
-              
-          }
-          
-     }
-
-     return $field;
-}
-
-add_filter('acf/load_field/name=kategorie', 'acf_load_award_categorie_choices');
 
 
 
@@ -384,6 +261,8 @@ add_filter( 'upload_mimes', function ( $mime_types ) {
     $mime_types['svg'] = 'image/svg+xml';
     $mime_types[ 'eps' ] = 'application/postscript';
     $mime_types['json'] = 'application/json'; 
+    $mime_types['obj'] = 'model/obj'; 
+    $mime_types['fbx'] = 'model/fbx'; 
     return $mime_types;
 } );
 

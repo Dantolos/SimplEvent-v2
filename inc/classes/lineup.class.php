@@ -245,7 +245,7 @@ class LineUp {
 
      }
 
-     public function cast_speaker_list( $speakerID, $showCV = false, $hideDate = false ){
+     public function cast_speaker_list( $speakerID, $showCV = false, $hideDate = false, $showKategorie = false ){
           $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
           $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
           $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" data-speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
@@ -259,6 +259,7 @@ class LineUp {
                     if( $timeDates  ){
                          if(!$hideDate){
                               $this->speakerCard .= '<h6>'.$this->dateFormat->formating_Date_Language( $timeDates['datum'], 'date' );
+                              
                               if( strlen( $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) ) > 0 ){
                                    $this->speakerCard .= ' | ';
                                    $this->speakerCard .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) );
@@ -281,6 +282,8 @@ class LineUp {
                          $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
 
                          $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
+
+                         $this->speakerCard .= $this->tags->tag_cloud( get_field( 'speaker_kategorie', $speakerID ) );
 
                          if( $showCV ){
                               $this->speakerCard .= '<p>'.get_field( 'speaker_cv', $speakerID ).'</p>';

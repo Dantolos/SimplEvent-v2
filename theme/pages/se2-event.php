@@ -18,6 +18,8 @@ class se2_page_Event {
           register_setting( 'simplevent-event-group', 'main_event' );
           register_setting( 'simplevent-event-group', 'side_events' );
 
+          register_setting( 'simplevent-event-group', 'speaker_categories' );
+
           register_setting( 'simplevent-event-group', 'sessions_active' );
           register_setting( 'simplevent-event-group', 'sessions_slots' );
 
@@ -31,6 +33,7 @@ class se2_page_Event {
 
           add_settings_section( 'simplevent-event-sideevents', 'Side Events', 'simplevent_event_sideevents', 'simplevent_event');
 
+          add_settings_section( 'simplevent-event-speaker', 'Speaker', 'simplevent_event_speaker', 'simplevent_event');
           add_settings_section( 'simplevent-event-sessions', 'Sessions', 'simplevent_event_sessions', 'simplevent_event');
           add_settings_section( 'simplevent-event-award', 'Award', 'simplevent_event_award', 'simplevent_event');
 
@@ -46,6 +49,8 @@ class se2_page_Event {
           add_settings_field( 'main-event', 'Side Events', 'simplevent_main_event', 'simplevent_event', 'simplevent-event-sideevents' );
           add_settings_field( 'side-events', 'Side Events', 'simplevent_side_events', 'simplevent_event', 'simplevent-event-sideevents' );
 
+          add_settings_field( 'speaker-categories', 'Kategorien', 'simplevent_speaker_categories', 'simplevent_event', 'simplevent-event-speaker' );
+
           add_settings_field( 'sessions-active', 'Sessions', 'simplevent_sessions_active', 'simplevent_event', 'simplevent-event-sessions' );
           add_settings_field( 'sessions-slots', 'Slots', 'simplevent_sessions_slots', 'simplevent_event', 'simplevent-event-sessions' );
 
@@ -60,6 +65,10 @@ class se2_page_Event {
             
           function simplevent_event_sideevents(){     
                echo 'Side Events';
+          }
+
+          function simplevent_event_speaker(){
+               echo 'Speaker Settings';
           }
 
           function simplevent_event_sessions(){     
@@ -204,6 +213,26 @@ class se2_page_Event {
                          echo '</div>';
                     }    
                echo '</div>';
+          }
+
+          //SPEAKER
+          function simplevent_speaker_categories(){
+               $speaker_categories = get_option('speaker_categories');
+               $speakerCategoriesBase = [ [ 'label' => '', 'value' => '' ] ];
+               $speaker_categories = ( !is_array( $speaker_categories ) ) ? $speakerCategoriesBase : $speaker_categories;
+
+               echo '<div class="Session_Slots">';
+               for ($i=0; $i < 6; $i++) { 
+
+                    $speaker_categories[$i] = ( !is_array( $speaker_categories ) ) ? $speakerCategoriesBase : $speaker_categories[$i]; 
+
+                    echo '<div style="width:100%;">';
+                         echo '<input style="width:20%;" type="text" name="speaker_categories['.$i.'][label]" value="' .$speaker_categories[$i]['label']. '" placeholder="label"/>';
+                         echo '<input style="width:50%;" type="text" name="speaker_categories['.$i.'][value]" value="' .$speaker_categories[$i]['value']. '" placeholder="value"/>';
+                    echo '</div>';
+               } 
+               echo '<div>';
+          
           }
           
           // SESSIONS

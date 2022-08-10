@@ -7082,7 +7082,7 @@ acf_add_local_field_group(array(
 				'interview' => 'Interview',
 				'entertainment' => 'Entertainment',
 				'music' => 'Music',
-				'session' => 'Session',
+				'session' => 'Session'
 			),
 			'allow_custom' => 0,
 			'default_value' => array(
