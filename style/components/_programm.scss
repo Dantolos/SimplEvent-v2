@@ -1,8 +1,8 @@
 //SCHEDULE
 @mixin slotBGgradiant {
-     background:var(--shadeColor);
+     background: var(--shadeColor);
      //background: linear-gradient(top, var(--shadeColor) 0%,  var(--secondColor) 74%,  var(--secondColor) 100%);
- }
+}
 
 .schedule-days-tabs {
      display: flex;
@@ -13,127 +13,133 @@
      width: 100vw;
      height: 150px;
      z-index: 2000;
-     background-color:var(--shadeColor);
+     background-color: var(--shadeColor);
      align-items: flex-end;
-     padding:0 20px;
-     
+     padding: 0 20px;
 
-     @include breakpoint( 'm' ){
+
+     @include breakpoint('m') {
           width: 100vw;
      }
 
      display: none;
-     @include breakpoint( 'xl' ){
+
+     @include breakpoint('xl') {
           display: flex;
-     } 
+     }
 
      button {
-          height:50px;
-          padding:1% 15px ;
-          border-radius:8px 8px 0 0;
-          border:var(--secondColor) solid 1px;
+          height: 50px;
+          padding: 1% 15px;
+          border-radius: 8px 8px 0 0;
+          border: var(--secondColor) solid 1px;
           border-width: 1px 1px 0 1px;
-          background-color:var(--shadeColor);
+          background-color: var(--shadeColor);
           color: var(--primeColor);
           font-weight: bold;
           filter: brightness(95%);
           margin-right: 4px;
-          
-          
+
+
           &:hover {
                border-color: $primary;
-              
+
                filter: brightness(90%);
           }
-          
+
      }
 
      .day-tab-activ {
           filter: brightness(100%);
-          border-color:var(--secondColor);
-          background-color:var(--secondColor);
-          
+          border-color: var(--secondColor);
+          background-color: var(--secondColor);
+
 
      }
-     
+
 }
 
 .se2-schedule-container {
 
-     width:100vw;
+     width: 100vw;
      margin: 0 0 50px 0;
      position: relative;
-     @include breakpoint( 'm' ){
+
+     @include breakpoint('m') {
           width: 100vw;
-          margin:50px 0;
-          
+          margin: 50px 0;
+
      }
 
-     @include breakpoint( 'xl' ){
-          margin:50px 0;
-          
+     @include breakpoint('xl') {
+          margin: 50px 0;
+
      }
-     
+
 
      // SCHEDULE GRID
      .schedule-grid {
-          width:100%;
-          height:fit-content;
-         
+          width: 100%;
+          height: fit-content;
+
           .schedule-hour {
                position: relative;
-               width:100%;
+               width: 100%;
                height: 200px;
-               @include breakpoint( 'm' ){
+
+               @include breakpoint('m') {
                     display: none;
                }
+
                h5 {
                     position: absolute;
-                    top:-8px;
-                    left:5px;
-                    padding:2px 5px;
-                    background-color:var(--secondColor);
-                    /* color:var(--secondColor); */ 
+                    top: -8px;
+                    left: 5px;
+                    padding: 2px 5px;
+                    background-color: var(--secondColor);
+                    /* color:var(--secondColor); */
                     border: 1px solid var(--shadeColor);
-                    border-radius:2px;
+                    border-radius: 2px;
                }
 
                .schedule-5min {
-                    height:8.33%;
-                    width:100%;
+                    height: 8.33%;
+                    width: 100%;
                     border-bottom: 1px dashed var(--shadeColor);
-                   
+
                }
-               
-               &:nth-child(even){
-                    
+
+               &:nth-child(even) {
+
                     background-color: var(--shadeColor);
-                    .schedule-5min { 
+
+                    .schedule-5min {
                          border-bottom: 1px dashed var(--secondColor);
                     }
                }
           }
      }
 
-     
+
      .day-schedule-passiv {
-          display:block;
+          display: block;
      }
-    
+
      .schedule-program-kalender {
-          position:absolute;
+          position: absolute;
           overflow-x: hidden;
           display: flex;
           flex-direction: row;
           flex-wrap: nowrap;
-          
-          top:0;
-          left:15%;
-          width:85%;
+
+          top: 0;
+          left: 15%;
+          width: 85%;
           height: 100%;
+
           //cursor:pointer;
-          @include breakpoint( 'm' ){
-               left:0;
+          @include breakpoint('m') {
+               left: 0;
                width: 100%;
                /* height: calc(100vh - 150px); */
                height: fit-content;
@@ -142,40 +148,44 @@
                height: fit-content;
                padding-bottom: 100px;
           }
+
           .schedule-program-day {
-          
-               width:100%;
+
+               width: 100%;
                height: inherit;
                position: relative;
                flex-shrink: 0;
 
-               @include breakpoint( 'm' ){
+               @include breakpoint('m') {
                     top: 50px;
                }
 
                .schedule-slot-kalender {
                     position: absolute;
-                    
-                    height:50px;
-                    top:0;
-                    width:95%;
-                    margin:0 2.5%;
-                    border-radius:1px;
+
+                    height: 50px;
+                    top: 0;
+                    width: 95%;
+                    margin: 0 2.5%;
+                    border-radius: 1px;
                     /* border: 1px solid var(--midColor); */
-                    
+
                     //@include dropShadow;
                     background-color: var(--secondColor);
-                    padding:0px;
+                    padding: 0px;
                     overflow-y: hidden;
-                    scrollbar-width: none; 
+                    scrollbar-width: none;
                     -ms-overflow-style: none;
-                    &::-webkit-scrollbar { display:none; }
 
-                    @include breakpoint( 'm' ){
+                    &::-webkit-scrollbar {
+                         display: none;
+                    }
+
+                    @include breakpoint('m') {
                          height: fit-content !important;
                          position: relative;
                     }
-                    
+
                     .schedule-container {
                          padding: 5px 20px;
                          display: flex;
@@ -183,62 +193,67 @@
                          justify-content: center;
                          flex-direction: column;
 
-                         height:fit-content;
-                         min-height:100%;
+                         height: fit-content;
+                         min-height: 100%;
                          position: relative;
-                         border-radius:1px;
+                         border-radius: 1px;
 
-                         @include breakpoint('m'){
-                              padding: 30px 10px 40px ;
-                              
+                         @include breakpoint('m') {
+                              padding: 30px 10px 40px;
+
                          }
+
                          h5 {
-                              @include breakpoint('m'){
-                               font-size: 130%;
+                              @include breakpoint('m') {
+                                   font-size: 130%;
                               }
                          }
+
                          .schedule-slot-time {
                               position: absolute;
                               opacity: .8;
-                              top:0;
+                              top: 0;
                               right: 0;
-                              padding:2px 5px;
+                              padding: 2px 5px;
                               color: var(--primeColor);
-                              background-color:var(--secondColor);
+                              background-color: var(--secondColor);
                               //border: 1px solid var(--primeColor);
-                              border-radius:0 1px 0 1px;
+                              border-radius: 0 1px 0 1px;
                               backdrop-filter: brightness(60%);
                               font-size: 1em;
-                              @include breakpoint('m'){
+
+                              @include breakpoint('m') {
                                    right: unset;
                                    position: relative;
-                                   left:0;
+                                   left: 0;
                                    font-weight: bold;
                                    text-align: center;
                                    border-radius: 3px;
-                                   margin:10px 0;
+                                   margin: 10px 0;
                               }
                          }
 
                     }
                }
-               &:nth-child(even){
-                    left:0;
+
+               &:nth-child(even) {
+                    left: 0;
                }
-               &:nth-child(odd){
-                    right:0;
+
+               &:nth-child(odd) {
+                    right: 0;
                }
+
                .schedule-speaker .schedule-container,
-               .schedule-separator-placeholder .schedule-container
-               {
+               .schedule-separator-placeholder .schedule-container {
                     //background-color:$primary;
                     border-style: solid;
-                    border-width:  0 0 0 4px;
+                    border-width: 0 0 0 4px;
                     border-color: $primary;
                     @include slotBGgradiant;
                     //order-color:linear-gradient(to top, rgba(255,255,255,.2), $primary);
                }
-               
+
                .schedule-session-slot .schedule-container {
                     //background-color: $secondary;
                     border-style: solid;
@@ -247,20 +262,22 @@
                     @include slotBGgradiant;
                }
 
-               
+
 
                .schedule-separator-standard .schedule-container {
                     background-image: linear-gradient(to top, var(--primeColor), var(--midColor));
                     //background-color: var(--midColor);
-                    color:var(--secondColor);
+                    color: var(--secondColor);
                }
+
                .schedule-separator-filler .schedule-container {
-                    background-color:  $secondary;
-                    color:var(--secondColor);
+                    background-color: $secondary;
+                    color: var(--secondColor);
                }
+
                .schedule-separator-show .schedule-container {
-                    background-color:  $primary;
-                    color:var(--secondColor);
+                    background-color: $primary;
+                    color: var(--secondColor);
                }
 
                .schedule-separator-panel .schedule-container {
@@ -274,51 +291,63 @@
                          display: flex;
                          flex-direction: row;
                          flex-wrap: wrap;
+
                          .schedule-slot-panel-speaker {
                               display: flex;
                               flex-direction: row;
                               align-items: center;
                               width: 48%;
-                              min-width:150px;
-                              margin:10px 1% ;
+                              min-width: 150px;
+                              margin: 10px 1%;
                               cursor: pointer;
+
                               .schedule-slot-panel-speaker-image {
                                    @include imageSettings;
-                                   width:25px;
-                                   height:25px;
-                                   border-radius:50%;
-                                   margin-right:5%;
+                                   width: 25px;
+                                   height: 25px;
+                                   border-radius: 50%;
+                                   margin-right: 5%;
                               }
+
                               .schedule-slot-speaker-name {
                                    width: calc(95% - 25px);
+
                                    h6 {
                                         color: $primary;
                                    }
                               }
-                              @include breakpoint( 'm' ){ 
+
+                              @include breakpoint('m') {
                                    width: 100%;
-                                   margin-top:20px;
+                                   margin-top: 20px;
+
                                    .schedule-slot-panel-speaker-image {
-                                        width:40px;
-                                        height:40px;
+                                        width: 40px;
+                                        height: 40px;
                                    }
+
                                    .schedule-slot-speaker-name {
                                         width: calc(95% - 40px);
                                    }
-                               }
+                              }
                          }
                     }
                }
 
-               @include breakpoint( 'm' ){ 
+               @include breakpoint('m') {
+
                     .schedule-separator-placeholder .schedule-container,
                     .schedule-separator-panel .schedule-container,
                     .schedule-speaker .schedule-container,
                     .schedule-session-slot .schedule-container {
-                         border-width: 0 0 0 3px ; 
+                         border-width: 0 0 0 3px;
                     }
                }
-               .schedule-speaker, .schedule-session-slot { cursor: pointer; }
+
+               .schedule-speaker,
+               .schedule-session-slot {
+                    cursor: pointer;
+               }
           }
      }
 
@@ -327,11 +356,15 @@
 
 
 .schedule-slot-info {
-     width:100%;
-     display:none;
-     p { margin-bottom:0;}
-     @include breakpoint( 'm' ){ 
-          display:block;
+     width: 100%;
+     display: none;
+
+     p {
+          margin-bottom: 0;
+     }
+
+     @include breakpoint('m') {
+          display: block;
      }
 }
 
@@ -339,74 +372,78 @@
 //SESSIONS
 .schedule-session-slot {
      .schedule-sessions {
-          width:100%;
+          width: 100%;
           display: flex;
           flex-wrap: wrap;
           flex-direction: row;
-        
-          .schedule-session{
-               max-width:22%;
-              
-               min-width:180px;
-               margin:1.5%;
+
+          .schedule-session {
+               max-width: 22%;
+
+               min-width: 180px;
+               margin: 1.5%;
                background-color: var(--secondColor);
+
                .schedule-session-image {
-                    width:100%;
-                    height:80px;
+                    width: 100%;
+                    height: 80px;
                     @include imageSettings;
                }
+
                h6 {
-                    padding:10px;
+                    padding: 10px;
                }
 
-               @include breakpoint( 'm' ){
+               @include breakpoint('m') {
                     width: 100%;
-                    max-width:unset;
+                    max-width: unset;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                    .schedule-session-image { 
 
-                         width:20%;
+                    .schedule-session-image {
+
+                         width: 20%;
                     }
+
                     h6 {
-                         width:80%;
-                         padding:10px;
+                         width: 80%;
+                         padding: 10px;
                     }
                }
 
           }
 
-          
+
      }
-     
+
 }
 
 //SPEAKER
 .schedule-speaker {
      .schedule-container {
-          
-          .schedule-slot-speaker-content{
+
+          .schedule-slot-speaker-content {
                display: flex;
                flex-direction: row;
-               width:100%;
+               width: 100%;
                cursor: pointer;
 
                .schedule-slot-speaker-image {
-                    
-                    width:50px;
-                    height:50px;
+
+                    width: 50px;
+                    height: 50px;
                     @include imageSettings;
-                    border-radius:50%;
-                    margin-right:5%;
+                    border-radius: 50%;
+                    margin-right: 5%;
                }
 
                .schedule-slot-title {
                     background-color: $primary;
-                    padding:3px;
+                    padding: 3px;
                     border-radius: 3px;
-                    color:$light;
-                    width:fit-content;
+                    color: $light;
+                    width: fit-content;
                     margin-bottom: 2px;
                }
 
@@ -414,11 +451,13 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    width:calc(95% - 50px);
-                    h5{
-                         margin-bottom:2px;
+                    width: calc(95% - 50px);
+
+                    h5 {
+                         margin-bottom: 2px;
                     }
-                    h6{
+
+                    h6 {
                          color: $primary;
                     }
                }
@@ -434,45 +473,55 @@
      padding: 30px 20px 10px;
      /* background-color: var(--lightshade); */
      border-bottom: 1px solid var(--lightshade);
-     
-     > h5 { 
-          margin-bottom: 0; 
+
+     >h5 {
+          margin-bottom: 0;
           padding: 5px 10px;
           background-color: var(--lightshade);
           border-radius: 20px;
-          @include breakpoint( 's' ){
+
+          @include breakpoint('s') {
                width: 100%;
                text-align: center;
           }
-      }
+     }
+
      .schedule-host {
           display: flex;
           flex-direction: row;
           justify-content: space-around;
           margin-left: 20px;
 
-          
-        
-          @include breakpoint( 's' ){
+
+
+          @include breakpoint('s') {
                justify-content: center;
-               width:100%;
+               width: 100%;
           }
+
           .se2-speaker-host {
-               width: clamp(fit-content,50%,100%);
+               width: clamp(fit-content, 50%, 100%);
+
                &:hover {
                     .se2-host-profil-image {
                          transform: scale(1.1);
                     }
                }
-               @include breakpoint( 'm' ){
-                    .se2-host-profil-image { width:35px; height:35px; }
+
+               @include breakpoint('m') {
+                    .se2-host-profil-image {
+                         width: 35px;
+                         height: 35px;
+                    }
+
                     background-color: $light;
                     padding-right:30px;
                     border-radius:15px;
-                    
+
                }
-               @include breakpoint( 's' ){
-                    margin-top:10px;
+
+               @include breakpoint('s') {
+                    margin-top: 10px;
                }
           }
      }
@@ -480,18 +529,22 @@
 
 //not needet (temporary)
 .schedule-slot-overflow {
-     color:$primary;
+     color: $primary;
      position: sticky;
-     bottom:0;
-     width:100%;
+     bottom: 0;
+     width: 100%;
      height: 40px;
-     background: radial-gradient(ellipse at bottom,  var(--secondColor), transparent 200px);
+     background: radial-gradient(ellipse at bottom, var(--secondColor), transparent 200px);
 
      &:hover {
           background: radial-gradient(ellipse at bottom, $primary, transparent 200px);
      }
 
-     p { text-align: center; font-size: 80%; margin-top:10px;  }
+     p {
+          text-align: center;
+          font-size: 80%;
+          margin-top: 10px;
+     }
 }
 
 // ***************************************
@@ -509,209 +562,255 @@
      .schedule-separator-standard,
      .schedule-separator-placeholder,
      .schedule-separator-show {
-          
-          .schedule-container{
+
+          .schedule-container {
                background-color: var(--shadeColor);
-               .schedule-std-content{
+
+               .schedule-std-content {
                     position: absolute;
                     top: 50%;
                     transform: translate(0, -50%);
-                    p { line-height: unset; margin-bottom: unset; }
+
+                    p {
+                         line-height: unset;
+                         margin-bottom: unset;
+                    }
                }
           }
      }
 }
 
 .schedule-program-day {
-     width:50%;
+     width: 50%;
      height: inherit;
      position: relative;
      flex-shrink: 0;
-     
-     @include breakpoint( 'xl' ){
-          width:100%;
+
+     @include breakpoint('xl') {
+          width: 100%;
      }
 }
-.schedule-slot-liste {
-     margin:20px;
-     
 
-     .schedule-container { 
-          padding:40px 20px 40px 150px;
-        
-          border:1px solid var(--shadeColor);
+.schedule-slot-liste {
+     margin: 20px;
+
+
+     .schedule-container {
+          padding: 40px 20px 40px 150px;
+
+          border: 1px solid var(--shadeColor);
           border-radius: 3px;
-          margin:5px;
+          margin: 5px;
           position: relative;
 
           h5 {
                margin-bottom: 0;
                font-size: 1.5em;
-               @include breakpoint( 's' ){
+
+               @include breakpoint('s') {
                     text-align: center;
                }
           }
 
-          @include breakpoint( 'm' ){
-               padding:20px 20px 20px 80px;
-               min-height:100px;
+          @include breakpoint('m') {
+               padding: 20px 20px 20px 80px;
+               min-height: 100px;
           }
+
           .schedule-slot-time {
                position: absolute;
-               left:40px;
-               top:50%;
+               left: 40px;
+               top: 50%;
                transform: translate(0, -50%);
-               width:40px;
-               @include breakpoint( 'm' ){
-                    left:20px;
-                    top:50%;
+               width: 40px;
+
+               @include breakpoint('m') {
+                    left: 20px;
+                    top: 50%;
                }
-               
-               .hour, .minute { 
-                    width:100%;
+
+               .hour,
+               .minute {
+                    width: 100%;
                     text-align: center;
-                    font-size:30px !important;
+                    font-size: 30px !important;
                     line-height: 10px !important;
                     margin-bottom: .5em;
                     font-optical-sizing: none;
                }
-               .hour{ font-weight: bold;}
+
+               .hour {
+                    font-weight: bold;
+               }
+
                .till {
                     border-top: solid 1px var(--primeColor);
-                    width:100%;
+                    width: 100%;
                     text-align: center;
-                    line-height:0 !important;
-                    font-size:14px !important;
-                    padding-top:10px;
-                    margin-top:-5px;
+                    line-height: 0 !important;
+                    font-size: 14px !important;
+                    padding-top: 10px;
+                    margin-top: -5px;
                     margin-bottom: 0;
                }
-               @include breakpoint( 'm' ){ 
-                    .hour, .minute { line-height: 12px !important; }
+
+               @include breakpoint('m') {
+
+                    .hour,
+                    .minute {
+                         line-height: 12px !important;
+                    }
                }
-               @include breakpoint( 's' ){ 
-                    .hour, .minute { line-height: 15px !important; }
-                    .till {margin-top:-2px;}
+
+               @include breakpoint('s') {
+
+                    .hour,
+                    .minute {
+                         line-height: 15px !important;
+                    }
+
+                    .till {
+                         margin-top: -2px;
+                    }
                }
           }
 
 
-          
-         
+
+
 
           //Speaker
           .schedule-slot-speaker-content {
                h5 {
                     font-size: 1em;
                }
+
                h4 {
                     font-size: 1.8em;
-                    margin-bottom:.25em;
+                    margin-bottom: .25em;
                }
+
                h6 {
                     margin-bottom: 0;
                }
+
                .schedule-slot-speaker-image {
                     width: 100px;
                     height: 100px;
                     border-radius: 50%;
-                    margin-right:20px;
+                    margin-right: 20px;
                }
 
-               @include breakpoint( 'm' ){
+               @include breakpoint('m') {
                     flex-wrap: wrap;
-                    justify-content:  center;
-                    
+                    justify-content: center;
+
                     text-align: center;
+
                     .schedule-slot-speaker-image {
-                         margin-right:0;
+                         margin-right: 0;
                          width: 60px;
                          height: 60px;
                     }
+
                     .schedule-slot-speaker-name {
-                         min-width:100%;
+                         min-width: 100%;
                          align-items: center;
-                         margin-top:10px;
+                         margin-top: 10px;
+
                          .schedule-slot-title {
                               background-color: unset;
                               color: var(--primeColor);
                               opacity: .7;
                          }
                     }
-                    
+
 
                }
           }
 
           //Sessions
-          .schedule-sessions  {
+          .schedule-sessions {
                margin-top: 20px;
+
                .schedule-session {
                     cursor: pointer;
+
                     h6 {
-                         font-size:1.2em;
-                         padding:10px 0;
+                         font-size: 1.2em;
+                         padding: 10px 0;
                     }
 
-                    @include breakpoint( 'm' ){
+                    @include breakpoint('m') {
                          width: 100%;
-                         max-width:unset;
+                         max-width: unset;
                          display: flex;
                          flex-direction: row;
                          align-items: center;
-                         
-                         .schedule-session-image { 
-                              margin-right:20px;
-                              width:120px;
-                              height:80px;
+
+                         .schedule-session-image {
+                              margin-right: 20px;
+                              width: 120px;
+                              height: 80px;
                          }
+
                          h6 {
-                              width:80%;
-                              padding:10px;
+                              width: 80%;
+                              padding: 10px;
                          }
                     }
-                    @include breakpoint( 's' ){
+
+                    @include breakpoint('s') {
                          flex-wrap: wrap;
                          background-color: var(--shadeColor);
                          border-radius: 3px;
-                         .schedule-session-image { 
+
+                         .schedule-session-image {
                               min-width: 120px;
-                              width:100%;
-                              height:60px;
-                              margin-right:0;
+                              width: 100%;
+                              height: 60px;
+                              margin-right: 0;
                          }
                     }
-               } 
+               }
 
-              
+
 
           }
-          
+
 
           //Panel
-          .schedule-slot-panel-speaker{
+          .schedule-slot-panel-speaker {
                cursor: pointer;
                display: flex;
                flex-direction: row;
                align-items: center;
-               margin-top:20px;
+               margin-top: 20px;
+
                .schedule-slot-panel-speaker-image {
                     width: 60px;
                     height: 60px;
                     border-radius: 50%;
-                    margin-right:20px;
+                    margin-right: 20px;
                     @include imageSettings;
-                    
+
                }
-               h6 { color:$primary; margin-bottom: 0;}
-               @include breakpoint( 'm' ){
+
+               h6 {
+                    color: $primary;
+                    margin-bottom: 0;
+               }
+
+               @include breakpoint('m') {
                     flex-wrap: wrap;
                     justify-content: center;
+
                     .schedule-slot-panel-speaker-image {
-                         margin-right:0;
+                         margin-right: 0;
                     }
+
                     .schedule-slot-speaker-name {
-                         margin-top:10px;
+                         margin-top: 10px;
                          min-width: 100%;
                          text-align: center;
                     }
@@ -719,15 +818,44 @@
           }
 
 
-         }    //separator
+     }
+
+     //separator
 
 }
-     
-     
 
 
+
+.pdf-download {
+     position: sticky;
+     background-color: var(--light);
+     bottom: 0;
+     left: 0;
+     right: 0;
+     margin: auto;
+     padding: 10px 20px;
+     width: fit-content;
+
+     @include dropShadow;
+
+     button {
+          margin-left: 10px;
+          padding: 5px 10px;
+
+          &::before {
+               color: $light;
+               font-family: "dashicons";
+
+               content: "\f190";
+               vertical-align: middle;
+               padding: 0 10px 0 0;
+               font-size: 20px;
+          }
+     }
+}
 
 
 .slot-shadow {
+
      box-shadow: 0 3px 30px var(--shadeColor);
 }

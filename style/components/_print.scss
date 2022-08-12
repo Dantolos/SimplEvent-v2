@@ -1,0 +1,11 @@
+@media print {
+
+     header,
+     footer,
+     aside,
+     form,
+     … {
+          display: none;
+     }
+
+}

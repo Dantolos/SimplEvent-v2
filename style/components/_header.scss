@@ -1,142 +1,150 @@
+header {
+     position: fixed;
+     top: 0;
+     left: 0;
+     z-index: 10000;
+     width: 100vw;
+     height: 80px;
 
-
-header { 
-     position:fixed;
-     top:0;
-     left:0;
-     z-index:10000;
-     width:100vw;
-     height:80px;
-     
-     display:flex;
+     display: flex;
      flex-direction: row;
      justify-content: flex-end;
      align-items: center;
-    
-     @include breakpoint( 'm' ){
-          height:8vw;
-     }
-     @include breakpoint( 's' ){
-          height:16vw;
+
+     @include breakpoint('m') {
+          height: 8vw;
      }
 
-    //------------------------------
-    //LOGO
-    //------------------------------
-    .header-logo {
-          left:10%;
+     @include breakpoint('s') {
+          height: 16vw;
+     }
+
+
+
+
+     //------------------------------
+     //LOGO
+     //------------------------------
+     .header-logo {
+          left: 10%;
           position: absolute;
           margin: auto;
           z-index: 10000;
           top: 0;
           bottom: 0;
-          max-height:55%;
+          max-height: 55%;
           max-width: 30%;
           width: var(--headerLogoWidth);
-          @include breakpoint( 'm' ){
-               left:5%;
-               top:0px;
-               max-height:80%;
+
+          @include breakpoint('m') {
+               left: 5%;
+               top: 0px;
+               max-height: 80%;
                max-width: 30%;
           }
 
           a img {
-               height:100%;
-               max-width:100%;
+               height: 100%;
+               max-width: 100%;
           }
-    }
-
-    //------------------------------
-    //NAVIGATION MENU
-    //------------------------------
-     #mobile-menu-wrapper {
-          position: fixed;
-          height:100vh;
-          width:100vw;
-          bottom:0;
-          left:0;
-          color: var(--primeColor);
-          background-color: var(--secondColor);
-          z-index:800;
      }
 
-    .se2-navigation {
-          height: 90%;
-          width:80%;
+     //------------------------------
+     //NAVIGATION MENU
+     //------------------------------
+     #mobile-menu-wrapper {
+          position: fixed;
+          height: 100vh;
+          width: 100vw;
+          bottom: 0;
+          left: 0;
+          color: var(--primeColor);
+          background-color: var(--secondColor);
+          z-index: 800;
+     }
 
-          ul{
-               padding:0;
-               li{
-                    margin:0; 
+     .se2-navigation {
+          height: 90%;
+          width: 80%;
+
+          ul {
+               padding: 0;
+
+               li {
+                    margin: 0;
                }
           }
-     
-          @include breakpoint( 'm' ){
+
+          @include breakpoint('m') {
                position: absolute;
                margin: auto;
-               right:0; bottom:100px; left:0;
-               overflow-y:scroll;
+               right: 0;
+               bottom: 100px;
+               left: 0;
+               overflow-y: scroll;
                @include hideScrollbar;
-               max-height:calc(80% - 60px);
-               
+               max-height: calc(80% - 60px);
+
                width: 100%;
-               
-               li{
-            
-               }
+
+               li {}
           }
 
           .se2-current.current-menu-parent,
           .current-menu-parent,
           .se2-current.current_page_item {
                border-bottom: 4px solid $secondary;
-               @include breakpoint( 'm' ){
+
+               @include breakpoint('m') {
                     border-bottom: unset;
                     color: $primaryText;
-                    background-color: $primary !important;
-               
+                    background-color: $primary  !important;
+
                     .se2-sub-menu {
-                    background-color: $primary !important;
+                         background-color: $primary  !important;
                     }
                }
           }
 
           .menu {
                height: 100%;
-               display:flex;
+               display: flex;
                flex-direction: row;
                flex-wrap: wrap;
                align-items: flex-end;
                align-content: flex-end;
                justify-content: flex-end;
-               @include breakpoint( 'm' ){
-                    width:100%;
+
+               @include breakpoint('m') {
+                    width: 100%;
                     display: block;
                }
 
                .se2-lvl-1-item {
-                    width:fit-content;
+                    width: fit-content;
                     display: flex;
-                    align-items:center;
-                    height:35px;
+                    align-items: center;
+                    height: 35px;
                     padding: 0 20px;
 
-                    
 
-                    @include breakpoint( 'm' ){
-                         width:100%;
+
+                    @include breakpoint('m') {
+                         width: 100%;
                          display: block;
-                         height:fit-content;
+                         height: fit-content;
                          padding: 15px 10%;
                          font-size: 1.2em;
-                         background-color:  var(--shadeColor);
-                         border-bottom:2px solid var(--secondColor);
+                         background-color: var(--shadeColor);
+                         border-bottom: 2px solid var(--secondColor);
+
                          .caret {
                               display: none;
                          }
                     }
+
                     /* border-left:1px solid var(--midColor); */
-                    &:hover {  
+                    &:hover {
                          //border-bottom: 2px solid $primary; 
                          backdrop-filter: brightness(.95) blur(20px);
                     }
@@ -144,8 +152,9 @@ header {
                     &:hover {
                          .se2-sub-menu {
                               display: block;
-                         } 
+                         }
                     }
+
                     li {
                          &:hover {
                               transform: scale(1.07);
@@ -155,42 +164,47 @@ header {
 
                     &:last-of-type {
                          .se2-sub-menu {
-                         right: 0 !important;
+                              right: 0 !important;
 
-                    }}
-                    a{
-                         &:active, &:visited, &:link  {
-                              color:unset !important;
+                         }
+                    }
+
+                    a {
+
+                         &:active,
+                         &:visited,
+                         &:link {
+                              color: unset !important;
                               text-decoration: none !important;
                          }
                     }
-               
+
                }
 
 
                //SUBMENU
-               .se2-sub-menu { 
+               .se2-sub-menu {
                     display: none;
-                    visibility: hidden; 
+                    visibility: hidden;
                     position: absolute;
-                    top:35px;
-                    z-index:5;
-                    min-width:fit-content;
-                    margin-left:-20px;
+                    top: 35px;
+                    z-index: 5;
+                    min-width: fit-content;
+                    margin-left: -20px;
                     list-style-type: none;
                     background-color: var(--primeColor);
                     color: var(--secondColor);
                     border-bottom: 1px solid var(--midColor);
-               
 
-                    @include breakpoint( 'm' ){
+
+                    @include breakpoint('m') {
                          display: block;
-                         visibility: unset; 
+                         visibility: unset;
                          position: unset;
                          color: var(--midColor);
-               
+
                          border-bottom: unset;
-                         margin-left:0;
+                         margin-left: 0;
                          color: var(--primeColor);
                          background-color: var(--shadeColor);
                     }
@@ -199,31 +213,33 @@ header {
                          padding: 5px 20px;
                          text-decoration: none;
 
-                         a{
+                         a {
                               padding: 5px 10px;
-                              height:100%;
-                              width:100%;
+                              height: 100%;
+                              width: 100%;
                               display: block;
                          }
-                         @include breakpoint( 'm' ){
-                              background-color:  var(--secondColor);
-                              border-radius:5px;
-                              
-                              margin:4px 0 ;
+
+                         @include breakpoint('m') {
+                              background-color: var(--secondColor);
+                              border-radius: 5px;
+
+                              margin: 4px 0;
                          }
-                         
+
                          &:hover {
                               background-color: var(--secondColor);
-                              color: var(--primeColor);         
+                              color: var(--primeColor);
                          }
 
                     }
 
                     .se2-current {
-                         background-color:$secondary;
-                         @include breakpoint( 'm' ){
+                         background-color: $secondary;
+
+                         @include breakpoint('m') {
                               color: $primaryText;
-                              background-color: $secondary !important;
+                              background-color: $secondary  !important;
                          }
                     }
                }
@@ -239,41 +255,43 @@ header {
           width: 10vw;
           z-index: 1000;
 
-          
-               .active-menu {
-                    stroke: var(--primeColor) !important;
-               }
-          @include breakpoint( 'm' ){
+
+          .active-menu {
+               stroke: var(--primeColor) !important;
+          }
+
+          @include breakpoint('m') {
                right: 3vw;
                top: 3vw;
                width: 5vw;
           }
-          @include breakpoint( 's' ){
+
+          @include breakpoint('s') {
                top: 5vw;
                right: 5vw;
                height: 8vh;
                width: 10vw;
-           }
+          }
 
      }
 
-    //------------------------------
-    //DARKMODE SWITCH
-    //------------------------------
-    #extramenu {
+     //------------------------------
+     //DARKMODE SWITCH
+     //------------------------------
+     #extramenu {
           position: fixed;
-          top:0;
-          display: flex; 
+          top: 0;
+          display: flex;
           flex-direction: row;
-          height:20px;
+          height: 20px;
           font-size: .8em;
           background-color: var(--secondColor);
-          border-bottom:solid 1px var(--primeColor);
+          border-bottom: solid 1px var(--primeColor);
           padding: 0 10px;
 
-          @include breakpoint( 'm' ){
+          @include breakpoint('m') {
                position: absolute;
-               bottom:0px;
+               bottom: 0px;
                top: unset;
                width: 100%;
                justify-content: center;
@@ -281,104 +299,134 @@ header {
                font-size: 1em;
           }
 
-          #modebutton, #languagebutton a button {
+          #modebutton,
+          #languagebutton a button {
                display: table;
                vertical-align: middle;
-               min-width:20px;
+               min-width: 20px;
                text-transform: uppercase;
-               padding:0 20px;
+               padding: 0 20px;
                background-color: unset;
-               color:var(--primeColor);
+               color: var(--primeColor);
           }
+
           #languagebutton {
                display: flex;
                align-items: center;
+
                a {
-                    
+
                     button {
-                         color:var(--primeColor);
+                         color: var(--primeColor);
                          display: table;
                          vertical-align: middle;
-                         padding:0 20px;
+                         padding: 0 20px;
                          width: auto !important;
                          background-color: unset;
-                         @include breakpoint( 'm' ){
-                              padding:0 30px;
+
+                         @include breakpoint('m') {
+                              padding: 0 30px;
                          }
-                         
+
                     }
-                    &:active, &:visited, &:link  {
-                         color:unset !important;
+
+                    &:active,
+                    &:visited,
+                    &:link {
+                         color: unset !important;
                          text-decoration: none !important;
                     }
                }
-              
-               
+
+
           }
-          
+
           #header_anmeldebutton {
 
                background-color: $secondary;
-               color:var(--dark);
-               height:25px;
+               color: var(--dark);
+               height: 25px;
                display: flex;
                align-items: center;
                font-weight: 800;
-               padding:6px 20px;
+               padding: 6px 20px;
                text-transform: uppercase;
                justify-content: center;
-               overflow:hidden;
+               overflow: hidden;
 
-               @include breakpoint( 'm' ){
+               @include breakpoint('m') {
                     position: absolute;
                     top: -60px;
                     right: 0;
                     left: 0;
                     width: 100%;
-                    height:60px;
+                    height: 60px;
                     text-align: center;
                     border-radius: 0px;
                }
-               
+
           }
 
           #header_socialmedia {
-               display:flex;
+               display: flex;
                flex-direction: row;
+
+               @media print {
+                    display: none;
+               }
+
                a {
-                    padding:0px;
+                    padding: 0px;
                     width: fit-content;
+
                     @supports (-moz-appearance:none) {
-                         width:25px;
-                       }
-                    
+                         width: 25px;
+                    }
+
                     svg {
-                         height:100%;
+                         height: 100%;
                          overflow: visible;
                     }
-                    .st0, .st1{transform-origin: 50% 50%;}
-                    .st1 { fill:var(--primeColor); }
+
+                    .st0,
+                    .st1 {
+                         transform-origin: 50% 50%;
+                    }
+
+                    .st1 {
+                         fill: var(--primeColor);
+                    }
+
                     &:hover {
-                         
-                         .st0 { fill:$light_shade; transform: scale(1.3,1.3); }
-                         .st1 { transform: scale(1.5,1.5); fill:$primary; }
-                         
+
+                         .st0 {
+                              fill: $light_shade;
+                              transform: scale(1.3, 1.3);
+                         }
+
+                         .st1 {
+                              transform: scale(1.5, 1.5);
+                              fill: $primary;
+                         }
+
                     }
                }
-               
+
           }
-       
-    }
+
+     }
 }
 
 .video-header {
      background-color: unset;
-     
-     .header-logo { left:5vw; }
+
+     .header-logo {
+          left: 5vw;
+     }
 
      .se2-navigation {
-          height:unset;
-          margin-right:2.5vw;
+          height: unset;
+          margin-right: 2.5vw;
      }
 }
 

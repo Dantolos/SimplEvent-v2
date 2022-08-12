@@ -173,7 +173,7 @@ class se2_Schedule {
 
 
                                    $speaker_slots .= '</div>';
-
+ 
                          $speaker_slots .= '</div>';
                     $speaker_slots .= '</div>';
                $speaker_slots .= '</div>';
@@ -447,6 +447,17 @@ class se2_Schedule {
 
           $slotTime .= '</div>';
           return $slotTime;
+     }
+
+     public function pdf_download(){
+          $pdfDownload = '';
+
+          $pdfDownload .= '<div class="pdf-download">';
+          $pdfDownload .= __('Download the Programm as PDF', 'SimplEvent');
+          $pdfDownload .= '<button onclick="pdfgenerator()">Download</button>';
+          $pdfDownload .= '</div>';
+
+          return $pdfDownload;
      }
 
 }
