@@ -4,54 +4,111 @@ $primary: var(--primary);
 $primaryText: #FFFFFF;
 $secondary: var(--secondary);
 
-.primary-txt { color: $primary; }
-.secondary-txt { color: $secondary; }
+.primary-txt {
+    color: $primary;
+}
+
+.secondary-txt {
+    color: $secondary;
+}
 
 //shades
 $dark: var(--dark);
 $dark_shade: var(--darkshade);
 
 $light: var(--light);
-$light_shade:var(--lightshade);
+$light_shade: var(--lightshade);
 
-.primary-txt { color: $primary; }
-.secondary-txt { color: $secondary; }
-.dark-txt { color: $dark; }
-.dark-shade-txt { color: $dark_shade; }
-.light-txt { color: $light; }
-.light-shade-txt { color: $light_shade; }
+.primary-txt {
+    color: $primary;
+}
 
-.primary-bg { background-color: $primary; }
-.secondary-bg { background-color: $secondary; }
-.dark-bg { background-color: $dark; }
-.dark-shade-bg { background-color: $dark_shade; }
-.light-bg { background-color: $light; }
-.light-shade-bg { background-color: $light_shade; }
+.secondary-txt {
+    color: $secondary;
+}
 
-.primary-fill { fill: $primary; }
-.secondary-fill { fill: $secondary; }
-.dark-fill {fill: $dark; }
-.dark-shade-fill {fill: $dark_shade; }
-.light-fill { fill: $light; }
-.light-shade-fill { fill: $light_shade; }
+.dark-txt {
+    color: $dark;
+}
+
+.dark-shade-txt {
+    color: $dark_shade;
+}
+
+.light-txt {
+    color: $light;
+}
+
+.light-shade-txt {
+    color: $light_shade;
+}
+
+.primary-bg {
+    background-color: $primary;
+}
+
+.secondary-bg {
+    background-color: $secondary;
+}
+
+.dark-bg {
+    background-color: $dark;
+}
+
+.dark-shade-bg {
+    background-color: $dark_shade;
+}
+
+.light-bg {
+    background-color: $light;
+}
+
+.light-shade-bg {
+    background-color: $light_shade;
+}
+
+.primary-fill {
+    fill: $primary;
+}
+
+.secondary-fill {
+    fill: $secondary;
+}
+
+.dark-fill {
+    fill: $dark;
+}
+
+.dark-shade-fill {
+    fill: $dark_shade;
+}
+
+.light-fill {
+    fill: $light;
+}
+
+.light-shade-fill {
+    fill: $light_shade;
+}
 
 body {
     background-color: var(--shadeColor);
-    
-    
+
+
     &.light {
         --primeColor: #{$dark};
         --secondColor: #{$light};
-       
+
         --midColor: #{$dark_shade};
 
         --shadeColor: #{$light_shade};
     }
+
     &.dark {
         --primeColor: #{$light};
         --secondColor: #{$dark};
-        
-        --midColor:  #{$light_shade};
+
+        --midColor: #{$light_shade};
 
         --shadeColor: #{$dark_shade};
     }
@@ -67,30 +124,59 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
 }
-.imageSettings { @include imageSettings; } 
+
+.imageSettings {
+    @include imageSettings;
+}
 
 @mixin wallContainerFlex {
-    display:flex;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
-    justify-content: center; 
+    justify-content: center;
 }
 
 @mixin dropShadow {
-    -webkit-box-shadow: 1px 1px 26px -2px rgba(0,0,0,0.2); 
-    box-shadow: 1px 1px 26px -2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 26px -2px rgba(0, 0, 0, 0.2);
 }
-.dropShadow { @include dropShadow }
+
+.dropShadow {
+    @include dropShadow
+}
 
 @mixin hideScrollbar {
-    overflow-y:scroll; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none;
-    &::-webkit-scrollbar { display:none; }
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
-.hideScrollbar { @include hideScrollbar }
+
+.hideScrollbar {
+    @include hideScrollbar
+}
 
 @mixin bluredBackground {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
-.bluredBackground { @include bluredBackground }
+
+.bluredBackground {
+    @include bluredBackground
+}
+
+//PRINT QUERY 
+@mixin query-print {
+    @media print {
+        @content;
+    }
+
+    @at-root.body.is-pdf-mode #{&} {
+        @content;
+    }
+}

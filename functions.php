@@ -148,9 +148,12 @@ function theme_add_scripts()
         'ajaxurl' => admin_url('admin-ajax.php'),
         'cookieAcc' =>  $cookieAccepted,
         'page' => $currpageVar,
+        'sitename' => get_bloginfo('name'),
         'icon' => file_get_contents( get_option( 'event_icon_neg' ) ),
         //'info' => $quickInfoAktiv
     );
+    
+    
     $scriptToAdGlobal = array('ajax-js', 'script-js', 'loader-js'  );
     foreach( $scriptToAdGlobal as $script ){
         wp_localize_script( $script, 'globalURL', $wnm_custom );
