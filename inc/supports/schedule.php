@@ -1,6 +1,5 @@
 <?php
 
- 
 
 class se2_Schedule {
 
@@ -452,12 +451,23 @@ class se2_Schedule {
      public function pdf_download(){
           $pdfDownload = '';
 
-          $pdfDownload .= '<div class="pdf-download">';
+          $pdfDownload .= '<div  class="pdf-download">';
           $pdfDownload .= __('Download the Programm as PDF', 'SimplEvent');
-          $pdfDownload .= '<button onclick="pdfgenerator()">Download</button>';
+          //$pdfDownload .= '<button onclick="pdfgenerator()">Download</button>';
+          $myObj->name = "John";
+          $myObj->age = 30;
+          $myObj->city = "New York";
+          $data = json_encode($myObj);
+          $pdfDownload .=     '
+                              <form action="'.  get_template_directory_uri() .'/inc/addons/tcpdf/programm_download.php" method="post">
+                                   <input type="submit" name="downloadpdf" value="'.$data.'" label="DDD" />
+                              </form>
+                              ';
           $pdfDownload .= '</div>';
-
+        
           return $pdfDownload;
      }
+
+    
 
 }
