@@ -454,15 +454,45 @@ class se2_Schedule {
           $pdfDownload .= '<div  class="pdf-download">';
           $pdfDownload .= __('Download the Programm as PDF', 'SimplEvent');
           //$pdfDownload .= '<button onclick="pdfgenerator()">Download</button>';
-          $myObj->name = "John";
-          $myObj->age = 30;
-          $myObj->city = "New York";
-          $data = json_encode($myObj);
+
+
+          $curl_data_array = array('name' => 'Aaron', 'type' => 1, 'post' => 'curl');
+          //$data = http_build_query($data_array);
+          $curl_data = json_encode(array( 'data' => $curl_data_array ));
+
+          $url = get_template_directory_uri() .'/inc/addons/tcpdf/programm_download.php';
+          //$url = 'http://localhost:8074/SimplEvent_v2/wp-content/themes/SimplEvent-v2/inc/addons/tcpdf/programm_download.php';
+          $curl = curl_init();
+
+          curl_setopt($curl, CURLOPT_URL, $url);
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+          curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json', 'Content-Length: ' . strlen($curl_data) ) );
+          
+          curl_setopt($curl, CURLOPT_POST, 1);
+          curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_data);
+          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 2);
+          curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+
+          $result = curl_exec($curl);
+
+          if($e = curl_error($curl)){
+               echo $e;
+          } else {
+               $decoded = json_decode($result);
+               //print_r($decoded);
+          } 
+
+          curl_close($curl);
+
+          print_r($result);
+
           $pdfDownload .=     '
                               <form action="'.  get_template_directory_uri() .'/inc/addons/tcpdf/programm_download.php" method="post">
-                                   <input type="submit" name="downloadpdf" value="'.$data.'" label="DDD" />
+                                   <input type="submit" name="downloadpdf" value="ccc" label="DDD" />
                               </form>
                               ';
+          $pdfDownload .= '<a href="'.  get_template_directory_uri() .'/inc/addons/tcpdf/programm_download.php" >DOWNLOAD</a>';
           $pdfDownload .= '</div>';
         
           return $pdfDownload;

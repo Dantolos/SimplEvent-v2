@@ -1,6 +1,12 @@
 <?php
 
+$form_data = file_get_contents('php://input');
+$data = json_decode( file_get_contents('php://input'), true);
+var_dump($data);
+var_dump($_POST);
+
 if( isset ( $_POST['downloadpdf'] ) ) {
+    print_r($_POST);
     $programmData = $_POST['downloadpdf'];
     require_once(__DIR__.'/tcpdf_import.php');
     // create new PDF document
@@ -11,7 +17,7 @@ if( isset ( $_POST['downloadpdf'] ) ) {
     $pdf->SetAuthor('Nicola Asuni');
     $pdf->SetTitle('TCPDF Example 002');
     $pdf->SetSubject('TCPDF Tutorial');
-    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+    $pdf->SetKeywords('TCPDF, PDF, example, test, guide'); 
 
     // remove default header/footer
     $pdf->setPrintHeader(false);
