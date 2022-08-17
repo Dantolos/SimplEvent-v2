@@ -1,7 +1,7 @@
 <?php
 
 function register_my_session() {
-    ini_set('session.save_path', './sessions');
+  
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
