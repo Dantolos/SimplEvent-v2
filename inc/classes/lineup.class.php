@@ -26,7 +26,7 @@ class LineUp {
      }
 
 
-     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = 'main' ) {
+     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = '' ) {
           $speaker_args = array(
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
@@ -35,9 +35,11 @@ class LineUp {
           );
           
           $speakerData = new WP_Query( $speaker_args ); 
-           
+          $this->speakerIDs = array();
           foreach( $speakerData->posts as $speaker ){
               
+               
+
                if( $cat != 'all' ){
                     $isInCat = false;
                     if( !is_array($cat) ){
@@ -58,23 +60,49 @@ class LineUp {
                     }
                }
                
-              
-               if($event != 'main'){
+               
+               if($event != ''){
                     $isInEvent = false;
-                    if( !is_array($event) || !is_array(get_field('event', $speaker->ID)) ){
-                              continue;
-                    } else {                  
-                         foreach( $event as $eValue => $e ){      
-                              foreach( get_field('event', $speaker->ID) as $sE ){    
-                                   if( strval($eValue) === strval($sE['value']) ){
+                    if( !is_array($event)  ){
+                         if( is_array(get_field('event', $speaker->ID))){
+                              
+                              foreach( get_field('event', $speaker->ID) as $sE ){     
+                                              
+                                   if( strval($event) === strval($sE['value']) ){
+                                        
                                         $isInEvent = true;
+                                   } else {
+                                        continue;
+                                   }
+                              }
+                         } else {
+                              continue;
+                         }
+                         if( !$isInEvent ){ continue; }
+                         /* foreach( get_field('event', $speaker->ID) as $sE2 ){
+                              if( strval($event) === strval(get_field('event', $speaker->ID)['value']) ){
+                                   $isInEvent = true;
+                              }
+                         } */
+                         
+                    } else {              
+                            
+                         foreach( $event as $eValue => $e ){     
+                              if( is_array(get_field('event', $speaker->ID))){
+                                   foreach( get_field('event', $speaker->ID) as $sE ){    
+                                        if( strval($eValue) === strval($sE['value']) ){
+                                               
+                                             $isInEvent = true;
+                                        }
                                    }
                               }
                          }
+                         
                          if( !$isInEvent ){ continue; }
                     }
+                    
                }
-
+               
                
 
                $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
@@ -360,7 +388,7 @@ class LineUp {
 
 
      public function cast_line_up_overview( $args = array() ) {
-
+        
           //std year
           $currYear = '';
           $cY = date('Y');
@@ -378,7 +406,10 @@ class LineUp {
           }
 
           //event
-          $currEvent = 'main';
+          $currEvent = $args['event'];
+          if(is_array($currEvent )){
+               $currEvent = array_keys($currEvent)[0];
+          }
          
           $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'" data-event="'.$currEvent.'">';
           

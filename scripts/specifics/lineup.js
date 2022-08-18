@@ -29,7 +29,7 @@ if (YEARFORM) {
      })
 }
 
-//categories
+//categories 
 const CATFORM = document.getElementById('speechcat')
 if (CATFORM) {
      CATFORM.addEventListener('change', (e) => {
