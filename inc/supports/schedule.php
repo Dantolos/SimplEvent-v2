@@ -518,9 +518,9 @@ class se2_Schedule {
                }
           }
 
-          echo '<pre style="color:red; line-height:1em;">';
+        /*   echo '<pre style="color:red; line-height:1em;">';
           var_dump( $clean_data );
-          echo '</pre>';
+          echo '</pre>'; */
 
      }
 
