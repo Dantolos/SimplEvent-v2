@@ -168,7 +168,7 @@ class LineUp {
                          }
                     }
            
-                    asort($yearOptions);
+                    //asort($yearOptions);
                     
                     $this->output .= '<div class="se2-lineup-filter-jahr filter-option">';
                     $this->output .= $this->forms->castDropdown( 'speakeryear', $yearOptions, false );

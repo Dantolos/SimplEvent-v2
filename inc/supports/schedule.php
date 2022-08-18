@@ -1,6 +1,5 @@
 <?php
 
- 
 
 class se2_Schedule {
 
@@ -441,23 +440,153 @@ class se2_Schedule {
                     break;
           }
 
-               
-
-
-
           $slotTime .= '</div>';
           return $slotTime;
      }
 
-     public function pdf_download(){
+     public function pdf_download($pageID){
+          $this->create_session($pageID);
+
           $pdfDownload = '';
 
-          $pdfDownload .= '<div class="pdf-download">';
+          $pdfDownload .= '<div  class="pdf-download">';
           $pdfDownload .= __('Download the Programm as PDF', 'SimplEvent');
-          $pdfDownload .= '<button onclick="pdfgenerator()">Download</button>';
+  
+          $pdf_link = '';
+          if(get_field('programm_pdf', $pageID)){
+               $pdf_link = get_field('programm_pdf', $pageID);
+          }else{ 
+               $pdf_link = get_template_directory_uri() .'/inc/addons/tcpdf/programm_download.php';
+          }
+          $pdfDownload .= '<a href="'. $pdf_link .'" >DOWNLOAD</a>';
           $pdfDownload .= '</div>';
-
+        
           return $pdfDownload;
      }
+
+     private function create_session($pageID){
+
+          $clean_data = array();
+
+          //split schedule in days
+          if( get_field('event_tag', $pageID)){
+               foreach( get_field( 'event_tag', $pageID ) as $key => $programmday ){
+                    $clean_data[$programmday['datum']] = array();
+
+                    //add speakers
+                    $speakers = $this->session_speaker_data( $pageID, $programmday['datum'] );
+                    if( count($speakers) > 0 ){
+                         foreach( $speakers as $start => $speaker ){
+                              $clean_data[$programmday['datum']][$start] = $speaker;
+                         }
+                    }
+
+                    //get programm slots
+                    if( isset( $programmday['programm_slots'] ) && count( $programmday['programm_slots'] ) > 0 ){
+                         foreach( $programmday['programm_slots'] as $key => $slot ){
+                              $clean_data[$programmday['datum']][$slot['start']] = $slot;
+
+                              
+                              //add panel speaker data
+                              if( $slot['acf_fc_layout'] === 'panel' ){
+                                   foreach( $slot['speaker'] as $speaker_ID ){
+                                        
+                                        $speaker_name = '';
+                                        if(get_field('speaker_degree', $speaker_ID)){ $speaker_name .= get_field('speaker_degree', $speaker_ID) . ' '; }
+                                        if(get_field('speaker_vorname', $speaker_ID)){ $speaker_name .= get_field('speaker_vorname', $speaker_ID); }
+                                        if(get_field('speaker_nachname', $speaker_ID)){ $speaker_name .= ' ' . get_field('speaker_nachname', $speaker_ID); }
+
+                                        $speaker_funktion = '';
+                                        if(get_field('speaker_funktion', $speaker_ID) && get_field('speaker_firma', $speaker_ID)){ 
+                                             $speaker_funktion .= get_field('speaker_funktion', $speaker_ID) . ', ' . get_field('speaker_firma', $speaker_ID); 
+                                        } else {
+                                             $speaker_funktion .= get_field('speaker_firma', $speaker_ID);
+                                        }
+                                        
+                                        $speaker_image = get_field('speaker_bild', $speaker_ID);
+
+                                        $speaker_data = array(
+                                             'name' =>  $speaker_name,
+                                             'funktion' => $speaker_funktion,
+                                             'image' => $speaker_image
+                                        );
+                                        $clean_data[$programmday['datum']][$slot['start']][$speaker_ID] = $speaker_data;
+                                   }
+                              }
+                         }
+                    }
+               }
+          }
+
+          echo '<pre style="color:red; line-height:1em;">';
+          var_dump( $clean_data );
+          echo '</pre>';
+
+     }
+
+     private function session_speaker_data($pageID, $date){
+
+          $speaker_data_output = array();
+          $args = array(
+               'post_type' => 'speakers', 
+               'tax_query' => array(
+                   array(
+                       'taxonomy' => 'jahr',
+                       'field'    => 'slug',
+                       'terms'    => get_field('jahr', $pageID)->slug,
+                   ),
+               ),
+          );
+
+          $speakers = new WP_Query( $args );
+
+          foreach( $speakers->posts as $key => $speaker ){
+
+               $speaker_ID = $speaker->ID;
+               $speakerDate = strtotime( str_replace( '/', '-',  get_field('speaker_zeit', $speaker_ID)['datum'] ) );
+               if( get_field('speaker_zeit', $speaker_ID)['hide'] ){
+                    continue;
+               }
+               if( get_field('speaker_zeit', $speaker_ID)['datum'] != intval($date) ){
+                    continue;
+               }
+               
+               $start_time = str_split( get_field('speaker_zeit', $speaker_ID)['start'], 5 )[0];
+               $end_time = str_split( get_field('speaker_zeit', $speaker_ID)['ende'], 5 )[0];
+
+               $speaker_name = '';
+               if(get_field('speaker_degree', $speaker_ID)){ $speaker_name .= get_field('speaker_degree', $speaker_ID) . ' '; }
+               if(get_field('speaker_vorname', $speaker_ID)){ $speaker_name .= get_field('speaker_vorname', $speaker_ID); }
+               if(get_field('speaker_nachname', $speaker_ID)){ $speaker_name .= ' ' . get_field('speaker_nachname', $speaker_ID); }
+
+
+               $speaker_funktion = '';
+               if(get_field('speaker_funktion', $speaker_ID) && get_field('speaker_firma', $speaker_ID)){ 
+                    $speaker_funktion .= get_field('speaker_funktion', $speaker_ID) . ', ' . get_field('speaker_firma', $speaker_ID); 
+               } else {
+                    $speaker_funktion .= get_field('speaker_firma', $speaker_ID);
+               }
+
+               $speaker_image = get_field('speaker_bild', $speaker_ID);
+
+               $speaker_lead = get_field('programm_titel', $speaker_ID);
+
+               $speaker_data_output[$start_time] = array(
+                    'acf_fc_layout' => 'speaker',
+                    'start' => $start_time,
+                    'ende' => $end_time,
+                    'name' => $speaker_name,
+                    'funktion' => $speaker_funktion,
+                    'image' => $speaker_image,
+                    'lead' => $speaker_lead
+               );
+
+          }
+
+          return $speaker_data_output;
+
+         
+     }
+    
 
 }

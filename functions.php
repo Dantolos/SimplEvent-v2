@@ -1,5 +1,13 @@
 <?php
 
+function register_my_session() {
+  
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+
+add_action('init', 'register_my_session');
 
 /*-------------------------------------------------------------*/
 /*------------------------THEME SETTINGS-----------------------*/
