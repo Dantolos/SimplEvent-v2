@@ -1,3 +1,24 @@
+
 .container {
-    color:green;
+    color:#4e5658;
+    margin: 0 150px;
+    width:  800px;
+    
+}
+
+h1 {
+    font-size: 18pt;
+}
+
+p {
+    font-size: 10pt;
+}
+
+table {
+    margin-left: 5cm;
+}
+
+td {
+    padding-top: 50cm;
+    border-bottom: 1px solid #4e5658;
 }

@@ -450,7 +450,7 @@ class se2_Schedule {
           $pdfDownload = '';
 
           $pdfDownload .= '<div  class="pdf-download">';
-          $pdfDownload .= __('Download the Programm as PDF', 'SimplEvent');
+          $pdfDownload .= '<div class="pdf-download-desc">'.__('Download the Programm as PDF', 'SimplEvent').'</div>';
   
           $pdf_link = '';
           if(get_field('programm_pdf', $pageID)){

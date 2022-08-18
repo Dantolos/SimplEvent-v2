@@ -23,7 +23,7 @@
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     // set margins
-    $pdf->SetMargins(1, 1, 1);
+    $pdf->SetMargins(10, 1, 10);
 
     // set auto page breaks
     $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
@@ -52,14 +52,13 @@
 
     $html .= '<div class="container">';
     foreach($_SESSION['programm'] as $datum => $programm_day){
-        $html .= '<h1>'.$datum.'<h1>';
+        $html .= '<h1>'.$datum.'</h1>';
         $html .= '<table>';
         foreach( $programm_day as $datum => $slot ){
             $html .= '<tr>';
                 //time
                 $html .= '<td>';
-                $html .= '<p class="hour">'.date( 'H:i', strtotime($slot['start']) ).'</p>';
-                $html .= '<p class="till">'.date( 'H:i', strtotime($slot['ende']) ).'</p>'; 
+                $html .= '<p class="hour">'.date( 'H:i', strtotime($slot['start']) ).' - '.date( 'H:i', strtotime($slot['ende']) ).'</p>'; 
                 $html .= '</td>';
 
                 $html .= '<td>';
