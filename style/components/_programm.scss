@@ -835,13 +835,19 @@
      margin: auto;
      padding: 10px 20px;
      width: fit-content;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
 
      @include dropShadow;
 
-     button {
-          margin-left: 10px;
-          padding: 5px 10px;
-
+     .pdf-button {
+          margin-top: 5px;
+          //margin-left: 10px;
+          padding: 6px 15px;
+          background-color: $dark;
+          color: $light;
           &::before {
                color: $light;
                font-family: "dashicons";
