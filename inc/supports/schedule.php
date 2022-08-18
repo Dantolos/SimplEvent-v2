@@ -458,7 +458,7 @@ class se2_Schedule {
           }else{ 
                $pdf_link = get_template_directory_uri() .'/inc/addons/tcpdf/programm_download.php';
           }
-          $pdfDownload .= '<a href="'. $pdf_link .'" >DOWNLOAD</a>';
+          $pdfDownload .= '<a href="'. $pdf_link .'" ><div class="pdf-button">DOWNLOAD</div></a>';
           $pdfDownload .= '</div>';
         
           return $pdfDownload;
