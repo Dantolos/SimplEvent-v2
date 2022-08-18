@@ -1,62 +1,9 @@
 <?php
   
+  session_start();
+ 
   
-    
-   /*  $url = '';
-
-    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {  
-        $url = "https://";   }
-    else  {
-        $url = "http://";   }
    
-    $host =  $url.$_SERVER['HTTP_HOST'];   
-    $url = $protocol.$host.'/SimplEvent_v2/wp-json/wp/v2/pages/'.$_POST['downloadpdf'];
-    
-    $curl = curl_init();
-
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    
-    // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 2);
-    // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2); 
-
-    $result = curl_exec($curl);
-
-    if($e = curl_error($curl)){
-        echo $e;
-    } else {
-        $decoded = json_decode($result);
-        echo '<pre>';
-        print_r($decoded); 
-    }  
-
-    curl_close($result); */
-
-    /*
-    $args = array(
-        'post_type' => 'speakers', 
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'jahr',
-                'field'    => 'slug',
-                'terms'    => '2022',
-            ),
-        ),
-    );
-
-    $speakers = new WP_Query( $args ); */
-    
-    // 1st Method - Declaring $wpdb as global and using it to execute an SQL query statement that returns a PHP object
-   
-    //$results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}options WHERE option_id = 1", OBJECT );
-    echo 'haaaa';
-    //var_dump($results);
-
-
-if(false){
-if( !isset ( $_POST['downloadpdf'] ) ) {
-    print_r($_POST);
-    $programmData = $_POST['downloadpdf'];
     require_once(__DIR__.'/tcpdf_import.php');
     // create new PDF document
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -93,28 +40,59 @@ if( !isset ( $_POST['downloadpdf'] ) ) {
     // ---------------------------------------------------------
 
     // set font
-    $pdf->SetFont('times', 'BI', 20);
+    $pdf->SetFont('dejavusans', '', 20);
 
     // add a page
     $pdf->AddPage();
 
     // set some text to print
-    $txt = <<<EOD
-    TCPDF Example 002
+    $html = '';
 
-    Default page header and footer are disabled using setPrintHeader() and setPrintFooter() methods.
-    EOD;
+    $html .= '<style>' . file_get_contents("programm_style.css") .'</style>';
 
+    $html .= '<div class="container">';
+    foreach($_SESSION['programm'] as $datum => $programm_day){
+        $html .= '<h1>'.$datum.'<h1>';
+        $html .= '<table>';
+        foreach( $programm_day as $datum => $slot ){
+            $html .= '<tr>';
+                //time
+                $html .= '<td>';
+                $html .= '<p class="hour">'.date( 'H:i', strtotime($slot['start']) ).'</p>';
+                $html .= '<p class="till">'.date( 'H:i', strtotime($slot['ende']) ).'</p>'; 
+                $html .= '</td>';
+
+                $html .= '<td>';
+                switch ($slot['acf_fc_layout']) {
+                    case 'standard':
+                        $html .= cast_standard_slot($slot);
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+                $html .= '</td>';
+            $html .= '</tr>';
+        }
+
+        $html .= '</table>';         
+    }
+    $html .= '</div>';
     // print a block of text using Write()
-    $pdf->Write(0, $txt, '', 0, 'C', true, 0, false, false, 0);
+    $pdf->writeHTML($html, true, false, true, false, '');
 
     // ---------------------------------------------------------
     //Close and output PDF document
     ob_end_clean();
 
-    $filename = $programmData . '.pdf';
+    $filename = 'asdfasdfasdf' . '.pdf';
     $pdf->Output($filename, 'D');
 
 
-}
-}
+    function cast_standard_slot($slot){
+        $standard_slot = '';
+        $standard_slot = '<h2>'.$slot['bezeichnung'].'</h2>';
+        $standard_slot = '<p>'.$slot['lead'].'</p>';
+        return $standard_slot;
+    }
