@@ -9,16 +9,40 @@
 h1 {
     font-size: 18pt;
 }
+h2 {
+    font-size: 13pt;
+    line-height:0.5;
+}
+h3 {
+    font-size: 11pt;
+    line-height:1.2;
+}
 
 p {
-    font-size: 10pt;
+    font-size: 9pt;
+    line-height: 0;
 }
 
 table {
     margin-left: 5cm;
 }
 
-td {
-    padding-top: 50cm;
-    border-bottom: 1px solid #4e5658;
+.schedule-row {
+    padding-top: 0;
+   
+    border-bottom: 1px solid #9e9e9e;
+
+}
+
+.filler {
+    background-color: #cfcfcf;
+}
+
+.standard {
+    background-color: #484848;
+    color: #eeeeee;
+}
+
+.show {
+    background-color: #e5e5e5;
 }

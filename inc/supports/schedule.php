@@ -446,7 +446,7 @@ class se2_Schedule {
 
      public function pdf_download($pageID){
           $this->create_session($pageID);
-
+          
           $pdfDownload = '';
 
           $pdfDownload .= '<div  class="pdf-download">';
@@ -472,8 +472,9 @@ class se2_Schedule {
           if( get_field('event_tag', $pageID)){
                foreach( get_field( 'event_tag', $pageID ) as $key => $programmday ){
                     $clean_data[$programmday['datum']] = array();
-
+                    
                     //add speakers
+                    $speakers = array();
                     $speakers = $this->session_speaker_data( $pageID, $programmday['datum'] );
                     if( count($speakers) > 0 ){
                          foreach( $speakers as $start => $speaker ){
@@ -481,6 +482,16 @@ class se2_Schedule {
                          }
                     }
 
+                    //add sessions
+                    $sessions = array(); 
+                    $sessions = $this->session_session_data($pageID, $programmday['datum']);
+                    if(isset($sessions)){
+                         if( count($sessions) > 0 ){
+                              foreach( $sessions as $start => $session ){
+                                   $clean_data[$programmday['datum']][$start] = $session;
+                              }
+                         }
+                    }
                     //get programm slots
                     if( isset( $programmday['programm_slots'] ) && count( $programmday['programm_slots'] ) > 0 ){
                          foreach( $programmday['programm_slots'] as $key => $slot ){
@@ -510,7 +521,7 @@ class se2_Schedule {
                                              'funktion' => $speaker_funktion,
                                              'image' => $speaker_image
                                         );
-                                        $clean_data[$programmday['datum']][$slot['start']][$speaker_ID] = $speaker_data;
+                                        $clean_data[$programmday['datum']][$slot['start']]['speakers'][$speaker_ID] = $speaker_data;
                                    }
                               }
                          }
@@ -518,9 +529,11 @@ class se2_Schedule {
                }
           }
 
-        /*   echo '<pre style="color:red; line-height:1em;">';
-          var_dump( $clean_data );
-          echo '</pre>'; */
+          foreach($clean_data as $key => $day_data){
+               ksort( $day_data );
+               $clean_data[$key] = $day_data;
+          } 
+          $_SESSION['programm'] = $clean_data;
 
      }
 
@@ -586,6 +599,64 @@ class se2_Schedule {
           return $speaker_data_output;
 
          
+     }
+
+     private function session_session_data($padeID, $date) {
+
+          $session_data_output = array();
+
+          $sessionSlots = get_option('sessions_slots');
+         
+          foreach($sessionSlots as $sessionSlot ){
+               
+               $sessionsArgs = array(
+                    'numberposts'	=> -1,
+                    'post_type'	=> 'sessions',
+                    'meta_query'	=> array(
+                         array(
+                              'key'	 	=> 'slot',
+                              'value'	  	=> sprintf('"%s"', $sessionSlot['label']),
+                              'compare' 	=> 'LIKE',
+                         ),
+                    )
+                    
+               );
+               $sessions = new WP_Query( $sessionsArgs ); 
+                            
+               if(isset($sessionSlot['date'])){
+                    $slotDate = str_replace( '-', '/', $sessionSlot['date']  );
+                    if( $slotDate !== $date ){
+                         continue; 
+                    }
+               }
+               $session_name = $sessionSlot['value'];
+
+               $insertstr = ':';
+               $start_time = substr($sessionSlot['start'], 0, 2) . $insertstr . substr($sessionSlot['start'], 2);
+               $end_time = substr($sessionSlot['ende'], 0, 2) . $insertstr . substr($sessionSlot['ende'], 2);
+
+               $session_data_output[$start_time] = array(
+                    'acf_fc_layout' => 'session',
+                    'start' => $start_time,
+                    'ende' => $end_time,
+                    'slot' => $session_name
+               );
+
+               foreach( $sessions->posts as $session ){
+                    $session_ID = $session->ID;
+
+                    $session_titel = get_field('titel', $session_ID );
+                    $session_image = get_field('session_bild', $session_ID );
+                    
+                    $session_data = array(
+                         'titel' => $session_titel,
+                         'image' => $session_image,
+                    );
+                    $session_data_output[$start_time]['sessions'][$session_ID] = $session_data;
+               }
+          }
+
+          return $session_data_output;
      }
     
 
