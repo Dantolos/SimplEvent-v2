@@ -183,7 +183,7 @@
         $speaker_slot .= '<table>';
         $speaker_slot .= '<tr>';
         $speaker_slot .= '<td width="50">';
-        $speaker_slot .= '<img src="'.$slot['image'].'" width="30" height="30"/>';
+        $speaker_slot .= '<img src="'.$slot['image'].'" width="30" height="auto"/>';
         $speaker_slot .= '</td>';
         //$panel_slot .= '</div>';
         $speaker_slot .= '<td width="350">';
