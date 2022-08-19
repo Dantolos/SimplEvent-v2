@@ -4,8 +4,45 @@
 
     require_once(__DIR__.'/tcpdf_import.php');
 
+
+    class MYPDF extends TCPDF {
+
+        //Page header
+        public function Header() {
+            // Logo
+           /*  $image_file = K_PATH_IMAGES.'logo_example.jpg';
+            $this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false); */
+            // Set font
+            $this->SetFont('dejavusans', 'R', 20);
+            // Title
+            $header_html = '<table height="50" style="border-bottom: 1px solid #9e9e9e;">';
+            $header_html .= '<tr>';
+            $header_html .= '<td width="450">';
+            $header_html .= '<h2 style="font-size:14pt;">Programm | '.$_SESSION['general']['event'].'</h2>';
+            $header_html .= '<p style="font-size:8pt;">Download: '.$_SESSION['general']['datum'].'</p>';
+            $header_html .= '</td>';
+            $header_html .= '<td width="150" >';
+            $header_html .= '<img style="height:80px;" src="'.$_SESSION['general']['logo'].'"/>';
+            $header_html .= '</td>';
+            $header_html .= '</tr>';
+            $header_html .= '</table>';
+            $this->writeHTML($header_html, true, false, true, false, '');
+        }
+    
+        // Page footer
+        public function Footer() {
+            // Position at 15 mm from bottom
+            $this->SetY(-15);
+            // Set font
+            $this->SetFont('dejavusans', 'R', 8);
+            // Page number
+            $this->Cell(0, 0, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        }
+    }
+
+
     // create new PDF document
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
     // set document information
     $pdf->SetCreator(PDF_CREATOR);
@@ -15,17 +52,19 @@
     $pdf->SetKeywords('programm, event, speaker'); 
 
     // remove default header/footer
-    $pdf->setPrintHeader(false);
-    $pdf->setPrintFooter(false);
+    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA)); 
 
     // set default monospaced font
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
     // set margins
-    $pdf->SetMargins(20, 1, 10);
+    $pdf->SetMargins(20, 50, 10);
+    $pdf->SetHeaderMargin(10);
+    $pdf->SetFooterMargin(50);
 
     // set auto page breaks
-    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+    $pdf->SetAutoPageBreak(TRUE, 20);
 
     // set image scale factor
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -51,11 +90,12 @@
         //STYLE
         $html .= '<style>' . file_get_contents("programm_style.css") .'</style>';
 
+        $beauty_date = date( 'l | j F Y', strtotime(str_replace( '/', '-',$datum)) );
         $html .= '<div class="container">';
-        $html .= '<h1>'.$datum.'</h1>';
+        $html .= '<h1>'.$beauty_date.'</h1>';
         $html .= '<table cellspacing="0" cellpadding="10">';
         foreach( $programm_day as $datum => $slot ){
-            $html .= '<tr>';
+            $html .= '<tr style="page-break-inside:avoid;">';
                 //time
                 $padding = '5';
                 $html .= '<td width="150" class="schedule-row">';
@@ -187,6 +227,7 @@
         $speaker_slot .= '</td>';
         //$panel_slot .= '</div>';
         $speaker_slot .= '<td width="350">';
+        $speaker_slot .= $slot['lead'] ? '<p>'.$slot['lead'].'</p>' : '';
         $speaker_slot .= '<h3>'.$slot['name'].'</h3>';
         $speaker_slot .= '<p>'.$slot['funktion'].'</p>';
         $speaker_slot .= '</td >';
@@ -210,7 +251,7 @@
                 
                 $session_slot .= ( $row_count%2 == 0 && $row_count != 0 ) ? '</tr><tr>' : '';
                 $row_count++;
-                $session_slot .= '<td width="200" style=" background-color: #e5e5e5;">';
+                $session_slot .= '<td width="200" style=" background-color: #f1f1f1;">';
                 //$session_slot .= '<div style="overflow:hidden; height:50px; " height="50"><img src="'.$session['image'].'" width="200" height="auto"/></div>';
                 $session_slot .= '<h3>'.$session['titel'].'</h3>';
                 //$session_slot .= '<p>'.$slot['funktion'].'</p>';
