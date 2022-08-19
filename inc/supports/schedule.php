@@ -535,6 +535,8 @@ class se2_Schedule {
           } 
           $_SESSION['programm'] = $clean_data;
 
+          $_SESSION['general'] = $this->session_general_infos($pageID);
+
      }
 
      private function session_speaker_data($pageID, $date){
@@ -659,5 +661,20 @@ class se2_Schedule {
           return $session_data_output;
      }
     
+     private function session_general_infos($pageID){
+          
+          $datum = date( 'l | j F Y' );
+          $event = get_bloginfo('name');
+          $logo = get_option( 'event_logo' );
+
+          $general_infos = array(
+               'datum' => $datum,
+               'event' => $event,
+               'logo'  => $logo
+          );
+
+          
+          return $general_infos;
+     }
 
 }

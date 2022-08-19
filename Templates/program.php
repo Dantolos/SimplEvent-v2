@@ -11,9 +11,7 @@ get_header();
 
 wp_enqueue_script( 'JS-schedule', get_template_directory_uri() . '/scripts/specifics/schedule.js', array('jquery'), '1.0.04', true );
 
-
 the_content();
-
 
 $Schedule = new se2_Schedule(get_the_ID());
 $speakerClass = new LineUp();
