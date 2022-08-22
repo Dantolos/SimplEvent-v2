@@ -665,7 +665,19 @@ class se2_Schedule {
           
           $datum = date( 'l | j F Y' );
           $event = get_bloginfo('name');
+
           $logo = get_option( 'event_logo' );
+          $mediacorner_pages = get_pages(array(
+               'meta_key' => '_wp_page_template',
+               'meta_value' => 'Templates/mediacorner.php'
+          ));
+      
+               if(get_field('logos', $mediacorner_pages[0]->ID)){          
+                    $logo = get_field('logos', $mediacorner_pages[0]->ID)[0]["logo"]['files_rgb']['png'];
+               }
+
+     
+          
 
           $general_infos = array(
                'datum' => $datum,
@@ -674,6 +686,7 @@ class se2_Schedule {
           );
 
           
+
           return $general_infos;
      }
 
