@@ -4,7 +4,10 @@
 
     require_once(__DIR__.'/tcpdf_import.php');
 
-
+    echo '<pre style="color:green;">';
+    var_dump($_SESSION);
+    echo '</pre>';
+    
     class MYPDF extends TCPDF {
 
         //Page header
@@ -22,7 +25,9 @@
             $header_html .= '<p style="font-size:8pt;">Download: '.$_SESSION['general']['datum'].'</p>';
             $header_html .= '</td>';
             $header_html .= '<td width="150" >';
-            $header_html .= '<img style="height:80px;" src="'.$_SESSION['general']['logo'].'"/>';
+            if(isset($_SESSION['general']['logo'])){
+                $header_html .= '<img style="height:80px;" src="'.$_SESSION['general']['logo'].'"/>';
+            }
             $header_html .= '</td>';
             $header_html .= '</tr>';
             $header_html .= '</table>';
@@ -201,9 +206,11 @@
             foreach($slot['speakers'] as $key => $speaker ) {
                 $panel_slot .= '<table>';
                 $panel_slot .= '<tr>';
-                $panel_slot .= '<td width="50">';
-                $panel_slot .= '<img src="'.$speaker['image'].'" width="30" height="30"/>';
-                $panel_slot .= '</td>';
+                if(isset($speaker['image'])){
+                    $panel_slot .= '<td width="50">';
+                    $panel_slot .= '<img src="'.$speaker['image'].'" width="30" height="30"/>';
+                    $panel_slot .= '</td>';
+                }
                 //$panel_slot .= '</div>';
                 $panel_slot .= '<td width="350">';
                 $panel_slot .= '<h3>'.$speaker['name'].'</h3>';
@@ -222,9 +229,11 @@
 
         $speaker_slot .= '<table>';
         $speaker_slot .= '<tr>';
-        $speaker_slot .= '<td width="50">';
-        $speaker_slot .= '<img src="'.$slot['image'].'" width="30" height="auto"/>';
-        $speaker_slot .= '</td>';
+        if(isset($speaker['image'])){
+            $speaker_slot .= '<td width="50">';
+            $speaker_slot .= '<img src="'.$slot['image'].'" width="30" height="auto"/>';
+            $speaker_slot .= '</td>';
+        }
         //$panel_slot .= '</div>';
         $speaker_slot .= '<td width="350">';
         $speaker_slot .= $slot['lead'] ? '<p>'.$slot['lead'].'</p>' : '';

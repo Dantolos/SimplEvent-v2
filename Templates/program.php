@@ -33,8 +33,9 @@ echo '<div class=" se2-schedule-container">';
      echo $Schedule->cast_Schedule();
 
      // PDF DOWNLOAD
-     echo $Schedule->pdf_download(get_the_ID());
-
+     if( get_field('generate_pdf', get_the_ID()) ){
+          echo $Schedule->pdf_download(get_the_ID());
+     }
 echo '</div>';
 
 
