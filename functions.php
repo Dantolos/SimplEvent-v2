@@ -1,8 +1,8 @@
 <?php
 
 function register_my_session() {
-    session_save_path(__DIR__."./temp");
-
+    /* session_save_path(__DIR__."./temp");
+ */
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
