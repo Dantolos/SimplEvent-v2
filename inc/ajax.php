@@ -120,7 +120,6 @@ function lineup()
      
     $LineUp = new LineUp;
     //$postID = $_POST['pid'];
-    
     wp_send_json( $LineUp->cast_line_up_overview( $arguments ) ); 
    
     die();

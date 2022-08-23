@@ -3,10 +3,10 @@
     session_start();
 
     require_once(__DIR__.'/tcpdf_import.php');
-
+/* 
     echo '<pre style="color:green;">';
     var_dump($_SESSION);
-    echo '</pre>';
+    echo '</pre>'; */
     
     class MYPDF extends TCPDF {
 
