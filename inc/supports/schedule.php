@@ -671,21 +671,18 @@ class se2_Schedule {
                'meta_key' => '_wp_page_template',
                'meta_value' => 'Templates/mediacorner.php'
           ));
-      
+
+          if(array_key_exists(0, $mediacorner_pages)){
                if(get_field('logos', $mediacorner_pages[0]->ID)){          
                     $logo = get_field('logos', $mediacorner_pages[0]->ID)[0]["logo"]['files_rgb']['png'];
                }
-
+          }
      
-          
-
           $general_infos = array(
                'datum' => $datum,
                'event' => $event,
                'logo'  => $logo
           );
-
-          
 
           return $general_infos;
      }

@@ -91,12 +91,22 @@ class Award {
      public function cast_candidate_lightbox( $candidateID ){
           $finalistMedia = get_field( 'media', $candidateID );
           $winnerClass = (get_field( 'award', $candidateID )['gewinner']) ? 'candidate-winner-class': '';
-          $moodimage = ($finalistMedia['mood_image']) ? 'has-mood' : '';
+          
+          $moodimageClass = ($finalistMedia['mood_image']) ? 'has-mood' : '';
+          $moodimage = false;
+          if(get_option( 'award_default_img' ) || $finalistMedia['mood_image'] ){
+               $moodimageClass = (get_option( 'award_default_img' )) ? 'has-mood' : '';
+               if($finalistMedia['mood_image']){
+                    $moodimage = $finalistMedia['mood_image'];
+               } else {
+                    $moodimage = esc_attr( get_option( 'award_default_img' ) );
+               }
+          }
           
           $candidateLB = '<div class="candidate-lb-container">';
                $candidateLB .= '<div class="candidate-lb-head">';
-                    if($moodimage === 'has-mood'){
-                         $candidateLB .= '<div class="candidate-lb-image candidate-stagger" style="background-image:url('.$finalistMedia['mood_image'].');"></div>';
+                    if($moodimage){
+                         $candidateLB .= '<div class="candidate-lb-image candidate-stagger" style="background-image:url('.$moodimage.');"></div>';
                     }
 
                     if( $finalistMedia['logo_positiv'] ){
@@ -110,12 +120,50 @@ class Award {
                          $candidateLB .= '</div>';
                     }
 
+                    
                     $candidateLB .= '<div class="candidate-lb-content candidate-stagger">';
                          $candidateLB .= '<h3>'.get_the_title( $candidateID ).'</h3>';
                          if( get_field( 'award', $candidateID )['finalistenbild'] ){
                               $candidateLB .= '<div class="candidate-finalist-image" style="background-image:url('.get_field( 'award', $candidateID )['finalistenbild'].');"></div>';
                          }
+                         if( get_field('Key data', $candidateID ) ){
+                              $candidateLB .= '<table class="candidate-keydata-table">';
+                             
+                              $keyData = get_field('Key data', $candidateID );
+                              if( $keyData['Founding year'] ) {
+                                   $candidateLB .= '<tr>';
+                                   $candidateLB .= '<td>'.__( 'Founding Year', 'SimplEvent' ).'</td>';
+                                   $candidateLB .= '<td>'.$keyData['Founding year'].'</td>';
+                                   $candidateLB .= '</tr>';
+                              }
+                              if( $keyData['lead'] ) {
+                                   $candidateLB .= '<tr>';
+                                   $candidateLB .= '<td>'.__( 'Lead', 'SimplEvent' ).'</td>';
+                                   $candidateLB .= '<td>';
+                                   if( count($keyData['lead']) > 0 ){
+                                        foreach ($keyData['lead'] as $key => $leadperson) {
+                                             $candidateLB .= $leadperson['name'] . ' ' . $leadperson['position'];
+                                        }
+                                   }
+                                   $candidateLB .= '</td>';
+                                   $candidateLB .= '</tr>';
+                              }
+                              if( $keyData['employee'] ) {
+                                   $candidateLB .= '<tr>';
+                                   $candidateLB .= '<td>'.__( 'Employee', 'SimplEvent' ).'</td>';
+                                   $candidateLB .= '<td>'.$keyData['employee'].'</td>';
+                                   $candidateLB .= '</tr>';
+                              }
+
+                              $candidateLB .= '</table>';
+                         }
+     
+                         
                          $candidateLB .= '<p>'.get_field( 'description', $candidateID ).'</p>';
+
+                         if(get_field('Key data', $candidateID )['website']){
+                              $candidateLB .= '<a href="'.get_field('Key data', $candidateID )['website'].'" target="_blank"><div class="candidate-website-button">'.__( 'Website', 'SimplEvent' ).'</div></a>';
+                         }
                     $candidateLB .= '</div>';
                $candidateLB .= '</div>';
           $candidateLB .= '</div>';
