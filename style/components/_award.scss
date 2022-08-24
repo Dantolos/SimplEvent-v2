@@ -101,13 +101,15 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
+          height: 180px;
           width: fit-content;
-          max-width: 300px;
+          width: 180px;
           margin-left:15%;
           margin-top:5%;
-          position: relative;
-          
+          position: absolute;
+          left: 0vw;
+          top: 30px;
+          @include dropShadow;
           img {
                height: auto;
                max-height: 80%;
@@ -117,15 +119,22 @@
           .candidate-winner-flag {
                background-color: $primary;
                color: $light;
-               padding: 4px 10px;
+               padding: 4px 10px 50px;
                border-radius: 0;
                position: fixed;
-               left: 0;
-               width: 100%;
+               
+               right: 10vw;
+               width: auto;
+               height:8vh;
                top:0px;
                text-transform: uppercase;
                text-align: center;
                font-size: 130%;
+               display: flex;
+               flex-direction: column-reverse;
+               
+               clip-path: polygon(0 1%, 100% 0%, 100% 100%, 50% 80%, 0 100%);
+               @include dropShadow;
           }
      }
      .has-mood {
@@ -136,18 +145,9 @@
           right: 10%;
           top: 10vh;
           transform: translateY(-15%);
-          .candidate-winner-flag {
-               padding: 2px 8px;
-               border-radius: 3px;
-               position: absolute !important;
-               left:unset;
-               bottom: -8px;
-               width: auto;
-               height:fit-content;
-               font-size: 120%;
-          }
+       
      }
-
+     
      .candidate-lb-head {
           
           .candidate-lb-image {
@@ -156,6 +156,7 @@
                min-width:220px;
                min-height:250px;
                @include imageSettings;
+               
           }
      }
      .candidate-lb-content {
@@ -196,6 +197,49 @@
                          width:100%;
                     }
                }
+          }
+
+          .candidate-keydata-table {
+               width:45%;
+               margin-bottom:20px;
+               @include breakpoint( 'm' ){
+                    width:100%;
+               }
+               tr{
+                    td {
+                        width: fit-content;
+                        border-block-start: 50px;
+                        padding:10px 20px;
+                        margin:2px;
+                        margin-bottom: 0;
+                        vertical-align: middle;
+                        &:first-of-type {
+                           text-align: right;
+                        }
+                        &:last-of-type {
+                            font-size: 1.4em;
+                            font-weight: 200;
+                            margin-bottom: 0;
+                            border: solid $dark;
+                            border-width: 0 0 1px  0;
+                            background-color: var(--lightshade);
+                            filter: brightness(1.08);
+                        }
+                    }
+                    
+                    
+                    
+                }
+          }
+
+          .candidate-website-button {
+               background-color: $primary;
+               color: $light;
+
+               float: right;
+               margin-top:20px;
+               width:fit-content;
+               padding: 10px 26px;
           }
      }
 

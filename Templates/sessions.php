@@ -16,7 +16,6 @@ $pageID = get_the_ID();
 $Session = new Sessions();
 
 echo '<div class="container">';
-
     echo the_content();
     echo $Session->cast_session_grid($pageID);
 echo '</div>';

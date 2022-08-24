@@ -9,7 +9,6 @@ ini_set('display_errors', 0); */
   ==================
 */
 
-
 require_once('classes/post.class.php');
 require_once('classes/partner.class.php');
 require_once('classes/company.class.php');
@@ -41,7 +40,6 @@ function partner_infos()
     
     wp_send_json( $Partner->call_Partner_Infos( $postID ) ); 
    
-
     die();
 }
 

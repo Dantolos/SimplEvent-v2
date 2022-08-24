@@ -1,4 +1,7 @@
 <?php
+require_once 'fields/images.php';
+
+use function SE2\ThemeSettings\Fields\Images\input_images;
 
 class se2_page_Event {
 
@@ -26,6 +29,7 @@ class se2_page_Event {
           register_setting( 'simplevent-event-group', 'award_active' );
           register_setting( 'simplevent-event-group', 'award_categories' );
           register_setting( 'simplevent-event-group', 'awards' );
+          register_setting( 'simplevent-event-group', 'award_default_img' );
 
 
           //****Section
@@ -57,6 +61,8 @@ class se2_page_Event {
           add_settings_field( 'award-active', 'Award', 'simplevent_award_active', 'simplevent_event', 'simplevent-event-award' );
           add_settings_field( 'awards', 'Awards', 'simplevent_awards', 'simplevent_event', 'simplevent-event-award' );
           add_settings_field( 'award-categories', 'Kategorien', 'simplevent_award_categories', 'simplevent_event', 'simplevent-event-award' );
+          add_settings_field( 'award-default-img', 'Default Image', 'simplevent_award_default_img', 'simplevent_event', 'simplevent-event-award' );
+
 
           // Section Functions
           function simplevent_event_facts() {
@@ -330,6 +336,13 @@ class se2_page_Event {
                     echo '</div>';        
                }
           }
+
+          function simplevent_award_default_img(){
+               $award_default_img = esc_attr( get_option( 'award_default_img' ) );
+               echo '<p>Default Image for Award Participant Lightboxes</p>';
+               echo input_images( 'Load default Award Background', 'award-default-img', 'award_default_img', $award_default_img );
+          }
+
 
      }
 

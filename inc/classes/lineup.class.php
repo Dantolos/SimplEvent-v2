@@ -66,10 +66,8 @@ class LineUp {
                     if( !is_array($event)  ){
                          if( is_array(get_field('event', $speaker->ID))){
                               
-                              foreach( get_field('event', $speaker->ID) as $sE ){     
-                                              
+                              foreach( get_field('event', $speaker->ID) as $sE ){    
                                    if( strval($event) === strval($sE['value']) ){
-                                        
                                         $isInEvent = true;
                                    } else {
                                         continue;
@@ -197,7 +195,6 @@ class LineUp {
                     }
            
                     //asort($yearOptions);
-                    
                     $this->output .= '<div class="se2-lineup-filter-jahr filter-option">';
                     $this->output .= $this->forms->castDropdown( 'speakeryear', $yearOptions, false );
                     $this->output .= '</div>';
