@@ -274,118 +274,127 @@ class se2_Schedule {
 
                $separators = $separatorDay['programm_slots'];
                foreach( $separators as $sep ){
-                
-
-                    // STANDARD LAYOUT
-                    if($sep['acf_fc_layout'] === 'standard'){
-                         $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-standard" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
-                              $separators_slots .= '<div class="schedule-container">';
-                              $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<div class="schedule-std-content">';
-                              $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-                              if($sep['lead']){
-                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
-                              }
-                              $separators_slots .= '</div>';
-                              $separators_slots .= '</div>';
-                         $separators_slots .= '</div>'; 
+              
+                    $linkedSep = false;
+                    $is_linked = '';
+                    if( array_key_exists( 'link', $sep ) ){
+                         if( is_array( $sep['link'] ) ){
+                              $linkedSep = true;
+                              $is_linked = 'is-linked';
+                         }
                     }
 
-               
-                    // STANDARD FILLER
-                    if($sep['acf_fc_layout'] === 'filler'){
-                         $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-filler" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
-                              $separators_slots .= '<div class="schedule-container">';
-                              $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<div class="schedule-std-content">';
+                    if( $linkedSep ){ $separators_slots .= '<a href="'.$sep['link']['url'].'" target="_blank" title="'.$sep['link']['title'].'">'; }
+
+                         // STANDARD LAYOUT
+                         if($sep['acf_fc_layout'] === 'standard'){
+                              $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' '.$is_linked.' schedule-separator-standard" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                                   $separators_slots .= '<div class="schedule-container">';
+                                   $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
+                                   $separators_slots .= '<div class="schedule-std-content">';
                                    $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
                                    if($sep['lead']){
                                         $separators_slots .= '<p>'.$sep['lead'].'</p>';
                                    }
                                    $separators_slots .= '</div>';
+                                   $separators_slots .= '</div>';
+                              $separators_slots .= '</div>'; 
+                         }
+
+                         // STANDARD FILLER
+                         if($sep['acf_fc_layout'] === 'filler'){
+                              $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' '.$is_linked.' schedule-separator-filler" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                                   $separators_slots .= '<div class="schedule-container">';
+                                   $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
+                                   $separators_slots .= '<div class="schedule-std-content">';
+                                        $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                                        if($sep['lead']){
+                                             $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                                        }
+                                        $separators_slots .= '</div>';
+                                   $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
-                         $separators_slots .= '</div>';
-                    }
+                         }
 
+                         // STANDARD PLACEHOLDER
+                         if($sep['acf_fc_layout'] === 'placeholder'){
+                              $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' '.$is_linked.' schedule-separator-placeholder" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                                   $separators_slots .= '<div class="schedule-container">';
+                                   $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
+                                   $separators_slots .= '<div class="schedule-std-content">';
+                                        $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                                        if($sep['lead']){
+                                             $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                                        }
+                                        $separators_slots .= '</div>';
+                                   $separators_slots .= '</div>';
+                              $separators_slots .= '</div>';
+                         }
 
-                    // STANDARD PLACEHOLDER
-                    if($sep['acf_fc_layout'] === 'placeholder'){
-                         $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-placeholder" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
-                              $separators_slots .= '<div class="schedule-container">';
-                              $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<div class="schedule-std-content">';
+                         // SHOW
+                         if($sep['acf_fc_layout'] === 'show'){
+                              $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' '.$is_linked.' schedule-separator-show" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                                   $separators_slots .= '<div class="schedule-container">';
+                                   $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
+                                   $separators_slots .= '<div class="schedule-std-content">';
+                                        $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
+                                        if($sep['lead']){
+                                             $separators_slots .= '<p>'.$sep['lead'].'</p>';
+                                        }
+                                        $separators_slots .= '</div>';
+                                   $separators_slots .= '</div>';
+                              $separators_slots .= '</div>';
+                         }
+
+                         // STANDARD PANEL
+                         if($sep['acf_fc_layout'] === 'panel'){
+                              $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
+                              $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' '.$is_linked.' schedule-separator-panel" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
+                                   $separators_slots .= '<div class="schedule-container">';
+                                   $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
                                    $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
                                    if($sep['lead']){
                                         $separators_slots .= '<p>'.$sep['lead'].'</p>';
                                    }
-                                   $separators_slots .= '</div>';
-                              $separators_slots .= '</div>';
-                         $separators_slots .= '</div>';
-                    }
+                                        $separators_slots .= '<div class="schedule-slot-panel-speakers">';
+                                        if($sep['speaker'] > 0){
+                                             foreach((array) $sep['speaker'] as $panelSpeaker ){
+                                             
+                                                  $separators_slots .= '<div class="schedule-slot-panel-speaker" data-speakerid="'. $panelSpeaker .'">';
+                                                       $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
 
-                    // PANEL
-                    if($sep['acf_fc_layout'] === 'show'){
-                         $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-show" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
-                              $separators_slots .= '<div class="schedule-container">';
-                              $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<div class="schedule-std-content">';
-                                   $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-                                   if($sep['lead']){
-                                        $separators_slots .= '<p>'.$sep['lead'].'</p>';
-                                   }
-                                   $separators_slots .= '</div>';
-                              $separators_slots .= '</div>';
-                         $separators_slots .= '</div>';
-                    }
+                                                       $name = ( get_field('speaker_vorname', $panelSpeaker) ) 
+                                                       ? 
+                                                            get_field('speaker_degree', $panelSpeaker) 
+                                                            . ' ' . get_field('speaker_vorname', $panelSpeaker) 
+                                                            . ' <b>' . get_field('speaker_nachname', $panelSpeaker) . '</b>'
+                                                       : 
+                                                            the_title();
 
-                    // STANDARD PANEL
-                    if($sep['acf_fc_layout'] === 'panel'){
-                         $timestamps = $this->set_start_duration_end_timestampts( $sep['start'], $sep['ende'] );
-                         $separators_slots .= '<div class="schedule-slot'.$this->viewClass.' schedule-separator-panel" start="'.$timestamps['start'].'" dur="'.$timestamps['duration'].'" ende="'.$timestamps['ende'].'" date="'.$separatorDate.'">';
-                              $separators_slots .= '<div class="schedule-container">';
-                              $separators_slots .= $this->slot_time( $sep['start'], $sep['ende'] );
-                              $separators_slots .= '<h5>'.$sep['bezeichnung'].'</h5>';
-                              if($sep['lead']){
-                                   $separators_slots .= '<p>'.$sep['lead'].'</p>';
-                              }
-                                   $separators_slots .= '<div class="schedule-slot-panel-speakers">';
-                                   if($sep['speaker'] > 0){
-                                        foreach( $sep['speaker'] as $panelSpeaker ){
-                                        
-                                             $separators_slots .= '<div class="schedule-slot-panel-speaker" data-speakerid="'. $panelSpeaker .'">';
-                                                  $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
-
-                                                  $name = ( get_field('speaker_vorname', $panelSpeaker) ) 
-                                                  ? 
-                                                       get_field('speaker_degree', $panelSpeaker) 
-                                                       . ' ' . get_field('speaker_vorname', $panelSpeaker) 
-                                                       . ' <b>' . get_field('speaker_nachname', $panelSpeaker) . '</b>'
-                                                  : 
-                                                       the_title();
-
-                                                  $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
-                                                       $separators_slots .= '<h5>'.$name.'</h5>';
-                                                       $speakerFirma = (get_field( 'speaker_firma', $panelSpeaker )) ? ', '.get_field( 'speaker_firma', $panelSpeaker ) : '';
-                                                            $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).$speakerFirma.'</h6>';
-                                                       $separators_slots .= '<div class="schedule-slot-info">';
-                                                            
+                                                       $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
+                                                            $separators_slots .= '<h5>'.$name.'</h5>';
+                                                            $speakerFirma = (get_field( 'speaker_firma', $panelSpeaker )) ? ', '.get_field( 'speaker_firma', $panelSpeaker ) : '';
+                                                                 $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).$speakerFirma.'</h6>';
+                                                            $separators_slots .= '<div class="schedule-slot-info">';
+                                                                 
+                                                            $separators_slots .= '</div>';
                                                        $separators_slots .= '</div>';
                                                   $separators_slots .= '</div>';
-                                             $separators_slots .= '</div>';
-                                        } 
-                                   }
+                                             } 
+                                        }
+                                        $separators_slots .= '</div>';
+                                   $separators_slots .= '<div class="schedule-slot-info">';       
                                    $separators_slots .= '</div>';
-                              $separators_slots .= '<div class="schedule-slot-info">';       
-                              $separators_slots .= '</div>';
 
+                                   $separators_slots .= '</div>';
                               $separators_slots .= '</div>';
-                         $separators_slots .= '</div>';
-                    }
+                         }
 
+                    if( $linkedSep ){ $separators_slots .= '</a>'; }
 
                }
           }
