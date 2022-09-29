@@ -281,7 +281,7 @@ class LineUp {
  
                     $timeDates = get_field( 'speaker_zeit', $speakerID );
 
-                    if( $timeDates  ){
+                    if( $timeDates ){
                          if(!$hideDate){
                               $this->speakerCard .= '<h6>'.$this->dateFormat->formating_Date_Language( $timeDates['datum'], 'date' );
                               
@@ -716,9 +716,7 @@ class LineUp {
                                    }
 
                               }
-
                          }                          
-
                     }
 
                     $this->speakerLightbox .= get_field( 'review_text', $speakerID );
