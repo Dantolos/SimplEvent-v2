@@ -26,7 +26,7 @@
             $header_html .= '</td>';
             $header_html .= '<td width="150" >';
             if(isset($_SESSION['general']['logo'])){
-                $header_html .= '<img style="height:80px;" src="'.$_SESSION['general']['logo'].'"/>';
+                //$header_html .= '<img style="height:80px;" src="'.$_SESSION['general']['logo'].'"/>';
             }
             $header_html .= '</td>';
             $header_html .= '</tr>';

@@ -40,7 +40,16 @@ class People{
             $this->output .= '<div class="se2-people-box">';
             $this->output .= '<div class="se2-people-portrait" style="background-image:url(' . esc_url( get_field('foto', $person->ID) ) . ')"></div>';
             $this->output .= '<div class="se2-people-content">';
-            $this->output .= '<h2>' . get_the_title($person->ID) . '</h2>';
+
+            $name = ( get_field('vorname', $speakerID) ) 
+                              ? 
+                                   get_field('degree', $speakerID) 
+                                   . ' ' . get_field('vorname', $speakerID) 
+                                   . ' <b>' . get_field('nachname', $speakerID) . '</b>'
+                              : 
+                                   the_title();
+
+            $this->output .= '<h2>' . $name . '</h2>';
             $firma = ( get_field('firma', $person->ID) ) ? ', ' . get_field('firma', $person->ID) : '';
             $this->output .= '<p>' . esc_attr( get_field('funktion', $person->ID) ) . $firma . '</p>';
 

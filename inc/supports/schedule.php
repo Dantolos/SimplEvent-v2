@@ -31,6 +31,7 @@ class se2_Schedule {
           $this->dateFormat = new Date_Format;
           
           $this->dateArray = array();
+
           //set Date-Menu to change programm date
           if( !get_field('side_programm', $pageID)){
                $this->dateArray = $this->dateFormat->date_range(get_option( 'facts_date' )['from'], get_option( 'facts_date' )['to'], "+1 day" );
@@ -99,6 +100,7 @@ class se2_Schedule {
                }
                $ScheduleGrid .= '</div>';
           }         
+
           $ScheduleGrid .= '</div>';
           return $ScheduleGrid;
      }
@@ -205,14 +207,11 @@ class se2_Schedule {
                     
                );
                $sessions = new WP_Query( $sessionsArgs ); 
-
-             
-
-               
+ 
                if(isset($sessionSlot['date'])){
                     $slotDate = strtotime( str_replace( '/', '-', $sessionSlot['date'] ) );
                     if( $slotDate !== $day ){
-                         continue; 
+                         continue;
                     }
                }
           
@@ -224,8 +223,7 @@ class se2_Schedule {
                          $sessions_slots .= $this->slot_time( $sessionSlot['start'], $sessionSlot['ende'] );
                          $sessions_slots .= '<h5>'.$sessionSlot['value'].'</h5>';
 
-                         //SESSIONS
-                         
+                         //SESSIONS 
                          $sessions_slots .= '<div class="schedule-sessions ">';
                          foreach($sessions->posts as $session){
 
@@ -274,7 +272,10 @@ class se2_Schedule {
 
                $separators = $separatorDay['programm_slots'];
                foreach( $separators as $sep ){
-                
+                    
+                    if( empty((string) $sep['start']) || empty((string) $sep['ende']) ){
+                         continue;
+                    }
 
                     // STANDARD LAYOUT
                     if($sep['acf_fc_layout'] === 'standard'){
@@ -354,7 +355,7 @@ class se2_Schedule {
                               }
                                    $separators_slots .= '<div class="schedule-slot-panel-speakers">';
                                    if($sep['speaker'] > 0){
-                                        foreach( $sep['speaker'] as $panelSpeaker ){
+                                        foreach((array) $sep['speaker'] as $panelSpeaker ){
                                         
                                              $separators_slots .= '<div class="schedule-slot-panel-speaker" data-speakerid="'. $panelSpeaker .'">';
                                                   $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
@@ -386,7 +387,7 @@ class se2_Schedule {
                          $separators_slots .= '</div>';
                     }
 
-
+                    
                }
           }
           return $separators_slots;

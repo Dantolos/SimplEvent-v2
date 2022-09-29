@@ -324,7 +324,7 @@ wp_head();
 
 
      <?php 
-     // ------CTA------
+     // CTA ------------------------------------------------------------------------------------------------
      $cta = new se2_CTA;
      if( get_option( 'se_cta_activ' ) === 'on' && get_option( 'se_cta' )){
           echo '<div class="cta-container">';
@@ -335,7 +335,7 @@ wp_head();
      }
          
 
-     // ------PAGELOADER------
+     // PAGELOADER ----------------------------------------------------------------------------------------
      if( get_option( 'page_loader' ) === 'on'){
           echo '<div id="page-loader"><img src="' . esc_url(get_option( 'event_icon_neg' )) . '"></div>';
      }
@@ -343,6 +343,7 @@ wp_head();
      ?>
 
 
+     
      <div id="master-container" class=" <?php echo $videoHeaderClass; ?>">
           <div id="content-container">
          

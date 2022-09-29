@@ -3,7 +3,7 @@ class se2_LB_Session {
      // *S* is an array of DOM elements that
      // element needs attribute: speakerid="**Wordpress Post-ID from Speaker**" 
      CALL_SESSION_LIGHTBOX(S) {
-
+ 
           try {
                for (let SESSION of S) {
                     SESSION.addEventListener('click', e => {
