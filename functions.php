@@ -1,8 +1,12 @@
 <?php
 
 function register_my_session() {
-    /* session_save_path(__DIR__."./temp");
- */
+
+    //just fpr local dev on xampp
+    if(get_site_url() === 'http://localhost:8074/SimplEvent_v2'){
+        session_save_path(__DIR__."./temp");
+    }
+ 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -151,6 +155,12 @@ function theme_add_scripts()
     if( null !== ICL_LANGUAGE_CODE ){
         $language =  ICL_LANGUAGE_CODE;
     }
+
+    $negIcon = '';
+    if( get_option( 'event_icon_neg' ) ){
+        $negIcon = file_get_contents( get_option( 'event_icon_neg' ) );
+    }
+
     $wnm_custom = array( 
         'templateUrl' => get_template_directory_uri(), 
         'lang' => $language,
@@ -158,7 +168,7 @@ function theme_add_scripts()
         'cookieAcc' =>  $cookieAccepted,
         'page' => $currpageVar,
         'sitename' => get_bloginfo('name'),
-        'icon' => file_get_contents( get_option( 'event_icon_neg' ) ),
+        'icon' =>  $negIcon,
         //'info' => $quickInfoAktiv
     );
     
