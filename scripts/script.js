@@ -261,8 +261,9 @@ if (searchParams.has("type")) {
                }
                LIGHTBOX.openLightbox('AX', callData);
                break;
+
           default:
-               console.warn('SE2: unknown type')
+               console.warn('unknown type')
                break;
      }
      console.log(searchParams.get('id'))
@@ -380,11 +381,4 @@ LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'
 jQuery(document).ajaxComplete(function () {
      //CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
      LB_SPEAKER.CALL_SPEAKER_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'))
-})
-
-LB_SESSION.CALL_SESSION_LIGHTBOX(document.querySelectorAll('.session-lb-trigger'))
-
-jQuery(document).ajaxComplete(function () {
-     //CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
-     LB_SESSION.CALL_SESSION_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'))
 })

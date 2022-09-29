@@ -27,10 +27,6 @@
         max-width:70%;
         max-height:70%;
     }
-
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 //------------------------------
@@ -41,68 +37,19 @@
     top:0;left:0;right:0;bottom:0;
     margin:auto;
     @include dropShadow;
-    @include scrollbars( );
 
     color: $dark;
     background-color: $light; 
     width: 75%;
     height:fit-content;
     max-height:60vh;
-    overflow-y: scroll;
+     overflow-y: scroll;
     padding:50px;
     p {color: $dark;}
     img {
         max-height:150px;
         max-width:40%;
         margin-bottom:5%;
-        margin-top:30px;
-    }
-
-    .partner-footer {
-       
-        display: flex;
-        justify-content:space-between;
-        align-items: flex-end;
-
-        margin-top:40px;
-        .partner-page-button {
-            background-color: $primary;
-            width: fit-content;
-            padding: 8px 25px;
-            color:white;
-            border-radius: 5px;
-            
-            &::before{
-                font-family: "dashicons";
-                content:'\f11d';
-                vertical-align: middle;
-                padding: 0 10px 0 0;
-                font-size: 20px;
-            }
-            &:hover {
-                background-color: $dark;
-                transform: scale(.95);
-            }
-        
-        }
-
-        .partner-socialmedia {
-            position: absolute;
-            top:5px;
-            right: 10px;
-
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            .partner-socialmedia-icon{
-                width:50px;
-                opacity: .4;
-                &:hover{
-                    transform: scale(1.2);
-                    opacity: 1;
-                }
-            }
-        }
     }
 
     @include breakpoint( 's' ){
@@ -111,10 +58,6 @@
         img {
             max-height:150px;
             max-width:80%;
-            margin-top:80px;
-        }
-        .partner-socialmedia-icon{
-            width:30px;
         }
     }
 }
