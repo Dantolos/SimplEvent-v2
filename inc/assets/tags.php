@@ -1,8 +1,9 @@
 <?php
 
+namespace se2\assets;
+
 class Tags {
      
-
      public function tag_cloud( $tags = array() ){
           $tagCloud = '';
           $tagCloud .= '<div class="se2-tag-cloud">';

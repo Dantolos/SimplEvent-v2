@@ -21,13 +21,16 @@ require_once('classes/award.class.php');
 require_once('classes/features/features-cta.class.php');
 
 //including supports
-require_once('supports/date.php');
+require_once('supports/date.php'); 
 require_once('supports/forms.php');
 require_once('supports/files.php');
 require_once('supports/social-media.php');
 
 require_once('assets/tags.php');
 require_once('assets/app-promotion.php');
+
+//components
+require_once(__DIR__.'/classes/components/speaker-lightbox.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -131,9 +134,9 @@ add_action('wp_ajax_speaker_lightbox', 'speaker_lightbox'); //nur für angemelde
 function speaker_lightbox() 
 { 
      $speakerID = $_POST['speakerid'];
-     $LineUp = new LineUp;
+    
      
-     wp_send_json( $LineUp->cast_speaker_lightbox( $speakerID ) ); 
+     wp_send_json( \se2\components\lightbox\speaker_lightbox( $speakerID ) ); 
      
      die();
 }
