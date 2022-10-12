@@ -129,6 +129,11 @@ class Mediacorner {
                if( count($realeses) > 0 ){
                     foreach( $realeses as $realese ){
  
+                         //if empty object
+                         if( !$realese['titel'] || !$realese['file'] ){
+                              continue;
+                         }
+
                          date_default_timezone_set("Europe/Zurich");
                          if( date( 'YmdHi', strtotime( str_replace( '/', '-',  $realese['public']) )) > date( 'YmdHi' ) ){
                               continue;

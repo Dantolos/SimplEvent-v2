@@ -38,7 +38,10 @@ class LineUp {
           $speakerQuery = new WP_Query( $speaker_args ); 
           $speakerQuery = $speakerQuery->posts;
 
-       
+          
+          // Speaker Order 
+          // Jeder Speaker kann einer von 5 Priorisierungsstufen zugeordnet werden, wobei Prio 1 als erstes aufgelistet wird
+          // In der Prio selbst, werden die Speaker alphabetisch nach Nachnamen sortiert. 
           $speakerSorted = array();
           function cmp($a, $b){
                return get_field('speaker_nachname', $a->ID) > get_field('speaker_nachname', $b->ID);

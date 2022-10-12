@@ -1,0 +1,25 @@
+#mapframe {
+    transform: none !important;
+    transition-duration: unset;
+    position: relative;
+    height:60vh;
+    width:100%;
+    background-color: rgb(230, 230, 230);
+    overflow: hidden;
+
+    #map-nav {
+        position: absolute;
+        touch-action: auto;
+        top:20px;
+        right:20px;
+        z-index: 25;
+    }
+
+    #map {
+       
+        position: absolute;
+        min-height:95%;
+        min-width:95%;
+        background-color: rgb(169, 197, 255);
+    }
+}
