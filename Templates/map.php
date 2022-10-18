@@ -8,7 +8,7 @@
 
 get_header();
 
-wp_enqueue_script( 'JS-map', get_template_directory_uri() . '/scripts/specifics/map.js', array('jquery'), '1.0.02', true );
+wp_enqueue_script( 'JS-map', get_template_directory_uri() . '/scripts/specifics/map.js', array('jquery'), '1.0.03', true );
 
 //CONTENT OUTPUT 
 the_content();

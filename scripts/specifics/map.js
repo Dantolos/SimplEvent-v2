@@ -48,6 +48,11 @@ var last = {
     z: current.z
 }
 
+var limit = {
+    x: element.offsetWidth / 100 * 80,
+    y: element.offsetHeight / 100 * 80,
+}
+
 function getRelativePosition(element, point, originalSize, scale) {
     var domCoords = getCoords(element);
 
@@ -180,10 +185,35 @@ hammertime.on('pinchend', function(e) {
     lastEvent = 'pinchend';
 })
 
+document.getElementById('reset').addEventListener('click', ()=> {
+    current.x = 0;
+    current.y = 0;
+    current.z = 1;
+    update()
+});
+
+document.getElementById('zoomout').addEventListener('click', ()=> {
+    if( current.z > .5 ){
+        current.z = current.z - .25;
+    }
+    update()
+});
+
+document.getElementById('zoomin').addEventListener('click', ()=> {
+    if( current.z < 2 ){
+        current.z = current.z + .25;
+    }
+    update()
+});
+
 function update() {
     current.height = originalSize.height * current.z;
     current.width = originalSize.width * current.z;
     element.style.trasition = '2';
-    //element.style.transform = "translate3d(" + current.x + "px, " + current.y + "px, 0) scale(" + current.z + ")";
+
+    if( current.x < -Math.abs( limit.x ) || current.x > limit.x ){  current.x = current.x > 0 ? limit.x : -Math.abs( limit.x ) }
+    if( current.y < -Math.abs( limit.y ) || current.y > limit.y ){  current.y = current.y > 0 ? limit.x : -Math.abs( limit.y ) }
+
     gsap.to(element, .2, { x:  current.x, y: current.y, scale: current.z })
 }
+

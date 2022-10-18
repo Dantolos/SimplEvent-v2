@@ -136,8 +136,8 @@
 
 function theme_add_files() 
 {
-     $scriptversion = '1.0.96'; 
-     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.62' );
+     $scriptversion = '1.0.97'; 
+     wp_enqueue_style( 'wp-style-css', get_template_directory_uri() . '/style.css', '', '1.1.63' );
      wp_enqueue_style( 'style-css', get_template_directory_uri() . '/style/build/style.css', '', $scriptversion );
      
      //3rd libraries
