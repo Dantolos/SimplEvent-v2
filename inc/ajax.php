@@ -29,8 +29,8 @@ require_once('supports/social-media.php');
 require_once('assets/tags.php');
 require_once('assets/app-promotion.php');
 
-//components
 require_once(__DIR__.'/classes/components/speaker-lightbox.php');
+require_once(__DIR__.'/classes/components/exhibitor-lightbox.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -153,6 +153,21 @@ function session_lightbox()
      $Sessions = new Sessions;
      
      wp_send_json( $Sessions->cast_session_lightbox( $sessionID ) ); 
+     
+     die();
+}
+
+/*-------------EXHIBITOR LIGHTBOX---------------*/
+//exhibitor-lightbox
+add_action('wp_ajax_nopriv_exhibitor_lightbox', 'exhibitor_lightbox');
+add_action('wp_ajax_exhibitor_lightbox', 'exhibitor_lightbox'); //nur für angemeldete (admins)
+
+function exhibitor_lightbox() 
+{ 
+     $pageID = $_POST['pageid'];
+     $exhibitorID = $_POST['exhibitorid'];
+
+     wp_send_json( \se2\components\lightbox\exhibitor_lightbox($pageID, $exhibitorID ) ); 
      
      die();
 }

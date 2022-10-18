@@ -1,4 +1,4 @@
-//s { loadOptions } = require("@babel/core");
+
 
 gsap.config({
      nullTargetWarn: false,
@@ -32,6 +32,7 @@ ANCHOR.goTO();
 let LB_SPEAKER = new se2_LB_Speaker();
 let LB_SESSION = new se2_LB_Session();
 let LB_CANDIDATE = new se2_LB_Candidate();
+
 
 //---------------------------------
 //HEADER
@@ -388,9 +389,3 @@ jQuery(document).ajaxComplete(function () {
      LB_SESSION.CALL_SESSION_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'))
 })
 
-LB_SESSION.CALL_SESSION_LIGHTBOX(document.querySelectorAll('.session-lb-trigger'))
-
-jQuery(document).ajaxComplete(function () {
-     //CALL_ANIMATION(document.querySelectorAll('.speaker-profile'))
-     LB_SESSION.CALL_SESSION_LIGHTBOX(document.querySelectorAll('.speaker-lb-trigger'))
-})

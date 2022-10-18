@@ -1,4 +1,4 @@
-
+let LB_EXHIBITOR = new se2_LB_Exhibitor();
 
 const mapFrame = document.getElementById('mapframe');
 const map = document.getElementById('map');
@@ -11,10 +11,12 @@ console.log(Exhibitors.children.length)
 for (let i = 0; i < Exhibitors.children.length; i++) {
     const Exhibitor = Exhibitors.children[i];
     Exhibitor.style.cursor = 'pointer'
-    Exhibitor.addEventListener('click', ()=>{
-        alert('aldskjfaöskdfj')
-    })   
+    Exhibitor.classList.add('exhibitors-lb-trigger')
+    Exhibitor.setAttribute('data-exhibitorid', Exhibitor.getAttribute('id'))
+    Exhibitor.setAttribute('data-pageid', mapFrame.dataset.pageid)
 }
+
+LB_EXHIBITOR.CALL_EXHIBITOR_LIGHTBOX(document.querySelectorAll('.exhibitors-lb-trigger'))
 
 var element = map;
 var hammertime = new Hammer(element, {});

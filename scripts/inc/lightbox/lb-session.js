@@ -31,7 +31,7 @@ class se2_LB_Session {
                     let newHeight = reviewVideo.offsetWidth / 16 * 9
                     reviewVideo.style.height = newHeight + 'px'
                } catch (error) {
-                    console.warn('LB SESSION: ', error)
+                    //console.warn('LB SESSION: ', error)
                }
 
 

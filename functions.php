@@ -125,7 +125,8 @@ function theme_add_scripts()
         array('socialshare-js', 'social-share.js' ),
         array('lightbox-speaker-js', 'lightbox/lb-speaker.js' ),
         array('lightbox-session-js', 'lightbox/lb-session.js' ),
-        array('lightbox-candidate-js', 'lightbox/lb-candidate.js' )
+        array('lightbox-candidate-js', 'lightbox/lb-candidate.js' ),
+        array('lightbox-exhibitor-js', 'lightbox/lb-exhibitor.js' )
     );
 
     if( get_option( 'se_header_mode_menu' ) == 'on' ){
@@ -139,7 +140,7 @@ function theme_add_scripts()
 
     foreach ($JsIncList as $JsInc) 
     {
-        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.37', true );
+        wp_enqueue_script( $JsInc[0], get_template_directory_uri() . '/scripts/inc/' . $JsInc[1], array('jquery'), '1.0.38', true );
     }
 
 
