@@ -20,10 +20,10 @@ class se2_Map {
         $mapOutput .= '<div id="mapframe" data-pageid="'.$this->pageID.'">';
 
             //ZOOM Buttons
-            $mapOutput .= '<div id="map-nav">';
+            /* $mapOutput .= '<div id="map-nav">';
                 $mapOutput .= '<button id="zoomout">-</button>';
                 $mapOutput .= '<button id="zoomin">+</button>';
-            $mapOutput .= '</div>'; 
+            $mapOutput .= '</div>';  */
 
             $mapOutput .= '<div id="map">';
             $mapOutput .= $this->mapSVGContent;

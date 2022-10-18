@@ -183,5 +183,7 @@ hammertime.on('pinchend', function(e) {
 function update() {
     current.height = originalSize.height * current.z;
     current.width = originalSize.width * current.z;
-    element.style.transform = "translate3d(" + current.x + "px, " + current.y + "px, 0) scale(" + current.z + ")";
+    element.style.trasition = '2';
+    //element.style.transform = "translate3d(" + current.x + "px, " + current.y + "px, 0) scale(" + current.z + ")";
+    gsap.to(element, .2, { x:  current.x, y: current.y, scale: current.z })
 }

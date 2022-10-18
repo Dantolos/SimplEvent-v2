@@ -1,13 +1,14 @@
 #mapframe {
     transform: none !important;
-    transition-duration: unset;
+    transition: unset;
     position: relative;
     height:60vh;
     width:100%;
- 
+    
     overflow: hidden;
 
     #map-nav {
+        
         position: absolute;
         touch-action: auto;
         top:20px;
@@ -17,11 +18,16 @@
 
     #map {
        
+        transition: unset;
         position: absolute;
         min-height:95%;
         min-width:95%;
 
     }
+    @include breakpoint('m') {
+        height:80vh;
+    }
+
 }
 
 .exhibitor-lb-container {
