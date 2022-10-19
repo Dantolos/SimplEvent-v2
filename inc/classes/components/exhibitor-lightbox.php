@@ -38,31 +38,39 @@ function exhibitor_lightbox($pageID, $exhibitorBoothID){
                                 $facts = get_field('Key data',$exhibitorID );
 
                                 //Founder Year
-                                $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
-                                $exhibitorLightbox .= '<h5>'.__('Founder Year', 'SimplEvent').'</h5>';
-                                $exhibitorLightbox .= '<h5>'.$facts['Founding year'].'</h5>';
-                                $exhibitorLightbox .= '</div>';
-                                
-                                //Lead
-                                $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
-                                $exhibitorLightbox .= '<h5>'.__('Lead', 'SimplEvent').'</h5>';
-                                foreach( $facts['lead'] as $leader ){
-                                    $exhibitorLightbox .= '<h5 style="">'.$leader['name'] .'</h5>';
-                                    $exhibitorLightbox .= '<h5 style="line-height: .5em !important; margin-bottom:15px; font-weight:200 !important;">'.$leader['position'].'</h5>';
+                                if( !$facts['Founding year'] ){
+                                    $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
+                                    $exhibitorLightbox .= '<h5>'.__('Founder Year', 'SimplEvent').'</h5>';
+                                    $exhibitorLightbox .= '<h5>'.$facts['Founding year'].'</h5>';
+                                    $exhibitorLightbox .= '</div>';
                                 }
-                                $exhibitorLightbox .= '</div>';
+
+                                //Lead
+                                if( count($facts['lead']) > 0 ){
+                                    $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
+                                    $exhibitorLightbox .= '<h5>'.__('Lead', 'SimplEvent').'</h5>';
+                                    foreach( $facts['lead'] as $leader ){
+                                        $exhibitorLightbox .= '<h5 style="">'.$leader['name'] .'</h5>';
+                                        $exhibitorLightbox .= '<h5 style="line-height: .5em !important; margin-bottom:15px; font-weight:200 !important;">'.$leader['position'].'</h5>';
+                                    }
+                                    $exhibitorLightbox .= '</div>';
+                                }
 
                                 //Employee
-                                $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
-                                $exhibitorLightbox .= '<h5>'.__('Employee', 'SimplEvent').'</h5>';
-                                $exhibitorLightbox .= '<h5>'.$facts['employee'].'</h5>';
-                                $exhibitorLightbox .= '</div>';
+                                if( !$facts['employee'] ){
+                                    $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
+                                    $exhibitorLightbox .= '<h5>'.__('Employee', 'SimplEvent').'</h5>';
+                                    $exhibitorLightbox .= '<h5>'.$facts['employee'].'</h5>';
+                                    $exhibitorLightbox .= '</div>';
+                                }
 
                                 //Website
-                                $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
-                                $exhibitorLightbox .= '<h5>'.__('Mehr', 'SimplEvent').'</h5>';
-                                $exhibitorLightbox .= '<a href="'.$facts['website'].'"><div class="exhibitor-lb-keyfact-button">'.__('Website', 'SimplEvent').'</div></a>';
-                                $exhibitorLightbox .= '</div>';
+                                if( !$facts['employee'] ){
+                                    $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
+                                    $exhibitorLightbox .= '<h5>'.__('Mehr', 'SimplEvent').'</h5>';
+                                    $exhibitorLightbox .= '<a href="'.$facts['website'].'"><div class="exhibitor-lb-keyfact-button">'.__('Website', 'SimplEvent').'</div></a>';
+                                    $exhibitorLightbox .= '</div>';
+                                }
 
                             $exhibitorLightbox .= '</div>';
                         $exhibitorLightbox .= '</div>';

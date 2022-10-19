@@ -7,7 +7,7 @@ get_header();
 the_content();
 
 $People = new People;
-$Groups = get_field('gruppe');
+$Groups = get_field('gruppe', get_the_ID());
 
 foreach( $Groups as $Group){
      echo '<h2 class="se2-people-group-title">'.get_term( $Group )->name.'</h2>';
