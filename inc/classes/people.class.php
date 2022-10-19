@@ -41,11 +41,11 @@ class People{
             $this->output .= '<div class="se2-people-portrait" style="background-image:url(' . esc_url( get_field('foto', $person->ID) ) . ')"></div>';
             $this->output .= '<div class="se2-people-content">';
             
-            $name = ( get_field('vorname', $speakerID) ) 
+            $name = ( get_field('vorname',  $person->ID) ) 
             ? 
-                 get_field('degree', $speakerID) 
-                 . ' ' . get_field('vorname', $speakerID) 
-                 . ' <b>' . get_field('nachname', $speakerID) . '</b>'
+                 get_field('degree',  $person->ID) 
+                 . ' ' . get_field('vorname',  $person->ID) 
+                 . ' <b>' . get_field('nachname',  $person->ID) . '</b>'
             : 
                  the_title();
             $this->output .= '<h2>' . $name . '</h2>';

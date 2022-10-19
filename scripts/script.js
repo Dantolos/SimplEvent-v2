@@ -141,13 +141,12 @@ const PEOPLES = document.getElementsByClassName('se2-people-box');
 for (let PERSON of PEOPLES) {
 
      PERSON.addEventListener('mouseover', (e) => {
-
-          gsap.to(PERSON.querySelector('.se2-people-portrait'), { duration: .1, y: '-10px', x: '10px', scale: 1.1 });
-          gsap.to(PERSON.querySelector('.se2-people-content'), { duration: .1, y: '-10px', x: '-10px' });
+          //gsap.to(PERSON.querySelector('.se2-people-portrait'), { duration: .1, y: '-10px', x: '10px', scale: 1.1 });
+          //gsap.to(PERSON.querySelector('.se2-people-content'), { duration: .1, y: '-10px', x: '-10px' });
      });
      PERSON.addEventListener('mouseleave', () => {
-          gsap.to(PERSON.querySelector('.se2-people-portrait'), { duration: .1, y: 0, x: 0, scale: 1 });
-          gsap.to(PERSON.querySelector('.se2-people-content'), { duration: .1, y: 0, x: 0 });
+          //gsap.to(PERSON.querySelector('.se2-people-portrait'), { duration: .1, y: 0, x: 0, scale: 1 });
+          //gsap.to(PERSON.querySelector('.se2-people-content'), { duration: .1, y: 0, x: 0 });
      });
 }
 
