@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace se2\components;
 
 function Speaker_ListElement( $speakerID, $showCV = false, $hideDate = false, $showKategorie = false ){

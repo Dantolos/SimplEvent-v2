@@ -4,16 +4,12 @@ require_once(__DIR__.'/../supports/language.php');
 class Sessions {
 
      public $sessionLightbox;
-     public $speakerFunctions;
      public $dateFormat;
      public $langFormat;
      public $lineup;
 
      public function __construct() {
-          $this->dateFormat = new \se2\support\Date_Format();
-          
-          $this->speakerFunctions = new LineUp;
-          
+          $this->dateFormat = new \se2\support\Date_Format();         
      }
 
      public function cast_session_grid($pageID){
@@ -195,7 +191,7 @@ class Sessions {
 
                               foreach(get_field('referenten', $sessionID) as $sessionSpeaker){
                                    if($sessionSpeaker['type'] === 'Speaker'){
-                                        $this->sessionLightbox .= $this->speakerFunctions->cast_speaker_list($sessionSpeaker['speaker'], true, true);
+                                        $this->sessionLightbox .= \se2\components\Speaker_ListElement($sessionSpeaker['speaker'], true, true);
                                    }
                               }
                               $this->sessionLightbox .= '</div>';
