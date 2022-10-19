@@ -558,6 +558,11 @@
      display: flex;
      flex-direction: row;
      padding-top: 20px;
+     justify-content: center;
+
+     @include breakpoint('xl') {
+          justify-content: unset;
+     }
 
      .schedule-separator-standard,
      .schedule-separator-placeholder,

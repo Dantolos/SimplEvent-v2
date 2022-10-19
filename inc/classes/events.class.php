@@ -3,12 +3,12 @@ class Events extends Posts {
 
      public $output;
      public $eventData;
-     public $dateFormat;
+
 
      
      //POST WALL
      public function __construct(){
-          $this->dateFormat = new Date_Format;
+    
           $this->speakerFunctions = new LineUp;
      }
 
@@ -40,8 +40,8 @@ class Events extends Posts {
                $this->output .= '<p class="secondary-txt">'; 
               
                if( $date || $time ){
-                    $date = ($date) ?  $this->dateFormat->formating_Date_Language( get_field('eckdaten', $event->ID )['date'], 'date' ) : '';
-                    $time = ($time) ? ' | ' . $this->dateFormat->formating_Date_Language( get_field('eckdaten', $event->ID )['time'], 'time' ) : '';
+                    $date = ($date) ?  \se2\support\formating_Date_Language( get_field('eckdaten', $event->ID )['date'], 'date' ) : '';
+                    $time = ($time) ? ' | ' .  \se2\support\formating_Date_Language( get_field('eckdaten', $event->ID )['time'], 'time' ) : '';
                     $this->output .= '<p class="secondary-txt">' . esc_attr( $date ) . esc_attr( $time ) . '</p>';
 
                }
@@ -107,7 +107,7 @@ class Events extends Posts {
                          $this->output .= '<tr>';
                          $this->output .= '<td>' . __( 'Datum', 'SimplEvent' ) . '</td>';
                          $this->output .= '<td>';
-                         $this->output .=  $this->dateFormat->formating_Date_Language( $facts['date'], 'date' ) ; 
+                         $this->output .=   \se2\support\formating_Date_Language( $facts['date'], 'date' ) ; 
                          $this->output .= '</td>';
                          $this->output .= '</tr>';
                     }
@@ -115,7 +115,7 @@ class Events extends Posts {
                          $this->output .= '<tr>';
                          $this->output .= '<td>' . __( 'Zeit', 'SimplEvent' ) . '</td>';
                          $this->output .= '<td>';
-                         $this->output .=  $this->dateFormat->formating_Date_Language( $facts['time'], 'time' ) ; 
+                         $this->output .=   \se2\support\formating_Date_Language( $facts['time'], 'time' ) ; 
                          $this->output .= '</td>';
                          $this->output .= '</tr>';
                     }
