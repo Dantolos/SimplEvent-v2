@@ -28,8 +28,8 @@ class se2_Schedule {
 
           $this->year = get_field('jahr', $pageID)->slug;
 
-          $this->dateFormat = new Date_Format;
-          
+          $this->dateFormat = new \se2\support\Date_Format;
+           
           $this->dateArray = array();
 
           //set Date-Menu to change programm date
