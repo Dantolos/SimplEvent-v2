@@ -5,21 +5,32 @@ const map = document.getElementById('map');
 const mapSVG = map.querySelector('svg');
 const Exhibitors = document.querySelector('#_booth');
 
+const tooltipDOM = document.getElementById('booth-tooltip');
 
-console.log(Exhibitors.children.length)
 
 for (let i = 0; i < Exhibitors.children.length; i++) {
     const Exhibitor = Exhibitors.children[i];
-    Exhibitor.style.cursor = 'pointer'
     Exhibitor.classList.add('exhibitors-lb-trigger')
     Exhibitor.setAttribute('data-exhibitorid', Exhibitor.getAttribute('id'))
     Exhibitor.setAttribute('data-pageid', mapFrame.dataset.pageid)
+
+    Exhibitor.addEventListener('mousemove', ()=>{
+        tooltipDOM.classList.remove('hide-tooltip')
+        boothTooltip( Exhibitor.getAttribute('id') );
+    })
+
+    Exhibitor.addEventListener('mouseleave', ()=>{
+        tooltipDOM.classList.add('hide-tooltip')
+    })
 }
 
 LB_EXHIBITOR.CALL_EXHIBITOR_LIGHTBOX(document.querySelectorAll('.exhibitors-lb-trigger'))
 
+
 var element = map;
 var hammertime = new Hammer(element, {});
+
+gsap.to(element, .2, { x:  0, y: 0, scale: 1 })
 
 hammertime.get('pinch').set({ enable: true });
 hammertime.get('pan').set({ threshold: 0 });
@@ -27,6 +38,8 @@ hammertime.get('pan').set({ threshold: 0 });
 var fixHammerjsDeltaIssue = undefined;
 var pinchStart = { x: undefined, y: undefined }
 var lastEvent = undefined;
+
+
 
 var originalSize = {
     width: 200,
@@ -50,7 +63,7 @@ var last = {
 
 var limit = {
     x: element.offsetWidth / 100 * 80,
-    y: element.offsetHeight / 100 * 80,
+    y: element.offsetHeight / 100 * 70,
 }
 
 function getRelativePosition(element, point, originalSize, scale) {
@@ -211,9 +224,98 @@ function update() {
     current.width = originalSize.width * current.z;
     element.style.trasition = '2';
 
-    if( current.x < -Math.abs( limit.x ) || current.x > limit.x ){  current.x = current.x > 0 ? limit.x : -Math.abs( limit.x ) }
-    if( current.y < -Math.abs( limit.y ) || current.y > limit.y ){  current.y = current.y > 0 ? limit.x : -Math.abs( limit.y ) }
+    zoomLimit =  current.z >= 1 ? current.z : current.z + 1
+    var correctur = {
+        x: limit.x / zoomLimit,
+        y: limit.y / zoomLimit
+    }
+
+    if( current.x < -Math.abs( limit.x ) || current.x > limit.x ){  current.x = current.x > 0 ? correctur.x : -Math.abs( correctur.x ) }
+    if( current.y < -Math.abs( limit.y ) || current.y > limit.y ){  current.y = current.y > 0 ? correctur.y: -Math.abs( correctur.y ) }
 
     gsap.to(element, .2, { x:  current.x, y: current.y, scale: current.z })
+
+    
 }
 
+
+
+//List 
+var listOpen = false;
+
+const ExhibitorListElements = document.createElement('div');
+for (let i = 0; i < Exhibitors.children.length; i++) {
+    if(listData[i]){
+        const ExhibitorElement = Exhibitors.children[i];
+        const ExhibitorListDOM = document.createElement('div');
+
+        let label = listData[i]['label'] ? listData[i]['label'] : listData[i]['name']
+        ExhibitorListDOM.innerHTML = '<span>'+(i+1)+'</span><h5>'+label+'</h5>';
+        ExhibitorListDOM.classList.add('exhibitors-lb-trigger', 'exhibitor-list-element')
+        ExhibitorListDOM.setAttribute('data-exhibitorid', (i+1))
+        ExhibitorListDOM.setAttribute('data-pageid', mapFrame.dataset.pageid)
+
+        let BoothSearch = (i+1) < 10 ? '_0'+(i+1) : '_'+(i+1);
+        
+        let aliasBooth = document.querySelector('[data-exhibitorid="'+BoothSearch+'"]');
+        ExhibitorListDOM.addEventListener('mouseenter', ()=> {     
+            aliasBooth.classList.add( 'highlighted-booth' )
+        })
+        ExhibitorListDOM.addEventListener('mouseleave', ()=> {
+            aliasBooth.classList.remove( 'highlighted-booth' )
+        })
+        
+        ExhibitorListElements.appendChild(ExhibitorListDOM)
+    }
+}
+
+document.getElementById('list').addEventListener('click', (e) => {
+    listOpen?closeList(e.target):openList(e.target);
+});
+
+function openList( buttonElement ){
+    const ExhibitorList = document.createElement('div');
+
+    buttonElement.classList.add('map-active-button')
+
+    ExhibitorList.classList.add('exhibitor-list')
+    ExhibitorList.appendChild(ExhibitorListElements)
+    mapFrame.appendChild(ExhibitorList);
+
+    LB_EXHIBITOR.CALL_EXHIBITOR_LIGHTBOX(document.querySelectorAll('.exhibitors-lb-trigger'))
+    listOpen = true;
+}
+
+function closeList( buttonElement ){
+    listOpen = false;
+
+    buttonElement.classList.remove('map-active-button')
+    
+    let ListDOM = document.querySelectorAll('.exhibitor-list');
+
+    for( let ListElement of ListDOM ){
+        ListElement.remove()
+    }
+}
+
+var mousePosition = {
+    x : 0,
+    y : 0
+}
+
+function mouseTracking(event){
+    mousePosition = {
+        x : ( event.clientX + 10),
+        y : (event.offsetY + 10)
+    }
+}
+
+function boothTooltip( rawID ){
+    let boothID = parseInt( rawID.replace('_', '') ) - 1
+    
+    gsap.to(tooltipDOM, .2, { top: mousePosition.y, left: mousePosition.x })
+    let boothLogo = tooltipDOM.querySelector('img')
+
+    boothLogo.src = listData[boothID]['logo']
+    tooltipDOM.querySelector('h5').innerHTML = listData[boothID]['name']
+}
