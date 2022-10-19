@@ -18,7 +18,7 @@ function speaker_lightbox($speakerID){
     : 
         get_the_title( $speakerID );
 
-    $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
+    $speakerFirma = ( get_field( 'speaker_firma', $speakerID ) ) ? ', ' . get_field( 'speaker_firma', $speakerID ) : '';
 
     $speakerLightbox = '<div class="speaker-lb-container">';
  
@@ -76,7 +76,7 @@ function speaker_lightbox($speakerID){
                    if(is_array(get_field('speaker_social_media', $speakerID)['social_media'])){
                         $speakerLightbox .= '<div class="speaker_socialmedia">';
                    
-                        $socialMEdias = get_field('speaker_social_media', $speakerID)['social_media'];
+                        $socialMEdias = get_field( 'speaker_social_media', $speakerID )['social_media'];
                         foreach( $socialMEdias  as $key => $smIcon ){
                              $speakerLightbox .= '<div class="speaker_socialmedia-icon">'.$socialMedia->cast_icon( $smIcon['acf_fc_layout'], $smIcon[$smIcon['acf_fc_layout']] ).'</div>';
                         }
@@ -88,12 +88,12 @@ function speaker_lightbox($speakerID){
                     
               //CONTENT
               $speakerLightbox .= '<div class="speaker-lb-content">';
-              //FOTO
-              $speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';    
-              $speakerLightbox .= '</div>';
+                    //FOTO
+                    $speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');">';    
+                    $speakerLightbox .= '</div>';
 
-                   //SPEAKER
-                   $speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
+                    //SPEAKER
+                    $speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
 
                         $speakerLightbox .= '<div class="se2-tag-element">' . \se2\support\LANGUAGE\formating_Language( get_field('speaker_sprache', $speakerID) ) . '</div>'; //------------------------------------------
                    
