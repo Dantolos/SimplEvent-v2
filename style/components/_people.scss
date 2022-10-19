@@ -4,17 +4,25 @@
 }
 
 .se2-people-wall {
-    margin-top: 80px;
+    width: 95vw;
+    max-width: 1400px;
+    margin: 80px auto;
     gap: 80px 20px ;
+    position: absolute;
+    left:0;
+    right:0;
+  
     @include wallContainerFlex;
 
     .se2-people-box {
         width: 95%;
-        max-width: 400px;
+        max-width: 350px;
         position: relative;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         gap: 20px;
         border: 2px solid $light-shade;
         border-radius: 10px;
@@ -53,7 +61,7 @@
 
             .se2-people-branche {
                 margin-top: 2em;
-                color: $primaryText;
+                color: $primary;
                 text-transform: uppercase;
 
                 span:hover {
