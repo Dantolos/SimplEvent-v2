@@ -1,12 +1,16 @@
 <?php 
 class Partner {
 
-    public $output;
-    public $button;
-    public $lbTheme;
+     public $output;
+     public $button;
+     public $lbTheme;
 
-    public function call_Partner_in_Categorie( $catID, $catTitle = false, $formatet = true )
-    {
+     public function __construct() {
+          $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'dark_mode_picker' )[1] ) );
+     }
+
+     public function call_Partner_in_Categorie( $catID, $catTitle = false, $formatet = true )
+     {
           $partner_args = array(
                'post_type' => 'partners', 'orderby' => 'title', 'order' => 'ASC', 'tax_query' => array(
                     array(
@@ -64,12 +68,31 @@ class Partner {
     }
 
     public function call_Partner_Infos( $partnerID ) {
-        $this->output = '<div class="partner-info" pid="' . $partnerID . '" >';
-        $this->output .= '<img src="'. get_field('partner-logo', $partnerID ) .'" alt="' . the_title($partnerID) . '">';              
-        $this->output .= '<h3>' . the_title($partnerID) . '</h3>';
-        $this->output .= '<p>' . get_field('partner-text', $partnerID ) . '</p>';
-        $this->output .= '<a class="secondary-txt" href="' . get_field( 'partner-link', $partnerID ) . '" target="_blank">' . __( 'Webseite', 'SimplEvent' ) . '</a>';
-        $this->output .= '</div>';
-        return $this->output;
-    }
+          $this->output = '<div class="partner-info" pid="' . $partnerID . '" >';
+          $this->output .= '<img src="'. get_field('partner-logo', $partnerID ) .'" alt="' . the_title($partnerID) . '">';              
+          $this->output .= '<h3>' . the_title($partnerID) . '</h3>';
+          $this->output .= '<p>' . get_field('partner-text', $partnerID ) . '</p>';
+
+          //FOOTER
+          $this->output .= '<div class="partner-footer">';
+          //WEBSITE BUTTON
+          $this->output .= '<a href="' . get_field( 'partner-link', $partnerID ) . '" target="_blank"><div class="partner-page-button">' . __( 'Webseite', 'SimplEvent' ) . '</div></a>';
+          
+          //SOCIAL LINKS
+          if(is_array(get_field('social_media', $partnerID)['social_media'])){
+               $this->output .= '<div class="partner-socialmedia">';
+          
+               $socialMEdias = get_field('social_media', $partnerID)['social_media'];
+               foreach( $socialMEdias  as $key => $smIcon ){
+                    $this->output .= '<div class="partner-socialmedia-icon">'.$this->socialMedia->cast_icon( $smIcon['acf_fc_layout'], $smIcon[$smIcon['acf_fc_layout']] ).'</div>';
+               }
+               $this->output .= '</div>';
+          } 
+        
+         
+          $this->output .= '</div>';
+
+          $this->output .= '</div>';
+          return $this->output;
+     }
 }

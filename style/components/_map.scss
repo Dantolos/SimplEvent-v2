@@ -1,0 +1,336 @@
+#mapframe {
+    transform: none !important;
+    transition: unset;
+    position: relative;
+    height:80vh;
+    width:100%;
+    background-color: $light-shade;
+    overflow: hidden;
+    #map-nav {
+        position:absolute;
+        bottom:30px;
+        touch-action: auto; 
+        width: fit-content;
+        margin:auto;
+        right:0;
+        left:0;
+        z-index: 5;
+ 
+        button {
+            @include dropShadow;
+            height: 36px;
+            width: 36px;
+            border-radius: 50%;
+            margin: 0 10px;
+
+            background-color: $light;
+
+            &::before{
+                font-family: "dashicons";
+                font-size: 1.4em;
+                color: $dark;
+                display: inline-block;
+                vertical-align: middle;
+                padding: 0;
+            }
+            
+            &:hover {
+                transform: scale(1.1);
+                &::before{
+                    color: $primary;
+                }
+            }
+            
+        }
+        #reset { &::before{ content: "\f531"; } }
+        #zoomout { &::before{ content: "\f460"; } }
+        #zoomin { &::before{ content: "\f543"; } }
+        #list { &::before{ content: "\f203"; } }
+        .map-active-button {
+            &::before{ content: "\f335" !important; }
+        }
+    }
+
+    #map {
+       
+        transition: unset;
+        position: absolute;
+        min-height:95%;
+        min-width:95%;
+
+        svg {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+
+            .exhibitors-lb-trigger {
+                &:hover {
+                    cursor: pointer;
+                    filter: brightness(1.2);
+                    stroke: 2px solid white;
+                    @include dropShadow;
+                }
+            }
+        }
+    }
+
+    @include breakpoint('m') {
+        height:80vh;
+    }
+
+}
+
+.exhibitor-lb-container {
+    position: fixed;
+     top: 0;
+     left: 0;
+     width: 87vw;
+     height: 100vh;
+     background-color: var(--secondColor);
+
+     .exhibitor-lb-container {
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        
+
+        .exhibitor-lb-moodimage {
+            width: 100%;
+            height:15vh;
+            @include imageSettings;
+            z-index: 10;
+        }
+
+        .exhibitor-lb-content {
+            width:100%;
+            height: 85vh;
+            padding-top: 120px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            overflow-y: scroll;
+            @include scrollbars;
+
+            .exhibitor-lb-product{
+                display: flex;
+                gap: 20px;
+                width: 95%;
+                max-width: 950px;
+                margin-bottom: 80px;
+                
+                .exhibitor-lb-product-image {
+                    width: 50%;
+                    height: 300px;
+                
+                    img {
+                        margin-left: -5vw;
+                        max-height:100%;
+                        max-width:100%;
+                    }
+                }
+
+                .exhibitor-lb-product-description {
+                    width: 66%;
+                }
+
+                @include breakpoint('l') {
+                    display: flex;
+                    flex-wrap: wrap;
+                    .exhibitor-lb-product-image { 
+                        width: 100%;
+
+                        img {
+                            margin-left: 0 !important;
+                            max-height: 100%;
+                            max-width: 100%;
+                        }
+                    }
+                    .exhibitor-lb-product-description { 
+                        width: 100%; 
+                        
+                    }
+                }
+
+            }
+
+            .exhibitor-lb-company {
+                padding: 120px 0;
+                position: relative;
+                width:100%;
+                background-color: $light-shade;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                .exhibitor-lb-company-logo {
+                    position: absolute;
+                    top: -50px;
+                    right: 20%;
+                    background-color: $light;
+                    border-radius: 50%;
+                    height: 150px;
+                    width: 150px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    @include dropShadow;
+                    img {
+                        max-width:70%;
+                        max-height: 70%;
+                    }
+                }
+
+                .exhibitor-lb-company-description{
+                    width: 95%;
+                    max-width: 950px;
+                }
+
+                .exhibitor-lb-keyfacts {
+                    width: 100%;
+                    display:flex;
+                    flex-wrap: wrap;
+                    width: 95%;
+                    max-width: 950px;
+                    margin-top: 60px;
+                    justify-content: space-between;
+                    .exhibitor-lb-keyfact-cell {
+                        width: 20%;
+                        min-width: 200px;
+                        h5 {
+                            margin: 10px 0;
+
+                            &:first-of-type {
+                                font-weight: 200 !important;
+                                opacity: .5;
+                            }
+                        }
+
+                        .exhibitor-lb-keyfact-button {
+                            padding: 5px 20px;
+                            background-color: $primary;
+                            color: white;
+                            width: fit-content;
+                            border-radius: 5px;
+
+                            &:hover {
+                                filter: brightness(.8);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+     }
+
+     .exhibitor-lb-empty{
+        width: 100%;
+        height: 100vh;
+        padding: 10vh 3vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h3 {
+            background-color: $light-shade;
+            padding: 30px 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+     }
+}
+
+// Exhibitor List
+.exhibitor-list {
+    width:20vw;
+    min-width: 250px;
+    height: 80%;
+    background-color:white;
+    z-index: 20;
+    position: absolute;
+    top:0;
+    left:20px;
+    bottom:0;
+    margin:auto;
+    border-radius: 8px;
+    @include dropShadow;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    @include scrollbars;
+    
+
+    .exhibitor-list-element {
+        display: flex;
+        gap: 15px;
+        padding: 15px;
+        border-bottom: 2px solid $light-shade;
+        background-color: white;
+        z-index: 30;
+        cursor: pointer;
+        span, h5 {
+            margin:0 !important;
+        }
+        span {
+            background-color: $light-shade;
+            width:20px;
+            height:20px;
+            border-radius: 50%;
+            text-align:center;
+        }
+        &:hover {
+            @include dropShadow;
+            transform: scaleX(1.025);
+        }
+    }
+}
+
+.highlighted-booth {
+    filter: brightness(2);
+    @include dropShadow;
+}
+
+//Tooltip
+#booth-tooltip {
+    position: absolute;
+    z-index: 29;
+    width: fit-content;
+    height: 50px;
+    border-radius: 8px;
+    background-color:white;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+    @include dropShadow;
+
+
+    .booth-tooltip-logo {
+        margin-left: -40px;
+
+        background-color: $light;
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include dropShadow;
+        img {
+            max-width:75%;
+            max-height: 75%;
+        }
+    }
+    h5 { margin:0 !important; }
+
+    @include breakpoint('s') {
+        visibility: hidden; opacity: 0;
+    }
+}
+
+.hide-tooltip { visibility: hidden; opacity: 0; }

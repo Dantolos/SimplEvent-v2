@@ -1,5 +1,7 @@
 <?php
 
+namespace se2\support;
+
 class Date_Format {
      public function formating_Date_Language( $value, $type ){
 

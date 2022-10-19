@@ -29,7 +29,7 @@ $event = 'main';
 if(get_field( 'visibility', get_the_ID() )['event']) {
      $event = array();
      foreach(get_field( 'visibility', get_the_ID() )['event'] as $selevent){
-          $event[$selevent['value']] = $selevent['label'];
+          $event[$selevent['value']] = $selevent['value'];
      }    
 }
 

@@ -10,7 +10,7 @@ class Sessions {
      public $lineup;
 
      public function __construct() {
-          $this->dateFormat = new Date_Format;
+          $this->dateFormat = new \se2\support\Date_Format();
           
           $this->speakerFunctions = new LineUp;
           

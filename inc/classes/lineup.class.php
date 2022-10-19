@@ -1,8 +1,12 @@
 <?php
 require_once(__DIR__.'/../supports/language.php');
 
-class LineUp {
+//COMPONENTS
+require_once(__DIR__.'/components/speaker-card.php');
+require_once(__DIR__.'/components/speaker-listelement.php');
+require_once(__DIR__.'/components/speaker-lightbox.php');
 
+class LineUp {
 
      public $output = '';
      public $speakerCard, $speakerLightbox, $speakerCardBlock;
@@ -15,161 +19,109 @@ class LineUp {
      public $MediaCorner;
      public $speakerCloud;
      
-
      public function __construct() {
           $this->forms = new se2_Forms;
-          $this->dateFormat = new Date_Format;
+          $this->dateFormat = new \se2\support\Date_Format;
           $this->files = new se2_Files;
-          $this->tags = new Tags;
+          $this->tags = new \se2\assets\Tags;
           $this->socialMedia = new se2_SocialMedia( esc_attr( get_option( 'dark_mode_picker' )[1] ) );
           $this->MediaCorner = new Mediacorner();
      }
 
-
-     public function call_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = '' ) {
+     public function query_speaker_data( $cat = 'all', $order = false, $year = 'all', $event = '' ){
           $speaker_args = array(
                'post_status' => array( 'publish' ),
                'post_type'   => 'speakers', 
                'posts_per_page' => -1
 
           );
+          $speakerQuery = new WP_Query( $speaker_args ); 
+          $speakerQuery = $speakerQuery->posts;
+
           
-          $speakerData = new WP_Query( $speaker_args ); 
-          $this->speakerIDs = array();
-          foreach( $speakerData->posts as $speaker ){
-              
-               
-
-               if( $cat != 'all' ){
-                    $isInCat = false;
-                    if( !is_array($cat) ){
-                         if( !in_array( $cat, get_field('speaker_kategorie', $speaker->ID) ) ){
-                           
-                              continue;
-                         } else {
-                              
-                              $isInCat = true;
-                         }
-                    } else {                  
-                         foreach( $cat as $c ){
-                              if( in_array( $c, get_field('speaker_kategorie', $speaker->ID) ) ){
-                                   $isInCat = true;
-                              }
-                         }
-                         if( !$isInCat ){ continue; }
-                    }
-               }
-               
-               
-               if($event != ''){
-                    $isInEvent = false;
-                    if( !is_array($event)  ){
-                         if( is_array(get_field('event', $speaker->ID))){
-                              
-                              foreach( get_field('event', $speaker->ID) as $sE ){    
-                                   if( strval($event) === strval($sE['value']) ){
-                                        $isInEvent = true;
-                                   } else {
-                                        continue;
-                                   }
-                              }
-                         } else {
-                              continue;
-                         }
-                         if( !$isInEvent ){ continue; }
-                         /* foreach( get_field('event', $speaker->ID) as $sE2 ){
-                              if( strval($event) === strval(get_field('event', $speaker->ID)['value']) ){
-                                   $isInEvent = true;
-                              }
-                         } */
-                         
-                    } else {              
-                            
-                         foreach( $event as $eValue => $e ){     
-                              if( is_array(get_field('event', $speaker->ID))){
-                                   foreach( get_field('event', $speaker->ID) as $sE ){    
-                                        if( strval($eValue) === strval($sE['value']) ){
-                                               
-                                             $isInEvent = true;
-                                        }
-                                   }
-                              }
-                         }
-                         
-                         if( !$isInEvent ){ continue; }
-                    }
-                    
-               }
-               
-               
-
-               $speakeryears = wp_get_post_terms( $speaker->ID, 'jahr' );
-               if($year != 'all'){
-                    $isInYear = false;
-                    
-                    foreach ( $speakeryears as $speakeryear ) {        
-                        
-                               
-                         if( !is_array($year) && $speakeryear->term_id == $year) { 
-                              
-                              $isInYear = true;      
-                              
-                         } elseif ( is_array($year) ) {         
-                              
-                              foreach( $year as $y ){
-                                   if( intval($y) === $speakeryear->term_id ){
-                                        $isInYear = true;
-                                   }
-                              }
-                         } else {
-                              continue;
-                         }
-                    }
-                    if( !$isInYear ){ continue; }
-               }
-             
-               
-
-               array_push( $this->speakerIDs, $speaker->ID );
-
-          }
-          
-
-          if( $order === 'asc' ){
-               function sortASC($a, $b) {
-                    if ( get_field('speaker_nachname', $a) == get_field('speaker_nachname', $b) ) {
-                        return 0;
-                    }
-                    return ( get_field('speaker_nachname', $a) < get_field('speaker_nachname', $b) ) ? -1 : 1;
-
-                }
-               uasort($this->speakerIDs, 'sortASC');
+          // Speaker Order 
+          // Jeder Speaker kann einer von 5 Priorisierungsstufen zugeordnet werden, wobei Prio 1 als erstes aufgelistet wird
+          // In der Prio selbst, werden die Speaker alphabetisch nach Nachnamen sortiert. 
+          $speakerSorted = array();
+          function cmp($a, $b){
+               return get_field('speaker_nachname', $a->ID) > get_field('speaker_nachname', $b->ID);
           }
 
-
-
-          if( $order === 'dsc' ){
-               function sortDSC($a, $b) {
-                    if ( get_field('speaker_nachname', $a) == get_field('speaker_nachname', $b) ) {
-                        return 0;
-                    }
-                    return ( get_field('speaker_nachname', $a) < get_field('speaker_nachname', $b) ) ? 1 : -1;
-               }
-               uasort($this->speakerIDs, 'sortDSC');
+          $prios = ['1' => array(), '2' => array(), '3' => array(), '4' => array(), '5' => array() ];
+          foreach( $speakerQuery as $speaker ){
+               $speakerPrio = get_field('order_priority', $speaker->ID) ? get_field('order_priority', $speaker->ID) : '3';
+               array_push( $prios[$speakerPrio], $speaker );
           }
-          
-          return $this->speakerIDs;
+          foreach( $prios as $prio ){
+               usort($prio, "cmp");
+               foreach($prio as $speaker){
+                    array_push( $speakerSorted, $speaker );
+               }
+          }
 
+          
+
+
+          $speakerData = array();
+
+          foreach( $speakerSorted as $speaker ){
+               $speakerID = $speaker->ID;
+               
+               //filter speaker category
+               if( $cat && $cat !== 'all' ){
+                    $matchCat = false;
+                    $speaker_categories = get_field('speaker_kategorie', $speakerID);
+                    foreach( $speaker_categories as $speaker_category ){
+                         $cat = is_array($cat) ? $cat : array($cat);
+                         if( in_array( $speaker_category, $cat )){
+                              $matchCat = true;
+                         }
+                    }
+                    if( !$matchCat ){ continue; }
+               }
+
+               //filter speaker gig year
+               if( $year && $year !== 'all' ){
+                    $matchYear = false;
+                    $speaker_years = wp_get_post_terms( $speakerID, 'jahr' );
+                    foreach( $speaker_years as $speaker_year ){
+                         if(  intval($year) === intval($speaker_year->term_id) ){
+                              $matchYear = true;
+                         }
+                    }
+                    if( !$matchYear ){ continue; }
+               }
+
+               //filter speaker event
+               if( $event && $event !== '' ){
+                    $matchEvent = false;
+                    $event = is_array($event) ? $event : array($event);
+                    $speaker_events = get_field('event', $speaker->ID);
+                    $speaker_events = is_array($speaker_events) ? $speaker_events : array($speaker_events);
+                    //echo '<pre style="color:red; line-height:1em;">'.var_dump($event).'</pre>';
+                
+                    foreach( $speaker_events as $speaker_event ){
+                         if( in_array( $speaker_event['label'], $event ) || in_array( $speaker_event['value'], $event ) ){
+                              $matchEvent = true;
+                              //echo '<pre style="color:red; line-height:1em;">'.var_dump($event).':'.var_dump($speaker_event).'</pre>';
+                         }
+                    }
+                    if( !$matchEvent ){ continue; }
+               }
+
+               array_push( $speakerData, $speakerID );
+          }
+
+          return $speakerData;
      }
  
-
-
      public function cast_line_up_filter_section( $pageID, $args ) {
 
           $this->output = '<div  class="se2-lineup-filter-section container">';
 
           $filters = get_field('filters', $pageID );
           $visibility = get_field('visibility', $pageID);
+          
 
           //sort direction
           if( is_array($filters) ){
@@ -200,8 +152,10 @@ class LineUp {
                     $this->output .= '</div>';
                }
 
-               //filter event
-               if( in_array( 'event', $filters ) ){
+               //filter event 
+               $visibleEvents = $visibility['event'];
+               $selected = '';
+               if( in_array( 'event', $filters ) &&  count($visibleEvents) > 1 ){
                     $this->output .= '<div class="se2-lineup-filter-events filter-option">';
 
                     //search for possible events to choice
@@ -211,17 +165,19 @@ class LineUp {
                          foreach($checkSpeakerIDs as $speakid) {
                               if(get_field('event', $speakid )){
                                    foreach( get_field('event', $speakid ) as $event ){
-                                        if(!in_array( $event['label'], $speechEvents )){
-                                             array_push( $speechEvents, $event['label'] ); 
+                                        foreach( $visibleEvents as $visibleEvent ){
+                                             if(!in_array( $event['label'], $speechEvents ) && $event['label'] == $visibleEvent['label'] ){
+                                                  if(count($speechEvents) === 0){ $selected = $visibleEvent['label']; }
+                                                  array_push( $speechEvents, $visibleEvent['label'] ); 
+                                             }
                                         }
                                    }
                               }
                          }
                     }
 
-                    //cast dropdown
-                   
-                    $this->output .= $this->forms->castDropdown( 'speechevent', $speechEvents, false, $args['event'] );
+                    //cast dropdown 
+                    $this->output .= $this->forms->castDropdown( 'speechevent', $speechEvents, false, $selected, 'Event' );
                     $this->output .= '</div>';
                }
           
@@ -270,90 +226,6 @@ class LineUp {
 
      }
 
-     public function cast_speaker_list( $speakerID, $showCV = false, $hideDate = false, $showKategorie = false ){
-          $speakerCardStyle = ($showCV) ? 'cursor: unset !important;' : '';
-          $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
-          $this->speakerCard = '<div class="se2-speaker-list-profile speaker-profile" data-speakerid="'.$speakerID.'" style="'.$speakerCardStyle.'">'; 
-              /*  $portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium'); */
-               $this->speakerCard .= '<div class="se2-speaker-profile-image" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
-   
-               $this->speakerCard .= '<div class="se2-speaker-list-profil-info">';
- 
-                    $timeDates = get_field( 'speaker_zeit', $speakerID );
-
-                    if( $timeDates  ){
-                         if(!$hideDate){
-                              $this->speakerCard .= '<h6>'.$this->dateFormat->formating_Date_Language( $timeDates['datum'], 'date' );
-                              
-                              if( strlen( $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) ) > 0 ){
-                                   $this->speakerCard .= ' | ';
-                                   $this->speakerCard .= str_replace( 'Uhr', '', $this->dateFormat->formating_Date_Language( $timeDates['start'], 'time' ) );
-                                   $this->speakerCard .= ' ' . __( 'bis', 'SimplEvent') . ' ';
-                                   $this->speakerCard .= $this->dateFormat->formating_Date_Language( $timeDates['ende'], 'time' );
-                              }
-                              $this->speakerCard .= '</h6>';
-                         }
-                         
-
-                         $name = ( get_field('speaker_vorname', $speakerID) ) 
-                              ? 
-                                   get_field('speaker_degree', $speakerID) 
-                                   . ' ' . get_field('speaker_vorname', $speakerID) 
-                                   . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
-                              : 
-                                   the_title();
-
-                         $this->speakerCard .= '<h4>'.$name.'</h4>';
-                         $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
-
-                         $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
-
-                         $this->speakerCard .= $this->tags->tag_cloud( get_field( 'speaker_kategorie', $speakerID ) );
-
-                         if( $showCV ){
-                              $this->speakerCard .= '<p>'.get_field( 'speaker_cv', $speakerID ).'</p>';
-                         }
-                    }
-
-
-
-               $this->speakerCard .= '</div>';
-
-          $this->speakerCard .= '</div>';
-
-          return $this->speakerCard;
-
-     }
-
-     public function cast_speaker_grid( $speakerID ){
-
-          $this->speakerCard = '<div class="se2-speaker-grid-profile speaker-profile" data-speakerid="'.$speakerID.'">'; 
-               /*$portraitImage = wp_get_attachment_image_src($this->files->se2_get_attachment_id_by_url(get_field('speaker_bild', $speakerID )), 'medium');*/
-               $portraitImage = esc_url( get_field('speaker_bild', $speakerID ));
-         
-               
-               $this->speakerCard .= '<div class="se2-speaker-grid-image" style="background-image:url('.$portraitImage.');"></div>';
-               $this->speakerCard .= '<div class="se2-speaker-grid-content">';
-
-               $name = ( get_field('speaker_vorname', $speakerID) ) 
-                    ? 
-                         get_field('speaker_degree', $speakerID) 
-                         . ' ' . get_field('speaker_vorname', $speakerID) 
-                         . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
-                    : 
-                         the_title();
-
-               $this->speakerCard .= '<h5>'.$name.'</h5>';
-               $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
-               $this->speakerCard .= '<p>'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
-
-               $this->speakerCard .= $this->tags->tag_cloud( get_field( 'speaker_kategorie', $speakerID ) );
-               $this->speakerCard .= '</div>';
-
-          $this->speakerCard .= '</div>';
-          return $this->speakerCard;
-     }
-
      public function cast_host( $speakerID  ){
   
           $this->speakerCard = '<div class="se2-speaker-host speaker-profile" data-speakerid="'.$speakerID.'" style="">'; 
@@ -383,7 +255,6 @@ class LineUp {
 
      }
 
-
      public function cast_line_up_overview( $args = array() ) {
         
           //std year
@@ -404,22 +275,23 @@ class LineUp {
 
           //event
           $currEvent = $args['event'];
-          if(is_array($currEvent )){
+          if(is_array( $currEvent )){
                $currEvent = array_keys($currEvent)[0];
           }
          
           $this->output = '<div id="lineup-container" class="se2-lineup-container container" year="'.$currYear.'" data-event="'.$currEvent.'">';
           
           //query IDs
-          $speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'], $args['year'], $args['event'] );
+          //$speakerIDs = $this->call_speaker_data( $args['cat'], $args['sort'], $args['year'], $args['event'] );
+          $speakerIDs = $this->query_speaker_data( $args['cat'], $args['sort'], $args['year'], $args['event'] );
 
           //cast view       
           if( $speakerIDs ){
                foreach( $speakerIDs as $speakerID ){
                     if( empty($args) || $args['view'] === 'grid' ){
-                         $this->output .= $this->cast_speaker_grid($speakerID);
+                         $this->output .= se2\components\Speaker_Card($speakerID);
                     }else if( $args['view'] === 'list' ){
-                         $this->output .= $this->cast_speaker_list($speakerID);
+                         $this->output .= se2\components\Speaker_ListElement($speakerID);
                     }
                }
           } else {
@@ -434,7 +306,7 @@ class LineUp {
 
 
      //SPEAKER LIGHTBOX 
-
+     //moved to components in namespace: se2\components\lightbox
      public function cast_speaker_lightbox( $speakerID ){
           $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
           $speakername = ( get_field('speaker_vorname', $speakerID)  ) 
@@ -648,89 +520,6 @@ class LineUp {
           $this->speakerCardBlock .= '</div>';
 
           return $this->speakerCardBlock;
-     }
-
-     public function gg_cast_speaker_lightbox($speakerID){
-          $speakerID = apply_filters( 'wpml_object_id', $speakerID, 'speakers' );
-          $this->speakerLightbox = '<div class="speaker-lb-container">';
-
-          $this->speakerLightbox .= '<div class="speaker-lb-head">';
-          $args = array( 'p' => $speakerID );
-          $myPosts = new WP_Query( $args );
-          $this->speakerLightbox .= '<pre style="color:green;">';
-          $this->speakerLightbox .= $myPosts;
-          $this->speakerLightbox .= '</pre>';
-          
-               $this->speakerLightbox .= '<div class="speaker-lb-image speaker-stagger" style="background-image:url('.get_field('speaker_bild', $speakerID ).');"></div>';
-
-               $this->speakerLightbox .= '<div class="speaker-lb-headinfo speaker-stagger">';
-            
-                    $speakername = ( get_field('speaker_vorname', $speakerID) ) 
-                    ? 
-                         get_field('speaker_degree', $speakerID) 
-                         . ' ' . get_field('speaker_vorname', $speakerID) 
-                         . ' <b>' . get_field('speaker_nachname', $speakerID) . '</b>'
-                    : 
-                         get_the_title( $speakerID );
-
-                    $this->speakerLightbox .= '<h2 class="speaker-stagger">'.$speakername.' - '.$speakerID.'</h2>';
-                    $speakerFirma = (get_field( 'speaker_firma', $speakerID )) ? ', '.get_field( 'speaker_firma', $speakerID ) : '';
-                    $this->speakerLightbox .= '<p class="speaker-stagger primary-txt">'.get_field( 'speaker_funktion', $speakerID ).$speakerFirma.'</p>';
-
-                    
-                    
-                    if( $myPosts->have_posts() ) {
-                         while( $myPosts->have_posts() ) {
-                              $myPosts->the_post();
-                              $this->speakerLightbox .= 'THIS POST';
-                              $this->speakerLightbox .= the_title();
-                         }
-                    }
-                    wp_reset_postdata();
-
-                    $speakerCV = get_field( 'speaker_cv', $speakerID );
-                    $this->speakerLightbox .=  $speakerCV;
-               
-
-                    if( have_rows('review_jahr',  $speakerID ) ){
-                         foreach( get_field( 'review_jahr', $speakerID ) as $review ){
-                              if( $review['review_public'] ){
-                          
-                                   $this->speakerLightbox .= '<h6>REVIEW asdfasdf <b>'. $review['jahr']->slug .'</b></h6>';
-                                   $this->speakerLightbox .= '<h3><b>'.$review['review_titel'].'</b></h3>';
-                                   $this->speakerLightbox .= '<h3>FASFASF</h3>';
-
-                                  
-                                   if( $review['review_video'] ){
-                                        $this->speakerLightbox .= '<div class="review-video"><iframe  width="100%" height="100%" src="https://media10.simplex.tv/content/'. $review['review_video'] .'/index.html?embed=1" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no"></iframe></div>';
-                                   }
-
-                                   $this->speakerLightbox .= '<p>'.$review['review_text'].'</p>';
-
-                                   if( $review['review_galerie'] ){
-                                        $this->speakerLightbox .= '<div class="speaker-lb-review-gallery">';
-                                        foreach($review['review_galerie'] as $image){
-                                             $this->speakerLightbox .= '<div class="se-review-img" open="0"><img src="'.$image.'"></div>';
-                                        }
-                                        $this->speakerLightbox .= '</div>';
-                                   }
-
-                              }
-
-                         }                          
-
-                    }
-
-                    $this->speakerLightbox .= get_field( 'review_text', $speakerID );
-
-               $this->speakerLightbox .= '</div>';
-
-          $this->speakerLightbox .= '</div>';
-
-          $this->speakerLightbox .= '</div>';
-
-          return $this->speakerLightbox;
-          
      }
 
      public function cast_speaker_tag_cloud( $speakers ){

@@ -21,13 +21,16 @@ require_once('classes/award.class.php');
 require_once('classes/features/features-cta.class.php');
 
 //including supports
-require_once('supports/date.php');
+require_once('supports/date.php'); 
 require_once('supports/forms.php');
 require_once('supports/files.php');
 require_once('supports/social-media.php');
 
 require_once('assets/tags.php');
 require_once('assets/app-promotion.php');
+
+require_once(__DIR__.'/classes/components/speaker-lightbox.php');
+require_once(__DIR__.'/classes/components/exhibitor-lightbox.php');
 
 /*-------------PARTNER---------------*/
 add_action('wp_ajax_nopriv_partner_infos', 'partner_infos');
@@ -131,9 +134,9 @@ add_action('wp_ajax_speaker_lightbox', 'speaker_lightbox'); //nur für angemelde
 function speaker_lightbox() 
 { 
      $speakerID = $_POST['speakerid'];
-     $LineUp = new LineUp;
+    
      
-     wp_send_json( $LineUp->cast_speaker_lightbox( $speakerID ) ); 
+     wp_send_json( \se2\components\lightbox\speaker_lightbox( $speakerID ) ); 
      
      die();
 }
@@ -150,6 +153,21 @@ function session_lightbox()
      $Sessions = new Sessions;
      
      wp_send_json( $Sessions->cast_session_lightbox( $sessionID ) ); 
+     
+     die();
+}
+
+/*-------------EXHIBITOR LIGHTBOX---------------*/
+//exhibitor-lightbox
+add_action('wp_ajax_nopriv_exhibitor_lightbox', 'exhibitor_lightbox');
+add_action('wp_ajax_exhibitor_lightbox', 'exhibitor_lightbox'); //nur für angemeldete (admins)
+
+function exhibitor_lightbox() 
+{ 
+     $pageID = $_POST['pageid'];
+     $exhibitorID = $_POST['exhibitorid'];
+
+     wp_send_json( \se2\components\lightbox\exhibitor_lightbox($pageID, $exhibitorID ) ); 
      
      die();
 }

@@ -11,7 +11,7 @@ class Mediacorner {
      public $fullscreenIcon;
 
      public function __construct(){
-          $this->dateFormat = new Date_Format;
+          $this->dateFormat = new \se2\support\Date_Format();
           $this->fileSize = new se2_Files;
           
           $this->fileDownload = [
@@ -129,6 +129,11 @@ class Mediacorner {
                if( count($realeses) > 0 ){
                     foreach( $realeses as $realese ){
  
+                         //if empty object
+                         if( !$realese['titel'] || !$realese['file'] ){
+                              continue;
+                         }
+
                          date_default_timezone_set("Europe/Zurich");
                          if( date( 'YmdHi', strtotime( str_replace( '/', '-',  $realese['public']) )) > date( 'YmdHi' ) ){
                               continue;
