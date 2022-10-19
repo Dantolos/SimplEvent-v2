@@ -3,13 +3,13 @@ class Events extends Posts {
 
      public $output;
      public $eventData;
-
+     public $dateFormat;
 
      
      //POST WALL
      public function __construct(){
-    
-          $this->speakerFunctions = new LineUp;
+          $this->dateFormat = new \se2\support\Date_Format;
+         
      }
 
      public function call_Events_Wall( $year = false, $order = 'ASC', $orderby = 'date', $acfField = false, $subField = false, $dateFormat = false ) {
@@ -40,8 +40,8 @@ class Events extends Posts {
                $this->output .= '<p class="secondary-txt">'; 
               
                if( $date || $time ){
-                    $date = ($date) ?  \se2\support\formating_Date_Language( get_field('eckdaten', $event->ID )['date'], 'date' ) : '';
-                    $time = ($time) ? ' | ' .  \se2\support\formating_Date_Language( get_field('eckdaten', $event->ID )['time'], 'time' ) : '';
+                    $date = ($date) ?  $this->dateFormat->formating_Date_Language( get_field('eckdaten', $event->ID )['date'], 'date' ) : '';
+                    $time = ($time) ? ' | ' . $this->dateFormat->formating_Date_Language( get_field('eckdaten', $event->ID )['time'], 'time' ) : '';
                     $this->output .= '<p class="secondary-txt">' . esc_attr( $date ) . esc_attr( $time ) . '</p>';
 
                }
@@ -107,7 +107,7 @@ class Events extends Posts {
                          $this->output .= '<tr>';
                          $this->output .= '<td>' . __( 'Datum', 'SimplEvent' ) . '</td>';
                          $this->output .= '<td>';
-                         $this->output .=   \se2\support\formating_Date_Language( $facts['date'], 'date' ) ; 
+                         $this->output .=  $this->dateFormat->formating_Date_Language( $facts['date'], 'date' ) ; 
                          $this->output .= '</td>';
                          $this->output .= '</tr>';
                     }
@@ -115,7 +115,7 @@ class Events extends Posts {
                          $this->output .= '<tr>';
                          $this->output .= '<td>' . __( 'Zeit', 'SimplEvent' ) . '</td>';
                          $this->output .= '<td>';
-                         $this->output .=   \se2\support\formating_Date_Language( $facts['time'], 'time' ) ; 
+                         $this->output .=  $this->dateFormat->formating_Date_Language( $facts['time'], 'time' ) ; 
                          $this->output .= '</td>';
                          $this->output .= '</tr>';
                     }
@@ -154,7 +154,7 @@ class Events extends Posts {
 
                foreach(get_field('speaker', $ID) as $eventspeaker){
                 
-                         $this->output .= $this->speakerFunctions->cast_speaker_list($eventspeaker, true, true);
+                         $this->output .= \se2\components\Speaker_ListElement($eventspeaker, true, true);
                     
                }
                $this->output .= '</div>';
