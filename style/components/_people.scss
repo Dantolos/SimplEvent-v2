@@ -1,8 +1,10 @@
 .se2-people-group-title {
     text-align: center;
+    margin-top: 120px;
 }
 
 .se2-people-wall {
+    margin-top: 80px;
     gap: 80px 20px ;
     @include wallContainerFlex;
 
@@ -31,7 +33,7 @@
            
             padding: 40px 20px;
             margin-top: -20px;
-           
+            
             width: 88%;
  
             h2 {
@@ -44,8 +46,6 @@
             }
 
             p {
-                color: rgba(255, 255, 255, .8);
-
                 @include breakpoint('s') {
                     font-size: 2rem !important;
                 }
@@ -63,13 +63,18 @@
 
             .socialmedia-container {
                 .socialmedia-icon {
-                    fill: $light;
-
+                    fill: $dark;
+                    margin-right: 20px;
                     &:hover {
+                        transform: scale(1.2);
                         fill: $secondary
                     }
                 }
             }
+        }
+
+        &:hover {
+            @include dropShadow;
         }
     }
 }
