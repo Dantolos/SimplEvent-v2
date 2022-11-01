@@ -231,7 +231,7 @@ function update() {
     }
 
     if( current.x < -Math.abs( limit.x ) || current.x > limit.x ){  current.x = current.x > 0 ? correctur.x : -Math.abs( correctur.x ) }
-    if( current.y < -Math.abs( limit.y ) || current.y > limit.y ){  current.y = current.y > 0 ? correctur.y: -Math.abs( correctur.y ) }
+    if( current.y < -Math.abs( limit.y ) || current.y > limit.y ){  current.y = current.y > 0 ? correctur.y : -Math.abs( correctur.y ) }
 
     gsap.to(element, .2, { x:  current.x, y: current.y, scale: current.z })
 
@@ -304,18 +304,27 @@ var mousePosition = {
 }
 
 function mouseTracking(event){
-    mousePosition = {
-        x : ( event.clientX + 10),
-        y : (event.offsetY + 10)
+    //pageYOffset 
+    //console.log(window.event.offsetX)
+    var x = event.clientX - event.currentTarget.offsetLeft + 10; 
+    var y = event.clientY - 60;
+  
+    mousePosition = {       
+        x : ( x ),
+        y : ( y )
     }
 }
 
 function boothTooltip( rawID ){
     let boothID = parseInt( rawID.replace('_', '') ) - 1
     
-    gsap.to(tooltipDOM, .2, { top: mousePosition.y, left: mousePosition.x })
+    gsap.to( tooltipDOM, .2, { top: mousePosition.y, left: mousePosition.x } )
     let boothLogo = tooltipDOM.querySelector('img')
 
-    boothLogo.src = listData[boothID]['logo']
+    if(typeof boothLogo !== 'undefined' ) {
+        if( listData[boothID]['logo'] ){
+            boothLogo.src = listData[boothID]['logo']
+        }
+    }
     tooltipDOM.querySelector('h5').innerHTML = listData[boothID]['name']
 }
