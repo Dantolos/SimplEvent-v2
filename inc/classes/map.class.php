@@ -11,7 +11,6 @@ class se2_Map {
         $this->pageID = $pageID;
         $mapSVG = get_field('map_svg', $pageID);
         $this->mapSVGContent = file_get_contents($mapSVG);
-        
     }
 
     public function cast_map(){

@@ -6,6 +6,8 @@
     width:100%;
     background-color: $light-shade;
     overflow: hidden;
+    cursor: move;
+
     #map-nav {
         position:absolute;
         bottom:30px;
@@ -67,8 +69,10 @@
             .exhibitors-lb-trigger {
                 &:hover {
                     cursor: pointer;
-                    filter: brightness(1.2);
-                    stroke: 2px solid white;
+                    //filter: brightness(1.5);
+                    //stroke: 2px;
+                    stroke-width: 5px;
+                    stroke: rgba(255,255,255,1);
                     @include dropShadow;
                 }
             }
@@ -150,7 +154,6 @@
                     }
                     .exhibitor-lb-product-description { 
                         width: 100%; 
-                        
                     }
                 }
 
@@ -217,6 +220,7 @@
 
                             &:hover {
                                 filter: brightness(.8);
+                                
                             }
                         }
                     }
@@ -297,7 +301,8 @@
 
 //Tooltip
 #booth-tooltip {
-    position: absolute;
+    position: fixed;
+    transform-origin: bottom left;
     z-index: 29;
     width: fit-content;
     height: 50px;
@@ -307,8 +312,9 @@
     align-items: center;
     gap: 20px;
     padding: 0 20px;
+    pointer-events: none;
+    cursor: none;
     @include dropShadow;
-
 
     .booth-tooltip-logo {
         margin-left: -40px;
