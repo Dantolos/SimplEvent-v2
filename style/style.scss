@@ -66,6 +66,20 @@ html {
      width: 100%;
 }
 
+//LIVE STREAM
+.se2-livestream-container {
+     width:100vw;
+     height: calc(100vh - 80px);
+     background-color: $light-shade;
+     @include breakpoint('m') {
+          height: calc(50vh - 8vw);
+     }
+
+     @include breakpoint('s') {
+          height: calc(50vh - 16vw);
+     }
+}
+
 
 @import 'components/header';
 @import 'components/footer';
