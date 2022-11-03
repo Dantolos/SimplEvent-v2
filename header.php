@@ -351,5 +351,17 @@ wp_head();
 
 
      <div id="master-container" class=" <?php echo $videoHeaderClass; ?>">
+
+          <?php 
+          // ------- LIVE-STREAM --------
+          if(is_front_page()){
+               if( get_option( 'se_livestream' ) === 'on' ){
+                    echo '<div class="se2-livestream-container">';
+                    echo get_option('se_iframe');
+                    echo '</div>';
+               }
+          }
+          ?>
+
           <div id="content-container">
          
