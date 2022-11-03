@@ -12,7 +12,7 @@ $page_details = get_posts( array(
      'meta_key' => '_wp_page_template',
      'hierarchical' => 0,
      'meta_value' => 'Templates/features-cta.php'
-    ));
+));
 
 echo '<pre style="color:green;">';
 var_dump($page_details);

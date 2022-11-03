@@ -335,6 +335,7 @@ wp_head();
      $cta = new se2_CTA;
      if( get_option( 'se_cta_activ' ) === 'on' && get_option( 'se_cta' )){
           echo '<div class="cta-container">';
+          
           foreach( get_option( 'se_cta' ) as $ctaID ){
                echo $cta->cast_cta_button( $ctaID );
           }
