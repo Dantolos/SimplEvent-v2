@@ -18,9 +18,6 @@ class se2_CTA{
           }
           $cta_settings = get_field('cta_settings', $postID );
 
-          echo '<pre style="color:red; line-height:1em;">';
-          var_dump( $postID );
-          echo '</pre>';
 
           $this->cta = '<div class="cta-button" data-postid="'.$postID.'" style="background-color:'.$cta_settings['button_color'].';" >';
                $this->cta .= '<div class="cta-butto-icon" >';

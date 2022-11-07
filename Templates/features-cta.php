@@ -14,9 +14,6 @@ $page_details = get_posts( array(
      'meta_value' => 'Templates/features-cta.php'
 ));
 
-echo '<pre style="color:green;">';
-var_dump($page_details);
-echo '</pre>';
 
 get_footer(); 
 
