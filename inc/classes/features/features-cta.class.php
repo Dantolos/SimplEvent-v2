@@ -13,14 +13,16 @@ class se2_CTA{
     
      public function cast_cta_button( $postID ){
           $postID = intval($postID);
-          $postID = icl_object_id($postID , 'features', true, ICL_LANGUAGE_CODE);
+          if(ICL_LANGUAGE_CODE){
+               $postID = icl_object_id($postID , 'features', true, ICL_LANGUAGE_CODE);
+          }
           $cta_settings = get_field('cta_settings', $postID );
 
+
           $this->cta = '<div class="cta-button" data-postid="'.$postID.'" style="background-color:'.$cta_settings['button_color'].';" >';
-          $this->cta .= '<div class="cta-butto-icon" >';
-          $this->cta .= '<img src="'.$cta_settings['icon'].'" />';
-          
-          $this->cta .= '</div>';
+               $this->cta .= '<div class="cta-butto-icon" >';
+               $this->cta .= '<img src="'.$cta_settings['icon'].'" />';
+               $this->cta .= '</div>';
           $this->cta .= '<div class="cta-tooltip" style=""><b>'.$cta_settings['button_tooltip'].'</b></div>';
           
           $this->cta .= '</div>';

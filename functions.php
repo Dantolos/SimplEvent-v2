@@ -49,7 +49,7 @@ require get_template_directory() . '/theme/plugins/se2-rest-api/se2-rest-api-app
 /*-------------------------------------------------------------*/
 /*----------------------------CTA------------------------------*/
 /*-------------------------------------------------------------*/
-require get_template_directory() . '/inc/classes/features/features-cta.class.php';
+//require get_template_directory() . '/inc/classes/features/features-cta.class.php';
 
 /*-------------------------------------------------------------*/
 if(is_user_logged_in()){

@@ -5,11 +5,11 @@ class Review {
     public $fileSize;
     public $mediacorner;
     public $LineUpPage;
-    public $LineUp;
+    public $LineUp; 
     public $Slider;
 
     public function __construct(){
-        $this->dateFormat = new Date_Format;
+        $this->dateFormat = new \se2\support\Date_Format;
         $this->LineUp = new LineUp;
         $this->fileSize = new se2_Files;
         $this->Slider = new se2_Slider;
