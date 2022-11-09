@@ -98,12 +98,12 @@ class LineUp {
                     $event = is_array($event) ? $event : array($event);
                     $speaker_events = get_field('event', $speaker->ID);
                     $speaker_events = is_array($speaker_events) ? $speaker_events : array($speaker_events);
-                    //echo '<pre style="color:red; line-height:1em;">'.var_dump($event).'</pre>';
                 
                     foreach( $speaker_events as $speaker_event ){
-                         if( in_array( $speaker_event['label'], $event ) || in_array( $speaker_event['value'], $event ) ){
-                              $matchEvent = true;
-                              //echo '<pre style="color:red; line-height:1em;">'.var_dump($event).':'.var_dump($speaker_event).'</pre>';
+                         if(is_array($speaker_event)){
+                              if( in_array( $speaker_event['label'], $event ) || in_array( $speaker_event['value'], $event ) ){
+                                   $matchEvent = true;
+                              }
                          }
                     }
                     if( !$matchEvent ){ continue; }

@@ -3376,7 +3376,7 @@ acf_add_local_field_group(array(
 			'wpml_cf_preferences' => 1,
 			'choices' => array(
 				'info' => 'Informationen',
-				'mm' => 'Medienmitteilungen',
+				'mm' => 'Files',
 				'logo' => 'Logos',
 				'fotos' => 'Fotos',
 				'audio' => 'Audio',
@@ -3446,8 +3446,8 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_60d325f860dda',
-			'label' => 'Medienmitteilungen',
-			'name' => 'medienmitteilungen',
+			'label' => 'Files',
+			'name' => 'files',
 			'type' => 'repeater',
 			'instructions' => '',
 			'required' => 0,
@@ -7936,7 +7936,7 @@ acf_add_local_field_group(array(
 						'class' => '',
 						'id' => '',
 					),
-					'wpml_cf_preferences' => 1,
+					'wpml_cf_preferences' => 3,
 					'post_type' => array(
 						0 => 'company',
 					),

@@ -546,11 +546,12 @@
           }
      }
 }
-$videoWidth: 400px;
-$videoHeight: 225px;
+
+//$videoHeight: calc($videoWidth / 0.5625);
+$videoWidth: clamp( 200px, 500px, 80vw );
+$videoHeight: calc(#{$videoWidth} * 0.5625); 
 .video-content-container {
 
-     
 
      .video-tag-cloud {
           width: 100%;
@@ -615,29 +616,34 @@ $videoHeight: 225px;
                }
           }
      }
+    
      .video-content-wrapper {
           display:flex;
           flex-wrap: wrap;
-          justify-content: flex-start;
+          justify-content: space-evenly;
+          gap: 2vw;
          
           .video-section {
-               margin:5px;
-               width:$videoWidth;
+               
+               
+               width: $videoWidth;
                max-width: 100%;
-               .video-wrapper{
-                    width: $videoWidth;
-                    height: $videoHeight;
-                    max-width: 100%;
+
+               .video-wrapper {
+                    width:  $videoWidth;
+                    height: $videoHeight; 
+                    
                     background-color:var(--lightshade);
+                    border-radius: 5px;
+                    @include imageSettings;
+                    overflow: hidden;
                     
                }
           }
 
           .video-section-info {
-               margin:20px 0;
+               margin:20px 0 30px 0;
                width:100%;
-
-               
 
                .video-tag-nodes{
                     width: 100%;

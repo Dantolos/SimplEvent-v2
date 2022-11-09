@@ -11,7 +11,7 @@ wp_enqueue_script( 'JS-mediacorner', get_template_directory_uri() . '/scripts/sp
 $mediaCorner = new Mediacorner;
 $pageID = get_the_ID();
 
-http://simplevent-v2.local/mediacorner/?m=fotos
+//http://simplevent-v2.local/mediacorner/?m=fotos
 
 $startpage = 'info';
 if( isset( $_GET["m"] ) ){

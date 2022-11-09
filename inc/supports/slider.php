@@ -60,12 +60,12 @@ class se2_Slider {
     }
 
     public function Speaker( $speakerID ){
-        $LineUp = new LineUp;
+        
         $Speaker = '';
         $Speaker .= '<li class="splide__slide">';
-        $Speaker .= $LineUp->cast_speaker_grid( $speakerID );
+        $Speaker .=  \se2\components\Speaker_Card( $speakerID );
         $Speaker .= '</li>';
         return $Speaker;
     }
     // SPEAKERSLIDER END
-}
+} 

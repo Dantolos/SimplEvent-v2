@@ -10,7 +10,7 @@ class Review {
 
     public function __construct(){
         $this->dateFormat = new \se2\support\Date_Format;
-        $this->LineUp = new LineUp;
+        
         $this->fileSize = new se2_Files;
         $this->Slider = new se2_Slider;
 
