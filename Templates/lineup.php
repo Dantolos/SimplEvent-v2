@@ -19,7 +19,14 @@ the_content();
 
 
 //LINE UP OVERVIEW
-$year = get_field( 'visibility', get_the_ID() )['jahr-visibility'][0]->term_id;
+$newestYear = get_field( 'visibility', get_the_ID() )['jahr-visibility'][0];
+foreach( get_field( 'visibility', get_the_ID() )['jahr-visibility'] as $yearCat ){
+     if( intval($yearCat->slug) < $newestYear->slug ){
+          $newestYear = $yearCat;
+     }
+}
+$year = $newestYear->term_id;
+
 if( isset( $_GET["j"] ) ){
      $yearTax = get_term_by( 'name', htmlspecialchars( $_GET["j"] ), 'jahr' );
      $year = $yearTax->term_id;

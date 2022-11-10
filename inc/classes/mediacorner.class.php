@@ -122,7 +122,7 @@ class Mediacorner {
      public function cast_press_realese( $pageID ){
 
           $pressRealese = '<div class="se2-press-realese">';
-          $pressRealese .= '<h4>'.__('Medienmitteilungen', 'SimplEvent').'</h4>';
+          $pressRealese .= '<h4>'.__('Files', 'SimplEvent').'</h4>';
           $realeses = get_field('medienmitteilungen', $pageID);
           $currentYear = false;
           if( is_array($realeses) ){
@@ -404,11 +404,9 @@ class Mediacorner {
           if($filter ){
                $filterArgs = [];
                
-
                if( isset($filter['jahr']) && !empty($filter['jahr']) ){
                     $video_args['tax_query'] = ['relation' => 'OR', array( 'taxonomy' => 'jahr', 'field' => 'slug', 'terms' => $filter['jahr'], 'operator' => 'IN', )];
                }
-               
           }
           
           //$videoMatrix .= var_dump( $video_args );
@@ -416,13 +414,10 @@ class Mediacorner {
           $videoRows = get_posts( $video_args );
           $videoMatrix .= '<div class="video-content-wrapper" pageid="'.$pageID.'">';
           if( count( $videoRows ) > 0  ){
-               
                foreach ( $videoRows as $key => $video ) {
 
-                    
                     $videoID = $video->ID;
                     
-
                     //$videoMatrix .= var_dump( get_field('tags', $videoID) );
                     $videoTags = get_field('tags', $videoID );
                     $tagIDs = array_map( function ($tags) { return $tags->term_id; }, $videoTags );
@@ -487,9 +482,13 @@ class Mediacorner {
 
      public function se2_video( $videoID ){
           $video = '';
+          $thumbnail = get_field( 'thumbnail', $videoID) ? 'background-image: url('.get_field( 'thumbnail', $videoID).');' : '';
+
+
+
           switch (get_field( 'type', $videoID)) {
                case 'youtube':
-                    $video .= '<div class="video-wrapper video-section-'.get_field( 'type', $videoID).'">' . $this->se2_v_youtube( get_field( 'link', $videoID) ) . '</div>';
+                    $video .= '<div class="video-wrapper video-section-'.get_field( 'type', $videoID).'" style="'.$thumbnail.'">' . $this->se2_v_youtube( get_field( 'link', $videoID) ) . '</div>';
                     break;
                case 'vimeo':
                     $video .= '<div class="video-wrapper">' . $this->se2_v_vimeo( get_field( 'link', $videoID) ) . '</div>';

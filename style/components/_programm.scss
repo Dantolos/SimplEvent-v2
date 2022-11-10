@@ -276,9 +276,11 @@
                }
 
                .schedule-separator-show .schedule-container {
-                    background-color: $primary;
+                    background-color: $primary !important;
                     color: var(--secondColor);
+
                }
+               
 
                .schedule-separator-panel .schedule-container {
                     //background-color: $secondary;
@@ -583,6 +585,9 @@
                }
           }
      }
+     .schedule-separator-show .schedule-container {  
+          background-color: $primary;
+     }
 }
 
 .schedule-program-day {
@@ -740,6 +745,12 @@
 
                .schedule-session {
                     cursor: pointer;
+                    border: 1px solid var(--shadeColor);
+                    border-width: 0 0 2px 0;
+
+                    .schedule-session-image {
+                         border-radius: 5px;
+                    }
 
                     h6 {
                          font-size: 1.2em;
