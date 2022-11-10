@@ -67,7 +67,7 @@ function exhibitor_lightbox($pageID, $exhibitorBoothID){
                                 }
 
                                 //Website
-                                if( $facts['employee'] ){
+                                if( $facts['website'] ){
                                     $exhibitorLightbox .= '<div class="exhibitor-lb-keyfact-cell">';
                                     $exhibitorLightbox .= '<h5>'.__('Mehr', 'SimplEvent').'</h5>';
                                     $exhibitorLightbox .= '<a href="'.$facts['website'].'"><div class="exhibitor-lb-keyfact-button">'.__('Website', 'SimplEvent').'</div></a>';
