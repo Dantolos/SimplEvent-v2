@@ -21,7 +21,7 @@ the_content();
 //LINE UP OVERVIEW
 $newestYear = get_field( 'visibility', get_the_ID() )['jahr-visibility'][0];
 foreach( get_field( 'visibility', get_the_ID() )['jahr-visibility'] as $yearCat ){
-     if( intval($yearCat->slug) < $newestYear->slug ){
+     if( intval($yearCat->slug) > $newestYear->slug ){
           $newestYear = $yearCat;
      }
 }
