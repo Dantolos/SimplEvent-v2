@@ -7378,7 +7378,7 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'wpml_cf_preferences' => 1,
+			'wpml_cf_preferences' => 2,
 			'default_value' => '',
 			'placeholder' => '',
 			'prepend' => '',

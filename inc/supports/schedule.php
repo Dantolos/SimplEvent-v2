@@ -365,22 +365,24 @@ class se2_Schedule {
                                         $separators_slots .= '<div class="schedule-slot-panel-speakers">';
                                         if($sep['speaker'] > 0){
                                              foreach((array) $sep['speaker'] as $panelSpeaker ){
-                                             
-                                                  $separators_slots .= '<div class="schedule-slot-panel-speaker" data-speakerid="'. $panelSpeaker .'">';
-                                                       $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeaker ).');"></div>';
 
-                                                       $name = ( get_field('speaker_vorname', $panelSpeaker) ) 
+                                                  $panelSpeakerID = apply_filters( 'wpml_object_id', $panelSpeaker);
+
+                                                  $separators_slots .= '<div class="schedule-slot-panel-speaker" data-speakerid="'. $panelSpeakerID .'">';
+                                                       $separators_slots .= '<div class="schedule-slot-panel-speaker-image" style="background-image:url('.get_field('speaker_bild', $panelSpeakerID ).');"></div>';
+
+                                                       $name = ( get_field('speaker_vorname', $panelSpeakerID) ) 
                                                        ? 
-                                                            get_field('speaker_degree', $panelSpeaker) 
-                                                            . ' ' . get_field('speaker_vorname', $panelSpeaker) 
-                                                            . ' <b>' . get_field('speaker_nachname', $panelSpeaker) . '</b>'
+                                                            get_field('speaker_degree', $panelSpeakerID) 
+                                                            . ' ' . get_field('speaker_vorname', $panelSpeakerID) 
+                                                            . ' <b>' . get_field('speaker_nachname', $panelSpeakerID) . '</b>'
                                                        : 
                                                             the_title();
-
+ 
                                                        $separators_slots .= '<div class="schedule-slot-speaker-name">'; 
                                                             $separators_slots .= '<h5>'.$name.'</h5>';
-                                                            $speakerFirma = (get_field( 'speaker_firma', $panelSpeaker )) ? ', '.get_field( 'speaker_firma', $panelSpeaker ) : '';
-                                                                 $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeaker ).$speakerFirma.'</h6>';
+                                                            $speakerFirma = (get_field( 'speaker_firma', $panelSpeakerID )) ? ', '.get_field( 'speaker_firma', $panelSpeakerID ) : '';
+                                                                 $separators_slots .= '<h6>'.get_field( 'speaker_funktion', $panelSpeakerID ).$speakerFirma.'</h6>';
                                                             $separators_slots .= '<div class="schedule-slot-info">';
                                                                  
                                                             $separators_slots .= '</div>';
