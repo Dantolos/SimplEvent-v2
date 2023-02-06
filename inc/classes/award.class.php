@@ -59,6 +59,7 @@ class Award {
      public function cast_finalist_box($finalistID){
           $finalistBox;
           $finalistMedia = get_field( 'media', $finalistID );
+          $finalistCategory = get_field('award', $finalistID)['kategorie'];
 
           $teaserText = get_field( 'description', $finalistID );
           $teaserText = str_replace( '<h3>', '<b>', $teaserText ); 
@@ -84,6 +85,7 @@ class Award {
                
                $finalistBox .= '<h4>'.get_the_title( $finalistID ).'</h4>';
                $finalistBox .= '<p>' . substr( $teaserText, 0, $teaserText_length ) . ' <span class="secondary-txt">' . __(' ... mehr', 'SimplEvent') . '</span></p>';
+               $finalistBox .= '<div class="se2-tag-cloud c-spacer c-spacer-b"><div class="se2-tag-element">' . $finalistCategory . '</div></div>';
           $finalistBox .= '</div>';
           return $finalistBox;
      }
@@ -91,7 +93,8 @@ class Award {
      public function cast_candidate_lightbox( $candidateID ){
           $finalistMedia = get_field( 'media', $candidateID );
           $winnerClass = (get_field( 'award', $candidateID )['gewinner']) ? 'candidate-winner-class': '';
-          
+          $candidateCategoy = get_field( 'award', $candidateID )['kategorie'];
+         
           $moodimageClass = ($finalistMedia['mood_image']) ? 'has-mood' : '';
           $moodimage = false;
           if(get_option( 'award_default_img' ) || $finalistMedia['mood_image'] ){
@@ -123,6 +126,7 @@ class Award {
                     
                     $candidateLB .= '<div class="candidate-lb-content candidate-stagger">';
                          $candidateLB .= '<h3>'.get_the_title( $candidateID ).'</h3>';
+                         $candidateLB .= '<div class="candidate-lb-category-flag candidate-stagger se2-tag-element c-spacer c-spacer-b">' . $candidateCategoy . '</div>';
                          if( get_field( 'award', $candidateID )['finalistenbild'] ){
                               $candidateLB .= '<div class="candidate-finalist-image" style="background-image:url('.get_field( 'award', $candidateID )['finalistenbild'].');"></div>';
                          }
