@@ -8,8 +8,22 @@ class People{
     public function __construct() {
         $post_args = array(
             'post_type' => 'peoples', 
-            'orderby' => 'name', 
-            'order' => 'ASC',
+            // 'orderby' => 'name', 
+            // 'order' => 'ASC',
+            'meta_query' => array(
+                'relation' => 'OR',
+                'jury_prasident' => array(
+                    'key'     => 'jury_prasident',
+                    'value'   => true
+                ),
+                'nachname' => array(
+                    'key' => 'nachname'
+                )
+            ),
+            'orderby' => array(
+                'jury_prasident' => 'ASC',
+                'nachname' => 'ASC'
+            ),   
         );
         $this->people = new WP_Query( $post_args );
     }
