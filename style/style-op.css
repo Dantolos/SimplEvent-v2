@@ -1,0 +1,19 @@
+
+.pum-content.popmake-content a {
+    padding: 10px 15px 13px;
+    line-height: 1;
+    font-weight: normal;
+    border-radius: 5px;
+    border:2px solid white;
+    background-color: transparent;
+    color: white;
+  } 
+
+  .pum-content.popmake-content a:hover { 
+      color: #0a0a0a;
+      background: white;
+  }
+  
+  .se-lightbox-container .speaker-lb-content .review-video {
+      height: 100% !important;
+  }
