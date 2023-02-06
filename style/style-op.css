@@ -1,3 +1,53 @@
+.c-spacer.c-spacer-b {
+    margin-bottom: 15px;
+}
+
+header #extramenu #header_socialmedia a {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1024px) {
+    header #extramenu {
+        padding-left: 0;  
+    }
+
+    header #extramenu #languagebutton a button {
+        padding: 0 15px;
+    }
+
+    .se2-app-promo-header {
+        position: relative;
+        left: unset;
+        max-width: 172px;
+        padding: 20px 20px 20px 43px;
+    }
+
+    header #extramenu #header_socialmedia a {
+        width: 40px;
+        height: 40px;
+    }
+
+    header .se2-navigation {
+        margin-top: 16vw;
+    }
+}
+
+@media (max-width: 768px) {
+    header #extramenu {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 380px) {
+    header #extramenu #header_socialmedia a {
+        width: 32px;
+    }
+
+    .se2-app-promo-header {
+        padding: 20px 10px 20px 28px;
+    }
+}
 
 .pum-content.popmake-content a {
     padding: 10px 15px 13px;
