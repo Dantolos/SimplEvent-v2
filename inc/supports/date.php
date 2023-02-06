@@ -44,11 +44,25 @@ class Date_Format {
                
                $lang = (apply_filters( 'wpml_current_language', NULL ) ) ? apply_filters( 'wpml_current_language', NULL )  : 'de';
 
+               $monate = array(1=>"Januar",
+               2=>"Februar",
+               3=>"M&auml;rz",
+               4=>"April",
+               5=>"Mai",
+               6=>"Juni",
+               7=>"Juli",
+               8=>"August",
+               9=>"September",
+               10=>"Oktober",
+               11=>"November",
+               12=>"Dezember");
+
                switch ( $lang ) {
 
                     case 'de':
                          setlocale(LC_ALL, "de_DE");
-                         $date = strftime( '%e. %B %G', $value );
+                         //$date = strftime( '%e. %B %G', $value );
+                         $date = date("d. ", $value) . $monate[(date("n", $value))] . " " . date("Y", $value);
                          break;
                     case 'en':
                          $date = strftime( '%e %B %G', $value );
@@ -59,7 +73,8 @@ class Date_Format {
                          break;
                     default:
                          setlocale(LC_ALL, "de_DE");
-                         $date = strftime( '%e. %B %G', $value );
+                         //$date = strftime( '%e. %B %G', $value );
+                         $date = date("d. ", $value) . $monate[(date("n", $value))] . " " . date("Y", $value);
                          break;
                }   
                
